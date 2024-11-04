@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/reset.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/portal.css}" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <title>Portal</title>
+</head>
+<body>
+<header class="portal-head">
+    <div class="portal-logo-name">
+        <img src="" alt="" />
+        <h1>포털시스템</h1>
+    </div>
+    <div class="user-alarm">
+        <div class="user-photo"></div>
+        <p class="portal-user-name">길오성님</p>
+    </div>
+</header>
+<section class="portal-main">
+    <nav class="portal-nav">
+        <ul>
+            <li class="portal-home-button"><img src="" alt="" />홈</li>
+            <li class="portal-student-info-button">
+                <img src="" alt="" />인적정보
+            </li>
+            <li class="portal-student-score-button">
+                <img src="" alt="" />학점확인
+            </li>
+            <li class="portal-student-major-info-button">
+                <img src="" alt="" />학과정보
+            </li>
+            <li class="poratl-student-report-button">과제제출</li>
+            <li class="portal-student-class-button">
+                <img src="" alt="" />수강신청란
+            </li>
+        </ul>
+    </nav>
+    <div class="portal-home portal-main-frame">
+        <div class="portal-user-login-etc">
+            <div>
+                <p><b>길오성</b>님 환영합니다</p>
+                <ul>
+                    <li>비밀번호 변경</li>
+                    <li>|</li>
+                    <li>인증서 등록</li>
+                </ul>
+            </div>
+            <ul>
+                <li>
+                    <ul>
+                        <li>이미지</li>
+                        <li>웹메일</li>
+                        <li>수량</li>
+                    </ul>
+                </li>
+                <li>
+                    <ul>
+                        <li>이미지</li>
+                        <li>쪽지</li>
+                        <li>수량</li>
+                    </ul>
+                </li>
+                <li>
+                    <ul>
+                        <li>이미지</li>
+                        <li>부서계시판</li>
+                        <li>수량</li>
+                    </ul>
+                </li>
+            </ul>
+            <ul>
+                <li>
+                    <p>시간</p>
+                    <p id="current-time">Loading...</p>
+                </li>
+                <li>
+                    <p>접속 IP</p>
+                    <p id="ip-address">Loading...</p>
+                </li>
+                <li>
+                    <button>마이페이지</button>
+                    <button>로그아웃</button>
+                </li>
+            </ul>
+        </div>
+        <div class="portal-college-schedule">
+            <h2>학사일정</h2>
+            <ul>
+                <li>
+                    <button>LEFT</button>
+                    <p class="portal-college-schedule-control-date">일자</p>
+                    <button>RIGHT</button>
+                </li>
+                <li>
+                    <ul>
+                        <li>
+                            <p class="portal-college-schedule-date">01-08</p>
+                            <p>1학년 학생회모집</p>
+                        </li>
+                        <li>
+                            <p class="portal-college-schedule-date">01-08</p>
+                            <p>1학년 학생회모집</p>
+                        </li>
+                        <li>
+                            <p class="portal-college-schedule-date">01-08</p>
+                            <p>1학년 학생회모집</p>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div class="portal-user-main-info">
+            <h2>학사정보</h2>
+            <ul>
+                <li>
+                    <ul>
+                        <li>이미지</li>
+                        <li><p>이수/졸업학점</p></li>
+                        <li>
+                            <p>126</p>
+                            <p>/150</p>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <ul>
+                        <li>이미지</li>
+                        <li><p>제적상태</p></li>
+                        <li><p>재학</p></li>
+                    </ul>
+                </li>
+                <li>
+                    <ul>
+                        <li>이미지</li>
+                        <li><p>학적상태</p></li>
+                        <li><p>3학년</p></li>
+                    </ul>
+                </li>
+                <li>
+                    <ul>
+                        <li>이미지</li>
+                        <li>복수전공</li>
+                        <li><p>미신청</p></li>
+                    </ul>
+                </li>
+                <li>
+                    <ul>
+                        <li>이미지</li>
+                        <li>학과</li>
+                        <li><p>컴퓨터공학과</p></li>
+                    </ul>
+                </li>
+                <li>
+                    <ul>
+                        <li>이미지</li>
+                        <li>지도교수님</li>
+                        <li>
+                            <p>황민수</p>
+                            <span> 교수님</span>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div class="portal-college-news">
+            <ul class="portal-college-news-controller">
+                <li class="portal-notice-button">공지사항</li>
+                <li class="portal-class-button">학사공지</li>
+                <li class="portal-employee-button">채용공고</li>
+                <li class="portal-conversation-button">자유계시판</li>
+                <div class="active-line"></div>
+                <!--위에 움직이는 줄-->
+            </ul>
+            <ul class="portal-college-notice-page portal-college-news-frame">
+                <li>
+                    <p>재목을 입력해주세요1</p>
+                    <p>24.10.11</p>
+                </li>
+                <li>
+                    <p>재목을 입력해주세요</p>
+                    <p>24.10.11</p>
+                </li>
+                <li>
+                    <p>재목을 입력해주세요</p>
+                    <p>24.10.11</p>
+                </li>
+                <li>
+                    <p>재목을 입력해주세요</p>
+                    <p>24.10.11</p>
+                </li>
+                <li>
+                    <p>재목을 입력해주세요</p>
+                    <p>24.10.11</p>
+                </li>
+                <li>
+                    <p>재목을 입력해주세요</p>
+                    <p>24.10.11</p>
+                </li>
+            </ul>
+            <ul class="portal-college-class-page portal-college-news-frame">
+                <li>
+                    <p>재목을 입력해주세요2</p>
+                    <p>24.10.11</p>
+                </li>
+                <li>
+                    <p>재목을 입력해주세요</p>
+                    <p>24.10.11</p>
+                </li>
+                <li>
+                    <p>재목을 입력해주세요</p>
+                    <p>24.10.11</p>
+                </li>
+                <li>
+                    <p>재목을 입력해주세요</p>
+                    <p>24.10.11</p>
+                </li>
+                <li>
+                    <p>재목을 입력해주세요</p>
+                    <p>24.10.11</p>
+                </li>
+                <li>
+                    <p>재목을 입력해주세요</p>
+                    <p>24.10.11</p>
+                </li>
+            </ul>
+            <ul class="portal-college-employee-page portal-college-news-frame">
+                <li>
+                    <p>재목을 입력해주세요3</p>
+                    <p>24.10.11</p>
+                </li>
+                <li>
+                    <p>재목을 입력해주세요</p>
+                    <p>24.10.11</p>
+                </li>
+                <li>
+                    <p>재목을 입력해주세요</p>
+                    <p>24.10.11</p>
+                </li>
+                <li>
+                    <p>재목을 입력해주세요</p>
+                    <p>24.10.11</p>
+                </li>
+                <li>
+                    <p>재목을 입력해주세요</p>
+                    <p>24.10.11</p>
+                </li>
+                <li>
+                    <p>재목을 입력해주세요</p>
+                    <p>24.10.11</p>
+                </li>
+            </ul>
+            <ul
+                    class="portal-college-conversation-page portal-college-news-frame"
+            >
+                <li>
+                    <p>재목을 입력해주세요4</p>
+                    <p>24.10.11</p>
+                </li>
+                <li>
+                    <p>재목을 입력해주세요</p>
+                    <p>24.10.11</p>
+                </li>
+                <li>
+                    <p>재목을 입력해주세요</p>
+                    <p>24.10.11</p>
+                </li>
+                <li>
+                    <p>재목을 입력해주세요</p>
+                    <p>24.10.11</p>
+                </li>
+                <li>
+                    <p>재목을 입력해주세요</p>
+                    <p>24.10.11</p>
+                </li>
+                <li>
+                    <p>재목을 입력해주세요</p>
+                    <p>24.10.11</p>
+                </li>
+            </ul>
+        </div>
+        <div class="portal-callender">
+            <!--이 부분은 데이터베이스를 받아와서 실제로는 보여지지 않으나 스크립트로 테이블로 정렬하기 위해 입력이 필요함 -->
+            <ul id="courseList" style="display: none">
+                <li>월,9시~10시,컴퓨터교육</li>
+                <li>월,10시~11시,컴퓨터과학</li>
+                <li>화,9시~11시,수학</li>
+                <li>수,11시~12시,자료구조</li>
+                <li>목,13시~14시,알고리즘</li>
+                <li>금,9시~10시,통계학</li>
+                <li>금,11시~12시,물리학</li>
+                <li>금,12시~13시,성리학</li>
+                <li>토,10시~12시,프로그래밍 기초</li>
+            </ul>
+
+            <!-- 시간표 테이블 -->
+            <table class="student-timetable">
+                <thead>
+                <tr>
+                    <th>시간</th>
+                    <th>월</th>
+                    <th>화</th>
+                    <th>수</th>
+                    <th>목</th>
+                    <th>금</th>
+                    <th>토</th>
+                    <th>일</th>
+                </tr>
+                </thead>
+                <tbody>
+                <!-- 시간대별 빈 열 생성 -->
+                <tr>
+                    <td>9</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>10</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>11</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>12</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>13</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>14</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>15</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>16</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>17</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!-----------------------------------portal home finish---------------------------------------------------------------->
+    <div class="portal-student-info portal-main-frame">
+        <h2>학적사항</h2>
+        <div class="portal-student-info-basic">
+            <div class="portal-student-pic">
+                <img src="" alt="1111" />
+            </div>
+            <table>
+                <!-- 첫 번째 행 -->
+                <tr>
+                    <th>학번</th>
+                    <td>20770707</td>
+                    <th>성명</th>
+                    <td>길오성</td>
+                    <th>학년/성적이수</th>
+                    <td>2학년/4학기이수</td>
+                </tr>
+                <!-- 두 번째 행 -->
+                <tr>
+                    <th>대학</th>
+                    <td>공과대학</td>
+                    <th>학과</th>
+                    <td>컴퓨터공학과</td>
+                    <th>전공</th>
+                    <td></td>
+                </tr>
+                <!-- 세 번째 행 -->
+                <tr>
+                    <th>전공구분</th>
+                    <td>전공심화</td>
+                    <th>제1복수전공</th>
+                    <td></td>
+                    <th>제2복수전공</th>
+                    <td></td>
+                </tr>
+                <!-- 네 번째 행 -->
+                <tr>
+                    <th>부전공</th>
+                    <td></td>
+                    <th>마이크로디그리</th>
+                    <td></td>
+                    <th>현재학적</th>
+                    <td>졸업</td>
+                </tr>
+                <!-- 다섯 번째 행 -->
+                <tr>
+                    <th>성별</th>
+                    <td>남자</td>
+                    <th>입학구분</th>
+                    <td>신입학</td>
+                    <th>과정구분</th>
+                    <td>일반과정</td>
+                </tr>
+                <!-- 여섯 번째 행 -->
+                <tr>
+                    <th>최종학적변동</th>
+                    <td>군제대복학</td>
+                    <th>최종학적변동일</th>
+                    <td>20220214</td>
+                    <th></th>
+                    <td></td>
+                </tr>
+            </table>
+        </div>
+        <div class="portal-student-info-specific-frame">
+            <ul class="portal-student-info-specific-controller">
+                <li>기본</li>
+                <li>주소</li>
+                <li>등록</li>
+                <li>학적변동</li>
+                <li>부,복수/전공심화</li>
+                <li>자격어학</li>
+            </ul>
+            <ul class="portal-student-info-specific">
+                <li>
+                    <div class="portal-student-info-specific-basic">
+                        <h3>학적 기본 사항</h3>
+                        <table>
+                            <tr>
+                                <th>성명</th>
+                                <td>길오성</td>
+                                <th>성명(영문)</th>
+                                <td>gil oseong</td>
+                                <th>생년월일</th>
+                                <td>2077-07-07</td>
+                            </tr>
+                            <tr>
+                                <th>휴학사용학기</th>
+                                <td>0</td>
+                                <th>휴학가능학기</th>
+                                <td>2</td>
+                                <th>복학예정일</th>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <th>전자우편주소</th>
+                                <td>amolang@and.com</td>
+                                <th>지도교수</th>
+                                <td>콘코드교수</td>
+                            </tr>
+                        </table>
+                        <h3>계좌정보</h3>
+                        <ul>
+                            <li>
+                                <p>은행</p>
+                                <select name="" id="">
+                                    <option value="">카카오뱅크</option>
+                                    <option value="">농협</option>
+                                    <option value="">하나은행</option>
+                                    <option value="">국민은행</option>
+                                    <option value="">기업은행</option>
+                                </select>
+                            </li>
+                            <li>
+                                <p>계좌번호</p>
+                                <input type="text" value="77717171717" />
+                            </li>
+                            <li>
+                                <p>예금주</p>
+                                <input type="text" value="길오성" />
+                            </li>
+                            <li>
+                                <p>관계</p>
+                                <select name="" id="">
+                                    <option value="">부</option>
+                                    <option value="">모</option>
+                                    <option value="">본인</option>
+                                </select>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</section>
+<script>
+    /*접속 ip를 갖고오는 스크립트*/
+     /*fetch("http://ip-api.com/json")
+      .then((response) => response.json())
+      .then((data) => {
+        document.getElementById("ip-address").textContent = data.query;
+      })
+      .catch((error) => {
+        console.error("Error fetching IP address:", error);
+        document.getElementById("ip-address").textContent =
+          "Could not retrieve IP address";
+      });*/
+    /*현재 접속 시간을 가지고 오는 스크립트*/
+    function showCurrentDateTime() {
+        const now = new Date();
+        const year = now.getFullYear();
+        const month = String(now.getMonth() + 1).padStart(2, "0"); // 월은 0부터 시작하므로 +1
+        const day = String(now.getDate()).padStart(2, "0");
+        const hours = String(now.getHours()).padStart(2, "0");
+        const minutes = String(now.getMinutes()).padStart(2, "0");
+        const seconds = String(now.getSeconds()).padStart(2, "0");
+
+        const formattedDateTime = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+        document.getElementById("current-time").textContent = formattedDateTime;
+    }
+
+    // Show date and time immediately
+    showCurrentDateTime();
+
+    // Update date and time every second
+    setInterval(showCurrentDateTime, 1000);
+    /*접속 시간을 가지고오는 스크립트 끝*/
+    /*시간표 자동정렬 스크립트*/
+    // 요일 순서 설정
+    const daysOrder = ["월", "화", "수", "목", "금", "토", "일"];
+
+    // HTML <ul>에서 <li> 항목 가져오기 및 파싱
+    function parseCourseList() {
+        const courseList = [];
+        const items = document.querySelectorAll("#courseList li");
+
+        items.forEach((item) => {
+            const [day, time, courseName] = item.textContent.split(",");
+            const [startHour, endHour] = time.split("~");
+
+            courseList.push({
+                day,
+                startHour: parseInt(startHour),
+                endHour: parseInt(endHour),
+                courseName,
+            });
+        });
+
+        return courseList;
+    }
+
+    // 시간표에 정렬된 과목 추가하기
+    function displayTimetable(courses) {
+        const timetable = document.querySelector(".student-timetable");
+        const rows = timetable.querySelectorAll("tbody tr");
+
+        courses.forEach((course) => {
+            const dayIndex = daysOrder.indexOf(course.day) + 1; // 요일 인덱스
+            const startTimeIndex = Array.from(rows).findIndex(
+                (row) => parseInt(row.cells[0].textContent) === course.startHour
+            );
+
+            // 셀에 수업 추가 및 병합 처리
+            if (startTimeIndex !== -1) {
+                const firstCell = rows[startTimeIndex].cells[dayIndex];
+
+                // 이미 다른 과목이 있는지 체크
+                if (!firstCell.textContent) {
+                    firstCell.textContent = course.courseName; // 과목 이름 설정
+                    firstCell.classList.add("subject");
+
+                    // 행 병합 처리
+                    const rowSpan = course.endHour - course.startHour; // 병합할 행 수 계산
+                    if (rowSpan > 1) {
+                        firstCell.rowSpan = rowSpan; // rowSpan 설정
+
+                        // 나머지 셀 숨기기
+                        for (let i = 1; i < rowSpan; i++) {
+                            rows[startTimeIndex + i].cells[dayIndex].style.display =
+                                "none"; // 숨기기
+                        }
+                    }
+                } else {
+                    console.warn(
+                        `Overlap detected for ${course.day} ${course.startHour}~${course.endHour}`
+                    );
+                }
+            }
+        });
+    }
+    // 메인 함수 실행
+    document.addEventListener("DOMContentLoaded", () => {
+        const courses = parseCourseList();
+        displayTimetable(courses);
+    });
+    /*시간표 자동정렬 스크립트끝*/
+    /*공지사항 및 기타 계시판 페이지 전환용의 스크립트*/
+    document.addEventListener("DOMContentLoaded", () => {
+        const pages = {
+            notice: document.querySelector(".portal-college-notice-page"),
+            class: document.querySelector(".portal-college-class-page"),
+            employee: document.querySelector(".portal-college-employee-page"),
+            conversation: document.querySelector(
+                ".portal-college-conversation-page"
+            ),
+        };
+
+        // 페이지 초기화
+        Object.keys(pages).forEach((key) => {
+            pages[key].style.display = "none";
+        });
+        pages.notice.style.display = "block"; // 처음에는 공지사항만 표시
+
+        const buttons = document.querySelectorAll(
+            ".portal-college-news-controller li"
+        );
+        const activeLine = document.querySelector(".active-line");
+
+        // 초기 활성 줄 위치 설정
+        function setActiveLine(target) {
+            activeLine.style.width = `${target.offsetWidth}px`;
+            activeLine.style.left = `${target.offsetLeft}px`;
+        }
+
+        // 버튼 클릭 이벤트 추가 및 페이지 전환
+        buttons.forEach((button) => {
+            button.addEventListener("click", () => {
+                const pageKey = button.classList[0].split("-")[1]; // 버튼 클래스에서 페이지 키 추출
+                showPage(pageKey);
+                setActiveLine(button); // 줄 위치 업데이트
+            });
+        });
+
+        // 페이지 전환 함수
+        function showPage(page) {
+            Object.keys(pages).forEach((key) => {
+                pages[key].style.display = key === page ? "block" : "none";
+            });
+        }
+
+        // 초기 활성 줄 위치 설정 (첫 번째 버튼 기준)
+        setActiveLine(buttons[0]);
+    });
+</script>
+</body>
+</html>
