@@ -11,6 +11,4 @@ public class MainController {
     @GetMapping("/")
     public String main() {return "main";}
 
-    @GetMapping("/portal")
-    public String portal_main() {return "portal/portal_main";}
 }

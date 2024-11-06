@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/reset.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/student/studentInfo.css}" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <title>Portal</title>
+</head>
+<body>
+<header class="portal-head">
+    <div class="portal-logo-name">
+        <img src="" alt="" />
+        <h1>포털시스템</h1>
+    </div>
+    <div class="user-alarm">
+        <div class="user-photo"></div>
+        <p class="portal-user-name">길오성님</p>
+    </div>
+</header>
+<section class="portal-main">
+    <nav class="portal-nav">
+        <ul>
+            <li class="portal-home-button"><img src="" alt="" />홈</li>
+            <li class="portal-student-info-button">
+                <img src="" alt="" />인적정보
+            </li>
+            <li class="portal-student-score-button">
+                <img src="" alt="" />학점확인
+            </li>
+            <li class="portal-student-major-info-button">
+                <img src="" alt="" />학과정보
+            </li>
+            <li class="poratl-student-report-button">과제제출</li>
+            <li class="portal-student-class-button">
+                <img src="" alt="" />수강신청란
+            </li>
+        </ul>
+    </nav>
+    <div class="portal-student-info portal-main-frame">
+        <h2>학적사항</h2>
+        <div class="portal-student-info-basic">
+            <div class="portal-student-pic">
+                <img src="" alt="1111" />
+            </div>
+            <table>
+                <!-- 첫 번째 행 -->
+                <tr>
+                    <th>학번</th>
+                    <td>20770707</td>
+                    <th>성명</th>
+                    <td>길오성</td>
+                    <th>학년/성적이수</th>
+                    <td>2학년/4학기이수</td>
+                </tr>
+                <!-- 두 번째 행 -->
+                <tr>
+                    <th>대학</th>
+                    <td>공과대학</td>
+                    <th>학과</th>
+                    <td>컴퓨터공학과</td>
+                    <th>전공</th>
+                    <td></td>
+                </tr>
+                <!-- 세 번째 행 -->
+                <tr>
+                    <th>전공구분</th>
+                    <td>전공심화</td>
+                    <th>제1복수전공</th>
+                    <td></td>
+                    <th>제2복수전공</th>
+                    <td></td>
+                </tr>
+                <!-- 네 번째 행 -->
+                <tr>
+                    <th>부전공</th>
+                    <td></td>
+                    <th>마이크로디그리</th>
+                    <td></td>
+                    <th>현재학적</th>
+                    <td>졸업</td>
+                </tr>
+                <!-- 다섯 번째 행 -->
+                <tr>
+                    <th>성별</th>
+                    <td>남자</td>
+                    <th>입학구분</th>
+                    <td>신입학</td>
+                    <th>과정구분</th>
+                    <td>일반과정</td>
+                </tr>
+                <!-- 여섯 번째 행 -->
+                <tr>
+                    <th>최종학적변동</th>
+                    <td>군제대복학</td>
+                    <th>최종학적변동일</th>
+                    <td>20220214</td>
+                    <th></th>
+                    <td></td>
+                </tr>
+            </table>
+        </div>
+        <div class="portal-student-info-specific-frame">
+            <ul class="portal-student-info-specific-controller">
+                <li>기본</li>
+                <li>주소</li>
+                <li>등록</li>
+                <li>학적변동</li>
+                <li>부,복수/전공심화</li>
+                <li>자격어학</li>
+            </ul>
+            <ul class="portal-student-info-specific">
+                <li>
+                    <div class="portal-student-info-specific-basic">
+                        <h3>학적 기본 사항</h3>
+                        <table>
+                            <tr>
+                                <th>성명</th>
+                                <td>길오성</td>
+                                <th>성명(영문)</th>
+                                <td>gil oseong</td>
+                                <th>생년월일</th>
+                                <td>2077-07-07</td>
+                            </tr>
+                            <tr>
+                                <th>휴학사용학기</th>
+                                <td>0</td>
+                                <th>휴학가능학기</th>
+                                <td>2</td>
+                                <th>복학예정일</th>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <th>전자우편주소</th>
+                                <td>amolang@and.com</td>
+                                <th>지도교수</th>
+                                <td>콘코드교수</td>
+                            </tr>
+                        </table>
+                        <h3>계좌정보</h3>
+                        <ul>
+                            <li>
+                                <p>은행</p>
+                                <select name="" id="">
+                                    <option value="">카카오뱅크</option>
+                                    <option value="">농협</option>
+                                    <option value="">하나은행</option>
+                                    <option value="">국민은행</option>
+                                    <option value="">기업은행</option>
+                                </select>
+                            </li>
+                            <li>
+                                <p>계좌번호</p>
+                                <input type="text" value="77717171717" />
+                            </li>
+                            <li>
+                                <p>예금주</p>
+                                <input type="text" value="길오성" />
+                            </li>
+                            <li>
+                                <p>관계</p>
+                                <select name="" id="">
+                                    <option value="">부</option>
+                                    <option value="">모</option>
+                                    <option value="">본인</option>
+                                </select>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li><button>등록하기</button></li>
+            </ul>
+        </div>
+    </div>
+</section>
+<script></script>
+</body>
+</html>
