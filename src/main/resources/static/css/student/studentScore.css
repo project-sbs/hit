@@ -1,0 +1,154 @@
+body {
+    width: 100%;
+    overflow: hidden;
+}
+header {
+    width: 100%;
+    padding: 1%;
+    height: 60px;
+    background: purple;
+    display: flex;
+    justify-content: space-between;
+}
+.portal-logo-name {
+    display: flex;
+}
+.portal-logo-name img {
+    width: 100px;
+}
+.portal-logo-name h1 {
+    font-size: 25px;
+}
+.portal-main {
+    display: flex;
+}
+.portal-nav {
+    width: 340px;
+}
+.portal-nav ul {
+    width: 100%;
+    height: 1020px;
+}
+.portal-nav > ul > li {
+    width: 100%;
+    height: 50px;
+    border-bottom: 2px solid #ececec;
+    line-height: 50px;
+    padding-left: 20px;
+}
+.portal-score-check-frame {
+    border-left: 1px solid #ececec;
+    width: 100%;
+}
+.portal-score-check-frame h2 {
+    padding: 2%;
+    margin-bottom: 5px;
+}
+.portal-score-check-student-info {
+    width: 70%;
+    margin: 0 auto;
+}
+.portal-score-check-student-info ul {
+    width: 100%;
+    display: flex;
+    border: 1px solid;
+}
+.portal-score-check-student-info ul li {
+    width: 16.6%;
+    display: flex;
+}
+.portal-score-check-student-info ul li:not(:last-child) {
+    border-right: 1px solid;
+}
+.portal-score-check-student-info ul li p:nth-of-type(1) {
+    width: 80px;
+    text-align: center;
+    border-right: 1px solid;
+}
+.portal-score-check-student-info ul li p:nth-of-type(2) {
+    margin-left: 10px;
+}
+.portal-score-total-year-count {
+    width: 20%;
+    display: flex;
+    margin: 100px 0px 10px 180px;
+    line-height: 26px;
+}
+.portal-score-total-year-count h3 {
+    font-size: 20px;
+}
+.portal-score-total-year-count p:nth-of-type(1) {
+    margin-left: 10px;
+    width: 40px;
+    border: 1px solid black;
+    text-align: center;
+    color: red;
+}
+.portal-score-total-year {
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    height: 150px;
+}
+.portal-score-total-year table {
+    border-collapse: collapse;
+    width: 80%;
+    text-align: center;
+    border: 1px solid #ddd;
+    margin-right: 100px;
+}
+.portal-score-total-year table th,
+td {
+    border: 1px solid #ddd;
+}
+.portal-score-total-year ul {
+    border: 1px solid;
+    width: 150px;
+}
+.portal-score-total-year ul > p {
+    padding: 3%;
+    margin-top: 10px;
+}
+.portal-score-total-year ul li {
+    display: flex;
+    margin-top: 10px;
+    border: 1px solid;
+}
+.portal-score-total-year ul li p:nth-of-type(1) {
+    border-right: 1px solid;
+    width: 65px;
+    text-align: center;
+}
+.portal-score-total-year ul li p:nth-of-type(2) {
+    margin-left: 10px;
+}
+.portal-score-each-year {
+    width: 80%;
+    margin: 0 auto;
+}
+.portal-score-each-year-count {
+    width: 20%;
+    display: flex;
+    margin: 100px 0px 10px 180px;
+    line-height: 26px;
+}
+.portal-score-each-year-count h3 {
+    font-size: 20px;
+}
+.portal-score-each-year-count p {
+    margin-left: 20px;
+    width: 40px;
+    border: 1px solid black;
+    text-align: center;
+    color: red;
+}
+.portal-score-each-year table {
+    width: 100%;
+    border-collapse: collapse;
+}
+.portal-score-each-year table th,
+td {
+    border: 1px solid #ddd;
+    text-align: center;
+    width: 9%;
+}

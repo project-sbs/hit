@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/reset.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/student/studentScore.css}" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <title>Portal</title>
+</head>
+<body>
+<header class="portal-head">
+    <div class="portal-logo-name">
+        <img src="" alt="" />
+        <h1>포털시스템</h1>
+    </div>
+    <div class="user-alarm">
+        <div class="user-photo"></div>
+        <p class="portal-user-name">길오성님</p>
+    </div>
+</header>
+<section class="portal-main">
+    <nav class="portal-nav">
+        <ul>
+            <li class="portal-home-button"><img src="" alt="" />홈</li>
+            <li class="portal-student-info-button">
+                <img src="" alt="" />인적정보
+            </li>
+            <li class="portal-student-score-button">
+                <img src="" alt="" />학점확인
+            </li>
+            <li class="poratl-student-report-button">과제제출</li>
+            <li class="portal-student-class-button">
+                <img src="" alt="" />수강신청란
+            </li>
+        </ul>
+    </nav>
+    <div class="portal-score-check-frame">
+        <h2>학점확인</h2>
+        <div class="portal-score-check-student-info">
+            <ul>
+                <li>
+                    <p>학번</p>
+                    <p>20770777</p>
+                </li>
+                <li>
+                    <p>성명</p>
+                    <p>길오성</p>
+                </li>
+                <li>
+                    <p>대학</p>
+                    <p>공과대학</p>
+                </li>
+                <li>
+                    <p>학과</p>
+                    <p>컴퓨터공학과</p>
+                </li>
+                <li>
+                    <p>학년</p>
+                    <p>2</p>
+                </li>
+                <li>
+                    <p>학적상태</p>
+                    <p>졸업</p>
+                </li>
+            </ul>
+        </div>
+        <div class="portal-score-total-year-count">
+            <h3>학기별 누적 성적</h3>
+        </div>
+        <div class="portal-score-total-year">
+            <table>
+                <thead>
+                <tr>
+                    <th>년도</th>
+                    <th>학기</th>
+                    <th>신청학점</th>
+                    <th>취득학점</th>
+                    <th>총평점</th>
+                    <th>평균평점</th>
+                    <th>실점총점</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>2022</td>
+                    <td>1학기</td>
+                    <td>15</td>
+                    <td>13</td>
+                    <td>4.2</td>
+                    <td>3.5</td>
+                    <td>52</td>
+                </tr>
+                <tr>
+                    <td>2022</td>
+                    <td>2학기</td>
+                    <td>18</td>
+                    <td>17</td>
+                    <td>3.8</td>
+                    <td>3.7</td>
+                    <td>67</td>
+                </tr>
+                <tr>
+                    <td>2023</td>
+                    <td>1학기</td>
+                    <td>16</td>
+                    <td>15</td>
+                    <td>3.9</td>
+                    <td>3.6</td>
+                    <td>60</td>
+                </tr>
+                <tr>
+                    <td>2023</td>
+                    <td>2학기</td>
+                    <td>20</td>
+                    <td>19</td>
+                    <td>4.0</td>
+                    <td>3.8</td>
+                    <td>76</td>
+                </tr>
+                </tbody>
+            </table>
+            <ul>
+                <p>누적성적</p>
+                <li>
+                    <p>백분율</p>
+                    <p>92.8</p>
+                </li>
+                <li>
+                    <p>신청학점</p>
+                    <p>69</p>
+                </li>
+                <li>
+                    <p>취득학점</p>
+                    <p>64</p>
+                </li>
+            </ul>
+        </div>
+        <div class="portal-score-each-year-count">
+            <h3>과목별 성적</h3>
+            <p></p>
+        </div>
+        <div class="portal-score-each-year">
+            <table>
+                <thead>
+                <tr>
+                    <th>년도</th>
+                    <th>학기</th>
+                    <th>학년</th>
+                    <th>수강번호</th>
+                    <th>과목명</th>
+                    <th>학점</th>
+                    <th>이수구분</th>
+                    <th>실점</th>
+                    <th>등급</th>
+                    <th>평점</th>
+                    <th>교수명</th>
+                </tr>
+                </thead>
+                <tbody>
+                <!-- 2022년 1학기 -->
+                <tr>
+                    <td>2022</td>
+                    <td>1학기</td>
+                    <td>1</td>
+                    <td>10101</td>
+                    <td>컴퓨터 개론</td>
+                    <td>3</td>
+                    <td>전공</td>
+                    <td>95</td>
+                    <td>A+</td>
+                    <td>4.5</td>
+                    <td>김철수</td>
+                </tr>
+                <tr>
+                    <td>2022</td>
+                    <td>1학기</td>
+                    <td>1</td>
+                    <td>10102</td>
+                    <td>프로그래밍 기초</td>
+                    <td>3</td>
+                    <td>전공</td>
+                    <td>88</td>
+                    <td>A</td>
+                    <td>4.0</td>
+                    <td>이영희</td>
+                </tr>
+                <tr>
+                    <td>2022</td>
+                    <td>1학기</td>
+                    <td>1</td>
+                    <td>10103</td>
+                    <td>기초 수학</td>
+                    <td>3</td>
+                    <td>교양</td>
+                    <td>82</td>
+                    <td>B+</td>
+                    <td>3.5</td>
+                    <td>박준호</td>
+                </tr>
+                <tr>
+                    <td>2022</td>
+                    <td>1학기</td>
+                    <td>1</td>
+                    <td>10104</td>
+                    <td>기초 물리</td>
+                    <td>3</td>
+                    <td>교양</td>
+                    <td>76</td>
+                    <td>B</td>
+                    <td>3.0</td>
+                    <td>최민수</td>
+                </tr>
+                <tr>
+                    <td>2022</td>
+                    <td>1학기</td>
+                    <td>1</td>
+                    <td>10105</td>
+                    <td>글쓰기</td>
+                    <td>3</td>
+                    <td>교양</td>
+                    <td>90</td>
+                    <td>A</td>
+                    <td>4.0</td>
+                    <td>홍길동</td>
+                </tr>
+
+                <!-- 2022년 2학기 -->
+                <tr>
+                    <td>2022</td>
+                    <td>2학기</td>
+                    <td>1</td>
+                    <td>10201</td>
+                    <td>자료구조</td>
+                    <td>3</td>
+                    <td>전공</td>
+                    <td>92</td>
+                    <td>A</td>
+                    <td>4.0</td>
+                    <td>김철수</td>
+                </tr>
+                <tr>
+                    <td>2022</td>
+                    <td>2학기</td>
+                    <td>1</td>
+                    <td>10202</td>
+                    <td>이산수학</td>
+                    <td>3</td>
+                    <td>전공</td>
+                    <td>85</td>
+                    <td>B+</td>
+                    <td>3.5</td>
+                    <td>이영희</td>
+                </tr>
+                <tr>
+                    <td>2022</td>
+                    <td>2학기</td>
+                    <td>1</td>
+                    <td>10203</td>
+                    <td>대학영어</td>
+                    <td>3</td>
+                    <td>교양</td>
+                    <td>88</td>
+                    <td>A</td>
+                    <td>4.0</td>
+                    <td>박준호</td>
+                </tr>
+                <tr>
+                    <td>2022</td>
+                    <td>2학기</td>
+                    <td>1</td>
+                    <td>10204</td>
+                    <td>일반화학</td>
+                    <td>3</td>
+                    <td>교양</td>
+                    <td>80</td>
+                    <td>B</td>
+                    <td>3.0</td>
+                    <td>최민수</td>
+                </tr>
+                <tr>
+                    <td>2022</td>
+                    <td>2학기</td>
+                    <td>1</td>
+                    <td>10205</td>
+                    <td>세계사</td>
+                    <td>3</td>
+                    <td>교양</td>
+                    <td>90</td>
+                    <td>A</td>
+                    <td>4.0</td>
+                    <td>홍길동</td>
+                </tr>
+                <tr>
+                    <td>2022</td>
+                    <td>2학기</td>
+                    <td>1</td>
+                    <td>10206</td>
+                    <td>철학개론</td>
+                    <td>3</td>
+                    <td>교양</td>
+                    <td>70</td>
+                    <td>C+</td>
+                    <td>2.5</td>
+                    <td>이순신</td>
+                </tr>
+
+                <!-- 2023년 1학기 -->
+                <tr>
+                    <td>2023</td>
+                    <td>1학기</td>
+                    <td>2</td>
+                    <td>20101</td>
+                    <td>운영체제</td>
+                    <td>3</td>
+                    <td>전공</td>
+                    <td>95</td>
+                    <td>A+</td>
+                    <td>4.5</td>
+                    <td>김철수</td>
+                </tr>
+                <tr>
+                    <td>2023</td>
+                    <td>1학기</td>
+                    <td>2</td>
+                    <td>20102</td>
+                    <td>데이터베이스</td>
+                    <td>3</td>
+                    <td>전공</td>
+                    <td>87</td>
+                    <td>A</td>
+                    <td>4.0</td>
+                    <td>이영희</td>
+                </tr>
+                <tr>
+                    <td>2023</td>
+                    <td>1학기</td>
+                    <td>2</td>
+                    <td>20103</td>
+                    <td>수치해석</td>
+                    <td>3</td>
+                    <td>전공</td>
+                    <td>82</td>
+                    <td>B+</td>
+                    <td>3.5</td>
+                    <td>박준호</td>
+                </tr>
+                <tr>
+                    <td>2023</td>
+                    <td>1학기</td>
+                    <td>2</td>
+                    <td>20104</td>
+                    <td>경제학</td>
+                    <td>3</td>
+                    <td>교양</td>
+                    <td>80</td>
+                    <td>B</td>
+                    <td>3.0</td>
+                    <td>최민수</td>
+                </tr>
+                <tr>
+                    <td>2023</td>
+                    <td>1학기</td>
+                    <td>2</td>
+                    <td>20105</td>
+                    <td>인문학 개론</td>
+                    <td>2</td>
+                    <td>교양</td>
+                    <td>88</td>
+                    <td>A</td>
+                    <td>4.0</td>
+                    <td>홍길동</td>
+                </tr>
+
+                <!-- 2023년 2학기 -->
+                <tr>
+                    <td>2023</td>
+                    <td>2학기</td>
+                    <td>2</td>
+                    <td>20201</td>
+                    <td>알고리즘</td>
+                    <td>3</td>
+                    <td>전공</td>
+                    <td>85</td>
+                    <td>B+</td>
+                    <td>3.5</td>
+                    <td>김철수</td>
+                </tr>
+                <tr>
+                    <td>2023</td>
+                    <td>2학기</td>
+                    <td>2</td>
+                    <td>20202</td>
+                    <td>네트워크</td>
+                    <td>3</td>
+                    <td>전공</td>
+                    <td>90</td>
+                    <td>A</td>
+                    <td>4.0</td>
+                    <td>이영희</td>
+                </tr>
+                <tr>
+                    <td>2023</td>
+                    <td>2학기</td>
+                    <td>2</td>
+                    <td>20203</td>
+                    <td>문학 개론</td>
+                    <td>3</td>
+                    <td>교양</td>
+                    <td>78</td>
+                    <td>B</td>
+                    <td>3.0</td>
+                    <td>박준호</td>
+                </tr>
+                <tr>
+                    <td>2023</td>
+                    <td>2학기</td>
+                    <td>2</td>
+                    <td>20204</td>
+                    <td>법학 개론</td>
+                    <td>2</td>
+                    <td>교양</td>
+                    <td>88</td>
+                    <td>A</td>
+                    <td>4.0</td>
+                    <td>최민수</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const totalYearRows = document.querySelectorAll(
+            ".portal-score-total-year tbody tr"
+        );
+        const eachYearRows = document.querySelectorAll(
+            ".portal-score-each-year tbody tr"
+        );
+        const countElement = document.querySelector(
+            ".portal-score-each-year-count p"
+        ); // 과목 수를 표시할 p 요소
+
+        // 초기 로드 시 가장 오래된 년도와 학기의 데이터만 표시
+        let earliestRow = totalYearRows[0]; // 첫 번째 행을 기본으로 설정
+        let earliestYear = earliestRow.cells[0].innerText; // 기본 년도
+        let earliestSemester = earliestRow.cells[1].innerText; // 기본 학기
+
+        // 가장 오래된 연도와 학기를 찾기 위한 변수 초기화
+        totalYearRows.forEach((row) => {
+            const year = row.cells[0].innerText;
+            const semester = row.cells[1].innerText;
+
+            // 가장 오래된 행을 찾기
+            if (
+                earliestYear > year ||
+                (earliestYear === year && semester === "1학기")
+            ) {
+                earliestRow = row; // 가장 오래된 행 업데이트
+                earliestYear = year;
+                earliestSemester = semester;
+            }
+        });
+
+        // 초기 로드 시 가장 오래된 년도와 학기의 데이터만 표시
+        eachYearRows.forEach((eachRow) => {
+            const eachYear = eachRow.cells[0].innerText; // 첫 번째 td: 년도
+            const eachSemester = eachRow.cells[1].innerText; // 두 번째 td: 학기
+
+            if (eachYear === earliestYear && eachSemester === earliestSemester) {
+                eachRow.style.display = ""; // 표시
+            } else {
+                eachRow.style.display = "none"; // 숨김
+            }
+        });
+
+        // 초기 로드 시 가장 오래된 행 색칠
+        highlightRow(earliestRow);
+
+        // 현재 보고 있는 행의 수를 카운트하고 업데이트하는 함수
+        updateCount();
+
+        // 'portal-score-total-year'의 tbody의 tr에 클릭 이벤트 리스너 추가
+        totalYearRows.forEach((row) => {
+            row.addEventListener("click", function () {
+                // 클릭한 tr의 첫 번째 td와 두 번째 td에서 연도와 학기 가져오기
+                const year = this.cells[0].innerText; // 첫 번째 td: 년도
+                const semester = this.cells[1].innerText; // 두 번째 td: 학기
+
+                // 각 tr을 순회하며 연도와 학기가 일치하는 것만 표시하고 나머지는 숨김
+                eachYearRows.forEach((eachRow) => {
+                    const eachYear = eachRow.cells[0].innerText; // 첫 번째 td: 년도
+                    const eachSemester = eachRow.cells[1].innerText; // 두 번째 td: 학기
+
+                    if (eachYear === year && eachSemester === semester) {
+                        eachRow.style.display = ""; // 일치하면 표시
+                    } else {
+                        eachRow.style.display = "none"; // 일치하지 않으면 숨김
+                    }
+                });
+
+                // 색상 초기화
+                totalYearRows.forEach((r) => (r.style.backgroundColor = "")); // 모든 행의 색상 초기화
+                highlightRow(this); // 클릭한 행 색상 추가
+
+                // 행 수 업데이트
+                updateCount();
+            });
+        });
+
+        // 현재 보고 있는 행에 색상을 추가하는 함수
+        function highlightRow(row) {
+            row.style.backgroundColor = "#e0f7fa"; // 색상 설정 (예: 연한 파란색)
+        }
+
+        // 현재 표시된 행의 수를 카운트하고 업데이트하는 함수
+        function updateCount() {
+            let count = 0;
+            eachYearRows.forEach((eachRow) => {
+                if (eachRow.style.display !== "none") {
+                    count++;
+                }
+            });
+            countElement.innerText = `${count}건`; // 과목 수 업데이트
+        }
+    });
+</script>
+</body>
+</html>
