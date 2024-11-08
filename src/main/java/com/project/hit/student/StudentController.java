@@ -19,4 +19,6 @@ public class StudentController {
     @GetMapping("/score")
     public String score() {return "portal/student/student_score";}
 
+    @GetMapping("/report")
+    public String report() {return "portal/student/student_report";}
 }

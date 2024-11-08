@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" type="text/css" th:href="@{/css/reset.css}" />
+  <link rel="stylesheet" type="text/css" th:href="@{/css/admin/adminPersonManage.css}" />
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <title>Portal</title>
+</head>
+<body>
+<header class="portal-head">
+  <div class="portal-logo-name">
+    <img src="" alt="" />
+    <h1>포털시스템</h1>
+  </div>
+  <div class="user-alarm">
+    <div class="user-photo"></div>
+    <p class="portal-user-name">길오성님</p>
+  </div>
+</header>
+<section class="portal-main">
+  <nav class="portal-nav">
+    <ul>
+      <li class="portal-home-button"><img src="" alt="" />홈</li>
+      <li class="portal-person-add-button">
+        <img src="" alt="" />인적정보 관리
+      </li>
+      <li class="portal-class-add-button"><img src="" alt="" />과목기입</li>
+      <li class="portal-student-pay-check-button">
+        <img src="" alt="" />등록금확인
+      </li>
+      <li class="portal-class-open-button">
+        <img src="" alt="" />수강신청
+      </li>
+    </ul>
+  </nav>
+  <div class="portal-person-managing-frame">
+    <h2>인적정보 관리</h2>
+    <button class="add-person-button" id="openAddModal">인적기입</button>
+    <ul>
+      <li>
+        <select id="department-filter">
+          <option value="">=== 학과 ===</option>
+          <option value="컴퓨터소프트웨어">컴퓨터소프트웨어</option>
+          <option value="컴퓨터공학">컴퓨터공학</option>
+          <option value="전자공학">전자공학</option>
+          <option value="화학공학">화학공학</option>
+          <option value="생물학">생물학</option>
+        </select>
+        <select id="person-type-filter">
+          <option value="학생" selected>학부생</option>
+          <option value="교수">교수</option>
+        </select>
+      </li>
+      <li>
+        <select name="" id="">
+          <option value="">이름</option>
+          <option value="">학번</option>
+          <option value="">사번</option></select
+        ><input type="text" /><button>검색</button>
+      </li>
+    </ul>
+    <table class="student-managing-table">
+      <thead>
+      <tr>
+        <th>학과</th>
+        <th>학번</th>
+        <th>이름</th>
+        <th>생년월일</th>
+        <th>연락처</th>
+        <th>이메일</th>
+        <th>이수학점</th>
+        <th>상태</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>컴퓨터소프트웨어</td>
+        <td>20210001</td>
+        <td>김철수</td>
+        <td>1999-05-14</td>
+        <td>010-1234-5678</td>
+        <td>chulsoo@example.com</td>
+        <td>70</td>
+        <td>재학</td>
+      </tr>
+      <tr>
+        <td>컴퓨터공학</td>
+        <td>20210002</td>
+        <td>이영희</td>
+        <td>2000-02-20</td>
+        <td>010-9876-5432</td>
+        <td>younghee@example.com</td>
+        <td>70</td>
+        <td>재학</td>
+      </tr>
+      <tr>
+        <td>전자공학</td>
+        <td>20210003</td>
+        <td>박민수</td>
+        <td>1998-09-11</td>
+        <td>010-5555-6666</td>
+        <td>minsoo@example.com</td>
+        <td>70</td>
+        <td>졸업</td>
+      </tr>
+      <tr>
+        <td>화학공학</td>
+        <td>20210004</td>
+        <td>최지은</td>
+        <td>2001-07-01</td>
+        <td>010-1111-2222</td>
+        <td>jieun@example.com</td>
+        <td>60</td>
+        <td>휴학</td>
+      </tr>
+      <tr>
+        <td>생물학</td>
+        <td>20210005</td>
+        <td>한나경</td>
+        <td>1997-03-05</td>
+        <td>010-7777-8888</td>
+        <td>nakyung@example.com</td>
+        <td>50</td>
+        <td>재학</td>
+      </tr>
+      </tbody>
+    </table>
+    <table class="professor-managing-table">
+      <thead>
+      <tr>
+        <th>학과</th>
+        <th>사번</th>
+        <th>이름</th>
+        <th>생년월일</th>
+        <th>연락처</th>
+        <th>이메일</th>
+        <th>직위</th>
+      </tr>
+      </thead>
+      <tr>
+        <td>컴퓨터소프트웨어</td>
+        <td>P20230001</td>
+        <td>김철수</td>
+        <td>1975-08-15</td>
+        <td>010-1234-5678</td>
+        <td>chulsoo@university.edu</td>
+        <td>정교수</td>
+      </tr>
+      <tr>
+        <td>컴퓨터공학</td>
+        <td>P20230002</td>
+        <td>이영희</td>
+        <td>1980-04-22</td>
+        <td>010-9876-5432</td>
+        <td>younghee@university.edu</td>
+        <td>부교수</td>
+      </tr>
+      <tr>
+        <td>전자공학</td>
+        <td>P20230003</td>
+        <td>박민수</td>
+        <td>1978-12-05</td>
+        <td>010-5555-6666</td>
+        <td>minsoo@university.edu</td>
+        <td>정교수</td>
+      </tr>
+      <tr>
+        <td>화학공학</td>
+        <td>P20230004</td>
+        <td>최지은</td>
+        <td>1985-09-11</td>
+        <td>010-1111-2222</td>
+        <td>jieun@university.edu</td>
+        <td>시간강사</td>
+      </tr>
+      <tr>
+        <td>생물학</td>
+        <td>P20230005</td>
+        <td>한나경</td>
+        <td>1979-06-30</td>
+        <td>010-7777-8888</td>
+        <td>nakyung@university.edu</td>
+        <td>부교수</td>
+      </tr>
+    </table>
+  </div>
+</section>
+<!-- 모달 창 -->
+<div id="addPersonModal" class="person-add-modal">
+  <div class="person-add-modal-content">
+    <span class="addPersonclose">&times;</span>
+    <h3>인적 정보 기입</h3>
+    <select id="personType" onchange="toggleFormFields()">
+      <option value="학생">학부생</option>
+      <option value="교수">교수</option>
+    </select>
+
+    <!-- 학생 폼 -->
+
+    <div id="studentForm">
+      <form action="">
+        <label for="department">학과:</label>
+        <input type="text" id="department" placeholder="학과 입력" />
+
+        <label for="studentId">학번:</label>
+        <input type="text" id="studentId" placeholder="학번 입력" />
+
+        <label for="studentName">이름:</label>
+        <input type="text" id="studentName" placeholder="이름 입력" />
+
+        <label for="birthDate">생년월일:</label>
+        <input type="date" id="birthDate" />
+
+        <label for="contact">연락처:</label>
+        <input type="text" id="contact" placeholder="연락처 입력" />
+
+        <label for="email">이메일:</label>
+        <input type="email" id="email" placeholder="이메일 입력" />
+        <input type="submit" value="기입" />
+      </form>
+    </div>
+
+    <!-- 교수 폼 -->
+    <div id="professorForm" style="display: none">
+      <form action="">
+        <label for="profDepartment">학과:</label>
+        <input type="text" id="profDepartment" placeholder="학과 입력" />
+
+        <label for="professorId">사번:</label>
+        <input type="text" id="professorId" placeholder="사번 입력" />
+
+        <label for="profName">이름:</label>
+        <input type="text" id="profName" placeholder="이름 입력" />
+
+        <label for="profBirthDate">생년월일:</label>
+        <input type="date" id="profBirthDate" />
+
+        <label for="profContact">연락처:</label>
+        <input type="text" id="profContact" placeholder="연락처 입력" />
+
+        <label for="profEmail">이메일:</label>
+        <input type="email" id="profEmail" placeholder="이메일 입력" />
+
+        <label for="position">직위:</label>
+        <select id="position">
+          <option value="정교수">정교수</option>
+          <option value="부교수">부교수</option>
+          <option value="시간강사">시간강사</option>
+        </select>
+        <input type="submit" value="기입" />
+      </form>
+    </div>
+  </div>
+</div>
+<script>
+  window.onload = function () {
+    document.querySelector(".professor-managing-table").style.display =
+            "none";
+  };
+  // 학과 및 유형 필터링
+  document
+          .getElementById("department-filter")
+          .addEventListener("change", filterData);
+  document
+          .getElementById("person-type-filter")
+          .addEventListener("change", filterData);
+
+  function filterData() {
+    var selectedDepartment =
+            document.getElementById("department-filter").value; // 선택된 학과
+    var selectedPersonType =
+            document.getElementById("person-type-filter").value; // 선택된 유형 (학생 또는 교수)
+
+    var studentTableRows = document.querySelectorAll(
+            ".student-managing-table tbody tr"
+    );
+    var professorTableRows = document.querySelectorAll(
+            ".professor-managing-table tbody tr"
+    );
+
+    // 교수 테이블과 학생 테이블의 표시 여부를 설정
+    if (selectedPersonType === "학생") {
+      document.querySelector(".student-managing-table").style.display = "";
+      document.querySelector(".professor-managing-table").style.display =
+              "none";
+    } else {
+      document.querySelector(".student-managing-table").style.display =
+              "none";
+      document.querySelector(".professor-managing-table").style.display =
+              "";
+    }
+
+    // 학생 테이블 필터링
+    studentTableRows.forEach(function (row) {
+      var department = row.cells[0].innerText; // 각 행의 학과 이름
+      if (selectedDepartment === "" || department === selectedDepartment) {
+        row.style.display = ""; // 선택된 학과가 맞으면 표시
+      } else {
+        row.style.display = "none"; // 아니면 숨김
+      }
+    });
+
+    // 교수 테이블 필터링
+    professorTableRows.forEach(function (row) {
+      var department = row.cells[0].innerText; // 각 행의 학과 이름
+      if (selectedDepartment === "" || department === selectedDepartment) {
+        row.style.display = ""; // 선택된 학과가 맞으면 표시
+      } else {
+        row.style.display = "none"; // 아니면 숨김
+      }
+    });
+  }
+  // 모달창
+  // 모달 열기 버튼
+  var modal = document.getElementById("addPersonModal");
+  var btn = document.getElementById("openAddModal");
+  var span = document.getElementsByClassName("addPersonclose")[0];
+
+  // 모달 열기
+  btn.onclick = function () {
+    modal.style.display = "block";
+  };
+
+  // 모달 닫기
+  span.onclick = function () {
+    modal.style.display = "none";
+  };
+
+  // 페이지 바깥 클릭 시 모달 닫기
+  window.onclick = function (event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  };
+
+  // 학생/교수 선택에 따른 폼 변경
+  function toggleFormFields() {
+    var personType = document.getElementById("personType").value;
+    if (personType === "학생") {
+      document.getElementById("studentForm").style.display = "block";
+      document.getElementById("professorForm").style.display = "none";
+    } else if (personType === "교수") {
+      document.getElementById("studentForm").style.display = "none";
+      document.getElementById("professorForm").style.display = "block";
+    }
+  }
+</script>
+</body>
+</html>
