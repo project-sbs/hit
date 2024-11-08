@@ -1,0 +1,167 @@
+body {
+    width: 100%;
+    overflow: hidden;
+}
+header {
+    width: 100%;
+    padding: 1%;
+    height: 60px;
+    background: purple;
+    display: flex;
+    justify-content: space-between;
+}
+.portal-logo-name {
+    display: flex;
+}
+.portal-logo-name img {
+    width: 100px;
+}
+.portal-logo-name h1 {
+    font-size: 25px;
+}
+.portal-main {
+    display: flex;
+}
+.portal-nav {
+    width: 340px;
+}
+.portal-nav ul {
+    width: 100%;
+    height: 1020px;
+}
+.portal-nav > ul > li {
+    width: 100%;
+    height: 50px;
+    border-bottom: 2px solid #ececec;
+    line-height: 50px;
+    padding-left: 20px;
+}
+.portal-person-managing-frame {
+    width: 100%;
+    border-left: #ececec 1px solid;
+}
+.portal-person-managing-frame h2 {
+    padding: 3%;
+    margin-bottom: 5px;
+}
+.add-person-button {
+    margin-left: 1400px;
+    position: relative;
+    width: 120px;
+    height: 35px;
+    top: -50px;
+    right: -30px;
+    background: beige;
+    border: 1px solid #ddd;
+}
+.portal-person-managing-frame ul {
+    width: 90%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+}
+.portal-person-managing-frame ul li {
+    display: flex;
+}
+.portal-person-managing-frame ul li select {
+    text-align: center;
+}
+.student-managing-table {
+    width: 90%;
+    border-collapse: collapse;
+    text-align: center;
+    border: 1px solid #ddd;
+    margin: 0 auto;
+}
+.student-managing-table th,
+.student-managing-table td {
+    border: 1px solid #ddd;
+    width: 12.5%;
+}
+.professor-managing-table {
+    width: 90%;
+    border-collapse: collapse;
+    text-align: center;
+    border: 1px solid #ddd;
+    margin: 0 auto;
+}
+.professor-managing-table th,
+.professor-managing-table td {
+    border: 1px solid #ddd;
+    width: 14%;
+}
+/*모달창*/
+/* 모달 배경 */
+.person-add-modal {
+    display: none; /* 기본적으로 숨김 */
+    position: fixed;
+    z-index: 1; /* 페이지 내용 위에 표시 */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* 반투명 배경 */
+    padding-top: 60px;
+}
+
+/* 모달 내용 스타일 */
+.person-add-modal-content {
+    background-color: white;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    height: 300px;
+}
+.person-add-modal-content h3 {
+    margin-bottom: 20px;
+}
+.person-add-modal-content #personType {
+    margin-bottom: 20px;
+}
+/* 모달 닫기 버튼 스타일 */
+.addPersonclose {
+    color: #aaa;
+    font-size: 28px;
+    font-weight: bold;
+    position: absolute;
+    right: 200px;
+    top: 150px;
+}
+
+.addPersonclose:hover,
+.addPersonclose:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+.studentForm input[type="text"],
+.studentForm input[type="email"],
+.studentForm input[type="date"],
+.studentForm select {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    box-sizing: border-box;
+}
+.professorForm input[type="text"],
+.professorForm input[type="email"],
+.professorForm input[type="date"],
+.professorForm select {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    box-sizing: border-box;
+}
+.person-add-modal button {
+    padding: 10px 20px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    margin-top: 20px;
+    margin-left: 1200px;
+}
+.person-add-modal button:hover {
+    background-color: #45a049;
+}

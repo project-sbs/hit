@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/reset.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/admin/adminClassManage.css}" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <title>Portal</title>
+</head>
+<body>
+<header class="portal-head">
+    <div class="portal-logo-name">
+        <img src="" alt="" />
+        <h1>포털시스템</h1>
+    </div>
+    <div class="user-alarm">
+        <div class="user-photo"></div>
+        <p class="portal-user-name">길오성님</p>
+    </div>
+</header>
+<section class="portal-main">
+    <nav class="portal-nav">
+        <ul>
+            <li class="portal-home-button"><img src="" alt="" />홈</li>
+            <li class="portal-person-add-button">
+                <img src="" alt="" />인적정보 관리
+            </li>
+            <li class="portal-class-add-button"><img src="" alt="" />과목기입</li>
+            <li class="portal-student-pay-check-button">
+                <img src="" alt="" />등록금확인
+            </li>
+            <li class="portal-class-open-button">
+                <img src="" alt="" />수강신청
+            </li>
+        </ul>
+    </nav>
+    <div class="portal-class-managing-frame">
+        <h2>수강과목관리</h2>
+        <button class="btn-add-course">수강과목기입</button>
+        <ul>
+            <li>
+                <select
+                        name=""
+                        class="major-type-select"
+                        onchange="handleSelectChange()"
+                >
+                    <option value="" disabled>=== 전공구분 ===</option>
+                    <option value="major" selected>전공</option>
+                    <option value="liberal">교양</option>
+                </select>
+            </li>
+            <li>
+                <select name="" class="department-select">
+                    <option value="" disabled>=== 학과 ===</option>
+                    <option value="컴퓨터소프트웨어">컴퓨터소프트웨어</option>
+                    <option value="컴퓨터공학">컴퓨터공학</option>
+                    <option value="전자공학">전자공학</option>
+                    <option value="화학공학">화학공학</option>
+                    <option value="생물학">생물학</option>
+                </select>
+            </li>
+        </ul>
+        <table class="major-class-table">
+            <thead>
+            <tr>
+                <th>과목고유번호</th>
+                <th>과목명</th>
+                <th>전공구분</th>
+                <th>요일</th>
+                <th>시간</th>
+                <th>교수명</th>
+                <th>최대인원수</th>
+                <th>현재인원수</th>
+                <th></th>
+                <th>학과</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>101</td>
+                <td>자료구조</td>
+                <td>전공</td>
+                <td>월</td>
+                <td>09:00-10:30</td>
+                <td>김교수</td>
+                <td>30</td>
+                <td>25</td>
+                <td><button>x</button></td>
+                <td>컴퓨터공학</td>
+            </tr>
+            <tr>
+                <td>102</td>
+                <td>알고리즘</td>
+                <td>전공</td>
+                <td>화</td>
+                <td>10:00-11:30</td>
+                <td>박교수</td>
+                <td>25</td>
+                <td>20</td>
+                <td><button>x</button></td>
+                <td>컴퓨터소프트웨어</td>
+            </tr>
+            <tr>
+                <td>103</td>
+                <td>회로이론</td>
+                <td>전공</td>
+                <td>수</td>
+                <td>13:00-14:30</td>
+                <td>이교수</td>
+                <td>40</td>
+                <td>35</td>
+                <td><button>x</button></td>
+                <td>전자공학</td>
+            </tr>
+            <tr>
+                <td>104</td>
+                <td>화학개론</td>
+                <td>전공</td>
+                <td>목</td>
+                <td>15:00-16:30</td>
+                <td>정교수</td>
+                <td>50</td>
+                <td>45</td>
+                <td><button>x</button></td>
+                <td>화학공학</td>
+            </tr>
+            <tr>
+                <td>105</td>
+                <td>생물학개론</td>
+                <td>전공</td>
+                <td>금</td>
+                <td>14:00-15:30</td>
+                <td>최교수</td>
+                <td>30</td>
+                <td>28</td>
+                <td><button>x</button></td>
+                <td>생물학</td>
+            </tr>
+            </tbody>
+        </table>
+        <table class="liberal-class-table">
+            <thead>
+            <tr>
+                <th>과목고유번호</th>
+                <th>과목명</th>
+                <th>교양</th>
+                <th>요일</th>
+                <th>시간</th>
+                <th>교수명</th>
+                <th>최대인원수</th>
+                <th>현재인원수</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>201</td>
+                <td>철학의이해</td>
+                <td>교양</td>
+                <td>월</td>
+                <td>08:30-10:00</td>
+                <td>김철학</td>
+                <td>60</td>
+                <td>50</td>
+                <td><button>x</button></td>
+            </tr>
+            <tr>
+                <td>202</td>
+                <td>세계사개론</td>
+                <td>교양</td>
+                <td>화</td>
+                <td>09:00-10:30</td>
+                <td>박역사</td>
+                <td>50</td>
+                <td>47</td>
+                <td><button>x</button></td>
+            </tr>
+            <tr>
+                <td>203</td>
+                <td>문학과사회</td>
+                <td>교양</td>
+                <td>수</td>
+                <td>11:00-12:30</td>
+                <td>이문학</td>
+                <td>40</td>
+                <td>35</td>
+                <td><button>x</button></td>
+            </tr>
+            <tr>
+                <td>204</td>
+                <td>예술사개론</td>
+                <td>교양</td>
+                <td>목</td>
+                <td>13:00-14:30</td>
+                <td>정예술</td>
+                <td>45</td>
+                <td>40</td>
+                <td><button>x</button></td>
+            </tr>
+            <tr>
+                <td>205</td>
+                <td>심리학개론</td>
+                <td>교양</td>
+                <td>금</td>
+                <td>10:00-11:30</td>
+                <td>최심리</td>
+                <td>55</td>
+                <td>53</td>
+                <td><button>x</button></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <!-- 수강 과목 기입 모달 창 -->
+    <!-- 수강 과목 기입 모달 창 -->
+    <div id="course-modal" class="modal-container">
+        <div class="modal-content-wrapper">
+            <span class="close-modal-btn">&times;</span>
+            <h2 class="modal-title">수강 과목 기입</h2>
+
+            <form id="course-form" class="course-form">
+                <label for="major-type" class="label-major-type">전공/교양:</label>
+                <select id="major-type" class="select-major-type">
+                    <option value="" disabled selected>=== 전공/교양 ===</option>
+                    <option value="major">전공</option>
+                    <option value="liberal">교양</option>
+                </select>
+
+                <br /><br />
+
+                <label for="department" class="label-department">학과:</label>
+                <select id="department" class="select-department">
+                    <option value="" disabled selected>=== 학과 ===</option>
+                    <option value="컴퓨터소프트웨어">컴퓨터소프트웨어</option>
+                    <option value="컴퓨터공학">컴퓨터공학</option>
+                    <option value="전자공학">전자공학</option>
+                    <option value="화학공학">화학공학</option>
+                    <option value="생물학">생물학</option>
+                </select>
+
+                <br /><br />
+
+                <label for="course-name" class="label-course-name">과목명:</label>
+                <input type="text" id="course-name" name="course-name" required />
+
+                <br /><br />
+
+                <label for="professor" class="label-professor">교수명:</label>
+                <input type="text" id="professor" name="professor" required />
+
+                <br /><br />
+
+                <label for="time" class="label-time">시간:</label>
+                <input type="text" id="time" name="time" required />
+
+                <br /><br />
+
+                <label for="day" class="label-day">요일:</label>
+                <input
+                        type="text"
+                        id="day"
+                        name="day"
+                        placeholder="예: 월, 화, 수, 목, 금"
+                        required
+                />
+
+                <br /><br />
+
+                <label for="max-students" class="label-max-students">인원수:</label>
+                <input
+                        type="number"
+                        id="max-students"
+                        name="max-students"
+                        required
+                />
+
+                <br /><br />
+
+                <button type="submit" class="submit-course">과목 추가</button>
+            </form>
+        </div>
+    </div>
+</section>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const majorTable = document.querySelector(".major-class-table");
+        const liberalTable = document.querySelector(".liberal-class-table");
+        const departmentSelect = document.querySelector(".department-select");
+        const majorTypeSelect = document.querySelector(".major-type-select");
+
+        // 페이지 로드 시 초기 상태 설정
+        majorTable.style.display = "table";
+        liberalTable.style.display = "none";
+        departmentSelect.style.display = "inline-block";
+
+        // 페이지 로드 후 첫 번째 필터링 실행
+        handleSelectChange(); // 초기 상태에서 전공 또는 교양에 맞는 테이블을 처리
+    });
+
+    function handleSelectChange() {
+        const majorTypeSelect = document.querySelector(".major-type-select");
+        const departmentSelect = document.querySelector(".department-select");
+        const majorTable = document.querySelector(".major-class-table");
+        const liberalTable = document.querySelector(".liberal-class-table");
+        const tableRows = document.querySelectorAll(
+            ".major-class-table tbody tr"
+        );
+
+        // 전공 또는 교양 선택에 따른 테이블 전환
+        if (majorTypeSelect.value === "major") {
+            majorTable.style.display = "table";
+            liberalTable.style.display = "none";
+            departmentSelect.style.display = "inline-block";
+
+            // 선택된 전공에 맞는 행만 보이게 하기
+            const selectedDepartment = departmentSelect.value;
+
+            // 모든 테이블 행을 숨기고 선택된 학과가 포함된 행만 보이게 함
+            tableRows.forEach((row) => {
+                const departmentTd = row.querySelector("td:last-of-type"); // 학과가 포함된 마지막 td
+                if (
+                    departmentTd &&
+                    departmentTd.textContent.trim() === selectedDepartment
+                ) {
+                    row.style.display = ""; // 일치하면 보이게
+                } else {
+                    row.style.display = "none"; // 일치하지 않으면 숨기기
+                }
+            });
+        } else if (majorTypeSelect.value === "liberal") {
+            majorTable.style.display = "none";
+            liberalTable.style.display = "table";
+            departmentSelect.style.display = "none";
+        } else {
+            majorTable.style.display = "none";
+            liberalTable.style.display = "none";
+            departmentSelect.style.display = "none";
+        }
+    }
+
+    // 학과가 변경될 때마다 handleSelectChange() 호출
+    document
+        .querySelector(".department-select")
+        .addEventListener("change", function () {
+            handleSelectChange();
+        });
+
+    // 모달창 관련 스크립트
+    // 모달 요소와 버튼 가져오기
+    const btnAddCourse = document.querySelector(".btn-add-course"); // 수강과목기입 버튼
+    const modal = document.querySelector(".modal-container"); // 모달 창
+    const closeBtn = document.querySelector(".close-modal-btn"); // 모달 닫기 버튼
+    const courseForm = document.querySelector("#course-form"); // 수강 과목 기입 폼
+    const majorTypeSelect = document.querySelector(".select-major-type"); // 전공/교양 선택박스
+    const departmentSelect = document.querySelector(".select-department"); // 학과 선택박스
+
+    // 모달 열기 함수
+    btnAddCourse.addEventListener("click", () => {
+        modal.style.display = "block";
+    });
+
+    // 모달 닫기 함수
+    closeBtn.addEventListener("click", () => {
+        modal.style.display = "none";
+    });
+
+    // 배경을 클릭하면 모달 닫기
+    window.addEventListener("click", (event) => {
+        if (event.target === modal) {
+            modal.style.display = "none";
+        }
+    });
+
+    // 전공/교양 선택에 따라 학과 표시 여부 변경
+    majorTypeSelect.addEventListener("change", () => {
+        const majorType = majorTypeSelect.value;
+
+        if (majorType === "liberal") {
+            departmentSelect.style.display = "none"; // 교양일 경우 학과 선택 숨기기
+        } else if (majorType === "major") {
+            departmentSelect.style.display = "block"; // 전공일 경우 학과 선택 표시
+        }
+    });
+</script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/reset.css" />
+    <link rel="stylesheet" href="/css/portalAdminClassManage.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <title>Portal</title>
+</head>
+<body>
+<header class="portal-head">
+    <div class="portal-logo-name">
+        <img src="" alt="" />
+        <h1>포털시스템</h1>
+    </div>
+    <div class="user-alarm">
+        <div class="user-photo"></div>
+        <p class="portal-user-name">길오성님</p>
+    </div>
+</header>
+<section class="portal-main">
+    <nav class="portal-nav">
+        <ul>
+            <li class="portal-home-button"><img src="" alt="" />홈</li>
+            <li class="portal-person-add-button">
+                <img src="" alt="" />인적정보 관리
+            </li>
+            <li class="portal-class-add-button"><img src="" alt="" />과목기입</li>
+            <li class="portal-student-pay-check-button">
+                <img src="" alt="" />등록금확인
+            </li>
+            <li class="portal-class-open-button">
+                <img src="" alt="" />수강신청
+            </li>
+        </ul>
+    </nav>
+    <div class="portal-class-managing-frame">
+        <h2>수강과목관리</h2>
+        <button class="btn-add-course">수강과목기입</button>
+        <ul>
+            <li>
+                <select
+                        name=""
+                        class="major-type-select"
+                        onchange="handleSelectChange()"
+                >
+                    <option value="" disabled>=== 전공구분 ===</option>
+                    <option value="major" selected>전공</option>
+                    <option value="liberal">교양</option>
+                </select>
+            </li>
+            <li>
+                <select name="" class="department-select">
+                    <option value="" disabled>=== 학과 ===</option>
+                    <option value="컴퓨터소프트웨어">컴퓨터소프트웨어</option>
+                    <option value="컴퓨터공학">컴퓨터공학</option>
+                    <option value="전자공학">전자공학</option>
+                    <option value="화학공학">화학공학</option>
+                    <option value="생물학">생물학</option>
+                </select>
+            </li>
+        </ul>
+        <table class="major-class-table">
+            <thead>
+            <tr>
+                <th>과목고유번호</th>
+                <th>과목명</th>
+                <th>전공구분</th>
+                <th>요일</th>
+                <th>시간</th>
+                <th>교수명</th>
+                <th>최대인원수</th>
+                <th>현재인원수</th>
+                <th></th>
+                <th>학과</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>101</td>
+                <td>자료구조</td>
+                <td>전공</td>
+                <td>월</td>
+                <td>09:00-10:30</td>
+                <td>김교수</td>
+                <td>30</td>
+                <td>25</td>
+                <td><button>x</button></td>
+                <td>컴퓨터공학</td>
+            </tr>
+            <tr>
+                <td>102</td>
+                <td>알고리즘</td>
+                <td>전공</td>
+                <td>화</td>
+                <td>10:00-11:30</td>
+                <td>박교수</td>
+                <td>25</td>
+                <td>20</td>
+                <td><button>x</button></td>
+                <td>컴퓨터소프트웨어</td>
+            </tr>
+            <tr>
+                <td>103</td>
+                <td>회로이론</td>
+                <td>전공</td>
+                <td>수</td>
+                <td>13:00-14:30</td>
+                <td>이교수</td>
+                <td>40</td>
+                <td>35</td>
+                <td><button>x</button></td>
+                <td>전자공학</td>
+            </tr>
+            <tr>
+                <td>104</td>
+                <td>화학개론</td>
+                <td>전공</td>
+                <td>목</td>
+                <td>15:00-16:30</td>
+                <td>정교수</td>
+                <td>50</td>
+                <td>45</td>
+                <td><button>x</button></td>
+                <td>화학공학</td>
+            </tr>
+            <tr>
+                <td>105</td>
+                <td>생물학개론</td>
+                <td>전공</td>
+                <td>금</td>
+                <td>14:00-15:30</td>
+                <td>최교수</td>
+                <td>30</td>
+                <td>28</td>
+                <td><button>x</button></td>
+                <td>생물학</td>
+            </tr>
+            </tbody>
+        </table>
+        <table class="liberal-class-table">
+            <thead>
+            <tr>
+                <th>과목고유번호</th>
+                <th>과목명</th>
+                <th>교양</th>
+                <th>요일</th>
+                <th>시간</th>
+                <th>교수명</th>
+                <th>최대인원수</th>
+                <th>현재인원수</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>201</td>
+                <td>철학의이해</td>
+                <td>교양</td>
+                <td>월</td>
+                <td>08:30-10:00</td>
+                <td>김철학</td>
+                <td>60</td>
+                <td>50</td>
+                <td><button>x</button></td>
+            </tr>
+            <tr>
+                <td>202</td>
+                <td>세계사개론</td>
+                <td>교양</td>
+                <td>화</td>
+                <td>09:00-10:30</td>
+                <td>박역사</td>
+                <td>50</td>
+                <td>47</td>
+                <td><button>x</button></td>
+            </tr>
+            <tr>
+                <td>203</td>
+                <td>문학과사회</td>
+                <td>교양</td>
+                <td>수</td>
+                <td>11:00-12:30</td>
+                <td>이문학</td>
+                <td>40</td>
+                <td>35</td>
+                <td><button>x</button></td>
+            </tr>
+            <tr>
+                <td>204</td>
+                <td>예술사개론</td>
+                <td>교양</td>
+                <td>목</td>
+                <td>13:00-14:30</td>
+                <td>정예술</td>
+                <td>45</td>
+                <td>40</td>
+                <td><button>x</button></td>
+            </tr>
+            <tr>
+                <td>205</td>
+                <td>심리학개론</td>
+                <td>교양</td>
+                <td>금</td>
+                <td>10:00-11:30</td>
+                <td>최심리</td>
+                <td>55</td>
+                <td>53</td>
+                <td><button>x</button></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <!-- 수강 과목 기입 모달 창 -->
+    <!-- 수강 과목 기입 모달 창 -->
+    <div id="course-modal" class="modal-container">
+        <div class="modal-content-wrapper">
+            <span class="close-modal-btn">&times;</span>
+            <h2 class="modal-title">수강 과목 기입</h2>
+
+            <form id="course-form" class="course-form">
+                <label for="major-type" class="label-major-type">전공/교양:</label>
+                <select id="major-type" class="select-major-type">
+                    <option value="" disabled selected>=== 전공/교양 ===</option>
+                    <option value="major">전공</option>
+                    <option value="liberal">교양</option>
+                </select>
+
+                <br /><br />
+
+                <label for="department" class="label-department">학과:</label>
+                <select id="department" class="select-department">
+                    <option value="" disabled selected>=== 학과 ===</option>
+                    <option value="컴퓨터소프트웨어">컴퓨터소프트웨어</option>
+                    <option value="컴퓨터공학">컴퓨터공학</option>
+                    <option value="전자공학">전자공학</option>
+                    <option value="화학공학">화학공학</option>
+                    <option value="생물학">생물학</option>
+                </select>
+
+                <br /><br />
+
+                <label for="course-name" class="label-course-name">과목명:</label>
+                <input type="text" id="course-name" name="course-name" required />
+
+                <br /><br />
+
+                <label for="professor" class="label-professor">교수명:</label>
+                <input type="text" id="professor" name="professor" required />
+
+                <br /><br />
+
+                <label for="time" class="label-time">시간:</label>
+                <input type="text" id="time" name="time" required />
+
+                <br /><br />
+
+                <label for="day" class="label-day">요일:</label>
+                <input
+                        type="text"
+                        id="day"
+                        name="day"
+                        placeholder="예: 월, 화, 수, 목, 금"
+                        required
+                />
+
+                <br /><br />
+
+                <label for="max-students" class="label-max-students">인원수:</label>
+                <input
+                        type="number"
+                        id="max-students"
+                        name="max-students"
+                        required
+                />
+
+                <br /><br />
+
+                <button type="submit" class="submit-course">과목 추가</button>
+            </form>
+        </div>
+    </div>
+</section>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const majorTable = document.querySelector(".major-class-table");
+        const liberalTable = document.querySelector(".liberal-class-table");
+        const departmentSelect = document.querySelector(".department-select");
+        const majorTypeSelect = document.querySelector(".major-type-select");
+
+        // 페이지 로드 시 초기 상태 설정
+        majorTable.style.display = "table";
+        liberalTable.style.display = "none";
+        departmentSelect.style.display = "inline-block";
+
+        // 페이지 로드 후 첫 번째 필터링 실행
+        handleSelectChange(); // 초기 상태에서 전공 또는 교양에 맞는 테이블을 처리
+    });
+
+    function handleSelectChange() {
+        const majorTypeSelect = document.querySelector(".major-type-select");
+        const departmentSelect = document.querySelector(".department-select");
+        const majorTable = document.querySelector(".major-class-table");
+        const liberalTable = document.querySelector(".liberal-class-table");
+        const tableRows = document.querySelectorAll(
+            ".major-class-table tbody tr"
+        );
+
+        // 전공 또는 교양 선택에 따른 테이블 전환
+        if (majorTypeSelect.value === "major") {
+            majorTable.style.display = "table";
+            liberalTable.style.display = "none";
+            departmentSelect.style.display = "inline-block";
+
+            // 선택된 전공에 맞는 행만 보이게 하기
+            const selectedDepartment = departmentSelect.value;
+
+            // 모든 테이블 행을 숨기고 선택된 학과가 포함된 행만 보이게 함
+            tableRows.forEach((row) => {
+                const departmentTd = row.querySelector("td:last-of-type"); // 학과가 포함된 마지막 td
+                if (
+                    departmentTd &&
+                    departmentTd.textContent.trim() === selectedDepartment
+                ) {
+                    row.style.display = ""; // 일치하면 보이게
+                } else {
+                    row.style.display = "none"; // 일치하지 않으면 숨기기
+                }
+            });
+        } else if (majorTypeSelect.value === "liberal") {
+            majorTable.style.display = "none";
+            liberalTable.style.display = "table";
+            departmentSelect.style.display = "none";
+        } else {
+            majorTable.style.display = "none";
+            liberalTable.style.display = "none";
+            departmentSelect.style.display = "none";
+        }
+    }
+
+    // 학과가 변경될 때마다 handleSelectChange() 호출
+    document
+        .querySelector(".department-select")
+        .addEventListener("change", function () {
+            handleSelectChange();
+        });
+
+    // 모달창 관련 스크립트
+    // 모달 요소와 버튼 가져오기
+    const btnAddCourse = document.querySelector(".btn-add-course"); // 수강과목기입 버튼
+    const modal = document.querySelector(".modal-container"); // 모달 창
+    const closeBtn = document.querySelector(".close-modal-btn"); // 모달 닫기 버튼
+    const courseForm = document.querySelector("#course-form"); // 수강 과목 기입 폼
+    const majorTypeSelect = document.querySelector(".select-major-type"); // 전공/교양 선택박스
+    const departmentSelect = document.querySelector(".select-department"); // 학과 선택박스
+
+    // 모달 열기 함수
+    btnAddCourse.addEventListener("click", () => {
+        modal.style.display = "block";
+    });
+
+    // 모달 닫기 함수
+    closeBtn.addEventListener("click", () => {
+        modal.style.display = "none";
+    });
+
+    // 배경을 클릭하면 모달 닫기
+    window.addEventListener("click", (event) => {
+        if (event.target === modal) {
+            modal.style.display = "none";
+        }
+    });
+
+    // 전공/교양 선택에 따라 학과 표시 여부 변경
+    majorTypeSelect.addEventListener("change", () => {
+        const majorType = majorTypeSelect.value;
+
+        if (majorType === "liberal") {
+            departmentSelect.style.display = "none"; // 교양일 경우 학과 선택 숨기기
+        } else if (majorType === "major") {
+            departmentSelect.style.display = "block"; // 전공일 경우 학과 선택 표시
+        }
+    });
+</script>
+</body>
+</html>

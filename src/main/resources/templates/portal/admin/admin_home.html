@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/reset.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/admin/adminHome.css}" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <title>Portal</title>
+</head>
+<body>
+<header class="portal-head">
+    <div class="portal-logo-name">
+        <img src="" alt="" />
+        <h1>포털시스템</h1>
+    </div>
+    <div class="user-alarm">
+        <div class="user-photo"></div>
+        <p class="portal-user-name">길오성님</p>
+    </div>
+</header>
+<section class="portal-main">
+    <nav class="portal-nav">
+        <ul>
+            <li class="portal-home-button"><img src="" alt="" />홈</li>
+            <li class="portal-person-add-button">
+                <img src="" alt="" />인적정보 관리
+            </li>
+            <li class="portal-class-add-button"><img src="" alt="" />과목기입</li>
+            <li class="portal-student-pay-check-button">
+                <img src="" alt="" />등록금확인
+            </li>
+            <li class="portal-class-open-button">
+                <img src="" alt="" />수강신청
+            </li>
+        </ul>
+    </nav>
+    <div class="portal-home portal-main-frame">
+        <div class="portal-user-login-etc">
+            <div>
+                <p><b>길오성</b>님 환영합니다</p>
+                <ul>
+                    <li>비밀번호 변경</li>
+                    <li>|</li>
+                    <li>인증서 등록</li>
+                </ul>
+            </div>
+            <ul>
+                <li>
+                    <ul>
+                        <li>이미지</li>
+                        <li>웹메일</li>
+                        <li>수량</li>
+                    </ul>
+                </li>
+                <li>
+                    <ul>
+                        <li>이미지</li>
+                        <li>쪽지</li>
+                        <li>수량</li>
+                    </ul>
+                </li>
+                <li>
+                    <ul>
+                        <li>이미지</li>
+                        <li>부서계시판</li>
+                        <li>수량</li>
+                    </ul>
+                </li>
+            </ul>
+            <ul>
+                <li>
+                    <p>시간</p>
+                    <p id="current-time">Loading...</p>
+                </li>
+                <li>
+                    <p>접속 IP</p>
+                    <p id="ip-address">Loading...</p>
+                </li>
+                <li>
+                    <button>마이페이지</button>
+                    <button>로그아웃</button>
+                </li>
+            </ul>
+        </div>
+        <div class="portal-college-schedule">
+            <h2>학사일정</h2>
+            <ul>
+                <li>
+                    <button>LEFT</button>
+                    <p class="portal-college-schedule-control-date">일자</p>
+                    <button>RIGHT</button>
+                </li>
+                <li>
+                    <ul>
+                        <li>
+                            <p class="portal-college-schedule-date">01-08</p>
+                            <p>1학년 학생회모집</p>
+                        </li>
+                        <li>
+                            <p class="portal-college-schedule-date">01-08</p>
+                            <p>1학년 학생회모집</p>
+                        </li>
+                        <li>
+                            <p class="portal-college-schedule-date">01-08</p>
+                            <p>1학년 학생회모집</p>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div class="portal-admin-student-check">
+            <canvas id="studentChart"></canvas>
+        </div>
+        <div class="portal-college-news">
+            <ul class="portal-college-news-controller">
+                <li class="portal-notice-button">공지사항</li>
+                <li class="portal-class-button">학사공지</li>
+                <li class="portal-employee-button">채용공고</li>
+                <li class="portal-conversation-button">자유계시판</li>
+                <div class="active-line"></div>
+                <!--위에 움직이는 줄-->
+            </ul>
+            <ul class="portal-college-notice-page portal-college-news-frame">
+                <li>
+                    <p>재목을 입력해주세요1</p>
+                    <p>24.10.11</p>
+                </li>
+                <li>
+                    <p>재목을 입력해주세요</p>
+                    <p>24.10.11</p>
+                </li>
+                <li>
+                    <p>재목을 입력해주세요</p>
+                    <p>24.10.11</p>
+                </li>
+                <li>
+                    <p>재목을 입력해주세요</p>
+                    <p>24.10.11</p>
+                </li>
+                <li>
+                    <p>재목을 입력해주세요</p>
+                    <p>24.10.11</p>
+                </li>
+                <li>
+                    <p>재목을 입력해주세요</p>
+                    <p>24.10.11</p>
+                </li>
+            </ul>
+            <ul class="portal-college-class-page portal-college-news-frame">
+                <li>
+                    <p>재목을 입력해주세요2</p>
+                    <p>24.10.11</p>
+                </li>
+                <li>
+                    <p>재목을 입력해주세요</p>
+                    <p>24.10.11</p>
+                </li>
+                <li>
+                    <p>재목을 입력해주세요</p>
+                    <p>24.10.11</p>
+                </li>
+                <li>
+                    <p>재목을 입력해주세요</p>
+                    <p>24.10.11</p>
+                </li>
+                <li>
+                    <p>재목을 입력해주세요</p>
+                    <p>24.10.11</p>
+                </li>
+                <li>
+                    <p>재목을 입력해주세요</p>
+                    <p>24.10.11</p>
+                </li>
+            </ul>
+            <ul class="portal-college-employee-page portal-college-news-frame">
+                <li>
+                    <p>재목을 입력해주세요3</p>
+                    <p>24.10.11</p>
+                </li>
+                <li>
+                    <p>재목을 입력해주세요</p>
+                    <p>24.10.11</p>
+                </li>
+                <li>
+                    <p>재목을 입력해주세요</p>
+                    <p>24.10.11</p>
+                </li>
+                <li>
+                    <p>재목을 입력해주세요</p>
+                    <p>24.10.11</p>
+                </li>
+                <li>
+                    <p>재목을 입력해주세요</p>
+                    <p>24.10.11</p>
+                </li>
+                <li>
+                    <p>재목을 입력해주세요</p>
+                    <p>24.10.11</p>
+                </li>
+            </ul>
+            <ul
+                    class="portal-college-conversation-page portal-college-news-frame"
+            >
+                <li>
+                    <p>재목을 입력해주세요4</p>
+                    <p>24.10.11</p>
+                </li>
+                <li>
+                    <p>재목을 입력해주세요</p>
+                    <p>24.10.11</p>
+                </li>
+                <li>
+                    <p>재목을 입력해주세요</p>
+                    <p>24.10.11</p>
+                </li>
+                <li>
+                    <p>재목을 입력해주세요</p>
+                    <p>24.10.11</p>
+                </li>
+                <li>
+                    <p>재목을 입력해주세요</p>
+                    <p>24.10.11</p>
+                </li>
+                <li>
+                    <p>재목을 입력해주세요</p>
+                    <p>24.10.11</p>
+                </li>
+            </ul>
+        </div>
+        <div class="portal-admin-paycheck">
+            <canvas id="tuitionChart"></canvas>
+            <canvas id="paymentStatusChart"></canvas>
+        </div>
+    </div>
+    <!-----------------------------------portal home finish---------------------------------------------------------------->
+</section>
+<script>
+    //portal home 스크립트
+    /*접속 ip를 갖고오는 스크립트*/
+    /* fetch("http://ip-api.com/json")
+      .then((response) => response.json())
+      .then((data) => {
+        document.getElementById("ip-address").textContent = data.query;
+      })
+      .catch((error) => {
+        console.error("Error fetching IP address:", error);
+        document.getElementById("ip-address").textContent =
+          "Could not retrieve IP address";
+      });*/
+    /*현재 접속 시간을 가지고 오는 스크립트*/
+    function showCurrentDateTime() {
+        const now = new Date();
+        const year = now.getFullYear();
+        const month = String(now.getMonth() + 1).padStart(2, "0"); // 월은 0부터 시작하므로 +1
+        const day = String(now.getDate()).padStart(2, "0");
+        const hours = String(now.getHours()).padStart(2, "0");
+        const minutes = String(now.getMinutes()).padStart(2, "0");
+        const seconds = String(now.getSeconds()).padStart(2, "0");
+
+        const formattedDateTime = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+        document.getElementById("current-time").textContent = formattedDateTime;
+    }
+
+    // Show date and time immediately
+    showCurrentDateTime();
+
+    // Update date and time every second
+    setInterval(showCurrentDateTime, 1000);
+    /*접속 시간을 가지고오는 스크립트 끝*/
+    // 학생 인원 수 그래프
+    const canvas = document.getElementById("studentChart");
+    canvas.width = 600; // 너비 설정
+    canvas.height = 350; // 높이를 기존보다 50px 더 늘린 400px로 설정
+
+    const ctx = canvas.getContext("2d");
+    const studentChart = new Chart(ctx, {
+        type: "bar",
+        data: {
+            labels: ["총학생수", "재학생수", "휴학생수", "재적학생수"],
+            datasets: [
+                {
+                    label: "학생 수",
+                    data: [1000, 700, 200, 100], // 임의의 데이터
+                    backgroundColor: [
+                        "rgba(75, 192, 192, 0.6)",
+                        "rgba(54, 162, 235, 0.6)",
+                        "rgba(255, 206, 86, 0.6)",
+                        "rgba(153, 102, 255, 0.6)",
+                    ],
+                    borderColor: [
+                        "rgba(75, 192, 192, 1)",
+                        "rgba(54, 162, 235, 1)",
+                        "rgba(255, 206, 86, 1)",
+                        "rgba(153, 102, 255, 1)",
+                    ],
+                    borderWidth: 1,
+                },
+            ],
+        },
+        options: {
+            responsive: false, // 크기 설정을 위해 false로 설정
+            scales: {
+                y: {
+                    beginAtZero: true,
+                },
+            },
+        },
+    });
+
+    /*공지사항 및 기타 계시판 페이지 전환용의 스크립트*/
+    document.addEventListener("DOMContentLoaded", () => {
+        const pages = {
+            notice: document.querySelector(".portal-college-notice-page"),
+            class: document.querySelector(".portal-college-class-page"),
+            employee: document.querySelector(".portal-college-employee-page"),
+            conversation: document.querySelector(
+                ".portal-college-conversation-page"
+            ),
+        };
+
+        // 페이지 초기화
+        Object.keys(pages).forEach((key) => {
+            pages[key].style.display = "none";
+        });
+        pages.notice.style.display = "block"; // 처음에는 공지사항만 표시
+
+        const buttons = document.querySelectorAll(
+            ".portal-college-news-controller li"
+        );
+        const activeLine = document.querySelector(".active-line");
+
+        // 초기 활성 줄 위치 설정
+        function setActiveLine(target) {
+            activeLine.style.width = `${target.offsetWidth}px`;
+            activeLine.style.left = `${target.offsetLeft}px`;
+        }
+
+        // 버튼 클릭 이벤트 추가 및 페이지 전환
+        buttons.forEach((button) => {
+            button.addEventListener("click", () => {
+                const pageKey = button.classList[0].split("-")[1]; // 버튼 클래스에서 페이지 키 추출
+                showPage(pageKey);
+                setActiveLine(button); // 줄 위치 업데이트
+            });
+        });
+
+        // 페이지 전환 함수
+        function showPage(page) {
+            Object.keys(pages).forEach((key) => {
+                pages[key].style.display = key === page ? "block" : "none";
+            });
+        }
+
+        // 초기 활성 줄 위치 설정 (첫 번째 버튼 기준)
+        setActiveLine(buttons[0]);
+    });
+    // 총등록금과 결제인원 확인 그래프
+    // canvas 크기 설정
+    const tuitionCanvas = document.getElementById("tuitionChart");
+    tuitionCanvas.width = 300;
+    tuitionCanvas.height = 300;
+
+    const paymentStatusCanvas = document.getElementById("paymentStatusChart");
+    paymentStatusCanvas.width = 300;
+    paymentStatusCanvas.height = 300;
+
+    // 첫 번째 원형 그래프: 총등록금, 미납등록금, 결제된등록금액수
+    const tuitionCtx = tuitionCanvas.getContext("2d");
+    new Chart(tuitionCtx, {
+        type: "pie",
+        data: {
+            labels: ["총등록금", "미납등록금", "결제된 등록금액"],
+            datasets: [
+                {
+                    data: [5000, 1500, 3500], // 임의의 데이터
+                    backgroundColor: [
+                        "rgba(255, 99, 132, 0.6)",
+                        "rgba(54, 162, 235, 0.6)",
+                        "rgba(75, 192, 192, 0.6)",
+                    ],
+                    borderColor: [
+                        "rgba(255, 99, 132, 1)",
+                        "rgba(54, 162, 235, 1)",
+                        "rgba(75, 192, 192, 1)",
+                    ],
+                    borderWidth: 1,
+                },
+            ],
+        },
+        options: {
+            responsive: false,
+            plugins: {
+                legend: {
+                    position: "top",
+                },
+            },
+        },
+    });
+
+    // 두 번째 원형 그래프: 결제된 인원, 결제 안된 인원, 등록 취소한 인원
+    const paymentStatusCtx = paymentStatusCanvas.getContext("2d");
+    new Chart(paymentStatusCtx, {
+        type: "pie",
+        data: {
+            labels: ["결제된 인원", "결제 안된 인원", "등록 취소한 인원"],
+            datasets: [
+                {
+                    data: [300, 100, 50], // 임의의 데이터
+                    backgroundColor: [
+                        "rgba(153, 102, 255, 0.6)",
+                        "rgba(255, 206, 86, 0.6)",
+                        "rgba(201, 203, 207, 0.6)",
+                    ],
+                    borderColor: [
+                        "rgba(153, 102, 255, 1)",
+                        "rgba(255, 206, 86, 1)",
+                        "rgba(201, 203, 207, 1)",
+                    ],
+                    borderWidth: 1,
+                },
+            ],
+        },
+        options: {
+            responsive: false,
+            plugins: {
+                legend: {
+                    position: "top",
+                },
+            },
+        },
+    });
+</script>
+</body>
+</html>
