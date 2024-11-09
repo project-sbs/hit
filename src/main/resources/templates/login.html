@@ -21,15 +21,17 @@
                 </ul>
             </div>
             <div class="login-input-box">
-                <input type="text" placeholder="ID" />
-                <input type="text" placeholder="PASSWORD" />
-                <p>
-                    로그인 정보 > ID : 교직원 번호, 초기비밀번호 : 생년월일 6자리 INFO
-                    > ID : Employee number, Init PW: BirthDay (6 digit)
-                </p>
-                <input type="submit" value="로그인(LOGIN)" />
-                <p>이용 후 반드시 로그아웃 해주세요!</p>
-                <p>Please be sure to log out after use.</p>
+                <form th:action="@{/login}" method="post">
+                    <input type="text" placeholder="ID" name="id"/>
+                    <input type="password" placeholder="PASSWORD" name="password" />
+                    <p>
+                        로그인 정보 > ID : 교직원 번호, 초기비밀번호 : 생년월일 6자리
+                        INFO > ID : Employee number, Init PW: BirthDay (6 digit)
+                    </p>
+                    <input type="submit" value="로그인(LOGIN)" />
+                    <p>이용 후 반드시 로그아웃 해주세요!</p>
+                    <p>Please be sure to log out after use.</p>
+                </form>
             </div>
         </div>
     </div>

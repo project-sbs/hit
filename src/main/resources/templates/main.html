@@ -21,7 +21,10 @@
                 <li>Admissions</li>
                 <li>Academics</li>
                 <li>Campus Life</li>
-                <li><a href="login.html">Portal</a></li>
+                <li sec:authorize="hasRole('관리자')"><a th:href="@{/a/home}">Portal</a></li>
+                <li sec:authorize="hasRole('학생')"><a th:href="@{/s/home}">Portal</a></li>
+                <li sec:authorize="hasRole('교수')"><a th:href="@{/p/home}">Portal</a></li>
+                <li sec:authorize="isAnonymous()"><a th:href="@{/login}">Portal</a></li>
             </ul>
         </div>
         <div class="main-top-motto">
