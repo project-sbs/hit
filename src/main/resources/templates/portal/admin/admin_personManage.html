@@ -200,56 +200,63 @@
     <!-- 학생 폼 -->
 
     <div id="studentForm">
-      <form action="">
+      <form th:object="${userInserForm}" th:action="@{/insert}" method="post">
+        <input type="hidden" th:field="*{type}" value="학생" />
+
         <label for="department">학과:</label>
-        <input type="text" id="department" placeholder="학과 입력" />
+        <input type="text" id="department" placeholder="학과 입력" th:field="*{major}" />
 
         <label for="studentId">학번:</label>
-        <input type="text" id="studentId" placeholder="학번 입력" />
+        <input type="text" id="studentId" placeholder="학번 입력" th:field="*{id}" />
 
         <label for="studentName">이름:</label>
-        <input type="text" id="studentName" placeholder="이름 입력" />
+        <input type="text" id="studentName" placeholder="이름 입력" th:field="*{name}" />
 
         <label for="birthDate">생년월일:</label>
-        <input type="date" id="birthDate" />
+        <input type="date" id="birthDate" th:field="*{birthday}" />
 
         <label for="contact">연락처:</label>
-        <input type="text" id="contact" placeholder="연락처 입력" />
+        <input type="text" id="contact" placeholder="연락처 입력" th:field="*{phone}" />
 
         <label for="email">이메일:</label>
-        <input type="email" id="email" placeholder="이메일 입력" />
-        <input type="submit" value="기입" />
+        <input type="email" id="email" placeholder="이메일 입력" th:field="*{email}" />
+
+        <input type="hidden" th:field="*{option}" value="학생" />
+
+        <input type="submit" value="가입" />
       </form>
     </div>
 
     <!-- 교수 폼 -->
     <div id="professorForm" style="display: none">
-      <form action="">
+      <form th:object="${userInserForm}" th:action="@{/insert}" method="post">
+        <input type="hidden" name="type" value="교수" />
+
         <label for="profDepartment">학과:</label>
-        <input type="text" id="profDepartment" placeholder="학과 입력" />
+        <input type="text" id="profDepartment" placeholder="학과 입력" th:field="*{major}" />
 
         <label for="professorId">사번:</label>
-        <input type="text" id="professorId" placeholder="사번 입력" />
+        <input type="text" id="professorId" placeholder="사번 입력" th:field="*{id}" />
 
         <label for="profName">이름:</label>
-        <input type="text" id="profName" placeholder="이름 입력" />
+        <input type="text" id="profName" placeholder="이름 입력" th:field="*{name}" />
 
         <label for="profBirthDate">생년월일:</label>
-        <input type="date" id="profBirthDate" />
+        <input type="date" id="profBirthDate" th:field="*{birthday}" />
 
         <label for="profContact">연락처:</label>
-        <input type="text" id="profContact" placeholder="연락처 입력" />
+        <input type="text" id="profContact" placeholder="연락처 입력" th:field="*{phone}" />
 
         <label for="profEmail">이메일:</label>
-        <input type="email" id="profEmail" placeholder="이메일 입력" />
+        <input type="email" id="profEmail" placeholder="이메일 입력" th:field="*{email}" />
 
         <label for="position">직위:</label>
-        <select id="position">
+        <select id="position" th:field="*{option}" >
           <option value="정교수">정교수</option>
           <option value="부교수">부교수</option>
           <option value="시간강사">시간강사</option>
         </select>
-        <input type="submit" value="기입" />
+        <input type="submit" value="가입" />
       </form>
     </div>
   </div>
