@@ -13,4 +13,7 @@ public class ProfessorService {
         return professor;
     }
 
+    public void insertProfessor(Professor professor) {      // test 상의 더미 데이터 insert 시 사용하는 메서드
+        this.professorRepository.save(professor);
+    }
 }
