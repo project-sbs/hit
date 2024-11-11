@@ -20,5 +20,6 @@ public class MajorService {
         }
     }
 
+    public void insertMajor(Major major) {this.majorRepository.save(major);}
 
 }
