@@ -40,8 +40,11 @@ public class SecurityConfig {
                 .requestCache(request -> request
                         .requestCache(requestCache))
                 .authorizeHttpRequests(authorizeHttpRequests -> authorizeHttpRequests
-                        .requestMatchers("/**").permitAll() // 모든 요청 허용
-                        .requestMatchers(HttpMethod.POST, "/user/resign").authenticated() // POST /user/resign 경로는 인증된 사용자만 접근 가능
+                        .requestMatchers("/a/**").hasRole("관리자")
+                        .requestMatchers("/s/**").hasAnyRole("관리자", "학생")
+                        .requestMatchers("/p/**").hasAnyRole("관리자", "교수")
+                        .requestMatchers("/logout").authenticated()
+                        .anyRequest().permitAll()
                 )
                 .headers(headers -> headers
                         .addHeaderWriter(new XFrameOptionsHeaderWriter(

@@ -3,6 +3,8 @@ package com.project.hit.professor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class ProfessorService {
@@ -16,4 +18,6 @@ public class ProfessorService {
     public void insertProfessor(Professor professor) {      // test 상의 더미 데이터 insert 시 사용하는 메서드
         this.professorRepository.save(professor);
     }
+
+    public List<Professor> getAllProfessors() {return this.professorRepository.findAll();}
 }
