@@ -2,6 +2,7 @@ package com.project.hit.major;
 
 import com.project.hit.DataNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,4 +25,5 @@ public class MajorService {
     public void insertMajor(Major major) {this.majorRepository.save(major);}
 
     public List<Major> getAllMajors() {return this.majorRepository.findAll();}
+
 }

@@ -24,6 +24,7 @@ import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -31,6 +32,7 @@ import java.util.List;
 @RequestMapping("/a")
 public class AdminController {
 
+    private final AdminService adminService;
     private final StudentService studentService;
     private final ProfessorService professorService;
     private final MajorService majorService;
@@ -46,20 +48,39 @@ public class AdminController {
     }
 
     @GetMapping("/home")
-    public String home() {return "portal/admin/admin_home";}
+    public String home(Principal principal, Model model) {
+        Admin admin = this.adminService.getAdmin(principal.getName());
+
+        model.addAttribute("admin", admin);
+        return "portal/admin/admin_home";
+    }
 
     @GetMapping("/class")
-    public String classManage() {return "portal/admin/admin_classManage";}
+    public String classManage(Principal principal, Model model) {
+        Admin admin = this.adminService.getAdmin(principal.getName());
+
+        model.addAttribute("admin", admin);
+        return "portal/admin/admin_classManage";
+    }
 
     @GetMapping("/major")
-    public String majorManage() {return "portal/admin/admin_majorManage";}
+    public String majorManage(Principal principal, Model model) {
+        List<Major> majorList = this.majorService.getAllMajors();
+        Admin admin = this.adminService.getAdmin(principal.getName());
+
+        model.addAttribute("admin", admin);
+        model.addAttribute("majorList", majorList);
+        return "portal/admin/admin_majorManage";
+    }
 
     @GetMapping("/person")
-    public String personManage(StudentInsertForm studentInsertForm, ProfessorInsertForm professorInsertForm, Model model) {
+    public String personManage(StudentInsertForm studentInsertForm, ProfessorInsertForm professorInsertForm,Principal principal,  Model model) {
         List<Major> majorList = this.majorService.getAllMajors();
         List<Student> studentList = this.studentService.getAllStudents();
         List<Professor> professorList = this.professorService.getAllProfessors();
+        Admin admin = this.adminService.getAdmin(principal.getName());
 
+        model.addAttribute("admin", admin);
         model.addAttribute("majorList", majorList);
         model.addAttribute("studentList", studentList);
         model.addAttribute("professorList", professorList);

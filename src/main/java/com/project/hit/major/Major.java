@@ -20,6 +20,8 @@ public class Major {
 
     private String name;
 
+    private int totalStudent;
+
     @OneToMany(mappedBy = "major")
     private List<Student> students;
 

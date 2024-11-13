@@ -16,7 +16,7 @@
   </div>
   <div class="user-alarm">
     <div class="user-photo"></div>
-    <p class="portal-user-name" th:text="${#authentication.getName()}"></p>
+    <p class="portal-user-name" th:text="${admin.getName()}"></p>
   </div>
 </header>
 <section class="portal-main">
@@ -181,6 +181,7 @@
 
         <label for="position">직위:</label>
         <select id="position" th:field="*{role}">
+          <option value="학과장">학과장</option>
           <option value="정교수">정교수</option>
           <option value="부교수">부교수</option>
           <option value="시간강사">시간강사</option>
