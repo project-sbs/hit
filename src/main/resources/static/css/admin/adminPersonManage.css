@@ -35,6 +35,7 @@ header {
     border-bottom: 2px solid #ececec;
     line-height: 50px;
     padding-left: 20px;
+    cursor: pointer;
 }
 .portal-person-managing-frame {
     width: 100%;
@@ -91,77 +92,81 @@ header {
     width: 14%;
 }
 /*모달창*/
-/* 모달 배경 */
-.person-add-modal {
-    display: none; /* 기본적으로 숨김 */
+/* 모달 기본 스타일 */
+#addPersonModal {
+    display: none; /* 처음에는 숨김 */
     position: fixed;
-    z-index: 1; /* 페이지 내용 위에 표시 */
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* 반투명 배경 */
-    padding-top: 60px;
-}
-
-/* 모달 내용 스타일 */
-.person-add-modal-content {
-    background-color: white;
-    margin: 5% auto;
+    z-index: 1000;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 50%;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
-    height: 300px;
-}
-.person-add-modal-content h3 {
-    margin-bottom: 20px;
-}
-.person-add-modal-content #personType {
-    margin-bottom: 20px;
-}
-/* 모달 닫기 버튼 스타일 */
-.addPersonclose {
-    color: #aaa;
-    font-size: 28px;
-    font-weight: bold;
-    position: absolute;
-    right: 200px;
-    top: 150px;
 }
 
-.addPersonclose:hover,
-.addPersonclose:focus {
-    color: black;
-    text-decoration: none;
+/* 모달 콘텐츠 스타일 */
+.person-add-modal-content {
+    padding: 20px;
+}
+
+/* 닫기 버튼 스타일 */
+.addPersonclose {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 24px;
+    font-weight: bold;
     cursor: pointer;
 }
-.studentForm input[type="text"],
-.studentForm input[type="email"],
-.studentForm input[type="date"],
-.studentForm select {
+
+/* 폼 스타일 */
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+form label {
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+form input[type="text"],
+form input[type="email"],
+form input[type="date"],
+form input[type="file"],
+form select {
+    margin-top: 5px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
     width: 100%;
-    padding: 10px;
-    margin: 5px 0;
     box-sizing: border-box;
 }
-.professorForm input[type="text"],
-.professorForm input[type="email"],
-.professorForm input[type="date"],
-.professorForm select {
-    width: 100%;
-    padding: 10px;
-    margin: 5px 0;
-    box-sizing: border-box;
-}
-.person-add-modal button {
-    padding: 10px 20px;
+
+form input[type="submit"] {
+    margin-top: 20px;
     background-color: #4caf50;
     color: white;
     border: none;
+    padding: 10px;
     cursor: pointer;
-    margin-top: 20px;
-    margin-left: 1200px;
+    border-radius: 4px;
 }
-.person-add-modal button:hover {
+
+form input[type="submit"]:hover {
     background-color: #45a049;
+}
+
+/* 학생 및 교수 폼 스타일 */
+#studentForm,
+#professorForm {
+    margin-top: 20px;
+}
+
+/* 모달이 열릴 때 표시 스타일 */
+.show-modal {
+    display: block;
 }

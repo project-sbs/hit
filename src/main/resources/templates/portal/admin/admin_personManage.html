@@ -16,21 +16,24 @@
   </div>
   <div class="user-alarm">
     <div class="user-photo"></div>
-    <p class="portal-user-name">길오성님</p>
+    <p class="portal-user-name" th:text="${#authentication.getName()}"></p>
   </div>
 </header>
 <section class="portal-main">
   <nav class="portal-nav">
     <ul>
-      <li class="portal-home-button"><img src="" alt="" />홈</li>
-      <li class="portal-person-add-button">
+      <li class="portal-home-button" onclick="location.href='/a/home'"><img src="" alt="" />홈</li>
+      <li class="portal-class-open-button" onclick="location.href='/a/major'">
+        <img src="" alt="" />전공관리
+      </li>
+      <li class="portal-person-add-button" onclick="location.href='/a/person'">
         <img src="" alt="" />인적정보 관리
       </li>
-      <li class="portal-class-add-button"><img src="" alt="" />과목기입</li>
-      <li class="portal-student-pay-check-button">
+      <li class="portal-class-add-button" onclick="location.href='/a/class'"><img src="" alt="" />과목기입</li>
+      <li class="portal-student-pay-check-button" onclick="location.href=''">
         <img src="" alt="" />등록금확인
       </li>
-      <li class="portal-class-open-button">
+      <li class="portal-class-open-button" onclick="location.href=''">
         <img src="" alt="" />수강신청
       </li>
     </ul>
@@ -42,11 +45,7 @@
       <li>
         <select id="department-filter">
           <option value="">=== 학과 ===</option>
-          <option value="컴퓨터소프트웨어">컴퓨터소프트웨어</option>
-          <option value="컴퓨터공학">컴퓨터공학</option>
-          <option value="전자공학">전자공학</option>
-          <option value="화학공학">화학공학</option>
-          <option value="생물학">생물학</option>
+          <option th:each="major, loop : ${majorList}" th:value="${major.getId()}" th:text="${major.getName().substring(0, major.getName().length() - 1)}"></option>
         </select>
         <select id="person-type-filter">
           <option value="학생" selected>학부생</option>
@@ -63,127 +62,53 @@
     </ul>
     <table class="student-managing-table">
       <thead>
-      <tr>
-        <th>학과</th>
-        <th>학번</th>
-        <th>이름</th>
-        <th>생년월일</th>
-        <th>연락처</th>
-        <th>이메일</th>
-        <th>이수학점</th>
-        <th>상태</th>
-      </tr>
+        <tr>
+          <th>학과</th>
+          <th>학번</th>
+          <th>이름</th>
+          <th>생년월일</th>
+          <th>연락처</th>
+          <th>이메일</th>
+          <th>이수학점</th>
+          <th>상태</th>
+        </tr>
       </thead>
       <tbody>
-      <tr>
-        <td>컴퓨터소프트웨어</td>
-        <td>20210001</td>
-        <td>김철수</td>
-        <td>1999-05-14</td>
-        <td>010-1234-5678</td>
-        <td>chulsoo@example.com</td>
-        <td>70</td>
-        <td>재학</td>
-      </tr>
-      <tr>
-        <td>컴퓨터공학</td>
-        <td>20210002</td>
-        <td>이영희</td>
-        <td>2000-02-20</td>
-        <td>010-9876-5432</td>
-        <td>younghee@example.com</td>
-        <td>70</td>
-        <td>재학</td>
-      </tr>
-      <tr>
-        <td>전자공학</td>
-        <td>20210003</td>
-        <td>박민수</td>
-        <td>1998-09-11</td>
-        <td>010-5555-6666</td>
-        <td>minsoo@example.com</td>
-        <td>70</td>
-        <td>졸업</td>
-      </tr>
-      <tr>
-        <td>화학공학</td>
-        <td>20210004</td>
-        <td>최지은</td>
-        <td>2001-07-01</td>
-        <td>010-1111-2222</td>
-        <td>jieun@example.com</td>
-        <td>60</td>
-        <td>휴학</td>
-      </tr>
-      <tr>
-        <td>생물학</td>
-        <td>20210005</td>
-        <td>한나경</td>
-        <td>1997-03-05</td>
-        <td>010-7777-8888</td>
-        <td>nakyung@example.com</td>
-        <td>50</td>
-        <td>재학</td>
-      </tr>
+        <tr th:each="student, loop : ${studentList}">
+          <td th:text="${student.getMajor().getName().substring(0, student.getMajor().getName().length() - 1)}"></td>           <!--학과목-->
+          <td th:text="${student.getId()}"></td>                                                                                <!--학번-->
+          <td th:text="${student.getName()}"></td>                                                                              <!--이름-->
+          <td th:text="${student.getBirthday()}"></td>                                                                          <!--생년월일-->
+          <td th:text="${student.getPhone()}"></td>                                                                             <!--연락처-->
+          <td th:text="${student.getEmail()}"></td>                                                                             <!--이메일-->
+          <td>70</td>                                                                                                           <!--학점-->
+          <td>재학</td>                                                                                                          <!--상태-->
+        </tr>
       </tbody>
     </table>
     <table class="professor-managing-table">
       <thead>
-      <tr>
-        <th>학과</th>
-        <th>사번</th>
-        <th>이름</th>
-        <th>생년월일</th>
-        <th>연락처</th>
-        <th>이메일</th>
-        <th>직위</th>
-      </tr>
+        <tr>
+          <th>학과</th>
+          <th>사번</th>
+          <th>이름</th>
+          <th>생년월일</th>
+          <th>연락처</th>
+          <th>이메일</th>
+          <th>직위</th>
+        </tr>
       </thead>
-      <tr>
-        <td>컴퓨터소프트웨어</td>
-        <td>P20230001</td>
-        <td>김철수</td>
-        <td>1975-08-15</td>
-        <td>010-1234-5678</td>
-        <td>chulsoo@university.edu</td>
-        <td>정교수</td>
-      </tr>
-      <tr>
-        <td>컴퓨터공학</td>
-        <td>P20230002</td>
-        <td>이영희</td>
-        <td>1980-04-22</td>
-        <td>010-9876-5432</td>
-        <td>younghee@university.edu</td>
-        <td>부교수</td>
-      </tr>
-      <tr>
-        <td>전자공학</td>
-        <td>P20230003</td>
-        <td>박민수</td>
-        <td>1978-12-05</td>
-        <td>010-5555-6666</td>
-        <td>minsoo@university.edu</td>
-        <td>정교수</td>
-      </tr>
-      <tr>
-        <td>화학공학</td>
-        <td>P20230004</td>
-        <td>최지은</td>
-        <td>1985-09-11</td>
-        <td>010-1111-2222</td>
-        <td>jieun@university.edu</td>
-        <td>시간강사</td>
-      </tr>
-      <tr>
-        <td>생물학</td>
-        <td>P20230005</td>
-        <td>한나경</td>
-        <td>1979-06-30</td>
-        <td>010-7777-8888</td>
-        <td>nakyung@university.edu</td>
-        <td>부교수</td>
-      </tr>
+      <tbody>
+        <tr th:each="professor, loop : ${professorList}">
+          <td th:text="${professor.getMajor().getName().substring(0, professor.getMajor().getName().length() - 1)}"></td>       <!--학과목-->
+          <td th:text="${professor.getId()}"></td>                                                                              <!--사번-->
+          <td th:text="${professor.getName()}"></td>                                                                            <!--이름-->
+          <td th:text="${professor.getBirthday()}"></td>                                                                        <!--생년월일-->
+          <td th:text="${professor.getPhone()}"></td>                                                                           <!--연락처-->
+          <td th:text="${professor.getEmail()}"></td>                                                                           <!--이메일-->
+          <td th:text="${professor.getROLE()}"></td>                                                                            <!--직위-->
+        </tr>
+      </tbody>
     </table>
   </div>
 </section>
@@ -198,13 +123,13 @@
     </select>
 
     <!-- 학생 폼 -->
-
     <div id="studentForm">
-      <form th:object="${userInserForm}" th:action="@{/insert}" method="post">
-        <input type="hidden" th:field="*{type}" value="학생" />
-
+      <form th:object="${studentInsertForm}" th:action="@{/a/insert/student}" method="post" enctype="multipart/form-data">
         <label for="department">학과:</label>
-        <input type="text" id="department" placeholder="학과 입력" th:field="*{major}" />
+        <select id="department" th:field="*{major}">
+          <option value="" disabled>=== 학과 ===</option>
+          <option th:each="major, loop : ${majorList}" th:value="${major.getId()}" th:text="${major.getName().substring(0, major.getName().length() - 1)}"></option>
+        </select>
 
         <label for="studentId">학번:</label>
         <input type="text" id="studentId" placeholder="학번 입력" th:field="*{id}" />
@@ -213,7 +138,7 @@
         <input type="text" id="studentName" placeholder="이름 입력" th:field="*{name}" />
 
         <label for="birthDate">생년월일:</label>
-        <input type="date" id="birthDate" th:field="*{birthday}" />
+        <input type="date" id="birthDate" th:field="*{birthday} "/>
 
         <label for="contact">연락처:</label>
         <input type="text" id="contact" placeholder="연락처 입력" th:field="*{phone}" />
@@ -221,19 +146,20 @@
         <label for="email">이메일:</label>
         <input type="email" id="email" placeholder="이메일 입력" th:field="*{email}" />
 
-        <input type="hidden" th:field="*{option}" value="학생" />
-
-        <input type="submit" value="가입" />
+        <label for="photo">사진:</label>
+        <input type="file" id="photo" placeholder="사진 추가" name="photo" accept="image/*"/>
+        <input type="submit" value="기입" />
       </form>
     </div>
 
     <!-- 교수 폼 -->
     <div id="professorForm" style="display: none">
-      <form th:object="${userInserForm}" th:action="@{/insert}" method="post">
-        <input type="hidden" name="type" value="교수" />
-
+      <form th:object="${professorInsertForm}" th:action="@{/a/insert/professor}" method="post" enctype="multipart/form-data">
         <label for="profDepartment">학과:</label>
-        <input type="text" id="profDepartment" placeholder="학과 입력" th:field="*{major}" />
+        <select id="profDepartment" th:field="*{major}">
+          <option value="" disabled>=== 학과 ===</option>
+          <option th:each="major, loop : ${majorList}" th:value="${major.getId()}" th:text="${major.getName().substring(0, major.getName().length() - 1)}"></option>
+        </select>
 
         <label for="professorId">사번:</label>
         <input type="text" id="professorId" placeholder="사번 입력" th:field="*{id}" />
@@ -250,13 +176,16 @@
         <label for="profEmail">이메일:</label>
         <input type="email" id="profEmail" placeholder="이메일 입력" th:field="*{email}" />
 
+        <label for="photo">사진:</label>
+        <input type="file" id="profPhoto" placeholder="사진 추가" name="photo" />
+
         <label for="position">직위:</label>
-        <select id="position" th:field="*{option}" >
+        <select id="position" th:field="*{role}">
           <option value="정교수">정교수</option>
           <option value="부교수">부교수</option>
           <option value="시간강사">시간강사</option>
         </select>
-        <input type="submit" value="가입" />
+        <input type="submit" value="기입" />
       </form>
     </div>
   </div>
@@ -276,9 +205,9 @@
 
   function filterData() {
     var selectedDepartment =
-            document.getElementById("department-filter").value; // 선택된 학과
+            document.getElementById("department-filter").selectedOptions[0].text; // 선택된 학과
     var selectedPersonType =
-            document.getElementById("person-type-filter").value; // 선택된 유형 (학생 또는 교수)
+            document.getElementById("person-type-filter").selectedOptions[0].text; // 선택된 유형 (학부생 또는 교수)
 
     var studentTableRows = document.querySelectorAll(
             ".student-managing-table tbody tr"
@@ -287,12 +216,12 @@
             ".professor-managing-table tbody tr"
     );
 
-    // 교수 테이블과 학생 테이블의 표시 여부를 설정
-    if (selectedPersonType === "학생") {
+    // 교수 테이블과 학생 테이블의 표시 여부 설정
+    if (selectedPersonType === "학부생") {
       document.querySelector(".student-managing-table").style.display = "";
       document.querySelector(".professor-managing-table").style.display =
               "none";
-    } else {
+    } else if (selectedPersonType === "교수") {
       document.querySelector(".student-managing-table").style.display =
               "none";
       document.querySelector(".professor-managing-table").style.display =
@@ -302,8 +231,12 @@
     // 학생 테이블 필터링
     studentTableRows.forEach(function (row) {
       var department = row.cells[0].innerText; // 각 행의 학과 이름
-      if (selectedDepartment === "" || department === selectedDepartment) {
-        row.style.display = ""; // 선택된 학과가 맞으면 표시
+      if (
+              selectedDepartment === "=== 학과 ===" ||
+              selectedDepartment === "" ||
+              department === selectedDepartment
+      ) {
+        row.style.display = ""; // 선택된 학과가 없거나 일치하면 표시
       } else {
         row.style.display = "none"; // 아니면 숨김
       }
@@ -312,8 +245,12 @@
     // 교수 테이블 필터링
     professorTableRows.forEach(function (row) {
       var department = row.cells[0].innerText; // 각 행의 학과 이름
-      if (selectedDepartment === "" || department === selectedDepartment) {
-        row.style.display = ""; // 선택된 학과가 맞으면 표시
+      if (
+              selectedDepartment === "=== 학과 ===" ||
+              selectedDepartment === "" ||
+              department === selectedDepartment
+      ) {
+        row.style.display = ""; // 선택된 학과가 없거나 일치하면 표시
       } else {
         row.style.display = "none"; // 아니면 숨김
       }

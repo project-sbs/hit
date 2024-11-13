@@ -30,9 +30,9 @@ public class Student {
 
     private String birthday;                            // 생년월일
 
-    // private String gender;                              // 성별
-
     private String ROLE;                                // 역할
+
+    private String profile;                             // 프로필 저장경로
 
     @ManyToOne
     private Major major;
