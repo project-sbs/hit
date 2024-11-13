@@ -1,5 +1,7 @@
 package com.project.hit.major;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -13,4 +15,6 @@ public interface MajorRepository extends JpaRepository<Major, Integer> {
 
     @Query("select distinct m from Major m order by m.id desc")
     List<Major> findById();
+
+    Page<Major> findAll(Pageable pageable);
 }

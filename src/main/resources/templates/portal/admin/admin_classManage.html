@@ -16,7 +16,7 @@
     </div>
     <div class="user-alarm">
         <div class="user-photo"></div>
-        <p class="portal-user-name">길오성님</p>
+        <p class="portal-user-name" th:text="${admin.getName()}"></p>
     </div>
 </header>
 <section class="portal-main">
@@ -73,6 +73,7 @@
                 <th>요일</th>
                 <th>시간</th>
                 <th>교수명</th>
+                <th>수강학점</th>
                 <th>최대인원수</th>
                 <th>현재인원수</th>
                 <th></th>
@@ -87,6 +88,7 @@
                 <td>월</td>
                 <td>09:00-10:30</td>
                 <td>김교수</td>
+                <td>3</td>
                 <td>30</td>
                 <td>25</td>
                 <td><button>x</button></td>
@@ -99,6 +101,7 @@
                 <td>화</td>
                 <td>10:00-11:30</td>
                 <td>박교수</td>
+                <td>2</td>
                 <td>25</td>
                 <td>20</td>
                 <td><button>x</button></td>
@@ -111,6 +114,7 @@
                 <td>수</td>
                 <td>13:00-14:30</td>
                 <td>이교수</td>
+                <td>3</td>
                 <td>40</td>
                 <td>35</td>
                 <td><button>x</button></td>
@@ -123,6 +127,7 @@
                 <td>목</td>
                 <td>15:00-16:30</td>
                 <td>정교수</td>
+                <td>2</td>
                 <td>50</td>
                 <td>45</td>
                 <td><button>x</button></td>
@@ -135,6 +140,7 @@
                 <td>금</td>
                 <td>14:00-15:30</td>
                 <td>최교수</td>
+                <td>3</td>
                 <td>30</td>
                 <td>28</td>
                 <td><button>x</button></td>
@@ -151,6 +157,7 @@
                 <th>요일</th>
                 <th>시간</th>
                 <th>교수명</th>
+                <th>수강학점</th>
                 <th>최대인원수</th>
                 <th>현재인원수</th>
                 <th></th>
@@ -164,6 +171,7 @@
                 <td>월</td>
                 <td>08:30-10:00</td>
                 <td>김철학</td>
+                <td>3</td>
                 <td>60</td>
                 <td>50</td>
                 <td><button>x</button></td>
@@ -175,6 +183,7 @@
                 <td>화</td>
                 <td>09:00-10:30</td>
                 <td>박역사</td>
+                <td>1</td>
                 <td>50</td>
                 <td>47</td>
                 <td><button>x</button></td>
@@ -186,6 +195,7 @@
                 <td>수</td>
                 <td>11:00-12:30</td>
                 <td>이문학</td>
+                <td>2</td>
                 <td>40</td>
                 <td>35</td>
                 <td><button>x</button></td>
@@ -197,6 +207,7 @@
                 <td>목</td>
                 <td>13:00-14:30</td>
                 <td>정예술</td>
+                <td>2</td>
                 <td>45</td>
                 <td>40</td>
                 <td><button>x</button></td>
@@ -208,6 +219,7 @@
                 <td>금</td>
                 <td>10:00-11:30</td>
                 <td>최심리</td>
+                <td>1</td>
                 <td>55</td>
                 <td>53</td>
                 <td><button>x</button></td>
@@ -216,13 +228,25 @@
         </table>
     </div>
     <!-- 수강 과목 기입 모달 창 -->
-    <!-- 수강 과목 기입 모달 창 -->
     <div id="course-modal" class="modal-container">
         <div class="modal-content-wrapper">
             <span class="close-modal-btn">&times;</span>
             <h2 class="modal-title">수강 과목 기입</h2>
 
             <form id="course-form" class="course-form">
+                <!--년도는 자동으로 변경시 사라질 항목-->
+                <label for="course-year" class="label-course-year">년도:</label>
+                <input type="number" id="course-year" name="course-year" required />
+
+                <br />
+                <label for="course-semester" class="label-course-semester">학기:</label>
+                <select id="semester-count" class="select-semester-count">
+                    <option value="" disabled selected>=== 학기 ===</option>
+                    <option value="semester1">1학기</option>
+                    <option value="semester2">2학기</option>
+                </select>
+                <br />
+
                 <label for="major-type" class="label-major-type">전공/교양:</label>
                 <select id="major-type" class="select-major-type">
                     <option value="" disabled selected>=== 전공/교양 ===</option>
@@ -230,11 +254,19 @@
                     <option value="liberal">교양</option>
                 </select>
 
-                <br /><br />
+                <br />
+                <label for="major-type" class="label-major-type">전공/교양:</label>
+                <select id="major-type" class="select-major-type">
+                    <option value="" disabled selected>=== 전공/교양 ===</option>
+                    <option value="major">전공</option>
+                    <option value="liberal">교양</option>
+                </select>
+
+                <br />
 
                 <label for="department" class="label-department">학과:</label>
                 <select id="department" class="select-department">
-                    <option value="" disabled selected>=== 학과 ===</option>
+                    <option value="" selected>=== 학과 ===</option>
                     <option value="컴퓨터소프트웨어">컴퓨터소프트웨어</option>
                     <option value="컴퓨터공학">컴퓨터공학</option>
                     <option value="전자공학">전자공학</option>
@@ -242,22 +274,22 @@
                     <option value="생물학">생물학</option>
                 </select>
 
-                <br /><br />
+                <br />
 
                 <label for="course-name" class="label-course-name">과목명:</label>
                 <input type="text" id="course-name" name="course-name" required />
 
-                <br /><br />
+                <br />
 
                 <label for="professor" class="label-professor">교수명:</label>
                 <input type="text" id="professor" name="professor" required />
 
-                <br /><br />
+                <br />
 
                 <label for="time" class="label-time">시간:</label>
                 <input type="text" id="time" name="time" required />
 
-                <br /><br />
+                <br />
 
                 <label for="day" class="label-day">요일:</label>
                 <input
@@ -268,7 +300,20 @@
                         required
                 />
 
-                <br /><br />
+                <br />
+
+                <label for="score" class="label-score">수강학점:</label>
+                <input
+                        type="number"
+                        id="score"
+                        name="score"
+                        max="3"
+                        min="1"
+                        placeholder="최대 3학점까지 기입할수 있습니다."
+                        required
+                />
+
+                <br />
 
                 <label for="max-students" class="label-max-students">인원수:</label>
                 <input
@@ -278,7 +323,7 @@
                         required
                 />
 
-                <br /><br />
+                <br />
 
                 <button type="submit" class="submit-course">과목 추가</button>
             </form>
@@ -363,6 +408,7 @@
             });
         }
     }
+
     // 모달창 관련 스크립트
     // 모달 요소와 버튼 가져오기
     const btnAddCourse = document.querySelector(".btn-add-course"); // 수강과목기입 버튼

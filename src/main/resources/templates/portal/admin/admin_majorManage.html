@@ -16,7 +16,7 @@
   </div>
   <div class="user-alarm">
     <div class="user-photo"></div>
-    <p class="portal-user-name">길오성님</p>
+    <p class="portal-user-name" th:text="${admin.getName()}"></p>
   </div>
 </header>
 <section class="portal-main">
@@ -48,43 +48,19 @@
       <tr>
         <th>No.</th>
         <th>학과명</th>
-        <th>학과담당교수</th>
+        <th>학과장</th>
         <th>학과현재인원수</th>
         <th>학과정원</th>
         <th>삭제</th>
       </tr>
       </thead>
       <tbody>
-      <tr>
-        <td>1</td>
-        <td>컴퓨터공학</td>
-        <td>김민수</td>
-        <td>40</td>
-        <td>40</td>
-        <td><button>x</button></td>
-      </tr>
-      <tr>
-        <td>2</td>
-        <td>컴퓨터소프트웨어</td>
-        <td>김철수</td>
-        <td>30</td>
-        <td>40</td>
-        <td><button>x</button></td>
-      </tr>
-      <tr>
-        <td>3</td>
-        <td>멀티미디어</td>
-        <td>김덕배</td>
-        <td>40</td>
-        <td>50</td>
-        <td><button>x</button></td>
-      </tr>
-      <tr>
-        <td>4</td>
-        <td>생명공학</td>
-        <td>김유미</td>
-        <td>30</td>
-        <td>50</td>
+      <tr th:if="${!majorList.isEmpty()}" th:each="major, loop : ${majorList}">
+        <td th:text="${majorList.size() - loop.index}"></td>
+        <td th:text="${major.getName().substring(0, major.getName().length() - 1)}"></td>
+        <td th:each="professor, loop : ${major.getProfessors()}" th:if="${professor.getMajor().getName() eq major.getName() && professor.getROLE() eq '학과장'}" th:text="${professor.getName()}"></td>
+        <td th:text="${#lists.size(major.getStudents())}"></td>
+        <td th:text="${major.getTotalStudent()}"></td>
         <td><button>x</button></td>
       </tr>
       </tbody>
@@ -96,14 +72,8 @@
       <span class="portal-major-entry-close-button">&times;</span>
       <h2>학과 기입</h2>
       <form class="portal-major-entry-form">
-        <label for="portal-major-id">학과 ID:</label>
-        <input type="number" id="portal-major-id" required />
-
         <label for="portal-major-name">학과명:</label>
         <input type="text" id="portal-major-name" required />
-
-        <label for="portal-major-professor">학과 담당 교수:</label>
-        <input type="text" id="portal-major-professor" required />
 
         <label for="portal-major-capacity">학과 정원:</label>
         <input type="number" id="portal-major-capacity" required />

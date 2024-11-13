@@ -145,14 +145,16 @@ header {
     flex-direction: column;
 }
 
+.label-course-year,
+.label-course-semester,
 .label-major-type,
 .label-department,
 .label-course-name,
 .label-professor,
 .label-time,
 .label-day,
+.label-score,
 .label-max-students {
-    margin-bottom: 5px;
     font-weight: bold;
     color: #555;
 }
@@ -161,7 +163,7 @@ select,
 input[type="text"],
 input[type="number"] {
     padding: 8px;
-    margin-bottom: 15px;
+    margin-bottom: 5px;
     border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 14px;
