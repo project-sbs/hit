@@ -12,6 +12,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.Page;
 import org.springframework.data.repository.query.Param;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -74,16 +75,37 @@ public class AdminController {
     }
 
     @GetMapping("/person")
-    public String personManage(StudentInsertForm studentInsertForm, ProfessorInsertForm professorInsertForm,Principal principal,  Model model) {
+    public String personManage(StudentInsertForm studentInsertForm, ProfessorInsertForm professorInsertForm, Principal principal, Model model,
+                               @RequestParam(name = "page", defaultValue = "0") int page, @RequestParam(name = "keyword", defaultValue = "") String keyword,
+                               @RequestParam(name = "field", defaultValue = "") String field, @RequestParam(name = "major", defaultValue = "-1") int major_id,
+                               @RequestParam(name = "person", defaultValue = "학부생") String person){
         List<Major> majorList = this.majorService.getAllMajors();
-        List<Student> studentList = this.studentService.getAllStudents();
-        List<Professor> professorList = this.professorService.getAllProfessors();
+        Page<Student> studentPaging = this.studentService.getStudents(field, keyword, page, major_id);
+        Page<Professor> professorPaging = this.professorService.getProfessors(field, keyword, page, major_id);
         Admin admin = this.adminService.getAdmin(principal.getName());
+
+        int totalPage = studentPaging.getTotalPages();
+        int block = 10;
+        int currentPage = studentPaging.getNumber() + 1;
+
+        int startBlock = (((currentPage - 1) / block) * block) + 1;
+        int endBlock = startBlock + block - 1;
+        if (endBlock > totalPage) {
+            endBlock = totalPage;
+        }
+
+        model.addAttribute("startBlock", startBlock);
+        model.addAttribute("endBlock", endBlock);
+        model.addAttribute("keyword", keyword);
+        model.addAttribute("field", field);
+        model.addAttribute("page", page);
+        model.addAttribute("major", major_id);
+        model.addAttribute("person", person);
 
         model.addAttribute("admin", admin);
         model.addAttribute("majorList", majorList);
-        model.addAttribute("studentList", studentList);
-        model.addAttribute("professorList", professorList);
+        model.addAttribute("studentPaging", studentPaging);
+        model.addAttribute("professorPaging", professorPaging);
 
         return "portal/admin/admin_personManage";
     }
@@ -135,6 +157,16 @@ public class AdminController {
         }
 
         return "redirect:/a/person";
+    }
+
+    @PostMapping("/insert/major")
+    public String majorInsert(@RequestParam("name") String name, @RequestParam("capacity") int capacity) {
+        Major major = new Major();
+        major.setName(name);
+        major.setTotalStudent(capacity);
+
+        this.majorService.insertMajor(major);
+        return "redirect:/a/major";
     }
 
     private Student insertStudent(StudentInsertForm studentInsertForm) {

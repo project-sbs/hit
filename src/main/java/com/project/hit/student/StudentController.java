@@ -16,7 +16,9 @@ public class StudentController {
     private final StudentService studentService;
 
     @GetMapping("/home")
-    public String home() {return "portal/student/student_home";}
+    public String home() {
+        return "portal/student/student_home";
+    }
 
     @GetMapping("/info")   // 학생
     public String info(Model model, Principal principal) {
@@ -27,8 +29,12 @@ public class StudentController {
     }
 
     @GetMapping("/score")
-    public String score() {return "portal/student/student_score";}
+    public String score() {
+        return "portal/student/student_score";
+    }
 
     @GetMapping("/report")
-    public String report() {return "portal/student/student_report";}
+    public String report() {
+        return "portal/student/student_report";
+    }
 }
