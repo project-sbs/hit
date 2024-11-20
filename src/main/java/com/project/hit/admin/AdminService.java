@@ -11,11 +11,13 @@ import java.util.Optional;
 public class AdminService {
     private final AdminRepository adminRepository;
 
-    public void insertAdmin(Admin admin) {this.adminRepository.save(admin);}
+    public void insertAdmin(Admin admin) {
+        this.adminRepository.save(admin);
+    }
 
     public Admin getAdmin(String id) {
         Optional<Admin> admin = adminRepository.findById(id);
-        if(admin.isPresent()) {
+        if (admin.isPresent()) {
             return admin.get();
         } else {
             throw new DataNotFoundException("Admin not found id : " + id);

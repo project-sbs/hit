@@ -56,9 +56,11 @@
       </thead>
       <tbody>
       <tr th:if="${!majorList.isEmpty()}" th:each="major, loop : ${majorList}">
-        <td th:text="${majorList.size() - loop.index}"></td>
+        <td th:text="${#lists.size(majorList) - loop.index}"></td>
         <td th:text="${major.getName().substring(0, major.getName().length() - 1)}"></td>
-        <td th:each="professor, loop : ${major.getProfessors()}" th:if="${professor.getMajor().getName() eq major.getName() && professor.getROLE() eq '학과장'}" th:text="${professor.getName()}"></td>
+        <td th:each="professor, loop : ${major.getProfessors()}"
+            th:if="${professor.getMajor().getName() eq major.getName() && professor.getROLE() eq '학과장'}" th:text="${professor.getName()}"></td>
+        <td th:if="${major.getProfessors().size() == 0}" th:text="'X'"></td>
         <td th:text="${#lists.size(major.getStudents())}"></td>
         <td th:text="${major.getTotalStudent()}"></td>
         <td><button>x</button></td>
@@ -71,12 +73,12 @@
     <div class="portal-major-entry-modal-content">
       <span class="portal-major-entry-close-button">&times;</span>
       <h2>학과 기입</h2>
-      <form class="portal-major-entry-form">
+      <form class="portal-major-entry-form" th:action="@{/a/insert/major}" method="post">
         <label for="portal-major-name">학과명:</label>
-        <input type="text" id="portal-major-name" required />
+        <input type="text" id="portal-major-name" name="name" required />
 
         <label for="portal-major-capacity">학과 정원:</label>
-        <input type="number" id="portal-major-capacity" required />
+        <input type="number" id="portal-major-capacity" name="capacity" required />
 
         <button type="submit">추가</button>
       </form>

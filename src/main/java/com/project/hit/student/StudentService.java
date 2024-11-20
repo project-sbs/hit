@@ -1,9 +1,16 @@
 package com.project.hit.student;
 
 import com.project.hit.DataNotFoundException;
+import com.project.hit.major.Major;
+import com.project.hit.major.MajorRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -11,6 +18,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class StudentService {
     private final StudentRepository studentRepository;
+    private final MajorRepository majorRepository;
 
     public Student addStudent(Student student) {
         this.studentRepository.save(student);
@@ -31,4 +39,37 @@ public class StudentService {
             throw new DataNotFoundException("Student not found for " + id);
         }
     }
+
+    public Page<Student> getStudents(String field, String keyword, int page, int major_id) {
+        List<Sort.Order> sorts = new ArrayList<>();
+        sorts.add(Sort.Order.desc("id"));
+        Pageable pageable = PageRequest.of(page, 10, Sort.by(sorts));
+
+        if (major_id > 0) {
+            Optional<Major> maj = this.majorRepository.findById(major_id);
+            if (maj.isPresent()) {
+                Major major = maj.get();
+                if (keyword != null && !keyword.isEmpty()) {
+                    if (field.equals("이름") ) {
+                        return this.studentRepository.findStudentByNameContainingAndMajor(keyword, major, pageable);
+                    } else if (field.equals("학번")) {
+                        return this.studentRepository.findStudentByIdContainingAndMajor(keyword, major, pageable);
+                    }
+                }
+                return this.studentRepository.findStudentByMajor(major, pageable);
+            } else {
+                throw new DataNotFoundException("Major not found for " + major_id);
+            }
+        } else {
+            if (keyword != null && !keyword.isEmpty()) {
+                if (field.equals("이름") ) {
+                    return this.studentRepository.findStudentByName(keyword, pageable);
+                } else if (field.equals("학번")) {
+                    return this.studentRepository.findStudentById(keyword, pageable);
+                }
+            }
+        }
+        return this.studentRepository.findAllByOrderByIdDesc(pageable);
+    }
+
 }
