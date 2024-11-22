@@ -23,19 +23,20 @@
 <section class="portal-main">
     <nav class="portal-nav">
         <ul>
-            <li class="portal-home-button" onclick="location.href='/a/home'"><img alt="" src=""/>홈</li>
+            <li class="portal-home-button" onclick="location.href='/a/home'"><img src="" alt="" />홈</li>
             <li class="portal-class-open-button" onclick="location.href='/a/major'">
-                <img alt="" src=""/>전공관리
+                <img src="" alt="" />전공관리
             </li>
             <li class="portal-person-add-button" onclick="location.href='/a/person'">
-                <img alt="" src=""/>인적정보 관리
+                <img src="" alt="" />인적정보 관리
             </li>
-            <li class="portal-class-add-button" onclick="location.href='/a/class'"><img alt="" src=""/>과목기입</li>
+            <li class="portal-class-add-button" onclick="location.href='/a/class'"><img src="" alt="" />과목기입</li>
+            <li class="portal-notice-add-button" onclick="location.href='/a/board'"><img src="" alt="" />게시판</li>
             <li class="portal-student-pay-check-button" onclick="location.href=''">
-                <img alt="" src=""/>등록금확인
+                <img src="" alt="" />등록금확인
             </li>
             <li class="portal-class-open-button" onclick="location.href=''">
-                <img alt="" src=""/>수강신청
+                <img src="" alt="" />수강신청
             </li>
         </ul>
     </nav>
@@ -126,55 +127,15 @@
                 <!--위에 움직이는 줄-->
             </ul>
             <ul class="portal-college-notice-page portal-college-news-frame">
-                <li>
-                    <p>재목을 입력해주세요1</p>
-                    <p>24.10.11</p>
-                </li>
-                <li>
-                    <p>재목을 입력해주세요</p>
-                    <p>24.10.11</p>
-                </li>
-                <li>
-                    <p>재목을 입력해주세요</p>
-                    <p>24.10.11</p>
-                </li>
-                <li>
-                    <p>재목을 입력해주세요</p>
-                    <p>24.10.11</p>
-                </li>
-                <li>
-                    <p>재목을 입력해주세요</p>
-                    <p>24.10.11</p>
-                </li>
-                <li>
-                    <p>재목을 입력해주세요</p>
-                    <p>24.10.11</p>
+                <li th:each="notice, loop : ${notices}" th:if="${!notices.isEmpty()}" >
+                    <p th:text="${notice.getTitle()}"></p>
+                    <p th:text="${#temporals.format(notice.getReg_date(), 'yyyy-MM-dd')}"></p>
                 </li>
             </ul>
             <ul class="portal-college-class-page portal-college-news-frame">
-                <li>
-                    <p>재목을 입력해주세요2</p>
-                    <p>24.10.11</p>
-                </li>
-                <li>
-                    <p>재목을 입력해주세요</p>
-                    <p>24.10.11</p>
-                </li>
-                <li>
-                    <p>재목을 입력해주세요</p>
-                    <p>24.10.11</p>
-                </li>
-                <li>
-                    <p>재목을 입력해주세요</p>
-                    <p>24.10.11</p>
-                </li>
-                <li>
-                    <p>재목을 입력해주세요</p>
-                    <p>24.10.11</p>
-                </li>
-                <li>
-                    <p>재목을 입력해주세요</p>
-                    <p>24.10.11</p>
+                <li th:each="edu, loop : ${educations}" th:if="${!educations.isEmpty()}">
+                    <p th:text="${edu.getTitle()}"></p>
+                    <p th:text="${#temporals.format(edu.getReg_date(), 'yyyy-MM-dd')}"
                 </li>
             </ul>
             <ul class="portal-college-employee-page portal-college-news-frame">
@@ -281,22 +242,20 @@
     const studentChart = new Chart(ctx, {
         type: "bar",
         data: {
-            labels: ["총학생수", "재학생수", "휴학생수", "재적학생수"],
+            labels: ["총학생수", "재학생수", "휴학생수"],
             datasets: [
                 {
                     label: "학생 수",
-                    data: [1000, 700, 200, 100], // 임의의 데이터
+                    data: [1000, 700, 200], // 임의의 데이터
                     backgroundColor: [
                         "rgba(75, 192, 192, 0.6)",
                         "rgba(54, 162, 235, 0.6)",
-                        "rgba(255, 206, 86, 0.6)",
-                        "rgba(153, 102, 255, 0.6)",
+                        "rgba(255, 206, 86, 0.6)"
                     ],
                     borderColor: [
                         "rgba(75, 192, 192, 1)",
                         "rgba(54, 162, 235, 1)",
-                        "rgba(255, 206, 86, 1)",
-                        "rgba(153, 102, 255, 1)",
+                        "rgba(255, 206, 86, 1)"
                     ],
                     borderWidth: 1,
                 },

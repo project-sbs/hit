@@ -1,5 +1,7 @@
 package com.project.hit.admin;
 
+import com.project.hit.board.Board;
+import com.project.hit.board.BoardService;
 import com.project.hit.major.Major;
 import com.project.hit.major.MajorService;
 import com.project.hit.professor.Professor;
@@ -25,6 +27,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.security.Principal;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Controller
@@ -36,6 +39,7 @@ public class AdminController {
     private final StudentService studentService;
     private final ProfessorService professorService;
     private final MajorService majorService;
+    private final BoardService boardService;
 
     @Value("src/main/resources/static/profile/")
     private String profileDir;
@@ -50,7 +54,11 @@ public class AdminController {
     @GetMapping("/home")
     public String home(Principal principal, Model model) {
         Admin admin = this.adminService.getAdmin(principal.getName());
+        List<Board> notices = this.boardService.getTop6Boards("notice");
+        List<Board> educations = this.boardService.getTop6Boards("edu");
 
+        model.addAttribute("notices", notices);
+        model.addAttribute("educations", educations);
         model.addAttribute("admin", admin);
         return "portal/admin/admin_home";
     }
@@ -116,6 +124,26 @@ public class AdminController {
         model.addAttribute("professorPaging", professorPaging);
 
         return "portal/admin/admin_personManage";
+    }
+
+    @GetMapping("/board")
+    public String notice(Principal principal, Model model) {
+        Admin admin = this.adminService.getAdmin(principal.getName());
+        model.addAttribute("admin", admin);
+        return "portal/admin/admin_board";
+    }
+
+    @PostMapping("/insert/board")
+    public String insertBoard(@RequestParam("type") String type, @RequestParam("title") String title, @RequestParam("content") String content) {
+        Board board = new Board();
+        board.setType(type);
+        board.setTitle(title);
+        board.setContent(content);
+        board.setReg_date(LocalDateTime.now());
+
+        this.boardService.insertBoard(board);
+
+        return "redirect:/a/board";
     }
 
     @PostMapping("/insert/student")
@@ -220,8 +248,8 @@ public class AdminController {
         String birthday = studentInsertForm.getBirthday();
         student.setBirthday(birthday);
 
-        String[] split = birthday.split("-");
-        String password = split[0].substring(2) + split[1] + split[2];
+        String[] split = birthday.split("-"); // '1998-01-01' '1998' '01' '01'
+        String password = split[0].substring(2) + split[1] + split[2]; // '980101'
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         student.setPassword(passwordEncoder.encode(password));
 

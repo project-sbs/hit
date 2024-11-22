@@ -1,0 +1,69 @@
+body {
+    width: 100%;
+    overflow: hidden;
+}
+header {
+    width: 100%;
+    padding: 1%;
+    height: 60px;
+    background: purple;
+    display: flex;
+    justify-content: space-between;
+}
+.portal-logo-name {
+    display: flex;
+}
+.portal-logo-name img {
+    width: 100px;
+}
+.portal-logo-name h1 {
+    font-size: 25px;
+}
+.portal-main {
+    display: flex;
+}
+.portal-nav {
+    width: 340px;
+}
+
+.portal-nav ul {
+    width: 100%;
+    height: 1020px;
+}
+.portal-nav > ul > li {
+    width: 100%;
+    height: 50px;
+    border-bottom: 2px solid #ececec;
+    line-height: 50px;
+    padding-left: 20px;
+}
+/*portal-nav 끝*/
+.portal-admin-notice {
+    width: 100%;
+    border-left: #ececec 1px solid;
+}
+.portal-admin-notice h2 {
+    padding: 3%;
+    margin-bottom: 5px;
+}
+.portal-admin-notice-wrap form {
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+}
+.portal-admin-notice-wrap select {
+    width: 200px;
+}
+.portal-admin-notice-wrap input:nth-of-type(2) {
+    height: 30px;
+}
+.portal-admin-notice-wrap textarea {
+    resize: none;
+    height: 500px;
+}
+.portal-admin-notice-wrap input:nth-of-type(3) {
+    width: 100px;
+    height: 30px;
+    margin-left: 1204px;
+}

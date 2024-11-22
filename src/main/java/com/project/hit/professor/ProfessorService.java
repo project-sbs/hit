@@ -60,7 +60,7 @@ public class ProfessorService {
                 }
             }
         }
-        return this.professorRepository.findAllByOrderByIdDesc(pageable);
+        return this.professorRepository.findAllByOrderByNoDesc(pageable);
     }
 
     public void updateProfessor(Professor professor) {
