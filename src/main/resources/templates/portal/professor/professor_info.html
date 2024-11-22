@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/reset.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/professor/professorInfo.css}" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <title>Portal</title>
+</head>
+<body>
+<header class="portal-head">
+    <div class="portal-logo-name">
+        <img src="" alt="" />
+        <h1>포털시스템</h1>
+    </div>
+    <div class="user-alarm">
+        <div class="user-photo"></div>
+        <p class="portal-user-name">길오성님</p>
+    </div>
+</header>
+<section class="portal-main">
+    <nav class="portal-nav">
+        <ul>
+            <li class="portal-home-button" onclick="location.href='/p/home'"><img src="" alt="" />홈</li>
+            <li class="portal-profinfo-button" onclick="location.href='/p/info'"><img src="" alt="" />교수정보관리</li>
+            <li class="portal-attendance-button" onclick="location.href='/Attendance/AttendanceCalendar'"><img src="" alt="" />출석부</li>
+            <li class="portal-scoring-button" onclick="location.href='/p/score'">과목채점<img src="" alt="" /></li>
+            <li class="portal-report-check-button" onclick="location.href='/p/report'">과제확인<img src="" alt="" /></li>
+        </ul>
+    </nav>
+    <div class="portal-professor-info portal-main-frame">
+        <h2>인적사항</h2>
+        <div class="portal-professor-info-basic">
+            <div class="portal-professor-pic">
+                <img src="" alt="1111" />
+            </div>
+            <table>
+                <!-- 첫 번째 행 -->
+                <tr>
+                    <th>사번</th>
+                    <td>P1011011</td>
+                    <th>성명</th>
+                    <td>길오성</td>
+                    <th>직위</th>
+                    <td>정교수</td>
+                </tr>
+                <!-- 두 번째 행 -->
+                <tr>
+                    <th>대학</th>
+                    <td>공과대학</td>
+                    <th>학과</th>
+                    <td>컴퓨터공학과</td>
+                    <th>성별</th>
+                    <td>논바이너리</td>
+                </tr>
+            </table>
+        </div>
+        <div class="portal-professor-info-specific-frame">
+            <ul class="portal-professor-info-specific-controller">
+                <li>기본</li>
+                <li>주소</li>
+                <li>자격어학</li>
+            </ul>
+            <ul class="portal-professor-info-specific">
+                <li>
+                    <div class="portal-professor-info-specific-basic">
+                        <h3>학적 기본 사항</h3>
+                        <table>
+                            <tr>
+                                <th>성명</th>
+                                <td>길오성</td>
+                                <th>성명(영문)</th>
+                                <td>gil oseong</td>
+                                <th>생년월일</th>
+                                <td>2077-07-07</td>
+                            </tr>
+                            <tr>
+                                <th>전자우편주소</th>
+                                <td>amolang@and.com</td>
+                                <th>휴대폰번호</th>
+                                <td>010-5555-5555</td>
+                            </tr>
+                        </table>
+                        <h3>계좌정보</h3>
+                        <ul>
+                            <li>
+                                <p>은행</p>
+                                <select name="" id="">
+                                    <option value="">카카오뱅크</option>
+                                    <option value="">농협</option>
+                                    <option value="">하나은행</option>
+                                    <option value="">국민은행</option>
+                                    <option value="">기업은행</option>
+                                </select>
+                            </li>
+                            <li>
+                                <p>계좌번호</p>
+                                <input type="text" value="77717171717" />
+                            </li>
+                            <li>
+                                <p>예금주</p>
+                                <input type="text" value="길오성" />
+                            </li>
+                            <li>
+                                <p>관계</p>
+                                <select name="" id="">
+                                    <option value="">부</option>
+                                    <option value="">모</option>
+                                    <option value="">본인</option>
+                                </select>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li><button>등록하기</button></li>
+            </ul>
+        </div>
+    </div>
+</section>
+<script></script>
+</body>
+</html>

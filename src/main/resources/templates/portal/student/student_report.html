@@ -16,7 +16,7 @@
     </div>
     <div class="user-alarm">
         <div class="user-photo"></div>
-        <p class="portal-user-name">길오성님</p>
+        <p class="portal-user-name" th:text="${student.getName()}"></p>
     </div>
 </header>
 <section class="portal-main">
@@ -37,17 +37,19 @@
     </nav>
     <div class="portal-student-report-frame">
         <h2>과제제출</h2>
-        <div>
-            <input type="text" />
-            <select name="" id="">
-                <option value="">콤퓨터과학</option>
-                <option value="">컴퓨터공학</option>
-                <option value="">컴퓨터구조</option>
-                <option value="">컴활</option>
-            </select>
+        <div class="portal-student-report-wrap">
+            <form action="">
+                <select name="" id="">
+                    <option value="">콤퓨터과학</option>
+                    <option value="">컴퓨터공학</option>
+                    <option value="">컴퓨터구조</option>
+                    <option value="">컴활</option>
+                </select>
+                <input type="text" placeholder="제목을 입력하시오" />
+                <input type="file" placeholder="파일첨부" />
+                <input type="submit" value="과제제출" />
+            </form>
         </div>
-        <textarea name="" id=""></textarea>
-        <input type="submit" value="과제제출" />
     </div>
 </section>
 </body>

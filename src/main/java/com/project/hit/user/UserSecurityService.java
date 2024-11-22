@@ -54,7 +54,7 @@ public class UserSecurityService implements UserDetailsService {
             }
             Professor professor = _user.get();
             List<GrantedAuthority> authorities = new ArrayList<>();
-            if(professor.getROLE().equals("교수")) {
+            if(professor.getROLE().equals("학과장") || professor.getROLE().equals("교수") || professor.getROLE().equals("부교수") || professor.getROLE().equals("시간강사")) {
                 authorities.add(new SimpleGrantedAuthority(UserRole.PROFESSOR.getValue()));
             } else {
                 throw new UsernameNotFoundException("권한이 일치 하지 않습니다.");
