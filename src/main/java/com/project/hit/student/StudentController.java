@@ -16,7 +16,10 @@ public class StudentController {
     private final StudentService studentService;
 
     @GetMapping("/home")
-    public String home() {
+    public String home(Model model, Principal principal) {
+        Student student = this.studentService.getStudentById(principal.getName());
+
+        model.addAttribute("student", student);
         return "portal/student/student_home";
     }
 
@@ -29,12 +32,18 @@ public class StudentController {
     }
 
     @GetMapping("/score")
-    public String score() {
+    public String score(Model model, Principal principal) {
+        Student student = this.studentService.getStudentById(principal.getName());
+
+        model.addAttribute("student", student);
         return "portal/student/student_score";
     }
 
     @GetMapping("/report")
-    public String report() {
+    public String report(Model model, Principal principal) {
+        Student student = this.studentService.getStudentById(principal.getName());
+
+        model.addAttribute("student", student);
         return "portal/student/student_report";
     }
 }

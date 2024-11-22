@@ -13,7 +13,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
-import org.springframework.data.repository.query.Param;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -84,18 +83,27 @@ public class AdminController {
         Page<Professor> professorPaging = this.professorService.getProfessors(field, keyword, page, major_id);
         Admin admin = this.adminService.getAdmin(principal.getName());
 
-        int totalPage = studentPaging.getTotalPages();
+        int stu_totalPage = studentPaging.getTotalPages();
+        int pro_totalPage = professorPaging.getTotalPages();
         int block = 10;
-        int currentPage = studentPaging.getNumber() + 1;
+        int stu_currentPage = studentPaging.getNumber() + 1;
+        int pro_currentPage = professorPaging.getNumber() + 1;
 
-        int startBlock = (((currentPage - 1) / block) * block) + 1;
-        int endBlock = startBlock + block - 1;
-        if (endBlock > totalPage) {
-            endBlock = totalPage;
+        int stu_startBlock = (((stu_currentPage - 1) / block) * block) + 1;
+        int stu_endBlock = stu_startBlock + block - 1;
+        if (stu_endBlock > stu_totalPage) {
+            stu_endBlock = stu_totalPage;
+        }
+        int pro_startBlock = (((pro_currentPage - 1) / block) * block) + 1;
+        int pro_endBlock = pro_startBlock + block - 1;
+        if (pro_endBlock > pro_totalPage) {
+            pro_endBlock = pro_totalPage;
         }
 
-        model.addAttribute("startBlock", startBlock);
-        model.addAttribute("endBlock", endBlock);
+        model.addAttribute("stu_startBlock", stu_startBlock);
+        model.addAttribute("stu_endBlock", stu_endBlock);
+        model.addAttribute("pro_startBlock", pro_startBlock);
+        model.addAttribute("pro_endBlock", pro_endBlock);
         model.addAttribute("keyword", keyword);
         model.addAttribute("field", field);
         model.addAttribute("page", page);
@@ -167,6 +175,42 @@ public class AdminController {
 
         this.majorService.insertMajor(major);
         return "redirect:/a/major";
+    }
+
+    @PostMapping("/modify/student")
+    public String modifyStudent(@RequestParam("major") int major, @RequestParam("studentId") String id, @RequestParam("name") String name, @RequestParam("dob") String dob,
+                                @RequestParam("phone") String phone, @RequestParam("email") String email, @RequestParam("credits") String credits,
+                                @RequestParam("status") String status, Principal principal) {
+        Student student = new Student();
+        Major mjr = this.majorService.getMajor(major);
+        student.setMajor(mjr);
+        student.setId(id);
+        student.setName(name);
+        student.setBirthday(dob);
+        student.setEmail(email);
+        student.setPhone(phone);
+        student.setStatus(status);
+
+        this.studentService.updateStudent(student);
+
+        return "redirect:/a/person";
+    }
+
+    @PostMapping("/modify/professor")
+    public String modifyProfessor(@RequestParam("major") int major, @RequestParam("professorId") String id, @RequestParam("name") String name, @RequestParam("dob") String dob,
+                                  @RequestParam("phone") String phone, @RequestParam("email") String email, @RequestParam("position") String position, Principal principal) {
+        Professor professor = new Professor();
+        Major mjr = this.majorService.getMajor(major);
+        professor.setMajor(mjr);
+        professor.setId(id);
+        professor.setName(name);
+        professor.setBirthday(dob);
+        professor.setPhone(phone);
+        professor.setEmail(email);
+        professor.setROLE(position);
+
+        this.professorService.updateProfessor(professor);
+        return "redirect:/a/person";
     }
 
     private Student insertStudent(StudentInsertForm studentInsertForm) {

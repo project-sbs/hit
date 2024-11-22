@@ -16,7 +16,7 @@
     </div>
     <div class="user-alarm">
         <div class="user-photo"></div>
-        <p class="portal-user-name">길오성님</p>
+        <p class="portal-user-name" th:text="${student.getName()}"></p>
     </div>
 </header>
 <section class="portal-main">
@@ -45,9 +45,9 @@
                 <!-- 첫 번째 행 -->
                 <tr>
                     <th>학번</th>
-                    <td>20770707</td>
+                    <td th:text="${student.getId()}"></td>
                     <th>성명</th>
-                    <td>길오성</td>
+                    <td th:text="${student.getName()}"></td>
                     <th>학년/성적이수</th>
                     <td>2학년/4학기이수</td>
                 </tr>
@@ -56,7 +56,7 @@
                     <th>대학</th>
                     <td>공과대학</td>
                     <th>학과</th>
-                    <td>컴퓨터공학과</td>
+                    <td th:text="${student.getMajor().getName()}"></td>
                     <th>전공</th>
                     <td></td>
                 </tr>
@@ -76,7 +76,7 @@
                     <th>마이크로디그리</th>
                     <td></td>
                     <th>현재학적</th>
-                    <td>졸업</td>
+                    <td th:text="${student.getStatus()}"></td>
                 </tr>
                 <!-- 다섯 번째 행 -->
                 <tr>
@@ -114,11 +114,11 @@
                         <table>
                             <tr>
                                 <th>성명</th>
-                                <td>길오성</td>
-                                <th>성명(영문)</th>
-                                <td>gil oseong</td>
+                                <td th:text="${student.getName()}"></td>
+                                <th>연락처</th>
+                                <td th:text="${student.getPhone()}"></td>
                                 <th>생년월일</th>
-                                <td>2077-07-07</td>
+                                <td th:text="${student.getBirthday()}"></td>
                             </tr>
                             <tr>
                                 <th>휴학사용학기</th>
@@ -130,7 +130,7 @@
                             </tr>
                             <tr>
                                 <th>전자우편주소</th>
-                                <td>amolang@and.com</td>
+                                <td th:text="${student.getEmail()}"></td>
                                 <th>지도교수</th>
                                 <td>콘코드교수</td>
                             </tr>

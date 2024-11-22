@@ -16,7 +16,7 @@
     </div>
     <div class="user-alarm">
         <div class="user-photo"></div>
-        <p class="portal-user-name">길오성님</p>
+        <p class="portal-user-name" th:text="${student.getName()}"></p>
     </div>
 </header>
 <section class="portal-main">
@@ -41,11 +41,11 @@
             <ul>
                 <li>
                     <p>학번</p>
-                    <p>20770777</p>
+                    <p th:text="${student.getId()}"></p>
                 </li>
                 <li>
                     <p>성명</p>
-                    <p>길오성</p>
+                    <p th:text="${student.getName()}"></p>
                 </li>
                 <li>
                     <p>대학</p>
@@ -53,7 +53,7 @@
                 </li>
                 <li>
                     <p>학과</p>
-                    <p>컴퓨터공학과</p>
+                    <p th:text="${student.getMajor().getName()}"></p>
                 </li>
                 <li>
                     <p>학년</p>
@@ -61,7 +61,7 @@
                 </li>
                 <li>
                     <p>학적상태</p>
-                    <p>졸업</p>
+                    <p th:text="${student.getStatus()}"></p>
                 </li>
             </ul>
         </div>
