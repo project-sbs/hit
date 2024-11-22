@@ -28,3 +28,4 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
 
     Page<Student> findStudentByIdContainingAndMajor(String id, Major major, Pageable pageable);
 }
+

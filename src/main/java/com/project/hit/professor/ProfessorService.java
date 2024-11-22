@@ -82,4 +82,14 @@ public class ProfessorService {
         }
     }
 
+    public Professor getProfessor(long professorNo) {
+        Optional<Professor> professor = this.professorRepository.findById(professorNo);
+        if (professor.isPresent()) {
+            return professor.get();
+        } else {
+            throw new DataNotFoundException("Not found for professor ID: " + professorNo);
+        }
+    }
+
+
 }

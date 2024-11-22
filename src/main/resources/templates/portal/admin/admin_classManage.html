@@ -82,6 +82,28 @@
             </tr>
             </thead>
             <tbody>
+            <tr th:each="subject : ${subjectList}">
+                <td th:text="${subject.code}"></td>
+
+                <td th:text="${subject.name}"></td>
+
+                <td th:text="${subject.major.name}"></td>
+
+                <td th:text="${subject.week}"></td>
+
+                <td th:text="${subject.time}"></td>
+
+                <td th:text="${subject.professor.name}"></td>
+
+                <td th:text="${subject.grade}"></td>
+
+                <td th:text="${subject.maxPersonnel}"></td>
+
+                <td><button>수강신청</button></td>
+
+            </tr>
+            </tbody>
+            <tbody>
             <tr>
                 <td>101</td>
                 <td>자료구조</td>
@@ -234,99 +256,80 @@
             <span class="close-modal-btn">&times;</span>
             <h2 class="modal-title">수강 과목 기입</h2>
 
-            <form id="course-form" class="course-form">
-                <!--년도는 자동으로 변경시 사라질 항목-->
-                <label for="course-year" class="label-course-year">년도:</label>
-                <input type="number" id="course-year" name="course-year" required />
+            <!-- 타임리프 폼 시작 -->
+            <form id="course-form" class="course-form" method="post" th:action="@{/a/insert/subject}" th:object="${subjectInsertForm}">
 
+                <!-- 년도 -->
+                <label for="course-year" class="label-course-year">년도:</label>
+                <input type="number" id="course-year" name="course-year" th:field="*{year}" required />
                 <br />
+
+                <!-- 학기 -->
                 <label for="course-semester" class="label-course-semester">학기:</label>
-                <select id="semester-count" class="select-semester-count">
+                <select id="semester-count" class="select-semester-count" th:field="*{semester}">
                     <option value="" disabled selected>=== 학기 ===</option>
                     <option value="semester1">1학기</option>
                     <option value="semester2">2학기</option>
                 </select>
                 <br />
 
+                <!-- 전공/교양 -->
                 <label for="major-type" class="label-major-type">전공/교양:</label>
-                <select id="major-type" class="select-major-type">
+                <select id="major-type" class="select-major-type" th:field="*{liberal}">
                     <option value="" disabled selected>=== 전공/교양 ===</option>
                     <option value="major">전공</option>
                     <option value="liberal">교양</option>
                 </select>
-
-                <br />
-                <label for="major-type" class="label-major-type">전공/교양:</label>
-                <select id="major-type" class="select-major-type">
-                    <option value="" disabled selected>=== 전공/교양 ===</option>
-                    <option value="major">전공</option>
-                    <option value="liberal">교양</option>
-                </select>
-
                 <br />
 
+                <!-- 학과 -->
                 <label for="department" class="label-department">학과:</label>
-                <select id="department" class="select-department">
+                <select id="department" class="select-department" th:field="*{major}">
                     <option value="" selected>=== 학과 ===</option>
-                    <option value="컴퓨터소프트웨어">컴퓨터소프트웨어</option>
-                    <option value="컴퓨터공학">컴퓨터공학</option>
-                    <option value="전자공학">전자공학</option>
-                    <option value="화학공학">화학공학</option>
-                    <option value="생물학">생물학</option>
+                    <option th:each="major : ${majorList}"
+                            th:value="${major.id}"
+                            th:text="${major.name.substring(0, major.name.length() - 1)}"></option>
                 </select>
-
                 <br />
 
+                <!-- 과목명 -->
                 <label for="course-name" class="label-course-name">과목명:</label>
-                <input type="text" id="course-name" name="course-name" required />
-
+                <input type="text" id="course-name" name="course-name" th:field="*{name}" required />
                 <br />
 
+                <!-- 교수명 -->
                 <label for="professor" class="label-professor">교수명:</label>
-                <input type="text" id="professor" name="professor" required />
-
+                <select id="professor" class="select-professor" th:field="*{professorNo}">
+                    <option value="" selected>=== 교수 선택 ===</option>
+                    <option th:each="professor : ${professorList}"
+                            th:value="${professor.no}"
+                            th:text="${professor.name}"></option>
+                </select>
                 <br />
 
+                <!-- 시간 -->
                 <label for="time" class="label-time">시간:</label>
-                <input type="text" id="time" name="time" required />
-
+                <input type="text" id="time" name="time" th:field="*{time}" required />
                 <br />
 
+                <!-- 요일 -->
                 <label for="day" class="label-day">요일:</label>
-                <input
-                        type="text"
-                        id="day"
-                        name="day"
-                        placeholder="예: 월, 화, 수, 목, 금"
-                        required
-                />
-
+                <input type="text" id="day" name="day" placeholder="예: 월, 화, 수, 목, 금" th:field="*{week}" required />
                 <br />
 
+                <!--최대 수강인원-->
+                <label for="max-personnel" class="label-max-personnel">최대 수강 인원:</label>
+                <input type="number" id="max-personnel" name="maxpersonnel" min="1" th:field="*{maxpersonnel}" required />
+                <br />
+
+                <!-- 수강학점 -->
                 <label for="score" class="label-score">수강학점:</label>
-                <input
-                        type="number"
-                        id="score"
-                        name="score"
-                        max="3"
-                        min="1"
-                        placeholder="최대 3학점까지 기입할수 있습니다."
-                        required
-                />
-
-                <br />
-
-                <label for="max-students" class="label-max-students">인원수:</label>
-                <input
-                        type="number"
-                        id="max-students"
-                        name="max-students"
-                        required
-                />
-
+                <input type="number" id="score" name="credits" min="1" max="3"
+                       placeholder="최대 3학점까지 기입할 수 있습니다." th:field="*{credits}" required />
                 <br />
 
                 <button type="submit" class="submit-course">과목 추가</button>
+            </form>
             </form>
         </div>
     </div>
