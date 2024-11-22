@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" th:href="@{/css/reset.css}" type="text/css" />
+    <link rel="stylesheet" th:href="@{/css/admin/adminNotice.css}" type="text/css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <title>Portal</title>
+</head>
+<body>
+<header class="portal-head">
+    <div class="portal-logo-name">
+        <img src="" alt="" />
+        <h1>포털시스템</h1>
+    </div>
+    <div class="user-alarm">
+        <div class="user-photo"></div>
+        <p class="portal-user-name" th:text="${admin.getName()}"></p>
+    </div>
+</header>
+<section class="portal-main">
+    <nav class="portal-nav">
+        <ul>
+            <li class="portal-home-button" onclick="location.href='/a/home'"><img src="" alt="" />홈</li>
+            <li class="portal-class-open-button" onclick="location.href='/a/major'">
+                <img src="" alt="" />전공관리
+            </li>
+            <li class="portal-person-add-button" onclick="location.href='/a/person'">
+                <img src="" alt="" />인적정보 관리
+            </li>
+            <li class="portal-class-add-button" onclick="location.href='/a/class'"><img src="" alt="" />과목기입</li>
+            <li class="portal-notice-add-button" onclick="location.href='/a/board'"><img src="" alt="" />게시판</li>
+            <li class="portal-student-pay-check-button" onclick="location.href=''">
+                <img src="" alt="" />등록금확인
+            </li>
+            <li class="portal-class-open-button" onclick="location.href=''">
+                <img src="" alt="" />수강신청
+            </li>
+        </ul>
+    </nav>
+    <div class="portal-admin-notice">
+        <h2>공지사항 기입</h2>
+        <div class="portal-admin-notice-wrap">
+            <form th:action="@{/a/insert/board}" method="post">
+                <select name="type" >
+                    <option value="notice">공지사항</option>
+                    <option value="edu">학사공지</option>
+                    <option value="hire">채용공고</option>
+                    <option value="free">자유계시판</option>
+                </select>
+                <input type="text" placeholder="제목을 입력해주세요" name="title"/>
+                <textarea name="content" id=""></textarea>
+                <input type="submit" value="작성완료" />
+            </form>
+        </div>
+    </div>
+</section>
+</body>
+</html>

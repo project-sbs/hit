@@ -14,7 +14,7 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
     @Query("select distinct st from Student st where st.id = :id")
     Optional<Student> findById(@Param("id") String id);
 
-    Page<Student> findAllByOrderByIdDesc(Pageable pageable);
+    Page<Student> findAllByOrderByNoDesc(Pageable pageable);
 
     Page<Student> findStudentByMajor(Major major, Pageable pageable);
 

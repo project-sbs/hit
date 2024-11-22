@@ -42,7 +42,7 @@ public class StudentService {
 
     public Page<Student> getStudents(String field, String keyword, int page, int major_id) {
         List<Sort.Order> sorts = new ArrayList<>();
-        sorts.add(Sort.Order.desc("id"));
+        sorts.add(Sort.Order.desc("no"));
         Pageable pageable = PageRequest.of(page, 10, Sort.by(sorts));
 
         if (major_id > 0) {
@@ -69,7 +69,7 @@ public class StudentService {
                 }
             }
         }
-        return this.studentRepository.findAllByOrderByIdDesc(pageable);
+        return this.studentRepository.findAllByOrderByNoDesc(pageable);
     }
 
     public void updateStudent(Student student) {

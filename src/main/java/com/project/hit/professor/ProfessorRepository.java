@@ -13,7 +13,7 @@ public interface ProfessorRepository extends JpaRepository<Professor, Long> {
     @Query("select distinct pr from Professor pr where pr.id = :id")
     Optional<Professor> findById(@Param("id") String id);
 
-    Page<Professor> findAllByOrderByIdDesc(Pageable pageable);
+    Page<Professor> findAllByOrderByNoDesc(Pageable pageable);
 
     Page<Professor> findProfessorByMajor(Major major, Pageable pageable);
 
