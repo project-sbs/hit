@@ -34,6 +34,11 @@ public class Student {
 
     private String profile;                             // 프로필 저장경로
 
+    @Column(columnDefinition = "INT DEFAULT 0")         // 이수학점
+    private int credits;
+
+    private String status;                              // 상태(재학, 휴학, 졸업)
+
     @ManyToOne
     private Major major;
 

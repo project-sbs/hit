@@ -2,16 +2,16 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" type="text/css" th:href="@{/css/reset.css}" />
-  <link rel="stylesheet" type="text/css" th:href="@{/css/admin/adminPersonManage.css}" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <link rel="stylesheet" th:href="@{/css/reset.css}" type="text/css" />
+  <link rel="stylesheet" th:href="@{/css/admin/adminPersonManage.css}" type="text/css" />
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <title>Portal</title>
 </head>
 <body>
 <header class="portal-head">
   <div class="portal-logo-name">
-    <img src="" alt="" />
+    <img alt="" src="" />
     <h1>포털시스템</h1>
   </div>
   <div class="user-alarm">
@@ -22,19 +22,19 @@
 <section class="portal-main">
   <nav class="portal-nav">
     <ul>
-      <li class="portal-home-button" onclick="location.href='/a/home'"><img src="" alt="" />홈</li>
+      <li class="portal-home-button" onclick="location.href='/a/home'"><img alt="" src="" />홈</li>
       <li class="portal-class-open-button" onclick="location.href='/a/major'">
-        <img src="" alt="" />전공관리
+        <img alt="" src="" />전공관리
       </li>
       <li class="portal-person-add-button" onclick="location.href='/a/person'">
-        <img src="" alt="" />인적정보 관리
+        <img alt="" src="" />인적정보 관리
       </li>
-      <li class="portal-class-add-button" onclick="location.href='/a/class'"><img src="" alt="" />과목기입</li>
+      <li class="portal-class-add-button" onclick="location.href='/a/class'"><img alt="" src="" />과목기입</li>
       <li class="portal-student-pay-check-button" onclick="location.href=''">
-        <img src="" alt="" />등록금확인
+        <img alt="" src="" />등록금확인
       </li>
       <li class="portal-class-open-button" onclick="location.href=''">
-        <img src="" alt="" />수강신청
+        <img alt="" src="" />수강신청
       </li>
     </ul>
   </nav>
@@ -44,76 +44,115 @@
     <ul>
       <li>
         <select id="department-filter">
-          <option value="">=== 학과 ===</option>
-          <option th:each="major, loop : ${majorList}" th:value="${major.getId()}" th:text="${major.getName().substring(0, major.getName().length() - 1)}"></option>
+          <option value="-1">=== 학과 ===</option>
+          <option th:each="major, loop : ${majorList}" th:text="${major.getName().substring(0, major.getName().length() - 1)}" th:value="${major.getId()}" ></option>
         </select>
+        <form id="filter-form" th:action="@{/a/person}" method="get">
+          <input type="hidden" id="filter-major" name="major" th:value="${major}">
+        </form>
         <select id="person-type-filter">
-          <option value="학생" selected>학부생</option>
+          <option selected value="학생">학부생</option>
           <option value="교수">교수</option>
         </select>
       </li>
       <li>
-        <select name="" id="">
-          <option value="">이름</option>
-          <option value="">학번</option>
-          <option value="">사번</option></select
-        ><input type="text" /><button>검색</button>
+        <form th:action="@{/a/person}" method="get">
+          <select id="search-field" name="field">
+            <option value="이름">이름</option>
+            <option value="학번">학번</option>
+            <option value="사번">사번</option>
+          </select>
+          <input type="text" name="keyword" th:value="${keyword}"/>
+          <input type="hidden" id="search-major" name="major" th:value="${major}">
+          <button type="submit">검색</button>
+        </form>
       </li>
     </ul>
     <table class="student-managing-table">
       <thead>
-        <tr>
-          <th>학과</th>
-          <th>학번</th>
-          <th>이름</th>
-          <th>생년월일</th>
-          <th>연락처</th>
-          <th>이메일</th>
-          <th>이수학점</th>
-          <th>상태</th>
-        </tr>
+      <tr>
+        <th>학과</th>
+        <th>학번</th>
+        <th>이름</th>
+        <th>생년월일</th>
+        <th>연락처</th>
+        <th>이메일</th>
+        <th>이수학점</th>
+        <th>상태</th>
+      </tr>
       </thead>
-      <tbody>
-        <tr th:each="student, loop : ${studentList}">
-          <td th:text="${student.getMajor().getName().substring(0, student.getMajor().getName().length() - 1)}"></td>           <!--학과목-->
-          <td th:text="${student.getId()}"></td>                                                                                <!--학번-->
-          <td th:text="${student.getName()}"></td>                                                                              <!--이름-->
-          <td th:text="${student.getBirthday()}"></td>                                                                          <!--생년월일-->
-          <td th:text="${student.getPhone()}"></td>                                                                             <!--연락처-->
-          <td th:text="${student.getEmail()}"></td>                                                                             <!--이메일-->
-          <td>70</td>                                                                                                           <!--학점-->
-          <td>재학</td>                                                                                                          <!--상태-->
-        </tr>
+      <tbody th:if="${!studentPaging.isEmpty()}">
+      <tr th:each="student, loop : ${studentPaging}">
+        <td th:text="${student.getMajor().getName().substring(0, student.getMajor().getName().length() - 1)}"></td>           <!--학과목-->
+        <td th:text="${student.getId()}"></td>                                                                                <!--학번-->
+        <td th:text="${student.getName()}"></td>                                                                              <!--이름-->
+        <td th:text="${student.getBirthday()}"></td>                                                                          <!--생년월일-->
+        <td th:text="${student.getPhone()}"></td>                                                                             <!--연락처-->
+        <td th:text="${student.getEmail()}"></td>                                                                             <!--이메일-->
+        <td th:text="${student.getCredits()}"></td>                                                                           <!--학점-->
+        <td th:text="${student.getStatus()}"></td>                                                                            <!--상태-->
+      </tr>
+      </tbody>
+      <tbody th:if="${studentPaging.isEmpty()}">
+      <tr>
+        <td colspan="8">조회된 데이터가 없습니다.</td>
+      </tr>
       </tbody>
     </table>
     <table class="professor-managing-table">
       <thead>
-        <tr>
-          <th>학과</th>
-          <th>사번</th>
-          <th>이름</th>
-          <th>생년월일</th>
-          <th>연락처</th>
-          <th>이메일</th>
-          <th>직위</th>
-        </tr>
+      <tr>
+        <th>학과</th>
+        <th>사번</th>
+        <th>이름</th>
+        <th>생년월일</th>
+        <th>연락처</th>
+        <th>이메일</th>
+        <th>직위</th>
+      </tr>
       </thead>
       <tbody>
-        <tr th:each="professor, loop : ${professorList}">
-          <td th:text="${professor.getMajor().getName().substring(0, professor.getMajor().getName().length() - 1)}"></td>       <!--학과목-->
-          <td th:text="${professor.getId()}"></td>                                                                              <!--사번-->
-          <td th:text="${professor.getName()}"></td>                                                                            <!--이름-->
-          <td th:text="${professor.getBirthday()}"></td>                                                                        <!--생년월일-->
-          <td th:text="${professor.getPhone()}"></td>                                                                           <!--연락처-->
-          <td th:text="${professor.getEmail()}"></td>                                                                           <!--이메일-->
-          <td th:text="${professor.getROLE()}"></td>                                                                            <!--직위-->
-        </tr>
+      <tr th:if="${!professorPaging.isEmpty()}" th:each="professor, loop : ${professorPaging}">
+        <td th:text="${professor.getMajor().getName().substring(0, professor.getMajor().getName().length() - 1)}"></td>       <!--학과목-->
+        <td th:text="${professor.getId()}"></td>                                                                              <!--사번-->
+        <td th:text="${professor.getName()}"></td>                                                                            <!--이름-->
+        <td th:text="${professor.getBirthday()}"></td>                                                                        <!--생년월일-->
+        <td th:text="${professor.getPhone()}"></td>                                                                           <!--연락처-->
+        <td th:text="${professor.getEmail()}"></td>                                                                           <!--이메일-->
+        <td th:text="${professor.getROLE()}"></td>                                                                            <!--직위-->
+      </tr>
+      <tr th:if="${professorPaging.isEmpty()}">
+        <td colspan="7">조회된 데이터가 없습니다.</td>
+      </tr>
       </tbody>
     </table>
+    <!-- 학생 페이징 시작 -->
+    <div class="st_pagination">
+      <a class="prev_btn" href="javascript:void(0)" th:data-page="${studentPaging.number - 1}" th:if="${studentPaging.number != 0 && !studentPaging.isEmpty()}"><span>이전</span></a>
+      <a class="page_link"
+         href="javascript:void(0)" th:if="${!studentPaging.isEmpty()}" th:classappend="${page == studentPaging.number} ? 'on'" th:data-page="${page}" th:each="page: ${#numbers.sequence(stu_startBlock - 1, stu_endBlock - 1)}" th:text="${page+1}"></a>
+      <a class="next_btn" href="javascript:void(0)" th:data-page="${studentPaging.number + 1}" th:if="${studentPaging.hasNext() && !studentPaging.isEmpty()}"><span>다음</span></a>
+    </div>
+    <!-- 학생 페이징 끝 -->
+    <!-- 교수 페이징 시작 -->
+    <div class="pr_pagination" th:if="${!professorPaging.isEmpty()}">
+      <a class="prev_btn" href="javascript:void(0)" th:data-page="${professorPaging.number - 1}" th:if="${professorPaging.number != 0}"><span>이전</span></a>
+      <a class="page_link"
+         href="javascript:void(0)" th:classappend="${page == professorPaging.number} ? 'on'" th:data-page="${page}" th:each="page: ${#numbers.sequence(pro_startBlock - 1, pro_endBlock - 1)}" th:text="${page+1}"></a>
+      <a class="next_btn" href="javascript:void(0)" th:data-page="${professorPaging.number + 1}" th:if="${professorPaging.hasNext()}"><span>다음</span></a>
+    </div>
+    <!-- 교수 페이징 끝 -->
+    <form id="actionForm" method="get" th:action="@{/a/person}">
+      <input type="hidden" id="kw" name="keyword" th:value="${keyword}">
+      <input type="hidden" id="field" name="field" th:value="${field}">
+      <input type="hidden" id="page" name="page" th:value="${page}">
+      <input type="hidden" id="major" name="major" th:value="${major}">
+      <input type="hidden" id="person" name="person" th:value="${person}">
+    </form>
   </div>
 </section>
 <!-- 모달 창 -->
-<div id="addPersonModal" class="person-add-modal">
+<div class="person-add-modal" id="addPersonModal">
   <div class="person-add-modal-content">
     <span class="addPersonclose">&times;</span>
     <h3>인적 정보 기입</h3>
@@ -124,60 +163,60 @@
 
     <!-- 학생 폼 -->
     <div id="studentForm">
-      <form th:object="${studentInsertForm}" th:action="@{/a/insert/student}" method="post" enctype="multipart/form-data">
+      <form enctype="multipart/form-data" method="post" th:action="@{/a/insert/student}" th:object="${studentInsertForm}">
         <label for="department">학과:</label>
         <select id="department" th:field="*{major}">
-          <option value="" disabled>=== 학과 ===</option>
-          <option th:each="major, loop : ${majorList}" th:value="${major.getId()}" th:text="${major.getName().substring(0, major.getName().length() - 1)}"></option>
+          <option disabled value="">=== 학과 ===</option>
+          <option th:each="major, loop : ${majorList}" th:text="${major.getName().substring(0, major.getName().length() - 1)}" th:value="${major.getId()}"></option>
         </select>
 
         <label for="studentId">학번:</label>
-        <input type="text" id="studentId" placeholder="학번 입력" th:field="*{id}" />
+        <input id="studentId" placeholder="학번 입력" th:field="*{id}" type="text" />
 
         <label for="studentName">이름:</label>
-        <input type="text" id="studentName" placeholder="이름 입력" th:field="*{name}" />
+        <input id="studentName" placeholder="이름 입력" th:field="*{name}" type="text" />
 
         <label for="birthDate">생년월일:</label>
-        <input type="date" id="birthDate" th:field="*{birthday} "/>
+        <input id="birthDate" th:field="*{birthday} " type="date"/>
 
         <label for="contact">연락처:</label>
-        <input type="text" id="contact" placeholder="연락처 입력" th:field="*{phone}" />
+        <input id="contact" placeholder="연락처 입력" th:field="*{phone}" type="text" />
 
         <label for="email">이메일:</label>
-        <input type="email" id="email" placeholder="이메일 입력" th:field="*{email}" />
+        <input id="email" placeholder="이메일 입력" th:field="*{email}" type="email" />
 
         <label for="photo">사진:</label>
-        <input type="file" id="photo" placeholder="사진 추가" name="photo" accept="image/*"/>
+        <input accept="image/*" id="photo" name="photo" placeholder="사진 추가" type="file"/>
         <input type="submit" value="기입" />
       </form>
     </div>
 
     <!-- 교수 폼 -->
     <div id="professorForm" style="display: none">
-      <form th:object="${professorInsertForm}" th:action="@{/a/insert/professor}" method="post" enctype="multipart/form-data">
+      <form enctype="multipart/form-data" method="post" th:action="@{/a/insert/professor}" th:object="${professorInsertForm}">
         <label for="profDepartment">학과:</label>
         <select id="profDepartment" th:field="*{major}">
-          <option value="" disabled>=== 학과 ===</option>
-          <option th:each="major, loop : ${majorList}" th:value="${major.getId()}" th:text="${major.getName().substring(0, major.getName().length() - 1)}"></option>
+          <option disabled value="">=== 학과 ===</option>
+          <option th:each="major, loop : ${majorList}" th:text="${major.getName().substring(0, major.getName().length() - 1)}" th:value="${major.getId()}"></option>
         </select>
 
         <label for="professorId">사번:</label>
-        <input type="text" id="professorId" placeholder="사번 입력" th:field="*{id}" />
+        <input id="professorId" placeholder="사번 입력" th:field="*{id}" type="text" />
 
         <label for="profName">이름:</label>
-        <input type="text" id="profName" placeholder="이름 입력" th:field="*{name}" />
+        <input id="profName" placeholder="이름 입력" th:field="*{name}" type="text" />
 
         <label for="profBirthDate">생년월일:</label>
-        <input type="date" id="profBirthDate" th:field="*{birthday}" />
+        <input id="profBirthDate" th:field="*{birthday}" type="date" />
 
         <label for="profContact">연락처:</label>
-        <input type="text" id="profContact" placeholder="연락처 입력" th:field="*{phone}" />
+        <input id="profContact" placeholder="연락처 입력" th:field="*{phone}" type="text" />
 
         <label for="profEmail">이메일:</label>
-        <input type="email" id="profEmail" placeholder="이메일 입력" th:field="*{email}" />
+        <input id="profEmail" placeholder="이메일 입력" th:field="*{email}" type="email" />
 
         <label for="photo">사진:</label>
-        <input type="file" id="profPhoto" placeholder="사진 추가" name="photo" />
+        <input id="profPhoto" name="photo" placeholder="사진 추가" type="file" />
 
         <label for="position">직위:</label>
         <select id="position" th:field="*{role}">
@@ -191,15 +230,69 @@
     </div>
   </div>
 </div>
+<!--수정 모달창-->
+<div class="modal-container" id="modifyModal">
+  <div class="modal-dialog">
+    <span class="modal-close-button">&times;</span>
+    <form class="modal-form" id="modifyForm" th:action="@{/a/modify/student}" method="post">
+      <!-- Fields for Student -->
+      <div class="modal-fields" id="studentModifyFields">
+        <label for="studentDepartmentModify">학과:</label>
+        <select id="studentDepartmentModify" name="major">
+          <option disabled value="">=== 학과 ===</option>
+          <option th:each="major, loop : ${majorList}" th:text="${major.getName().substring(0, major.getName().length() - 1)}" th:value="${major.getId()}"></option>
+        </select>
+        <label>학번: <input id="studentIdModify" name="studentId" readonly type="text" /></label><br />
+        <label>이름: <input id="studentNameModify" name="name" type="text" /></label><br />
+        <label>생년월일: <input id="studentDobModify" name="dob" type="date" /></label><br />
+        <label>연락처: <input id="studentPhoneModify" name="phone" type="text" /></label><br />
+        <label>이메일:<input id="studentEmailModify" name="email" type="email" /></label><br />
+        <label>이수학점: <input id="studentCreditsModify" name="credits" readonly type="text" /></label><br />
+        <label>상태:
+          <select id="studentStatusModify" name="status">
+            <option value="재학">재학</option>
+            <option value="휴학">휴학</option>
+            <option value="졸업">졸업</option>
+          </select>
+        </label><br />
+        <input type="submit" value="기입" />
+      </div>
+    </form>
+    <form th:action="@{/a/modify/professor}" method="post">
+      <!-- Fields for Professor -->
+      <div class="modal-fields" id="professorModifyFields">
+        <label for="professorDepartmentModify">학과:</label>
+        <select id="professorDepartmentModify" name="major">
+          <option disabled value="">=== 학과 ===</option>
+          <option th:each="major, loop : ${majorList}" th:text="${major.getName().substring(0, major.getName().length() - 1)}" th:value="${major.getId()}"></option>
+        </select>
+        <label>사번: <input id="professorIdModify" name="professorId" readonly type="text" /></label><br />
+        <label>이름: <input id="professorNameModify" name="name" type="text" /></label><br />
+        <label>생년월일: <input id="professorDobModify" name="dob" type="date" /></label><br />
+        <label>연락처: <input id="professorPhoneModify" name="phone" type="text" /></label><br />
+        <label>이메일: <input id="professorEmailModify" name="email" type="email" /></label><br />
+        <label>직위:
+          <select id="professorPositionModify" name="position">
+            <option value="학과장">학과장</option>
+            <option value="교수">교수</option>
+            <option value="부교수">부교수</option>
+            <option value="시간강사">시간강사</option>
+          </select>
+        </label><br />
+        <input type="submit" value="기입" />
+      </div>
+    </form>
+  </div>
+</div>
 <script>
   window.onload = function () {
-    document.querySelector(".professor-managing-table").style.display =
-            "none";
+    document.querySelector(".professor-managing-table").style.display = "none";
+    document.querySelector(".pr_pagination").style.display = "none";
   };
   // 학과 및 유형 필터링
-  document
+  /*document
           .getElementById("department-filter")
-          .addEventListener("change", filterData);
+          .addEventListener("change", filterData);*/
   document
           .getElementById("person-type-filter")
           .addEventListener("change", filterData);
@@ -220,13 +313,14 @@
     // 교수 테이블과 학생 테이블의 표시 여부 설정
     if (selectedPersonType === "학부생") {
       document.querySelector(".student-managing-table").style.display = "";
-      document.querySelector(".professor-managing-table").style.display =
-              "none";
+      document.querySelector(".st_pagination").style.display = "";
+      document.querySelector(".professor-managing-table").style.display = "none";
+      document.querySelector(".pr_pagination").style.display = "none";
     } else if (selectedPersonType === "교수") {
-      document.querySelector(".student-managing-table").style.display =
-              "none";
-      document.querySelector(".professor-managing-table").style.display =
-              "";
+      document.querySelector(".student-managing-table").style.display = "none";
+      document.querySelector(".st_pagination").style.display = "none";
+      document.querySelector(".professor-managing-table").style.display = "";
+      document.querySelector(".pr_pagination").style.display = "";
     }
 
     // 학생 테이블 필터링
@@ -291,6 +385,102 @@
       document.getElementById("professorForm").style.display = "block";
     }
   }
+  //수정 모달창
+  const modalContainer = document.getElementById("modifyModal");
+  const studentModifyFields = document.getElementById(
+          "studentModifyFields"
+  );
+  const professorModifyFields = document.getElementById(
+          "professorModifyFields"
+  );
+  const closeModalButton =
+          document.getElementsByClassName("modal-close-button")[0];
+
+  // Open modal function to display data and lock scroll
+  // 모달 열기 함수
+  function openModal(row, isStudent) {
+    const cells = row.getElementsByTagName("td");
+
+    if (isStudent) {
+      studentModifyFields.style.display = "block";
+      professorModifyFields.style.display = "none";
+      const selectId = document.getElementById("studentDepartmentModify");
+
+      for(const option of selectId.options) {
+        if (option.text === cells[0].innerText) {
+          option.selected = true;
+          break;
+        }
+      }
+      document.getElementById("studentIdModify").value = cells[1].innerText;
+      document.getElementById("studentNameModify").value =
+              cells[2].innerText;
+      document.getElementById("studentDobModify").value =
+              cells[3].innerText;
+      document.getElementById("studentPhoneModify").value =
+              cells[4].innerText;
+      document.getElementById("studentEmailModify").value =
+              cells[5].innerText;
+      document.getElementById("studentCreditsModify").value =
+              cells[6].innerText;
+      document.getElementById("studentStatusModify").value =
+              cells[7].innerText;
+    } else {
+      studentModifyFields.style.display = "none";
+      professorModifyFields.style.display = "block";
+
+      const selectId = document.getElementById("professorDepartmentModify");
+
+      for(const option of selectId.options) {
+        if (option.text === cells[0].innerText) {
+          option.selected = true;
+          break;
+        }
+      }
+      document.getElementById("professorIdModify").value =
+              cells[1].innerText;
+      document.getElementById("professorNameModify").value =
+              cells[2].innerText;
+      document.getElementById("professorDobModify").value =
+              cells[3].innerText;
+      document.getElementById("professorPhoneModify").value =
+              cells[4].innerText;
+      document.getElementById("professorEmailModify").value =
+              cells[5].innerText;
+      document.getElementById("professorPositionModify").value =
+              cells[6].innerText;
+    }
+
+    // 모달 창 표시
+    modalContainer.style.display = "block";
+  }
+
+  // 모달 닫기 함수
+  closeModalButton.onclick = function () {
+    modalContainer.style.display = "none";
+  };
+
+  // 바깥 영역 클릭 시 모달 닫기
+  window.onclick = function (event) {
+    if (event.target == modalContainer) {
+      modalContainer.style.display = "none";
+    }
+  };
+
+  document.querySelectorAll(".student-managing-table tbody tr")
+          .forEach((row) => {
+            row.onclick = function () {
+              openModal(row, true);
+            };
+          });
+
+  document.querySelectorAll(".professor-managing-table tbody tr")
+          .forEach((row) => {
+            row.onclick = function () {
+              openModal(row, false);
+            };
+          });
 </script>
+<script th:src="@{/js/pagination.js}"></script>
 </body>
 </html>
