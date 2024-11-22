@@ -1,17 +1,17 @@
 package com.project.hit.Attendance;
 
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class AttendanceService {
 
-    @Autowired
 
-    private AttendanceRepository attendanceRepository;
+    private final AttendanceRepository attendanceRepository;
 
     public List<Attendance> getAttendanceByDate(String date) {
         List<Attendance> result = attendanceRepository.findAttendanceByDate(date);

@@ -16,14 +16,4 @@ public class Attendance {
     private String attendanceStatus;
     private String date;
 
-
-    @Override
-    public String toString() {
-        return "Attendance{" +
-                "id=" + id +
-                ", studentName='" + studentName + '\'' +
-                ", attendanceStatus='" + attendanceStatus + '\'' +
-                ", date='" + date + '\'' +
-                '}';
-    }
 }
