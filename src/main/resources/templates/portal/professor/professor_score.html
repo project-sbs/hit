@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" type="text/css" th:href="@{/css/reset.css}" />
+  <link rel="stylesheet" type="text/css" th:href="@{/css/professor/professorScore.css}" />
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <title>Portal</title>
+</head>
+<body>
+<header class="portal-head">
+  <div class="portal-logo-name">
+    <img src="" alt="" />
+    <h1>포털시스템</h1>
+  </div>
+  <div class="user-alarm">
+    <div class="user-photo"></div>
+    <p class="portal-user-name">길오성님</p>
+  </div>
+</header>
+<section class="portal-main">
+  <nav class="portal-nav">
+    <ul>
+      <li class="portal-home-button" onclick="location.href='/p/home'"><img src="" alt="" />홈</li>
+      <li class="portal-profinfo-button" onclick="location.href='/p/info'"><img src="" alt="" />교수정보관리</li>
+      <li class="portal-attendance-button" onclick="location.href='/Attendance/AttendanceCalendar'"><img src="" alt="" />출석부</li>
+      <li class="portal-scoring-button" onclick="location.href='/p/score'">과목채점<img src="" alt="" /></li>
+      <li class="portal-report-check-button" onclick="location.href='/p/report'">과제확인<img src="" alt="" /></li>
+    </ul>
+  </nav>
+  <div class="portal-professor-score portal-main-frame">
+    <h2>과목 체점</h2>
+    <div class="portal-professor-score-wrap">
+      <div class="portal-professor-score-filter">
+        <select name="" id="">
+          <option value="">과목1</option>
+          <option value="">과목2</option>
+          <option value="">과목3</option>
+        </select>
+        <input type="button" id="submitBtn" value="입력완료" />
+      </div>
+      <form action="/p/subject/update" method="post">
+        <table>
+          <thead>
+          <tr>
+            <th>과목명</th>
+            <th>학번</th>
+            <th>이름</th>
+            <th>과제1</th>
+            <th>과제2</th>
+            <th>중간고사</th>
+            <th>기말고서</th>
+            <th>전체선택 <input type="checkbox" /></th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td>컴퓨터과학</td>
+            <td>20110222</td>
+            <td>길오성1</td>
+            <td>
+              <input type="number" min="0" max="20" />
+            </td>
+            <td>
+              <input type="number" min="0" max="20" />
+            </td>
+            <td><input type="number" min="0" max="20" /></td>
+            <td><input type="number" min="0" max="20" /></td>
+            <td><input type="checkbox" /></td>
+          </tr>
+          <tr>
+            <td>컴퓨터과학</td>
+            <td>20110222</td>
+            <td>길오성2</td>
+            <td>
+              <input type="number" min="0" max="20" />
+            </td>
+            <td>
+              <input type="number" min="0" max="20" />
+            </td>
+            <td><input type="number" min="0" max="20" /></td>
+            <td><input type="number" min="0" max="20" /></td>
+            <td><input type="checkbox" /></td>
+          </tr>
+          <tr>
+            <td>컴퓨터과학</td>
+            <td>20110222</td>
+            <td>길오성3</td>
+            <td>
+              <input type="number" min="0" max="20" />
+            </td>
+            <td>
+              <input type="number" min="0" max="20" />
+            </td>
+            <td><input type="number" min="0" max="20" /></td>
+            <td><input type="number" min="0" max="20" /></td>
+            <td><input type="checkbox" /></td>
+          </tr>
+          <tr>
+            <td>컴퓨터과학</td>
+            <td>20110222</td>
+            <td>길오성4</td>
+            <td>
+              <input type="number" min="0" max="20" />
+            </td>
+            <td>
+              <input type="number" min="0" max="20" />
+            </td>
+            <td><input type="number" min="0" max="20" /></td>
+            <td><input type="number" min="0" max="20" /></td>
+            <td><input type="checkbox" /></td>
+          </tr>
+          <tr>
+            <td>컴퓨터과학</td>
+            <td>20110222</td>
+            <td>길오성5</td>
+            <td>
+              <input type="number" min="0" max="20" />
+            </td>
+            <td>
+              <input type="number" min="0" max="20" />
+            </td>
+            <td><input type="number" min="0" max="20" /></td>
+            <td><input type="number" min="0" max="20" /></td>
+            <td><input type="checkbox" /></td>
+          </tr>
+          </tbody>
+        </table>
+      </form>
+    </div>
+  </div>
+</section>
+<script></script>
+</body>
+</html>

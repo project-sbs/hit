@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/reset.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/professor/professorReportCheck.css}" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <title>Portal</title>
+</head>
+<body>
+<header class="portal-head">
+    <div class="portal-logo-name">
+        <img src="" alt="" />
+        <h1>포털시스템</h1>
+    </div>
+    <div class="user-alarm">
+        <div class="user-photo"></div>
+        <p class="portal-user-name">길오성님</p>
+    </div>
+</header>
+<section class="portal-main">
+    <nav class="portal-nav">
+        <ul>
+            <li class="portal-home-button" onclick="location.href='/p/home'"><img src="" alt="" />홈</li>
+            <li class="portal-profinfo-button" onclick="location.href='/p/info'"><img src="" alt="" />교수정보관리</li>
+            <li class="portal-attendance-button" onclick="location.href='/Attendance/AttendanceCalendar'"><img src="" alt="" />출석부</li>
+            <li class="portal-scoring-button" onclick="location.href='/p/score'">과목채점<img src="" alt="" /></li>
+            <li class="portal-report-check-button" onclick="location.href='/p/report'">과제확인<img src="" alt="" /></li>
+        </ul>
+    </nav>
+    <div class="portal-professor-report-check portal-main-frame">
+        <h2>과제확인</h2>
+        <div class="portal-professor-report-check-wrap">
+            <select name="" id="">
+                <option value="">과목1</option>
+                <option value="">과목2</option>
+                <option value="">과목3</option>
+            </select>
+            <table>
+                <thead>
+                <tr>
+                    <th>과목명</th>
+                    <th>학번</th>
+                    <th>이름</th>
+                    <th>제목</th>
+                    <th>날짜</th>
+                    <th>파일</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>과목1</td>
+                    <td>20115022</td>
+                    <td>길오성1</td>
+                    <td>과제입니다1</td>
+                    <td>2022-02-03</td>
+                    <td>파일</td>
+                </tr>
+                <tr>
+                    <td>과목2</td>
+                    <td>20115023</td>
+                    <td>길오성2</td>
+                    <td>과제입니다2</td>
+                    <td>2022-02-03</td>
+                    <td>파일</td>
+                </tr>
+                <tr>
+                    <td>과목3</td>
+                    <td>20115024</td>
+                    <td>길오성3</td>
+                    <td>과제입니다3</td>
+                    <td>2022-02-03</td>
+                    <td>파일</td>
+                </tr>
+                <tr>
+                    <td>과목4</td>
+                    <td>20115025</td>
+                    <td>길오성4</td>
+                    <td>과제입니다4</td>
+                    <td>2022-02-03</td>
+                    <td>파일</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+</body>
+</html>
