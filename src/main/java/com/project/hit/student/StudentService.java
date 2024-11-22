@@ -72,4 +72,23 @@ public class StudentService {
         return this.studentRepository.findAllByOrderByIdDesc(pageable);
     }
 
+    public void updateStudent(Student student) {
+        Optional<Student> stud = this.studentRepository.findById(student.getId());
+        if (stud.isPresent()) {
+            Student temp = stud.get();
+            temp.setMajor(student.getMajor());
+            temp.setName(student.getName());
+            temp.setBirthday(student.getBirthday());
+            temp.setPhone(student.getPhone());
+            if(!temp.getEmail().equals(student.getEmail())) {
+                temp.setEmail(student.getEmail());
+            }
+            temp.setBirthday(student.getBirthday());
+            temp.setStatus(student.getStatus());
+            this.studentRepository.save(temp);
+        } else {
+            throw new DataNotFoundException("Student not found for " + student.getId());
+        }
+    }
+
 }

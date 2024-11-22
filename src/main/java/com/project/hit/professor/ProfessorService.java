@@ -62,4 +62,24 @@ public class ProfessorService {
         }
         return this.professorRepository.findAllByOrderByIdDesc(pageable);
     }
+
+    public void updateProfessor(Professor professor) {
+        Optional<Professor> prof = this.professorRepository.findById(professor.getId());
+        if (prof.isPresent()) {
+            Professor temp = prof.get();
+            temp.setName(professor.getName());
+            temp.setMajor(professor.getMajor());
+            temp.setBirthday(professor.getBirthday());
+            temp.setPhone(professor.getPhone());
+            if(!temp.getEmail().equals(professor.getEmail())) {
+                temp.setEmail(professor.getEmail());
+            }
+            temp.setBirthday(professor.getBirthday());
+            temp.setROLE(professor.getROLE());
+            this.professorRepository.save(temp);
+        } else {
+            throw new DataNotFoundException("Professor not found for " + professor.getId());
+        }
+    }
+
 }
