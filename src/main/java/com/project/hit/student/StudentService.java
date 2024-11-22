@@ -20,7 +20,6 @@ public class StudentService {
     private final StudentRepository studentRepository;
     private final MajorRepository majorRepository;
 
-
     public Student addStudent(Student student) {
         this.studentRepository.save(student);
         return student;
@@ -45,7 +44,6 @@ public class StudentService {
         List<Sort.Order> sorts = new ArrayList<>();
         sorts.add(Sort.Order.desc("id"));
         Pageable pageable = PageRequest.of(page, 10, Sort.by(sorts));
-
 
         if (major_id > 0) {
             Optional<Major> maj = this.majorRepository.findById(major_id);

@@ -1,0 +1,107 @@
+.calendar {
+  width: 300px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.calendar_head {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.calendar_head button {
+    font-size: 20px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.CalendarHead H2 {
+    margin: 0;
+    font-size: 24px;
+}
+
+.calendar_day {
+  width: 80%;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 5px;
+  padding-bottom: 15px;
+  height: 50px;
+}
+
+.calendar_day div {
+  padding: 10px;
+  cursor: pointer;
+  text-align: center;
+    font-size: 18px;
+}
+
+
+
+.calendar_days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr); /* 7개의 열로 나눔 */
+  gap: 5px;
+  width: 80%;
+  margin: 0 auto;
+
+}
+
+.calendar_days div {
+  padding: 10px;
+  background-color: #f0f0f0;
+  cursor: pointer;
+  border-radius: 5px;
+  height: 55px;
+  font-size: 18px;
+}
+
+
+
+.calendar_days div:hover {
+  background-color: #e0e0e0;
+}
+
+.week {
+  font-weight: bold;
+}
+
+.calendar_day .week {
+  background-color: #000;
+  color: #fff;
+}
+
+.week_sunday {
+  color: red; /* 일요일은 빨간색 */
+  background-color: #000;
+}
+
+.week_saturday {
+  color: blue; /* 토요일은 파란색 */
+  background-color: #000;
+}
+
+#attendance-info {
+    margin-top: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.student-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 5px 0;
+}
+
+#attendance-list p {
+    text-align: center;
+    color: #666;
+    font-size: 14px;
+}

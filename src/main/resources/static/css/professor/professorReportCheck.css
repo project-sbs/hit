@@ -36,31 +36,28 @@ header {
     line-height: 50px;
     padding-left: 20px;
 }
-.portal-student-report-frame {
-    width: 100%;
+.portal-professor-report-check {
     border-left: 1px solid #ececec;
+    width: 100%;
 }
-.portal-student-report-frame h2 {
+.portal-professor-report-check h2 {
     padding: 2%;
     margin-bottom: 5px;
 }
-.portal-student-report-wrap {
-    width: 70%;
+.portal-professor-report-check-wrap {
+    width: 80%;
     margin: 0 auto;
-    display: flex;
-    flex-direction: column;
 }
-.portal-student-report-wrap form {
-    display: flex;
-    flex-direction: column;
+.portal-professor-report-check-wrap table {
+    width: 100%;
+    text-align: center;
+    border: 1px solid #888;
+    margin-top: 50px;
+    border-collapse: collapse;
 }
-.portal-student-report-wrap form input:nth-of-type(1) {
+.portal-professor-report-check-wrap table th,
+.portal-professor-report-check-wrap table td {
+    border: 1px solid #888;
     height: 30px;
-}
-.portal-student-report-wrap form input:nth-of-type(2) {
-    border-right: 1px solid;
-    border-bottom: 1px solid;
-}
-.portal-student-report-wrap form input:nth-of-type(3) {
-    width: 100px;
+    line-height: 30px;
 }

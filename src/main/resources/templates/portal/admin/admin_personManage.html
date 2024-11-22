@@ -70,60 +70,60 @@
     </ul>
     <table class="student-managing-table">
       <thead>
-      <tr>
-        <th>학과</th>
-        <th>학번</th>
-        <th>이름</th>
-        <th>생년월일</th>
-        <th>연락처</th>
-        <th>이메일</th>
-        <th>이수학점</th>
-        <th>상태</th>
-      </tr>
+        <tr>
+          <th>학과</th>
+          <th>학번</th>
+          <th>이름</th>
+          <th>생년월일</th>
+          <th>연락처</th>
+          <th>이메일</th>
+          <th>이수학점</th>
+          <th>상태</th>
+        </tr>
       </thead>
       <tbody th:if="${!studentPaging.isEmpty()}">
-      <tr th:each="student, loop : ${studentPaging}">
-        <td th:text="${student.getMajor().getName().substring(0, student.getMajor().getName().length() - 1)}"></td>           <!--학과목-->
-        <td th:text="${student.getId()}"></td>                                                                                <!--학번-->
-        <td th:text="${student.getName()}"></td>                                                                              <!--이름-->
-        <td th:text="${student.getBirthday()}"></td>                                                                          <!--생년월일-->
-        <td th:text="${student.getPhone()}"></td>                                                                             <!--연락처-->
-        <td th:text="${student.getEmail()}"></td>                                                                             <!--이메일-->
-        <td th:text="${student.getCredits()}"></td>                                                                           <!--학점-->
-        <td th:text="${student.getStatus()}"></td>                                                                            <!--상태-->
-      </tr>
+        <tr th:each="student, loop : ${studentPaging}">
+          <td th:text="${student.getMajor().getName().substring(0, student.getMajor().getName().length() - 1)}"></td>           <!--학과목-->
+          <td th:text="${student.getId()}"></td>                                                                                <!--학번-->
+          <td th:text="${student.getName()}"></td>                                                                              <!--이름-->
+          <td th:text="${student.getBirthday()}"></td>                                                                          <!--생년월일-->
+          <td th:text="${student.getPhone()}"></td>                                                                             <!--연락처-->
+          <td th:text="${student.getEmail()}"></td>                                                                             <!--이메일-->
+          <td th:text="${student.getCredits()}"></td>                                                                           <!--학점-->
+          <td th:text="${student.getStatus()}"></td>                                                                            <!--상태-->
+        </tr>
       </tbody>
       <tbody th:if="${studentPaging.isEmpty()}">
-      <tr>
-        <td colspan="8">조회된 데이터가 없습니다.</td>
-      </tr>
+        <tr>
+          <td colspan="8">조회된 데이터가 없습니다.</td>
+        </tr>
       </tbody>
     </table>
     <table class="professor-managing-table">
       <thead>
-      <tr>
-        <th>학과</th>
-        <th>사번</th>
-        <th>이름</th>
-        <th>생년월일</th>
-        <th>연락처</th>
-        <th>이메일</th>
-        <th>직위</th>
-      </tr>
+        <tr>
+          <th>학과</th>
+          <th>사번</th>
+          <th>이름</th>
+          <th>생년월일</th>
+          <th>연락처</th>
+          <th>이메일</th>
+          <th>직위</th>
+        </tr>
       </thead>
       <tbody>
-      <tr th:if="${!professorPaging.isEmpty()}" th:each="professor, loop : ${professorPaging}">
-        <td th:text="${professor.getMajor().getName().substring(0, professor.getMajor().getName().length() - 1)}"></td>       <!--학과목-->
-        <td th:text="${professor.getId()}"></td>                                                                              <!--사번-->
-        <td th:text="${professor.getName()}"></td>                                                                            <!--이름-->
-        <td th:text="${professor.getBirthday()}"></td>                                                                        <!--생년월일-->
-        <td th:text="${professor.getPhone()}"></td>                                                                           <!--연락처-->
-        <td th:text="${professor.getEmail()}"></td>                                                                           <!--이메일-->
-        <td th:text="${professor.getROLE()}"></td>                                                                            <!--직위-->
-      </tr>
-      <tr th:if="${professorPaging.isEmpty()}">
-        <td colspan="7">조회된 데이터가 없습니다.</td>
-      </tr>
+        <tr th:if="${!professorPaging.isEmpty()}" th:each="professor, loop : ${professorPaging}">
+          <td th:text="${professor.getMajor().getName().substring(0, professor.getMajor().getName().length() - 1)}"></td>       <!--학과목-->
+          <td th:text="${professor.getId()}"></td>                                                                              <!--사번-->
+          <td th:text="${professor.getName()}"></td>                                                                            <!--이름-->
+          <td th:text="${professor.getBirthday()}"></td>                                                                        <!--생년월일-->
+          <td th:text="${professor.getPhone()}"></td>                                                                           <!--연락처-->
+          <td th:text="${professor.getEmail()}"></td>                                                                           <!--이메일-->
+          <td th:text="${professor.getROLE()}"></td>                                                                            <!--직위-->
+        </tr>
+        <tr th:if="${professorPaging.isEmpty()}">
+          <td colspan="7">조회된 데이터가 없습니다.</td>
+        </tr>
       </tbody>
     </table>
     <!-- 학생 페이징 시작 -->

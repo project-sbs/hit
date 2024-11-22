@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/css/Attendance/AttendanceCalendar.css">
+    <script src="/js/AttendanceCalendar.js" defer></script>
+</head>
+<body>
+    <div class="calendar_head">
+        <button onclick="prevMonth()">◀</button>
+            <h2 id="month">2024년 11월</h2>
+        <button onclick="nextMonth()">▶</button>
+    </div>
+
+    <div class="calendar_day">
+        <div class="week">일</div>
+        <div class="week">월</div>
+        <div class="week">화</div>
+        <div class="week">수</div>
+        <div class="week">목</div>
+        <div class="week">금</div>
+        <div class="week">토</div>
+        <!-- 날짜를 추가할 컨테이너 추가 -->
+
+    </div>
+        <div class="calendar_days"></div>
+
+    <div id="attendance-info">
+        <h3>출석부</h3>
+        <div id="attendance-list"></div>
+    </div>
+
+    <button id="save-attendance" style="display:block;">출석 저장</button>
+
+</body>
+</html>

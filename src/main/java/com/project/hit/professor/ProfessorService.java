@@ -82,18 +82,4 @@ public class ProfessorService {
         }
     }
 
-    public Professor getProfessorByName(String professorName) {
-        return professorRepository.findByName(professorName);  // 예시: 이름으로 교수 찾기
-    }
-
-
-
-    public Professor getProfessor(Long professorNo) {
-        Optional<Professor> professor = this.professorRepository.findById(professorNo);
-        if (professor.isPresent()) {
-            return professor.get();
-        } else {
-            throw new DataNotFoundException("Not found for code : " + professorNo);
-        }
-    }
 }

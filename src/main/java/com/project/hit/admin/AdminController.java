@@ -6,11 +6,8 @@ import com.project.hit.professor.Professor;
 import com.project.hit.professor.ProfessorService;
 import com.project.hit.student.Student;
 import com.project.hit.student.StudentService;
-import com.project.hit.subject.Subject;
-import com.project.hit.subject.SubjectService;
 import com.project.hit.user.ProfessorInsertForm;
 import com.project.hit.user.StudentInsertForm;
-import com.project.hit.user.SubjectInsertForm;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -39,7 +36,6 @@ public class AdminController {
     private final StudentService studentService;
     private final ProfessorService professorService;
     private final MajorService majorService;
-    private final SubjectService subjectService;
 
     @Value("src/main/resources/static/profile/")
     private String profileDir;
@@ -60,22 +56,12 @@ public class AdminController {
     }
 
     @GetMapping("/class")
-    public String classManage(SubjectInsertForm subjectInsertForm, Principal principal, Model model) {
-        List<Subject> subjectList = this.subjectService.getAllSubjects();
-        List<Major> majorList = this.majorService.getAllMajors();
-        List<Professor> professorList = this.professorService.getAllProfessors();
+    public String classManage(Principal principal, Model model) {
         Admin admin = this.adminService.getAdmin(principal.getName());
 
         model.addAttribute("admin", admin);
-        model.addAttribute("subjectList",subjectList);
-        model.addAttribute("majorList", majorList);
-        model.addAttribute("professorList", professorList);
-        model.addAttribute("subjectInsertForm", subjectInsertForm);
-
         return "portal/admin/admin_classManage";
     }
-
-
 
     @GetMapping("/major")
     public String majorManage(Principal principal, Model model) {
@@ -129,11 +115,8 @@ public class AdminController {
         model.addAttribute("studentPaging", studentPaging);
         model.addAttribute("professorPaging", professorPaging);
 
-
         return "portal/admin/admin_personManage";
     }
-
-
 
     @PostMapping("/insert/student")
     public String studentInsert(@Valid StudentInsertForm studentInsertForm, BindingResult bindingResult, @RequestParam("photo") MultipartFile photo) {
@@ -184,38 +167,15 @@ public class AdminController {
         return "redirect:/a/person";
     }
 
-        @PostMapping("/insert/major")
-        public String majorInsert(@RequestParam("name") String name, @RequestParam("capacity") int capacity) {
-            Major major = new Major();
-            major.setName(name);
-            major.setTotalStudent(capacity);
+    @PostMapping("/insert/major")
+    public String majorInsert(@RequestParam("name") String name, @RequestParam("capacity") int capacity) {
+        Major major = new Major();
+        major.setName(name);
+        major.setTotalStudent(capacity);
 
-            this.majorService.insertMajor(major);
-            return "redirect:/a/major";
-        }
-
-        @PostMapping("/insert/subject")
-        public String subjectInsert(@Valid SubjectInsertForm subjectInsertForm, BindingResult bindingResult) {
-
-            if (bindingResult.hasErrors()) {
-                return "portal/admin/admin_classManage";
-            }
-
-            try {
-                Subject subject = insertSubject(subjectInsertForm);
-                this.subjectService.addSubject(subject);
-            } catch (DataIntegrityViolationException e) {
-                e.printStackTrace();
-                bindingResult.reject("insertFailed", "이미 등록된 사용자입니다.");
-                return "portal/admin/admin_classManage";
-            } catch (Exception e) {
-                e.printStackTrace();
-                bindingResult.reject("insertFailed", e.getMessage());
-                return "portal/admin/admin_classManage";
-            }
-
-            return "redirect:/a/class";
-        }
+        this.majorService.insertMajor(major);
+        return "redirect:/a/major";
+    }
 
     @PostMapping("/modify/student")
     public String modifyStudent(@RequestParam("major") int major, @RequestParam("studentId") String id, @RequestParam("name") String name, @RequestParam("dob") String dob,
@@ -253,39 +213,6 @@ public class AdminController {
         return "redirect:/a/person";
     }
 
-
-
-    private Subject insertSubject(SubjectInsertForm subjectInsertForm) {
-        Subject subject = new Subject();
-
-        subject.setYear(subjectInsertForm.getYear());
-        subject.setSemester(subjectInsertForm.getSemester());
-        subject.setLiberal(subjectInsertForm.getLiberal());
-        subject.setName(subjectInsertForm.getName());
-        subject.setTime(subjectInsertForm.getTime());
-        subject.setDay(subjectInsertForm.getDay());
-        subject.setCredits(subjectInsertForm.getCredits());
-        subject.setCode(subjectInsertForm.getCode());
-        subject.setMaxPersonnel(String.valueOf(subjectInsertForm.getMaxpersonnel()));
-        subject.setPersonnel(subjectInsertForm.getPersonnel());
-
-        // 학과 처리
-        int majorCode = Integer.parseInt(subjectInsertForm.getMajor());
-        Major major = majorService.getMajor(majorCode);
-        subject.setMajor(major);
-
-        // 교수 처리
-        Long professorNo = subjectInsertForm.getProfessor();
-        Professor professor = professorService.getProfessor(professorNo);
-        subject.setProfessor(professor);
-
-        return subject;
-    }
-
-
-
-
-
     private Student insertStudent(StudentInsertForm studentInsertForm) {
         Student student = new Student();
         student.setId(studentInsertForm.getId());
@@ -308,7 +235,6 @@ public class AdminController {
 
         return student;
     }
-
 
     private Professor insertProfessor(ProfessorInsertForm professorInsertForm) {
         Professor professor = new Professor();
@@ -333,8 +259,6 @@ public class AdminController {
         return professor;
     }
 
-
-
     private String addPhoto(MultipartFile file, String id) {
         String pathDir = null;
         if (!file.isEmpty()) {
@@ -355,7 +279,5 @@ public class AdminController {
         }
         return pathDir;
     }
-
-
 
 }
