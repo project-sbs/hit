@@ -89,7 +89,7 @@
 
                 <td th:text="${subject.major.name}"></td>
 
-                <td th:text="${subject.day}"></td>
+                <td th:text="${subject.week}"></td>
 
                 <td th:text="${subject.time}"></td>
 
@@ -299,7 +299,7 @@
 
                 <!-- 교수명 -->
                 <label for="professor" class="label-professor">교수명:</label>
-                <select id="professor" class="select-professor" th:field="*{professor}">
+                <select id="professor" class="select-professor" th:field="*{professorNo}">
                     <option value="" selected>=== 교수 선택 ===</option>
                     <option th:each="professor : ${professorList}"
                             th:value="${professor.no}"
@@ -314,7 +314,7 @@
 
                 <!-- 요일 -->
                 <label for="day" class="label-day">요일:</label>
-                <input type="text" id="day" name="day" placeholder="예: 월, 화, 수, 목, 금" th:field="*{day}" required />
+                <input type="text" id="day" name="day" placeholder="예: 월, 화, 수, 목, 금" th:field="*{week}" required />
                 <br />
 
                 <!--최대 수강인원-->

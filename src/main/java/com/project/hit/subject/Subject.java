@@ -14,11 +14,12 @@ import java.util.List;
 @Setter
 public class Subject {
     @Id
-    private String code;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int code;
 
     private String name;           // 과목명
 
-    private String day;            // 날짜
+    private String week;           // 날짜
 
     private String time;           // 시간
 
@@ -45,9 +46,13 @@ public class Subject {
     private Professor professor;
 
     @ManyToOne
-    private  Student student;
+    private Student student;
+
 
 }
+
+
+
 
 
 
