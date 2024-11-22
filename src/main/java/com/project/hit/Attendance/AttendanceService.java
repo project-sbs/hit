@@ -10,7 +10,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class AttendanceService {
 
-
     private final AttendanceRepository attendanceRepository;
 
     public List<Attendance> getAttendanceByDate(String date) {
