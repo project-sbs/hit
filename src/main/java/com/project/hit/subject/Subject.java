@@ -27,8 +27,6 @@ public class Subject {
 
     private String maxPersonnel;   // 총 인원
 
-    private String Personnel;      // 현제 수강인원
-
     private int credits;           // 학점
 
     private String semester;       // 학기
