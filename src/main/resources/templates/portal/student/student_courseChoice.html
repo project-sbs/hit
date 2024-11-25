@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/reset.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/student/studentCourseChoice.css}" />
+    <title>Document</title>
+</head>
+<body>
+<header>
+    <h1><img src="" alt="" />수강신청 페이지</h1>
+</header>
+<div class="course-container">
+    <section>
+        <ul>
+            <li>
+                <div class="course-schedule-table-wrap">
+                    <table class="course-schedule-table">
+                        <thead>
+                        <tr>
+                            <th>시간</th>
+                            <th>월</th>
+                            <th>화</th>
+                            <th>수</th>
+                            <th>목</th>
+                            <th>금</th>
+                            <th>토</th>
+                            <th>일</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <!-- 시간대별 빈 열 생성 -->
+                        <tr>
+                            <td>9</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>10</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>11</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>12</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>13</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>14</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>15</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>16</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>17</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </li>
+            <li>
+                <div>
+                    <h2>수강신청목록</h2>
+                    <div class="course-choose-list-wrap">
+                        <table class="course-choose-list">
+                            <thead>
+                            <tr>
+                                <th>순번</th>
+                                <th>과목명</th>
+                                <th>전공여부</th>
+                                <th>학점</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>국어</td>
+                                <td>전공</td>
+                                <td>2</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>수학</td>
+                                <td>전공</td>
+                                <td>2</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>영어</td>
+                                <td>교양</td>
+                                <td>2</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <ul>
+                            <li>
+                                <h3>신청가능학점</h3>
+                                <p>18</p>
+                            </li>
+                            <li>
+                                <h3>신청학점</h3>
+                                <p>6</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </section>
+    <section>
+        <ul>
+            <li class="course-filter">
+                <div>
+                    <select name="" id="">
+                        <option value="">===전공/교양===</option>
+                        <option value="">전공</option>
+                        <option value="">교양</option>
+                    </select>
+                    <select name="" id="">
+                        <option value="">===전공 별 분류===</option>
+                        <option value="">컴퓨터공학</option>
+                        <option value="">컴퓨터소프트웨어</option>
+                        <option value="">컴퓨터기하학</option>
+                    </select>
+                </div>
+                <button>수강신청</button>
+            </li>
+            <li class="course-table-wrap">
+                <table class="course-table">
+                    <thead>
+                    <tr>
+                        <th>과목번호</th>
+                        <th>과목명</th>
+                        <th>수업 요일</th>
+                        <th>수업 시간</th>
+                        <th>전공여부</th>
+                        <th>담당교수</th>
+                        <th>학점</th>
+                        <th>총원</th>
+                        <th>신청인원</th>
+                        <th>신청/취소</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>01011</td>
+                        <td>국어</td>
+                        <td>목,금</td>
+                        <td>09:00~11:00</td>
+                        <td>전공</td>
+                        <td>김국어</td>
+                        <td>2</td>
+                        <td>40</td>
+                        <td>30</td>
+                        <td>
+                            <input type="checkbox" name="" id="" /><button>취소</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>01012</td>
+                        <td>수학</td>
+                        <td>월,화</td>
+                        <td>09:00~11:00</td>
+                        <td>전공</td>
+                        <td>김수학</td>
+                        <td>2</td>
+                        <td>40</td>
+                        <td>20</td>
+                        <td>
+                            <input type="checkbox" name="" id="" /><button>취소</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>01013</td>
+                        <td>영어</td>
+                        <td>수,목</td>
+                        <td>13:00~15:00</td>
+                        <td>교양</td>
+                        <td>김영어</td>
+                        <td>2</td>
+                        <td>40</td>
+                        <td>10</td>
+                        <td>
+                            <input type="checkbox" name="" id="" /><button>취소</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>01014</td>
+                        <td>과학</td>
+                        <td>목,금</td>
+                        <td>14:00~16:00</td>
+                        <td>교양</td>
+                        <td>김과학</td>
+                        <td>2</td>
+                        <td>40</td>
+                        <td>30</td>
+                        <td>
+                            <input type="checkbox" name="" id="" /><button>취소</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>01015</td>
+                        <td>사회</td>
+                        <td>화,수</td>
+                        <td>15:00~16:00</td>
+                        <td>교양</td>
+                        <td>김사회</td>
+                        <td>2</td>
+                        <td>40</td>
+                        <td>10</td>
+                        <td>
+                            <input type="checkbox" name="" id="" /><button>취소</button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </li>
+            <li>
+                <!--페이징부분-->
+            </li>
+        </ul>
+    </section>
+</div>
+<footer></footer>
+</body>
+</html>

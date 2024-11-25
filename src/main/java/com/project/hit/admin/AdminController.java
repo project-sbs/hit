@@ -67,7 +67,7 @@ public class AdminController {
     }
 
     @GetMapping("/class")
-    public String classManage(SubjectInsertForm subjectInsertForm,Principal principal, Model model) {
+    public String classManage(SubjectInsertForm subjectInsertForm, Principal principal, Model model) {
         Admin admin = this.adminService.getAdmin(principal.getName());
         List<Subject> subjectList = this.subjectService.getAllSubjects();
         List<Major> majorList = this.majorService.getAllMajors();
@@ -179,9 +179,6 @@ public class AdminController {
         return "redirect:/a/class";
     }
 
-
-
-
     @PostMapping("/insert/student")
     public String studentInsert(@Valid StudentInsertForm studentInsertForm, BindingResult bindingResult, @RequestParam("photo") MultipartFile photo) {
 
@@ -280,16 +277,14 @@ public class AdminController {
     private Subject insertSubject(SubjectInsertForm subjectInsertForm){
         Subject subject = new Subject();
 
-        System.out.println("Credits from Form: " + subjectInsertForm.getCredits());  // Credits 확인
-
         subject.setYear(subjectInsertForm.getYear());
         subject.setSemester(subjectInsertForm.getSemester());
-        subject.setLiberal(subjectInsertForm.getLiberal());
+        subject.setType(subjectInsertForm.getType());
         subject.setName(subjectInsertForm.getName());
         subject.setTime(subjectInsertForm.getTime());
         subject.setWeek(subjectInsertForm.getWeek());
         subject.setCredits(subjectInsertForm.getCredits());
-        subject.setMaxPersonnel(String.valueOf(subjectInsertForm.getMaxpersonnel()));
+        subject.setMaxPersonnel(subjectInsertForm.getMaxPersonnel());
 
         // 과목폼
         int majorCode = Integer.parseInt(subjectInsertForm.getMajor());

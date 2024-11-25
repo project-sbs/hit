@@ -2,6 +2,7 @@ package com.project.hit.student;
 
 import com.project.hit.major.Major;
 import com.project.hit.subject.Subject;
+import com.project.hit.sugang.Sugang;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -43,6 +44,6 @@ public class Student {
     private Major major;
 
     @OneToMany(mappedBy = "student")
-    private List<Subject> subjects;
+    private List<Sugang> sugangList;
 
 }
