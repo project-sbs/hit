@@ -280,6 +280,7 @@ public class AdminController {
     private Subject insertSubject(SubjectInsertForm subjectInsertForm){
         Subject subject = new Subject();
 
+        System.out.println("Credits from Form: " + subjectInsertForm.getCredits());  // Credits 확인
 
         subject.setYear(subjectInsertForm.getYear());
         subject.setSemester(subjectInsertForm.getSemester());
@@ -288,7 +289,6 @@ public class AdminController {
         subject.setTime(subjectInsertForm.getTime());
         subject.setWeek(subjectInsertForm.getWeek());
         subject.setCredits(subjectInsertForm.getCredits());
-        subject.setPersonnel(subjectInsertForm.getPersonnel());
         subject.setMaxPersonnel(String.valueOf(subjectInsertForm.getMaxpersonnel()));
 
         // 과목폼

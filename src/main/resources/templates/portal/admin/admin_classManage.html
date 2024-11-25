@@ -82,25 +82,19 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="subject : ${subjectList}">
+            <tr th:each="subject, iterStat : ${subjectList}">
                 <td th:text="${subject.code}"></td>
-
                 <td th:text="${subject.name}"></td>
-
                 <td th:text="${subject.major.name}"></td>
-
                 <td th:text="${subject.week}"></td>
-
                 <td th:text="${subject.time}"></td>
-
                 <td th:text="${subject.professor.name}"></td>
-
-                <td th:text="${subject.grade}"></td>
-
+                <td th:text="${subject.credits}"></td>
                 <td th:text="${subject.maxPersonnel}"></td>
+                
+                <td th:text="${iterStat.index + 1}"></td>
 
                 <td><button>수강신청</button></td>
-
             </tr>
             </tbody>
             <tbody>
