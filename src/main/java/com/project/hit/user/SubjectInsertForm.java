@@ -1,6 +1,5 @@
 package com.project.hit.user;
 
-import jakarta.persistence.Column;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,7 +11,7 @@ public class SubjectInsertForm {
 
     private String semester;             // 학기
 
-    private String liberal;              // 전공/교양
+    private String type;              // 전공/교양
 
     private String major;                // 학과
 
@@ -26,9 +25,6 @@ public class SubjectInsertForm {
 
     private int credits;                 // 학점
 
-    private String Personnel;            // 현재 수강인원
+    private int maxPersonnel;            // 총 인원
 
-    private int maxpersonnel;            // 총 인원
-
-    private String code;                 // 고유번호
 }

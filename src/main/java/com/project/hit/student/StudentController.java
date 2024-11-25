@@ -46,4 +46,12 @@ public class StudentController {
         model.addAttribute("student", student);
         return "portal/student/student_report";
     }
+
+    @GetMapping("/course")
+    public String course(Model model, Principal principal) {
+        Student student = this.studentService.getStudentById(principal.getName());
+
+        model.addAttribute("student", student);
+        return "portal/student/student_courseChoice";
+    }
 }

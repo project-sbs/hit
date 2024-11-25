@@ -30,8 +30,8 @@
                 <img src="" alt="" />학점확인
             </li>
             <li class="poratl-student-report-button" onclick="location.href='/s/report'">과제제출</li>
-            <li class="portal-student-class-button" onclick="location.href=''">
-                <img src="" alt="" />수강신청란
+            <li class="portal-student-class-button" onclick="openNewWindow('/s/course', 1920, 1080); return false;">
+                <img src="" alt="" />수강신청
             </li>
         </ul>
     </nav>
@@ -554,6 +554,17 @@
         setActiveLine(buttons[0]);
     });
     //portal home 끝
+
+    // 새 창 띄우는 스크립트
+    function openNewWindow(url, width, height) {
+        var screenWidth = window.innerWidth;
+        var screenHeight = window.innerHeight;
+
+        var left = (screenWidth - width) / 2 + window.screenX;
+        var top = (screenHeight - height) / 2 + window.screenY;
+
+        window.open(url, '_blank', `width=${width},height=${height},top=${top},left=${left}`);
+    }
 </script>
 </body>
 </html>

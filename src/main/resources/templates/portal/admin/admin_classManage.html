@@ -82,8 +82,8 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="subject, iterStat : ${subjectList}">
-                <td th:text="${subject.code}"></td>
+            <tr th:each="subject, loop : ${subjectList}">
+                <td th:text="${subject.getNo()}"></td>
                 <td th:text="${subject.name}"></td>
                 <td th:text="${subject.major.name}"></td>
                 <td th:text="${subject.week}"></td>
@@ -91,8 +91,7 @@
                 <td th:text="${subject.professor.name}"></td>
                 <td th:text="${subject.credits}"></td>
                 <td th:text="${subject.maxPersonnel}"></td>
-                
-                <td th:text="${iterStat.index + 1}"></td>
+                <td th:text="${#lists.size(subject.getSugangList())}"></td>
 
                 <td><button>수강신청</button></td>
             </tr>
@@ -260,7 +259,7 @@
 
                 <!-- 학기 -->
                 <label for="course-semester" class="label-course-semester">학기:</label>
-                <select id="semester-count" class="select-semester-count" th:field="*{semester}">
+                <select id="course-semester" class="select-semester-count" th:field="*{semester}">
                     <option value="" disabled selected>=== 학기 ===</option>
                     <option value="semester1">1학기</option>
                     <option value="semester2">2학기</option>
@@ -269,7 +268,7 @@
 
                 <!-- 전공/교양 -->
                 <label for="major-type" class="label-major-type">전공/교양:</label>
-                <select id="major-type" class="select-major-type" th:field="*{liberal}">
+                <select id="major-type" class="select-major-type" th:field="*{type}">
                     <option value="" disabled selected>=== 전공/교양 ===</option>
                     <option value="major">전공</option>
                     <option value="liberal">교양</option>
@@ -313,7 +312,7 @@
 
                 <!--최대 수강인원-->
                 <label for="max-personnel" class="label-max-personnel">최대 수강 인원:</label>
-                <input type="number" id="max-personnel" name="maxpersonnel" min="1" th:field="*{maxpersonnel}" required />
+                <input type="number" id="max-personnel" name="maxpersonnel" min="1" th:field="*{maxPersonnel}" required />
                 <br />
 
                 <!-- 수강학점 -->
@@ -323,7 +322,6 @@
                 <br />
 
                 <button type="submit" class="submit-course">과목 추가</button>
-            </form>
             </form>
         </div>
     </div>
