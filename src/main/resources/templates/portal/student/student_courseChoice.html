@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" type="text/css" th:href="@{/css/reset.css}" />
     <link rel="stylesheet" type="text/css" th:href="@{/css/student/studentCourseChoice.css}" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <title>Document</title>
 </head>
 <body>
@@ -132,30 +133,21 @@
                         <table class="course-choose-list">
                             <thead>
                             <tr>
-                                <th>순번</th>
+                                <th>No.</th>
                                 <th>과목명</th>
                                 <th>전공여부</th>
                                 <th>학점</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>국어</td>
-                                <td>전공</td>
-                                <td>2</td>
+                            <tr th:if="${!sugangList.isEmpty()}" th:each="sugang, loop : ${sugangList}">
+                                <td th:text="${sugang.getSubject().getNo()}"></td>
+                                <td th:text="${sugang.getSubject().getName()}"></td>
+                                <td th:text="${sugang.getSubject().getType()}"></td>
+                                <td th:text="${sugang.getSubject().getCredits()}"></td>
                             </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>수학</td>
-                                <td>전공</td>
-                                <td>2</td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>영어</td>
-                                <td>교양</td>
-                                <td>2</td>
+                            <tr th:if="${sugangList.isEmpty()}">
+                                <td colspan="4">신청한 리스트가 없거나 신청기간을 확인해 주세요.</td>
                             </tr>
                             </tbody>
                         </table>
@@ -166,7 +158,7 @@
                             </li>
                             <li>
                                 <h3>신청학점</h3>
-                                <p>6</p>
+                                <p th:text="${totalCredit}"></p>
                             </li>
                         </ul>
                     </div>
@@ -178,16 +170,14 @@
         <ul>
             <li class="course-filter">
                 <div>
-                    <select name="" id="">
-                        <option value="">===전공/교양===</option>
-                        <option value="">전공</option>
-                        <option value="">교양</option>
+                    <select id="majorTypeSelect">
+                        <option value="전체" th:selected="${major == '전체'}">전체</option>
+                        <option value="전공" th:selected="${major == '전공'}">전공</option>
+                        <option value="교양" th:selected="${major == '교양'}">교양</option>
                     </select>
-                    <select name="" id="">
-                        <option value="">===전공 별 분류===</option>
-                        <option value="">컴퓨터공학</option>
-                        <option value="">컴퓨터소프트웨어</option>
-                        <option value="">컴퓨터기하학</option>
+                    <select id="departmentSelect" disabled>
+                        <option value="0">===전공 별 분류===</option>
+                        <option th:each="major, loop : ${majorList}" th:value="${major.getId()}" th:text="${major.getName()}"></option>
                     </select>
                 </div>
                 <button>수강신청</button>
@@ -196,7 +186,7 @@
                 <table class="course-table">
                     <thead>
                     <tr>
-                        <th>과목번호</th>
+                        <th>No.</th>
                         <th>과목명</th>
                         <th>수업 요일</th>
                         <th>수업 시간</th>
@@ -209,72 +199,16 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>01011</td>
-                        <td>국어</td>
-                        <td>목,금</td>
-                        <td>09:00~11:00</td>
-                        <td>전공</td>
-                        <td>김국어</td>
-                        <td>2</td>
-                        <td>40</td>
-                        <td>30</td>
-                        <td>
-                            <input type="checkbox" name="" id="" /><button>취소</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>01012</td>
-                        <td>수학</td>
-                        <td>월,화</td>
-                        <td>09:00~11:00</td>
-                        <td>전공</td>
-                        <td>김수학</td>
-                        <td>2</td>
-                        <td>40</td>
-                        <td>20</td>
-                        <td>
-                            <input type="checkbox" name="" id="" /><button>취소</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>01013</td>
-                        <td>영어</td>
-                        <td>수,목</td>
-                        <td>13:00~15:00</td>
-                        <td>교양</td>
-                        <td>김영어</td>
-                        <td>2</td>
-                        <td>40</td>
-                        <td>10</td>
-                        <td>
-                            <input type="checkbox" name="" id="" /><button>취소</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>01014</td>
-                        <td>과학</td>
-                        <td>목,금</td>
-                        <td>14:00~16:00</td>
-                        <td>교양</td>
-                        <td>김과학</td>
-                        <td>2</td>
-                        <td>40</td>
-                        <td>30</td>
-                        <td>
-                            <input type="checkbox" name="" id="" /><button>취소</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>01015</td>
-                        <td>사회</td>
-                        <td>화,수</td>
-                        <td>15:00~16:00</td>
-                        <td>교양</td>
-                        <td>김사회</td>
-                        <td>2</td>
-                        <td>40</td>
-                        <td>10</td>
+                    <tr th:if="${!subjectList.isEmpty()}" th:each="subject, loop : ${subjectList}">
+                        <td th:text="${subject.getNo()}"></td>
+                        <td th:text="${subject.getName()}"></td>
+                        <td th:text="${subject.getWeek()}"></td>
+                        <td th:text="${subject.getTime()}">09:00~11:00</td>
+                        <td th:text="${subject.getType()}">전공</td>
+                        <td th:text="${subject.getProfessor().getName()}">김국어</td>
+                        <td th:text="${subject.getCredits()}">2</td>
+                        <td th:text="${subject.getMaxPersonnel()}">40</td>
+                        <td th:text="${subject.getSugangList().size()}"></td>
                         <td>
                             <input type="checkbox" name="" id="" /><button>취소</button>
                         </td>
@@ -286,8 +220,38 @@
                 <!--페이징부분-->
             </li>
         </ul>
+        <form id="filterForm" th:action="@{/s/course}" method="get">
+            <input type="hidden" id="major" name="major" th:value="${major}">
+            <input type="hidden" id="department" name="department" th:value="${department}">
+        </form>
     </section>
 </div>
 <footer></footer>
+<script>
+    $(document).ready(function () {
+        if($("#major").val() === "전공") {
+            $("#departmentSelect").prop("disabled", false);
+        } else {
+            $("#departmentSelect").prop("disabled", true);
+        }
+
+        // 전공 / 교양 리스트 필터링
+        $("#majorTypeSelect").on('change', function (){
+            $("#major").val($(this).val());
+            if ($(this).val() === "전공") {
+                $("#departmentSelect").prop("disabled", false);
+            } else {
+                $("#department").val("");
+                $("#filterForm").submit();
+            }
+        });
+
+        // 전공 리스트 필터링
+        $("#departmentSelect").on('change', function (){
+            $("#department").val($(this).val());
+            $("#filterForm").submit();
+        })
+    });
+</script>
 </body>
 </html>

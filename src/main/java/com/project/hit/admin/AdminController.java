@@ -69,13 +69,15 @@ public class AdminController {
     @GetMapping("/class")
     public String classManage(SubjectInsertForm subjectInsertForm, Principal principal, Model model) {
         Admin admin = this.adminService.getAdmin(principal.getName());
-        List<Subject> subjectList = this.subjectService.getAllSubjects();
+        List<Subject> subjectList1 = this.subjectService.getSubjectList("전공");
+        List<Subject> subjectList2 = this.subjectService.getSubjectList("교양");
         List<Major> majorList = this.majorService.getAllMajors();
         List<Professor> professorList =this.professorService.getAllProfessors();
 
         model.addAttribute("professorList",professorList);
         model.addAttribute("majorList", majorList);
-        model.addAttribute("subjectList",subjectList);
+        model.addAttribute("subjectList1",subjectList1);
+        model.addAttribute("subjectList2",subjectList2);
         model.addAttribute("admin", admin);
          return "portal/admin/admin_classManage";
     }
@@ -286,12 +288,14 @@ public class AdminController {
         subject.setCredits(subjectInsertForm.getCredits());
         subject.setMaxPersonnel(subjectInsertForm.getMaxPersonnel());
 
-        // 과목폼
-        int majorCode = Integer.parseInt(subjectInsertForm.getMajor());
-        Major major = majorService.getMajor(majorCode);
-        subject.setMajor(major);
+        // 전공
+        if (subject.getType().equals("전공")) {
+            int majorCode = Integer.parseInt(subjectInsertForm.getMajor());
+            Major major = majorService.getMajor(majorCode);
+            subject.setMajor(major);
+        }
 
-        // 교수폼
+        // 교수
         Long professorNo = subjectInsertForm.getProfessorNo();
         Professor professor = professorService.getProfessor(professorNo);
         subject.setProfessor(professor);
