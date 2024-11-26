@@ -73,10 +73,10 @@ header {
     border: 1px solid #ddd;
     width: 12.5px;
 }
-.major-class-table th:last-of-type,
+/*.major-class-table th:last-of-type,
 .major-class-table td:last-of-type {
     display: none;
-}
+}*/
 /*모달창*/
 /* 수강 과목 기입 버튼 */
 .btn-add-course {

@@ -68,177 +68,60 @@
         <table class="major-class-table">
             <thead>
             <tr>
-                <th>과목고유번호</th>
+                <th>No.</th>
                 <th>과목명</th>
-                <th>전공구분</th>
+                <th>구분(전공)</th>
                 <th>요일</th>
                 <th>시간</th>
                 <th>교수명</th>
                 <th>수강학점</th>
                 <th>최대인원수</th>
                 <th>현재인원수</th>
-                <th></th>
-                <th>학과</th>
+                <th>관리</th>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="subject, loop : ${subjectList}">
+            <tr th:each="subject, loop : ${subjectList1}">
                 <td th:text="${subject.getNo()}"></td>
-                <td th:text="${subject.name}"></td>
-                <td th:text="${subject.major.name}"></td>
+                <td th:text="${subject.getName()}" th:attr="title=${subject.getName()}"></td>
+                <td th:text="${subject.getMajor().getName()}"></td>
                 <td th:text="${subject.week}"></td>
                 <td th:text="${subject.time}"></td>
                 <td th:text="${subject.professor.name}"></td>
                 <td th:text="${subject.credits}"></td>
                 <td th:text="${subject.maxPersonnel}"></td>
                 <td th:text="${#lists.size(subject.getSugangList())}"></td>
-
-                <td><button>수강신청</button></td>
-            </tr>
-            </tbody>
-            <tbody>
-            <tr>
-                <td>101</td>
-                <td>자료구조</td>
-                <td>전공</td>
-                <td>월</td>
-                <td>09:00-10:30</td>
-                <td>김교수</td>
-                <td>3</td>
-                <td>30</td>
-                <td>25</td>
-                <td><button>x</button></td>
-                <td>컴퓨터공학</td>
-            </tr>
-            <tr>
-                <td>102</td>
-                <td>알고리즘</td>
-                <td>전공</td>
-                <td>화</td>
-                <td>10:00-11:30</td>
-                <td>박교수</td>
-                <td>2</td>
-                <td>25</td>
-                <td>20</td>
-                <td><button>x</button></td>
-                <td>컴퓨터소프트웨어</td>
-            </tr>
-            <tr>
-                <td>103</td>
-                <td>회로이론</td>
-                <td>전공</td>
-                <td>수</td>
-                <td>13:00-14:30</td>
-                <td>이교수</td>
-                <td>3</td>
-                <td>40</td>
-                <td>35</td>
-                <td><button>x</button></td>
-                <td>전자공학</td>
-            </tr>
-            <tr>
-                <td>104</td>
-                <td>화학개론</td>
-                <td>전공</td>
-                <td>목</td>
-                <td>15:00-16:30</td>
-                <td>정교수</td>
-                <td>2</td>
-                <td>50</td>
-                <td>45</td>
-                <td><button>x</button></td>
-                <td>화학공학</td>
-            </tr>
-            <tr>
-                <td>105</td>
-                <td>생물학개론</td>
-                <td>전공</td>
-                <td>금</td>
-                <td>14:00-15:30</td>
-                <td>최교수</td>
-                <td>3</td>
-                <td>30</td>
-                <td>28</td>
-                <td><button>x</button></td>
-                <td>생물학</td>
+                <td><button>X</button></td>
             </tr>
             </tbody>
         </table>
         <table class="liberal-class-table">
             <thead>
             <tr>
-                <th>과목고유번호</th>
+                <th>No.</th>
                 <th>과목명</th>
-                <th>교양</th>
+                <th>구분</th>
                 <th>요일</th>
                 <th>시간</th>
                 <th>교수명</th>
                 <th>수강학점</th>
                 <th>최대인원수</th>
                 <th>현재인원수</th>
-                <th></th>
+                <th>관리</th>
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <td>201</td>
-                <td>철학의이해</td>
+            <tr th:each="subject, loop : ${subjectList2}">
+                <td th:text="${subject.getNo()}"></td>
+                <td th:text="${subject.name}"></td>
                 <td>교양</td>
-                <td>월</td>
-                <td>08:30-10:00</td>
-                <td>김철학</td>
-                <td>3</td>
-                <td>60</td>
-                <td>50</td>
-                <td><button>x</button></td>
-            </tr>
-            <tr>
-                <td>202</td>
-                <td>세계사개론</td>
-                <td>교양</td>
-                <td>화</td>
-                <td>09:00-10:30</td>
-                <td>박역사</td>
-                <td>1</td>
-                <td>50</td>
-                <td>47</td>
-                <td><button>x</button></td>
-            </tr>
-            <tr>
-                <td>203</td>
-                <td>문학과사회</td>
-                <td>교양</td>
-                <td>수</td>
-                <td>11:00-12:30</td>
-                <td>이문학</td>
-                <td>2</td>
-                <td>40</td>
-                <td>35</td>
-                <td><button>x</button></td>
-            </tr>
-            <tr>
-                <td>204</td>
-                <td>예술사개론</td>
-                <td>교양</td>
-                <td>목</td>
-                <td>13:00-14:30</td>
-                <td>정예술</td>
-                <td>2</td>
-                <td>45</td>
-                <td>40</td>
-                <td><button>x</button></td>
-            </tr>
-            <tr>
-                <td>205</td>
-                <td>심리학개론</td>
-                <td>교양</td>
-                <td>금</td>
-                <td>10:00-11:30</td>
-                <td>최심리</td>
-                <td>1</td>
-                <td>55</td>
-                <td>53</td>
-                <td><button>x</button></td>
+                <td th:text="${subject.week}"></td>
+                <td th:text="${subject.time}"></td>
+                <td th:text="${subject.professor.name}"></td>
+                <td th:text="${subject.credits}"></td>
+                <td th:text="${subject.maxPersonnel}"></td>
+                <td th:text="${#lists.size(subject.getSugangList())}"></td>
+                <td><button>X</button></td>
             </tr>
             </tbody>
         </table>
@@ -270,8 +153,8 @@
                 <label for="major-type" class="label-major-type">전공/교양:</label>
                 <select id="major-type" class="select-major-type" th:field="*{type}">
                     <option value="" disabled selected>=== 전공/교양 ===</option>
-                    <option value="major">전공</option>
-                    <option value="liberal">교양</option>
+                    <option value="전공">전공</option>
+                    <option value="교양">교양</option>
                 </select>
                 <br />
 
@@ -385,7 +268,7 @@
             });
         } else {
             majorTableRows.forEach(function (row) {
-                const departmentColumn = row.querySelector("td:last-child"); // 학과가 포함된 마지막 td
+                const departmentColumn = row.querySelector("td:nth-of-type(3)"); // 학과가 포함된 마지막 td
                 if (
                     departmentColumn &&
                     departmentColumn.textContent.trim() === selectedDepartment
@@ -412,7 +295,9 @@
     const closeBtn = document.querySelector(".close-modal-btn"); // 모달 닫기 버튼
     const courseForm = document.querySelector("#course-form"); // 수강 과목 기입 폼
     const majorTypeSelect = document.querySelector(".select-major-type"); // 전공/교양 선택박스
-    const departmentSelect = document.querySelector(".select-department"); // 학과 선택박스
+    /*const departmentSelect = document.querySelector(".select-department"); // 학과 선택박스
+    const departmentLabel = document.querySelector(".label-department");*/
+    const departmentBox = document.getElementById("department");
 
     // 모달 열기 함수
     btnAddCourse.addEventListener("click", () => {
@@ -435,10 +320,14 @@
     majorTypeSelect.addEventListener("change", () => {
         const majorType = majorTypeSelect.value;
 
-        if (majorType === "liberal") {
-            departmentSelect.style.display = "none"; // 교양일 경우 학과 선택 숨기기
-        } else if (majorType === "major") {
-            departmentSelect.style.display = "block"; // 전공일 경우 학과 선택 표시
+        if (majorType === "교양") {
+            /*departmentSelect.style.display = "none"; // 교양일 경우 학과 선택 숨기기
+            departmentLabel.style.display = "none";*/
+            departmentBox.disabled = true;
+        } else if (majorType === "전공") {
+            /*departmentSelect.style.display = "block"; // 전공일 경우 학과 선택 표시
+            departmentLabel.style.display = "block";*/
+            departmentBox.disabled = false;
         }
     });
 </script>
