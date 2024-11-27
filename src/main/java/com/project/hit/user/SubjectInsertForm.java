@@ -19,7 +19,9 @@ public class SubjectInsertForm {
 
     private Long professorNo;             // 교수명
 
-    private String time;                 // 시간
+    private String startTime;                 // 시간
+
+    private String endTime;
 
     private String week;                  // 요일
 

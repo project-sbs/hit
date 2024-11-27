@@ -177,44 +177,51 @@
                     </select>
                     <select id="departmentSelect" disabled>
                         <option value="0">===전공 별 분류===</option>
-                        <option th:each="major, loop : ${majorList}" th:value="${major.getId()}" th:text="${major.getName()}"></option>
+                        <option th:each="major, loop : ${majorList}" th:selected="${major.getId() == department}" th:value="${major.getId()}" th:text="${major.getName()}"></option>
                     </select>
                 </div>
-                <button>수강신청</button>
+                <button type="submit" id="insertSubmitBtn">수강신청</button>
+            </li>
+            <li class="select-all-section">
+                <label for="selectAll">전체선택</label>
+                <input type="checkbox" id="selectAll" />
             </li>
             <li class="course-table-wrap">
-                <table class="course-table">
-                    <thead>
-                    <tr>
-                        <th>No.</th>
-                        <th>과목명</th>
-                        <th>수업 요일</th>
-                        <th>수업 시간</th>
-                        <th>전공여부</th>
-                        <th>담당교수</th>
-                        <th>학점</th>
-                        <th>총원</th>
-                        <th>신청인원</th>
-                        <th>신청/취소</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr th:if="${!subjectList.isEmpty()}" th:each="subject, loop : ${subjectList}">
-                        <td th:text="${subject.getNo()}"></td>
-                        <td th:text="${subject.getName()}"></td>
-                        <td th:text="${subject.getWeek()}"></td>
-                        <td th:text="${subject.getTime()}">09:00~11:00</td>
-                        <td th:text="${subject.getType()}">전공</td>
-                        <td th:text="${subject.getProfessor().getName()}">김국어</td>
-                        <td th:text="${subject.getCredits()}">2</td>
-                        <td th:text="${subject.getMaxPersonnel()}">40</td>
-                        <td th:text="${subject.getSugangList().size()}"></td>
-                        <td>
-                            <input type="checkbox" name="" id="" /><button>취소</button>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
+                <form id="sugangForm" th:action="@{/s/insert/course}" method="post">
+                    <table class="course-table">
+                        <thead>
+                        <tr>
+                            <th>No.</th>
+                            <th>과목명</th>
+                            <th>수업 요일</th>
+                            <th>수업 시간</th>
+                            <th>전공여부</th>
+                            <th>담당교수</th>
+                            <th>학점</th>
+                            <th>총원</th>
+                            <th>신청인원</th>
+                            <th>신청/취소</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:if="${!subjectList.isEmpty()}" th:each="subject, loop : ${subjectList}">
+                            <td th:text="${subject.getNo()}"></td>
+                            <td th:text="${subject.getName()}"></td>
+                            <td th:text="${subject.getWeek()}"></td>
+                            <td th:text="${subject.getTime()}"></td>
+                            <td th:text="${subject.getType()}"></td>
+                            <td th:text="${subject.getProfessor().getName()}"></td>
+                            <td th:text="${subject.getCredits()}"></td>
+                            <td th:text="${subject.getMaxPersonnel()}"></td>
+                            <td th:text="${subject.getSugangList().size()}"></td>
+                            <td>
+                                <input type="checkbox" th:if="${!appliedSubjects.contains(subject.getNo()) && subject.getMaxPersonnel() > subject.getSugangList().size()}" name="selectedNo" class="checkBox" th:value="${subject.getNo()}" />
+                                <button class="deleteBtn" th:if="${appliedSubjects.contains(subject.getNo())}" th:data-uri="@{|/s/delete/course/${subject.getNo()}|}">취소</button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </form>
             </li>
             <li>
                 <!--페이징부분-->
@@ -250,6 +257,24 @@
         $("#departmentSelect").on('change', function (){
             $("#department").val($(this).val());
             $("#filterForm").submit();
+        })
+
+        $("#insertSubmitBtn").on('click', function () {
+            $("#sugangForm").submit();
+        })
+
+        $("#selectAll").on('click', function () {
+            $(".checkBox").prop("checked", this.checked);
+        })
+
+        $(".deleteBtn").on('click', function (e) {
+            e.preventDefault();
+            const subject = $(this).closest('tr').find('td:nth-child(2)').text();
+            const uri = $(this).data('uri');
+
+            if(confirm(`정말로 '${subject}'을(를) 취소하시겠습니까?`)) {
+                location.href = uri;
+            }
         })
     });
 </script>
