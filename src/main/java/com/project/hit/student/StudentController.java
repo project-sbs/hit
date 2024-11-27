@@ -10,13 +10,12 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 @RequiredArgsConstructor
@@ -71,8 +70,9 @@ public class StudentController {
 
         List<Major> majorList = this.majorService.getAllMajors();
         Page<Subject> subjectList = getSubjectList(year, getSemester(month), major, department, page);
-        List<Sugang> sugangList = this.sugangService.getCurrentSugangs(semester, year);
+        List<Sugang> sugangList = this.sugangService.getCurrentSugangs(student, semester, year);
         int totalCredit = getTotalCredit(sugangList);
+        List<Integer> appliedSubjects = sugangList.stream().map(s -> s.getSubject().getNo()).toList();
 
         int totalPage = subjectList.getTotalPages();
         int block = 10;
@@ -84,6 +84,7 @@ public class StudentController {
 
         model.addAttribute("sugangList", sugangList);
         model.addAttribute("totalCredit", totalCredit);
+        model.addAttribute("appliedSubjects", appliedSubjects);
         model.addAttribute("student", student);
         model.addAttribute("majorList", majorList);
         model.addAttribute("department", department);
@@ -92,6 +93,22 @@ public class StudentController {
         model.addAttribute("startBlock", startBlock);
         model.addAttribute("endBlock", endBlock);
         return "portal/student/student_courseChoice";
+    }
+
+    @PostMapping("/insert/course")
+    public String insertCourse(@RequestParam("selectedNo") List<Integer> selectedNo, Principal principal) {
+        Student student = this.studentService.getStudentById(principal.getName());
+        this.sugangService.insertSugang(selectedNo, student);
+
+        return "redirect:/s/course";
+    }
+
+    @GetMapping("/delete/course/{no}")
+    public String deleteCourse(@PathVariable("no") int no, Principal principal) {
+        Student student = this.studentService.getStudentById(principal.getName());
+        this.sugangService.deleteSugang(no, student);
+
+        return "redirect:/s/course";
     }
 
     private String getSemester(int month) {

@@ -283,7 +283,8 @@ public class AdminController {
         subject.setSemester(subjectInsertForm.getSemester());
         subject.setType(subjectInsertForm.getType());
         subject.setName(subjectInsertForm.getName());
-        subject.setTime(subjectInsertForm.getTime());
+        String time = subjectInsertForm.getStartTime() + "-" + subjectInsertForm.getEndTime();
+        subject.setTime(time);
         subject.setWeek(subjectInsertForm.getWeek());
         subject.setCredits(subjectInsertForm.getCredits());
         subject.setMaxPersonnel(subjectInsertForm.getMaxPersonnel());

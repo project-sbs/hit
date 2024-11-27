@@ -75,6 +75,9 @@ section:nth-of-type(1) > ul > li:nth-of-type(2) h2 {
 .course-filter button {
     width: 120px;
 }
+.select-all-section {
+    text-align: right;
+}
 .course-table th {
     height: 40px;
 }

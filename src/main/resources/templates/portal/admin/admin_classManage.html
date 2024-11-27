@@ -184,8 +184,9 @@
                 <br />
 
                 <!-- 시간 -->
-                <label for="time" class="label-time">시간:</label>
-                <input type="text" id="time" name="time" th:field="*{time}" required />
+                <label class="label-time">시간:</label>
+                <input type="time" th:field="*{startTime}" required />
+                <input type="time" th:field="*{endTime}" required />
                 <br />
 
                 <!-- 요일 -->
