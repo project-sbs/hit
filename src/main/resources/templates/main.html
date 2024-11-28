@@ -14,7 +14,9 @@
     <!--111111111-->
     <nav class="main-top">
         <div class="hit-nav">
-            <div>로고</div>
+            <div class="logo-wrap">
+                <img src="/image/HitLogo.png" alt="HIT대학교 로고" />
+            </div>
             <ul>
                 <li>About HIT</li>
                 <li>Research</li>
@@ -39,16 +41,20 @@
                 <p>THE HONOR MAKE YOU FREE</p>
                 <button>APPLY</button>
             </div>
-            <button>HIT News & More</button>
+            <button class="open-hidden-link">HIT News & More</button>
         </div>
     </nav>
 </header>
+<!-- Top 버튼 -->
+<button id="scrollToTopBtn" class="scroll-to-top-btn">Top</button>
 <div class="main-middle">
-    <div class="hit-news">
+    <section class="hit-news">
         <h2>HIT NEWS</h2>
         <ul>
             <li>
-                <div class="hit-news-photo1"></div>
+                <div class="hit-news-img-wrap">
+                    <img src="/image/technology.jpg" alt="a circuit diagram" />
+                </div>
                 <ul class="hit-news-info">
                     <li><p>Invention</p></li>
                     <li><b>Professor Gil Successfully Develops a Powerful AI</b></li>
@@ -58,11 +64,13 @@
                             artificial intelligence named HOHO.
                         </p>
                     </li>
-                    <a href="">Read More</a>
+                    <a href="#">READ MORE >></a>
                 </ul>
             </li>
             <li>
-                <div class="hit-news-photo2"></div>
+                <div class="hit-news-img-wrap">
+                    <img src="/image/analysis.jpg" alt="a microscope" />
+                </div>
                 <ul class="hit-news-info">
                     <li><p>Discovery</p></li>
                     <li><b>Discovery of a New Ultra-Small Microorganism</b></li>
@@ -72,11 +80,13 @@
                             'Java'
                         </p>
                     </li>
-                    <a href="">Read More</a>
+                    <a href="#">READ MORE >></a>
                 </ul>
             </li>
             <li>
-                <div class="hit-news-photo3"></div>
+                <div class="hit-news-img-wrap">
+                    <img src="/image/hangar.jpg" alt="a shuttle factory" />
+                </div>
                 <ul class="hit-news-info">
                     <li><p>Cooperation</p></li>
                     <li><b>SpaceX's Collaboration Request</b></li>
@@ -86,12 +96,12 @@
                             Earnest Request
                         </p>
                     </li>
-                    <a href="">Read more</a>
+                    <a href="#">READ MORE >></a>
                 </ul>
             </li>
         </ul>
-    </div>
-    <div class="hit-research">
+    </section>
+    <section class="hit-research">
         <div class="hit-research-top">
             <h2>RESEARCH ARCHIVE</h2>
             <button>+</button>
@@ -122,12 +132,138 @@
                     impact of this new AI on everyday life. Stay tuned for more
                     updates on this exciting development!
                 </p>
-                <a href="">READ MORE</a>
+                <a href="#">READ MORE >></a>
             </div>
-            <div class="hit-research-photo"></div>
+            <div class="hit-research-img-wrap">
+                <img src="/image/server.jpg" alt="computer server machines" />
+            </div>
         </div>
-    </div>
+    </section>
+    <section class="study-in-hit">
+        <div class="study-in-hit-top">
+            <h2>STUDY IN KOREA AT HIT</h2>
+            <button>+</button>
+        </div>
+        <div class="study-in-hit-bottom">
+            <div class="study-in-hit-img-wrap">
+                <img
+                        src="/image/model_library.jpg"
+                        alt="a student who is reading a book"
+                />
+            </div>
+            <div class="study-in-hit-txt-wrap">
+                <p>
+                    <b>A Serendipitous Choice: My Journey of Discovery and Growth</b>
+                </p>
+
+                <p>
+                    “I mentioned earlier that discovering Yonsei and ending up here
+                    felt sudden. However, I now know for certain that I was meant to
+                    be here and that Yonsei University is the perfect place for me at
+                    this moment. Being an international student abroad is challenging,
+                    but Yonsei has provided me with numerous opportunities and reasons
+                    to grow and evolve. Freedom is crucial to me, and Yonsei has
+                    offered me the freedom to choose, a life full of growth, and the
+                    chance to explore different aspects of myself. I never imagined I
+                    would be a biotechnology major, double majoring in economics, and
+                    working in a field involving creativity and videography. Yonsei
+                    has taught me that I don't have to limit myself to one path, that
+                    I can pursue multiple interests, and that there is much more to
+                    discover about my talents if I am willing to explore them. Embrace
+                    every moment and opportunity. Don’t be afraid to try new things
+                    and explore your strengths and abilities—you’re the one who adds
+                    color to your life.”
+                </p>
+                <ul class="study-in-hit-student-info">
+                    <li>
+                        <b>Name :</b>
+                        <p>Alisa Kenes</p>
+                    </li>
+                    <li>
+                        <b>Nationality: </b>
+                        <p>Republic of Czech</p>
+                    </li>
+                    <li>
+                        <b>College:</b>
+                        <p>Underwood International College (UIC)</p>
+                    </li>
+                    <li>
+                        <b>Major:</b>
+                        <p>Life Science and Biotechnology (LSBT)</p>
+                    </li>
+                </ul>
+                <a href="#"><b>READ MORE >></b></a>
+            </div>
+        </div>
+    </section>
+    <section class="hit-photo">
+        <h2>HIT PHOTO</h2>
+        <div class="hit-photo-wrap">
+            <img src="" alt="" />
+        </div>
+        <ul class="hit-controller-photo">
+            <li>
+                <div class="hit-controller-photo-wrap">
+                    <img src="/image/hit_photo1.jpg" alt="university architecture" />
+                </div>
+                <p>university architecture</p>
+            </li>
+            <li>
+                <div class="hit-controller-photo-wrap">
+                    <img src="/image/hit_photo2.jpg" alt="university library" />
+                </div>
+                <p>university library</p>
+            </li>
+            <li>
+                <div class="hit-controller-photo-wrap">
+                    <img src="/image/hit_photo3.jpg" alt="university hall" />
+                </div>
+                <p>university hall</p>
+            </li>
+            <li>
+                <div class="hit-controller-photo-wrap">
+                    <img src="/image/hit_photo4.jpg" alt="university wall" />
+                </div>
+                <p>university wall</p>
+            </li>
+            <li>
+                <div class="hit-controller-photo-wrap">
+                    <img
+                            src="/image/hit_photo5.jpg"
+                            alt="university football match"
+                    />
+                </div>
+                <p>university football match</p>
+            </li>
+            <li>
+                <div class="hit-controller-photo-wrap">
+                    <img
+                            src="/image/hit_photo6.jpg"
+                            alt="university conference room"
+                    />
+                </div>
+                <p>university conference room</p>
+            </li>
+        </ul>
+    </section>
 </div>
-<footer></footer>
+<footer>
+    <ul class="footer-nav">
+        <li><a href="#">Recruit</a></li>
+        <li>|</li>
+        <li>
+            <a href="#"><b> Privacy Policy</b></a>
+        </li>
+        <li>|</li>
+        <li>Cookie Policy</li>
+        <li>|</li>
+        <li>Site Map</li>
+    </ul>
+    <div class="footer-loc-link">
+        <p>50 Yonsei-ro Seodaemun-gu, Seoul, 03722, Republic of Korea</p>
+        <a href="#">Related Links +</a>
+    </div>
+    <p>© 2024 HIT UNIV. ALL RIGHTS RESERVED</p>
+</footer>
 </body>
 </html>

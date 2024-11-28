@@ -1,0 +1,76 @@
+body {
+  width: 100%;
+  overflow: hidden;
+  font-family: "Noto Sans KR", sans-serif;
+}
+img {
+  background-size: cover;
+}
+h2,
+h3 {
+  color: #555555;
+}
+header {
+  width: 100%;
+  height: 80px;
+  display: flex;
+  background: linear-gradient(
+    270deg,
+    #0057b7,
+    #023e8a
+  ); /* 로열 블루 → 다크 네이비 */
+  justify-content: space-between;
+  color: white;
+}
+footer {
+  height: 50px;
+  padding-left: 10px;
+  font-size: 14px;
+  margin-top: 520px;
+}
+/* @keyframes gradientMove {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+} */
+header h1 {
+  margin-left: 80px;
+  margin-top: 10px;
+}
+
+.portal-head img {
+  width: 150px;
+}
+.portal-main {
+  display: flex;
+}
+.portal-nav {
+  width: 340px;
+}
+.portal-nav ul {
+  width: 100%;
+  height: 1020px;
+}
+.portal-nav > ul > li {
+  width: 100%;
+  height: 50px;
+  border-bottom: 2px solid #d1d9e6;
+  line-height: 50px;
+  padding-left: 20px;
+  display: flex;
+  cursor: pointer;
+}
+.portal-nav > ul > li img {
+  width: 40px;
+  height: 40px;
+  background-size: cover;
+  margin-top: 5px;
+  margin-right: 20px;
+}
+

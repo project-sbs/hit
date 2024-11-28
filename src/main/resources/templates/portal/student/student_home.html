@@ -4,38 +4,39 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" type="text/css" th:href="@{/css/reset.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/commonElement.css}" />
     <link rel="stylesheet" type="text/css" th:href="@{/css/student/studentHome.css}" />
+    <link
+            href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap"
+            rel="stylesheet"
+    />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <title>Portal</title>
 </head>
 <body>
 <header class="portal-head">
-    <div class="portal-logo-name">
-        <img src="" alt="" />
-        <h1>포털시스템</h1>
-    </div>
-    <div class="user-alarm">
-        <div class="user-photo"></div>
-        <p class="portal-user-name" th:text="${student.getName()}"></p>
+    <div>
+        <h1><img src="/image/home/HitLogo.png" alt="" /></h1>
     </div>
 </header>
 <section class="portal-main">
     <nav class="portal-nav">
         <ul>
-            <li class="portal-home-button" onclick="location.href='/s/home'"><img src="" alt="" />홈</li>
+            <li class="portal-home-button" onclick="location.href='/s/home'"><div><img src="/image/home/homeicon.png" alt="" /></div>홈</li>
             <li class="portal-student-info-button" onclick="location.href='/s/info'">
-                <img src="" alt="" />인적정보
+                <div><img src="/image/home/userIcon.png" alt="" /></div>인적정보
             </li>
             <li class="portal-student-score-button" onclick="location.href='/s/score'">
-                <img src="" alt="" />학점확인
+                <div><img src="/image/home/searchIcon.png" alt="" /></div>학점확인
             </li>
-            <li class="portal-student-report-button" onclick="location.href='/s/report'">과제제출</li>
-            <li class="portal-student-schedule-button" onclick="location.href=''">
-                <img src="" alt="" />출결관리
-            </li>
+            <li class="portal-student-report-button" onclick="location.href='/s/report'"><div><img src="/image/home/reportIcon.png" alt="" /></div>과제제출</li>
             <li class="portal-student-class-button" onclick="openNewWindow('/s/course', 1920, 1080); return false;">
-                <img src="" alt="" />수강신청
+                <div><img src="/image/home/courseIcon.png" alt="" /></div>수강신청
             </li>
+            <footer>
+                <p>© 2024 HITuniv. All rights reserved.</p>
+                <p>모든 저작권 권리는 HIT대학교에 있습니다.</p>
+            </footer>
         </ul>
     </nav>
     <div class="portal-home portal-main-frame">
@@ -51,23 +52,23 @@
             <ul>
                 <li>
                     <ul>
-                        <li>이미지</li>
+                        <li><img src="/image/home/mailIcon.png" alt=""></li>
                         <li>웹메일</li>
-                        <li>수량</li>
+
                     </ul>
                 </li>
                 <li>
                     <ul>
-                        <li>이미지</li>
+                        <li><img src="/image/home/smallMailIcon.png" alt=""></li>
                         <li>쪽지</li>
-                        <li>수량</li>
+
                     </ul>
                 </li>
                 <li>
                     <ul>
-                        <li>이미지</li>
+                        <li><img src="/image/home/chatIcon.png" alt=""></li>
                         <li>부서계시판</li>
-                        <li>수량</li>
+
                     </ul>
                 </li>
             </ul>
@@ -90,9 +91,9 @@
             <h2>학사일정</h2>
             <ul>
                 <li>
-                    <button>LEFT</button>
+                    <button><img src="/image/home/arrowBack.png" alt=""></button>
                     <p class="portal-college-schedule-control-date">일자</p>
-                    <button>RIGHT</button>
+                    <button><img src="/image/home/arrowForward.png" alt=""></button>
                 </li>
                 <li>
                     <ul>
@@ -117,7 +118,7 @@
             <ul>
                 <li>
                     <ul>
-                        <li>이미지</li>
+                        <li><img src="/image/home/importIcon.png" alt=""></li>
                         <li><p>이수/졸업학점</p></li>
                         <li>
                             <p>126</p>
@@ -127,39 +128,38 @@
                 </li>
                 <li>
                     <ul>
-                        <li>이미지</li>
+                        <li><img src="/image/home/trophyIcon.png" alt=""></li>
                         <li><p>제적상태</p></li>
                         <li><p>재학</p></li>
                     </ul>
                 </li>
                 <li>
                     <ul>
-                        <li>이미지</li>
+                        <li><img src="/image/home/floorIcon.png" alt=""></li>
                         <li><p>학적상태</p></li>
                         <li><p>3학년</p></li>
                     </ul>
                 </li>
                 <li>
                     <ul>
-                        <li>이미지</li>
+                        <li><img src="/image/home/checkListIcon.png" alt=""></li>
                         <li>복수전공</li>
                         <li><p>미신청</p></li>
                     </ul>
                 </li>
                 <li>
                     <ul>
-                        <li>이미지</li>
+                        <li><img src="/image/home/schoolIcon.png" alt=""></li>
                         <li>학과</li>
                         <li><p>컴퓨터공학과</p></li>
                     </ul>
                 </li>
                 <li>
                     <ul>
-                        <li>이미지</li>
-                        <li>지도교수님</li>
+                        <li><img src="/image/home/badgeIcon.png" alt=""></li>
+                        <li>지도교수</li>
                         <li>
                             <p>황민수</p>
-                            <span> 교수님</span>
                         </li>
                     </ul>
                 </li>

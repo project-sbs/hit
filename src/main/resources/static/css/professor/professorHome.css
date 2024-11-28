@@ -1,42 +1,4 @@
-body {
-    width: 100%;
-    overflow: hidden;
-}
-header {
-    width: 100%;
-    padding: 1%;
-    height: 60px;
-    background: purple;
-    display: flex;
-    justify-content: space-between;
-}
-.portal-logo-name {
-    display: flex;
-}
-.portal-logo-name img {
-    width: 100px;
-}
-.portal-logo-name h1 {
-    font-size: 25px;
-}
-.portal-main {
-    display: flex;
-}
-.portal-nav {
-    width: 340px;
-}
-.portal-nav ul {
-    width: 100%;
-    height: 1020px;
-}
-.portal-nav > ul > li {
-    width: 100%;
-    height: 50px;
-    border-bottom: 2px solid #ececec;
-    line-height: 50px;
-    padding-left: 20px;
-    cursor: pointer;
-}
+
 .portal-home {
     width: 100%;
     padding: 3%;
@@ -54,109 +16,141 @@ header {
     border: 1px solid black;
 }
 .portal-user-login-etc > div {
-    text-align: center;
-    background: #ececec;
-    border-bottom: 1px solid;
-    height: 80px;
+  text-align: center;
+  background: #0057b7;
+  border-bottom: 1px solid #d1d9e6;
+  color: white;
+  height: 80px;
 }
 .portal-user-login-etc > div p {
-    border-bottom: 1px solid;
-    height: 40px;
-    font-size: 18px;
-    line-height: 40px;
+  border-bottom: 1px solid #d1d9e6;
+  height: 40px;
+  font-size: 18px;
+  line-height: 40px;
 }
 .portal-user-login-etc div ul {
-    display: flex;
-    width: 240px;
-    margin: 0 auto;
-    line-height: 40px;
+  display: flex;
+  width: 240px;
+  margin: 0 auto;
+  line-height: 40px;
 }
 .portal-user-login-etc div ul li:nth-of-type(2) {
-    margin: 0 20px;
+  margin: 0 20px;
 }
 /*웹메일 쪽지 부서게시판 부분*/
 .portal-user-login-etc > ul:nth-of-type(1) {
-    display: flex;
-    width: 320px;
-    margin: 0 auto;
+  display: flex;
+  width: 320px;
+  margin: 0 auto;
 }
 .portal-user-login-etc > ul:nth-of-type(1) > li {
-    width: 120px;
-    height: 120px;
-    text-align: center;
+  width: 120px;
+  height: 120px;
+  text-align: center;
 }
 .portal-user-login-etc > ul:nth-of-type(1) > li:nth-of-type(2) {
-    margin: 0 auto;
+  margin: 0 auto;
 }
 .portal-user-login-etc > ul:nth-of-type(2) {
-    width: 100%;
-    border-top: 1px solid;
-    padding: 3%;
+  width: 100%;
+  border-top: 1px solid #d1d9e6;
+  padding: 3%;
 }
 .portal-user-login-etc > ul:nth-of-type(2) li {
-    display: flex;
-    margin-bottom: 10px;
+  display: flex;
+  margin-bottom: 10px;
 }
 .portal-user-login-etc > ul:nth-of-type(2) li p {
-    margin-right: 10px;
+  margin-right: 10px;
 }
 .portal-user-login-etc > ul:nth-of-type(2) li:nth-of-type(3) {
-    width: 240px;
-    margin: 0 auto;
-    justify-content: space-between;
-    margin-top: 30px;
+  width: 240px;
+  margin: 0 auto;
+  justify-content: space-between;
+  margin-top: 30px;
 }
 .portal-user-login-etc > ul:nth-of-type(2) li:nth-of-type(3) button {
-    width: 110px;
-    height: 35px;
+  width: 110px;
+  height: 35px;
 }
 .portal-user-login-etc
-> ul:nth-of-type(2)
-li:nth-of-type(3)
-button:nth-of-type(1) {
-    background: skyblue;
-    border: none;
+  > ul:nth-of-type(2)
+  li:nth-of-type(3)
+  button:nth-of-type(1) {
+  background: skyblue;
+  border: none;
 }
 .portal-user-login-etc
-> ul:nth-of-type(2)
-li:nth-of-type(3)
-button:nth-of-type(2) {
-    background: white;
-    border: 1px solid #ececec;
-    box-shadow: 2px #ececec;
+  > ul:nth-of-type(2)
+  li:nth-of-type(3)
+  button:nth-of-type(2) {
+  background: white;
+  border: 1px solid #d1d9e6;
+  box-shadow: 2px #d1d9e6;
+}
+.portal-user-login-etc > ul:nth-of-type(1) > li > ul > li:nth-of-type(1) {
+  margin-top: 10px;
+}
+.portal-user-login-etc > ul:nth-of-type(1) > li > ul > li img {
+  width: 50px;
+  height: 50px;
+  margin-top: 10px;
 }
 /*.portal-user-login-etc css끝*/
+.portal-college-schedule h2 {
+  padding-top: 20px;
+  margin-bottom: 20px;
+}
 .portal-college-schedule {
-    width: 380px;
-    height: 350px;
-    border: 1px solid black;
-    margin: 0 60px;
+  width: 380px;
+  height: 350px;
+  border: 1px solid #d1d9e6;
+  margin: 0 60px;
 }
 .portal-college-schedule > ul > li:nth-of-type(1) {
-    display: flex;
-    width: 300px;
-    height: 50px;
-    line-height: 50px;
-    margin: 0 auto;
-    margin-bottom: 20px;
+  display: flex;
+  width: 300px;
+  height: 50px;
+  line-height: 50px;
+  margin: 0 auto;
+  margin-bottom: 20px;
+}
+.portal-college-schedule-control-date {
+  width: 200px;
+  text-align: center;
+  margin: 0 auto;
+}
+.portal-college-schedule button {
+  width: 40px;
+  height: 50px;
+  border: none;
+  background: white;
+}
+.portal-college-schedule button:nth-of-type(1) {
+  padding-left: 10px;
+}
+.portal-college-schedule img {
+  width: 30px;
+  height: 50px;
 }
 /*학사 일정 컨트롤러 날짜*/
 .portal-college-schedule > ul > li:nth-of-type(1) p {
-    width: 200px;
-    padding-left: 20px;
+  width: 220px;
+  padding-left: 20px;
 }
 .portal-college-schedule li ul {
-    width: 300px;
-    margin: 0 auto;
+  width: 300px;
+  margin: 0 auto;
 }
 .portal-college-schedule li ul li {
-    margin-bottom: 10px;
+  margin-bottom: 10px;
 }
 /*일정 날짜*/
 .portal-college-schedule li ul li p:nth-of-type(1) {
-    color: aqua;
+  color: aqua;
 }
-/*학사 일정 끝*/
+/*portal-college-schdule css 끝*/
+
 .portal-admin-student-check {
     width: 600px;
     height: 350px;

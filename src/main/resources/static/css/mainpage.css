@@ -1,8 +1,21 @@
 body {
   width: 100%;
+  font-family: "Roboto", sans-serif;
 }
 header {
   width: 100%;
+}
+
+img {
+  background-size: cover;
+}
+.main-middle img:not(.hit-photo img) {
+  transition: all 0.3s ease; /* 부드러운 전환 효과 */
+}
+
+.main-middle img:not(.hit-photo img):hover {
+  transform: translateY(-10px); /* 이미지가 살짝 위로 올라감 */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6); /* 그림자 효과 */
 }
 .hit-nav {
   padding: 1.5%;
@@ -13,14 +26,22 @@ header {
   color: white;
 }
 .hit-nav ul {
-  left: 1270px;
+  left: 1100px;
   position: relative;
   display: flex;
 }
 .hit-nav ul li {
   margin: 0px 10px;
 }
-
+.logo-wrap {
+  width: 160px;
+  height: 64px;
+}
+.logo-wrap > img {
+  width: 160px;
+  height: 64px;
+  background-size: cover;
+}
 /*메인페이지 상단 사진관련*/
 .main-top-photo {
   width: 100%;
@@ -103,17 +124,16 @@ header {
   width: 100%;
   height: 268px;
 }
+.hit-news-img-wrap {
+  width: 401px;
+  height: 268px;
+}
+.hit-news-img-wrap > img {
+  width: 401px;
+  height: 268px;
+}
 .hit-news > ul > li:nth-of-type(2) {
   margin: 0px 64px;
-}
-.hit-news li:nth-of-type(1) div {
-  background: url(../image/technology.jpg) no-repeat center top/cover;
-}
-.hit-news li:nth-of-type(2) div {
-  background: url(../image/analysis.jpg) no-repeat center top/cover;
-}
-.hit-news li:nth-of-type(3) div {
-  background: url(../image/hangar.jpg) no-repeat center top/cover;
 }
 .hit-news li .hit-news-info {
   width: 100%;
@@ -138,6 +158,7 @@ header {
 .hit-research-top {
   display: flex;
   justify-content: space-between;
+  margin-bottom: 48px;
 }
 .hit-research-top h2 {
   margin-bottom: 20px;
@@ -147,8 +168,9 @@ header {
   width: 24px;
   height: 24px;
   text-align: center;
-  font-size: 20px;
+  font-size: 24px;
   background: none;
+  border: none;
 }
 .hit-research-bottom {
   display: flex;
@@ -163,13 +185,196 @@ header {
 }
 .hit-research-write p:nth-of-type(2) {
   margin-top: 20px;
+  margin-bottom: 20px;
 }
 .hit-research-write a {
-  margin-top: 5px;
   font-size: 20px;
 }
-.hit-research-photo {
-  background: url(../image/server.jpg) no-repeat center top/cover;
-  width: 696px;
+.hit-research-img-wrap {
+  width: 571px;
   height: 462px;
+}
+.hit-research-img-wrap > img {
+  width: 571px;
+  height: 462px;
+}
+.study-in-hit-top {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 96px;
+  margin-bottom: 48px;
+}
+.study-in-hit-top h2 {
+  margin-bottom: 20px;
+  font-size: 32px;
+}
+.study-in-hit-top button {
+  width: 24px;
+  height: 24px;
+  text-align: center;
+  font-size: 24px;
+  background: none;
+  border: none;
+}
+.study-in-hit-bottom {
+  width: 100%;
+  height: 746px;
+  display: flex;
+}
+.study-in-hit-img-wrap {
+  width: 600px;
+  height: 746px;
+  margin-right: 100px;
+}
+.study-in-hit-img-wrap > img {
+  width: 600px;
+  height: 746px;
+}
+.study-in-hit-txt-wrap {
+  width: 632px;
+}
+.study-in-hit-txt-wrap > p:nth-of-type(1) {
+  margin-top: 209px;
+  font-size: 22px;
+  margin-bottom: 20px;
+}
+.study-in-hit-txt-wrap > p:nth-of-type(2) {
+  margin-bottom: 20px;
+}
+.study-in-hit-student-info {
+  margin-bottom: 50px;
+}
+.study-in-hit-student-info li {
+  display: flex;
+}
+.study-in-hit-student-info li b {
+  font-style: italic;
+  margin-right: 10px;
+}
+.study-in-hit-txt-wrap a b {
+  font-size: 19px;
+  font-weight: lighter;
+}
+
+.hit-photo {
+  margin-top: 120px;
+  width: 100%;
+  height: 1116px;
+}
+
+.hit-photo h2 {
+  margin-bottom: 48px;
+  font-size: 32px;
+}
+.hit-photo-wrap {
+  margin: 0 auto;
+  width: 1332px;
+  height: 750px;
+}
+.hit-photo-wrap > img {
+  width: 1332px;
+  height: 750px;
+}
+.hit-controller-photo {
+  margin-top: 30px;
+  display: flex;
+  justify-content: space-between;
+  height: 183px;
+}
+.hit-controller-photo li {
+  width: 15%;
+  height: 183px;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  font-style: italic;
+}
+.hit-controller-photo-wrap {
+  width: 100%;
+  height: 140px;
+}
+.hit-controller-photo-wrap > img {
+  width: 100%;
+  height: 140px;
+  opacity: 0.6; /* 기본적으로 약간 투명하게 설정 */
+  transition: opacity 0.3s ease; /* 투명도 변화에 부드러운 전환 효과 */
+}
+.hit-controller-photo li:nth-of-type(1) > img {
+  opacity: 1;
+}
+.hit-controller-photo-wrap > img.active {
+  opacity: 1; /* 클릭한 사진은 원래대로 돌아옴 */
+}
+footer {
+  width: 100%;
+  height: 213px;
+  background: #001e40;
+  color: white;
+  padding-top: 33px;
+}
+.footer-nav {
+  width: 70%;
+  margin: 0 auto;
+  display: flex;
+}
+.footer-nav li {
+  margin-right: 25px;
+  font-size: 18px;
+}
+.footer-loc-link {
+  width: 70%;
+  margin: 0 auto;
+  margin-top: 36px;
+  display: flex;
+  justify-content: space-between;
+}
+.footer-loc-link a {
+  border: 1px solid white;
+  width: 162px;
+  height: 45px;
+  text-align: center;
+  line-height: 45px;
+}
+footer > p {
+  width: 70%;
+  margin: 0 auto;
+}
+.scroll-to-top-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+  display: none; /* 기본적으로 숨김 */
+  transition: opacity 0.3s ease;
+}
+
+.scroll-to-top-btn:hover {
+  background-color: #0056b3;
+}
+.hidden-links {
+  display: none;
+  position: absolute;
+  background: #f9f9f9;
+  border: 1px solid #ddd;
+  padding: 10px;
+}
+
+.link-button {
+  display: block;
+  margin: 5px 0;
+  text-decoration: none;
+  color: #333;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.link-button:hover {
+  color: #007bff; /* 커서 올렸을 때 색상 변경 */
 }

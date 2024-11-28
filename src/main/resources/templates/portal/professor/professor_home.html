@@ -4,29 +4,25 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" type="text/css" th:href="@{/css/reset.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/commonElement.css}" />
     <link rel="stylesheet" type="text/css" th:href="@{/css/professor/professorHome.css}" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <title>Portal</title>
 </head>
 <body>
 <header class="portal-head">
-    <div class="portal-logo-name">
-        <img src="" alt="" />
-        <h1>포털시스템</h1>
-    </div>
-    <div class="user-alarm">
-        <div class="user-photo"></div>
-        <p class="portal-user-name">길오성님</p>
+    <div>
+        <h1><img src="/image/home/HitLogo.png" alt="" /></h1>
     </div>
 </header>
 <section class="portal-main">
     <nav class="portal-nav">
         <ul>
-            <li class="portal-home-button" onclick="location.href='/p/home'"><img src="" alt="" />홈</li>
-            <li class="portal-profinfo-button" onclick="location.href='/p/info'"><img src="" alt="" />교수정보관리</li>
-            <li class="portal-attendance-button" onclick="location.href='/Attendance/AttendanceCalendar'"><img src="" alt="" />출석부</li>
-            <li class="portal-scoring-button" onclick="location.href='/p/score'">과목채점<img src="" alt="" /></li>
-            <li class="portal-report-check-button" onclick="location.href='/p/report'">과제확인<img src="" alt="" /></li>
+            <li class="portal-home-button" onclick="location.href='/p/home'"><div><img src="/image/home/homeicon.png" alt="" /></div>홈</li>
+            <li class="portal-profinfo-button" onclick="location.href='/p/info'"><div><img src="/image/home/userIcon.png" alt="" /></div>교수정보</li>
+            <li class="portal-attendance-button" onclick="location.href='/Attendance/AttendanceCalendar'"><div><img src="/image/home/courseIcon.png" alt="" /></div>출석부</li>
+            <li class="portal-scoring-button" onclick="location.href='/p/score'"><div><img src="/image/home/importIcon.png" alt=""></div>과목채점</li>
+            <li class="portal-report-check-button" onclick="location.href='/p/report'"><div><img src="/image/home/importIcon.png" alt=""></div>과제확인</li>
         </ul>
     </nav>
     <div class="portal-home portal-main-frame">
@@ -42,23 +38,20 @@
             <ul>
                 <li>
                     <ul>
-                        <li>이미지</li>
+                        <li><img src="/image/home/mailIcon.png" alt=""></li>
                         <li>웹메일</li>
-                        <li>수량</li>
                     </ul>
                 </li>
                 <li>
                     <ul>
-                        <li>이미지</li>
+                        <li><img src="/image/home/smallMailIcon.png" alt=""></li>
                         <li>쪽지</li>
-                        <li>수량</li>
                     </ul>
                 </li>
                 <li>
                     <ul>
-                        <li>이미지</li>
+                        <li><img src="/image/home/chatIcon.png" alt=""></li>
                         <li>부서계시판</li>
-                        <li>수량</li>
                     </ul>
                 </li>
             </ul>
@@ -81,9 +74,9 @@
             <h2>학사일정</h2>
             <ul>
                 <li>
-                    <button>LEFT</button>
+                    <button><img src="/image/home/arrowBack.png" alt=""></button>
                     <p class="portal-college-schedule-control-date">일자</p>
-                    <button>RIGHT</button>
+                    <button><img src="/image/home/arrowForward.png" alt=""></button>
                 </li>
                 <li>
                     <ul>
