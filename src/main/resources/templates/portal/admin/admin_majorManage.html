@@ -4,38 +4,34 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" type="text/css" th:href="@{/css/reset.css}" />
+  <link rel="stylesheet" type="text/css" th:href="@{/css/commonElement.css}" />
   <link rel="stylesheet" type="text/css" th:href="@{/css/admin/adminMajorManage.css}" />
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <title>Portal</title>
 </head>
 <body>
 <header class="portal-head">
-  <div class="portal-logo-name">
-    <img src="" alt="" />
-    <h1>포털시스템</h1>
-  </div>
-  <div class="user-alarm">
-    <div class="user-photo"></div>
-    <p class="portal-user-name" th:text="${admin.getName()}"></p>
+  <div>
+    <h1><img src="/image/home/HitLogo.png" alt="" /></h1>
   </div>
 </header>
 <section class="portal-main">
   <nav class="portal-nav">
     <ul>
-      <li class="portal-home-button" onclick="location.href='/a/home'"><img src="" alt="" />홈</li>
-      <li class="portal-class-open-button" onclick="location.href='/a/major'">
-        <img src="" alt="" />전공관리
-      </li>
+      <li class="portal-home-button" onclick="location.href='/a/home'"><div><img src="/image/home/homeicon.png" alt="" /></div>홈</li>
       <li class="portal-person-add-button" onclick="location.href='/a/person'">
-        <img src="" alt="" />인적정보 관리
+        <div><img src="/image/home/userIcon.png" alt="" /></div>인적정보 관리
       </li>
-      <li class="portal-class-add-button" onclick="location.href='/a/class'"><img src="" alt="" />과목기입</li>
-      <li class="portal-notice-add-button" onclick="location.href='/a/board'"><img src="" alt="" />게시판</li>
+      <li class="portal-class-open-button" onclick="location.href='/a/major'">
+        <div><img src="/image/home/schoolIcon.png" alt=""></div>전공관리
+      </li>
+      <li class="portal-class-add-button" onclick="location.href='/a/class'"><div><img src="/image/home/importIcon.png" alt=""></div>과목기입</li>
+      <li class="portal-notice-add-button" onclick="location.href='/a/board'"><div><img src="/image/home/noticeIcon.png" alt=""></div>게시판</li>
       <li class="portal-student-pay-check-button" onclick="location.href=''">
-        <img src="" alt="" />등록금확인
+        <div><img src="/image/home/paymentsIcon.png" alt=""></div>등록금확인
       </li>
       <li class="portal-class-open-button" onclick="location.href=''">
-        <img src="" alt="" />수강신청
+        <div><img src="/image/home/courseIcon.png" alt="" /></div>수강신청
       </li>
     </ul>
   </nav>

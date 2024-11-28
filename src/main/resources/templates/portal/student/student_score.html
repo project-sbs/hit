@@ -4,35 +4,39 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" type="text/css" th:href="@{/css/reset.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/commonElement.css}" />
     <link rel="stylesheet" type="text/css" th:href="@{/css/student/studentScore.css}" />
+    <link
+            href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap"
+            rel="stylesheet"
+    />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <title>Portal</title>
 </head>
 <body>
 <header class="portal-head">
-    <div class="portal-logo-name">
-        <img src="" alt="" />
-        <h1>포털시스템</h1>
-    </div>
-    <div class="user-alarm">
-        <div class="user-photo"></div>
-        <p class="portal-user-name" th:text="${student.getName()}"></p>
+    <div>
+        <h1><img src="/image/home/HitLogo.png" alt="" /></h1>
     </div>
 </header>
 <section class="portal-main">
     <nav class="portal-nav">
         <ul>
-            <li class="portal-home-button" onclick="location.href='/s/home'"><img src="" alt="" />홈</li>
+            <li class="portal-home-button" onclick="location.href='/s/home'"><div><img src="/image/home/homeicon.png" alt="" /></div>홈</li>
             <li class="portal-student-info-button" onclick="location.href='/s/info'">
-                <img src="" alt="" />인적정보
+                <div><img src="/image/home/userIcon.png" alt="" /></div>인적정보
             </li>
             <li class="portal-student-score-button" onclick="location.href='/s/score'">
-                <img src="" alt="" />학점확인
+                <div><img src="/image/home/searchIcon.png" alt="" /></div>학점확인
             </li>
-            <li class="poratl-student-report-button" onclick="location.href='/s/report'">과제제출</li>
-            <li class="portal-student-class-button" onclick="location.href=''">
-                <img src="" alt="" />수강신청란
+            <li class="portal-student-report-button" onclick="location.href='/s/report'"><div><img src="/image/home/reportIcon.png" alt="" /></div>과제제출</li>
+            <li class="portal-student-class-button" onclick="openNewWindow('/s/course', 1920, 1080); return false;">
+                <div><img src="/image/home/courseIcon.png" alt="" /></div>수강신청
             </li>
+            <footer>
+                <p>© 2024 HITuniv. All rights reserved.</p>
+                <p>모든 저작권 권리는 HIT대학교에 있습니다.</p>
+            </footer>
         </ul>
     </nav>
     <div class="portal-score-check-frame">
