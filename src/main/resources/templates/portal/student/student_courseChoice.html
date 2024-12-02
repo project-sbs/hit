@@ -180,7 +180,8 @@
                     </select>
                     <select id="departmentSelect" disabled>
                         <option value="0">===전공 별 분류===</option>
-                        <option th:each="major, loop : ${majorList}" th:selected="${major.getId() == department}" th:value="${major.getId()}" th:text="${major.getName()}"></option>
+                        <option th:each="major, loop : ${majorList}"
+                                th:selected="${major.getId() == department}" th:value="${major.getId()}" th:text="${major.getName()}"></option>
                     </select>
                 </div>
                 <button type="submit" id="insertSubmitBtn">수강신청</button>

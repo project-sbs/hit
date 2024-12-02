@@ -21,7 +21,7 @@ public class Board {
 
     private String title;
 
-    private String content;
+    private String content;         // 내용
 
     private LocalDateTime reg_date;
 }

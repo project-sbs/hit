@@ -122,72 +122,35 @@
                 <div class="active-line"></div>
                 <!--위에 움직이는 줄-->
             </ul>
+
             <ul class="portal-college-notice-page portal-college-news-frame">
                 <li th:each="notice, loop : ${notices}" th:if="${!notices.isEmpty()}" >
                     <p th:text="${notice.getTitle()}"></p>
                     <p th:text="${#temporals.format(notice.getReg_date(), 'yyyy-MM-dd')}"></p>
                 </li>
             </ul>
+
             <ul class="portal-college-class-page portal-college-news-frame">
-                <li th:each="edu, loop : ${educations}" th:if="${!educations.isEmpty()}">
+                <li th:each="edu, loop : ${educations}" th:if="${!educations.isEmpty()}"></p>
                     <p th:text="${edu.getTitle()}"></p>
-                    <p th:text="${#temporals.format(edu.getReg_date(), 'yyyy-MM-dd')}"
+                    <p th:text="${#temporals.format(edu.getReg_date(), 'yyyy-MM-dd')}"></p>
                 </li>
             </ul>
+
             <ul class="portal-college-employee-page portal-college-news-frame">
-                <li>
-                    <p>재목을 입력해주세요3</p>
-                    <p>24.10.11</p>
-                </li>
-                <li>
-                    <p>재목을 입력해주세요</p>
-                    <p>24.10.11</p>
-                </li>
-                <li>
-                    <p>재목을 입력해주세요</p>
-                    <p>24.10.11</p>
-                </li>
-                <li>
-                    <p>재목을 입력해주세요</p>
-                    <p>24.10.11</p>
-                </li>
-                <li>
-                    <p>재목을 입력해주세요</p>
-                    <p>24.10.11</p>
-                </li>
-                <li>
-                    <p>재목을 입력해주세요</p>
-                    <p>24.10.11</p>
+                <li th:each="hire, loop : ${jobpostings}" th:if="${!jobpostings.isEmpty()}"></p>
+                    <p th:text="${hire.getTitle()}"></p>
+                    <p th:text="${#temporals.format(hire.getReg_date(), 'yyyy-MM-dd')}"></p>
                 </li>
             </ul>
-            <ul
-                    class="portal-college-conversation-page portal-college-news-frame"
-            >
-                <li>
-                    <p>재목을 입력해주세요4</p>
-                    <p>24.10.11</p>
-                </li>
-                <li>
-                    <p>재목을 입력해주세요</p>
-                    <p>24.10.11</p>
-                </li>
-                <li>
-                    <p>재목을 입력해주세요</p>
-                    <p>24.10.11</p>
-                </li>
-                <li>
-                    <p>재목을 입력해주세요</p>
-                    <p>24.10.11</p>
-                </li>
-                <li>
-                    <p>재목을 입력해주세요</p>
-                    <p>24.10.11</p>
-                </li>
-                <li>
-                    <p>재목을 입력해주세요</p>
-                    <p>24.10.11</p>
+
+            <ul class="portal-college-conversation-page portal-college-news-frame">
+                <li th:each="free, loop : ${freebulletins}" th:if="${!freebulletins.isEmpty()}"></p>
+                    <p th:text="${free.getTitle()}"></p>
+                    <p th:text="${#temporals.format(free.getReg_date(), 'yyyy-MM-dd')}"></p>
                 </li>
             </ul>
+
         </div>
         <div class="portal-admin-paycheck">
             <canvas id="tuitionChart"></canvas>

@@ -1,28 +1,19 @@
 package com.project.hit.student;
 
+import com.project.hit.DataNotFoundException;
+import com.project.hit.admin.Admin;
+import com.project.hit.admin.AdminService;
 import com.project.hit.board.Board;
 import com.project.hit.board.BoardService;
-import com.project.hit.major.Major;
-import com.project.hit.major.MajorService;
-import com.project.hit.subject.Subject;
-import com.project.hit.subject.SubjectService;
-import com.project.hit.sugang.Sugang;
-import com.project.hit.sugang.SugangService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.springframework.web.util.UriUtils;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.nio.charset.StandardCharsets;
 import java.security.Principal;
-import java.time.LocalDateTime;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Controller
 @RequiredArgsConstructor
@@ -30,18 +21,22 @@ import java.util.stream.Collectors;
 public class StudentController {
 
     private final StudentService studentService;
-    private final SugangService sugangService;
-    private final MajorService majorService;
-    private final SubjectService subjectService;
     private final BoardService boardService;
+    private AdminService adminService;
 
     @GetMapping("/home")
     public String home(Model model, Principal principal) {
         Student student = this.studentService.getStudentById(principal.getName());
-        List<Board> noticeList = this.boardService.getTop6Boards("notice");
+        List<Board> notices = this.boardService.getTop6Boards("notice");
+        List<Board> educations = this.boardService.getTop6Boards("edu");
+        List<Board> freebulletins = this.boardService.getTop6Boards("free");
+        List<Board> jobpostings = this.boardService.getTop6Boards("hire");
 
+        model.addAttribute("jobpostings", jobpostings);
+        model.addAttribute("freebulletins", freebulletins);
+        model.addAttribute("notices", notices);
+        model.addAttribute("educations", educations);
         model.addAttribute("student", student);
-        model.addAttribute("noticeList", noticeList);
         return "portal/student/student_home";
     }
 
@@ -70,107 +65,41 @@ public class StudentController {
     }
 
     @GetMapping("/course")
-    public String course(@RequestParam(name = "major", defaultValue = "전체") String major, @RequestParam(name = "department", defaultValue = "0") int department,
-                         @RequestParam(name = "page", defaultValue = "0") int page, Model model, Principal principal) {
+    public String course(Model model, Principal principal) {
         Student student = this.studentService.getStudentById(principal.getName());
-        LocalDateTime today = LocalDateTime.now();
-        String year = String.valueOf(today.getYear());
-        int month = today.getMonthValue();
-        String semester = getSemester(month);
 
-        List<Major> majorList = this.majorService.getAllMajors();
-        Page<Subject> subjectList = getSubjectList(year, getSemester(month), major, department, page);
-        List<Sugang> sugangList = this.sugangService.getCurrentSugangs(student, semester, year);
-        int totalCredit = getTotalCredit(sugangList);
-        List<Integer> appliedSubjects = sugangList.stream().map(s -> s.getSubject().getNo()).toList();
-
-        int totalPage = subjectList.getTotalPages();
-        int block = 5;
-        int currentPage = subjectList.getNumber() + 1;
-
-        int[] pageBlock = getPageBlock(totalPage, currentPage, block);
-        int startBlock = pageBlock[0];
-        int endBlock = pageBlock[1];
-
-        model.addAttribute("sugangList", sugangList);
-        model.addAttribute("totalCredit", totalCredit);
-        model.addAttribute("appliedSubjects", appliedSubjects);
         model.addAttribute("student", student);
-        model.addAttribute("majorList", majorList);
-        model.addAttribute("department", department);
-        model.addAttribute("major", major);
-        model.addAttribute("page", page);
-        model.addAttribute("subjectList", subjectList);
-        model.addAttribute("startBlock", startBlock);
-        model.addAttribute("endBlock", endBlock);
         return "portal/student/student_courseChoice";
     }
 
-    @PostMapping("/insert/course")
-    public String insertCourse(@RequestParam("selectedNo") List<Integer> selectedNo, @RequestParam("major") String major,
-                               @RequestParam("department") int department, @RequestParam("page") int page, Principal principal,
-                               RedirectAttributes redirectAttr) {
+    @GetMapping("/board")
+    public String board(Model model, Principal principal) {
         Student student = this.studentService.getStudentById(principal.getName());
-        this.sugangService.insertSugang(selectedNo, student);
+        List<Board> notices = this.boardService.getTop6Boards("notice");
+        List<Board> educations = this.boardService.getTop6Boards("edu");
+        List<Board> freebulletins = this.boardService.getTop6Boards("free");
+        List<Board> jobpostings = this.boardService.getTop6Boards("hire");
+        List<Board> contents = this.boardService.getTop6Boards("con");
 
-        redirectAttr.addAttribute("major", major);
-        redirectAttr.addAttribute("department", department);
-        redirectAttr.addAttribute("page", page);
-
-        return "redirect:/s/course";
+        model.addAttribute("contents", contents);
+        model.addAttribute("jobpostings", jobpostings);
+        model.addAttribute("freebulletins", freebulletins);
+        model.addAttribute("notices", notices);
+        model.addAttribute("educations", educations);
+        model.addAttribute("student", student);
+        return "portal/student/student_board";
     }
 
-    @GetMapping("/delete/course/{no}")
-    @ResponseBody
-    public ResponseEntity<String> deleteCourse(@PathVariable("no") int no, Principal principal) {
-        Student student = this.studentService.getStudentById(principal.getName());
-        boolean isDeleted = this.sugangService.deleteSugang(no, student);
+    @GetMapping("/detail/{id}")
+    public String detail(Principal principal, Model model, @PathVariable("id") Long no) {
+        Board board = this.boardService.getBoard(no);
+        Board previousBoard = this.boardService.getPreviousBoard(no);
+        Board nextBoard = this.boardService.getNextBoard(no);
 
-        if (isDeleted) {
-            return ResponseEntity.ok("삭제 성공.");
-        } else {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("삭제 오류.");
-        }
-    }
-
-    private String getSemester(int month) {
-        String semester;
-        switch (month) {
-            case 3: case 4: case 5: case 6:
-                semester = "semester1";
-                break;
-            case 9: case 10: case 11: case 12:
-                semester = "semester2";
-                break;
-            default:
-                semester = "계절학기";
-                break;
-        }
-        return semester;
-    }
-
-    private int getTotalCredit(List<Sugang> sugangList) {
-        int totalCredit = 0;
-        for (Sugang sugang : sugangList) {
-            totalCredit += sugang.getSubject().getCredits();
-        }
-        return totalCredit;
-    }
-
-    private Page<Subject> getSubjectList(String year, String semester, String major, int department, int page) {
-        if (major.equals("전체")) {
-            return this.subjectService.getAllSubjects(year, semester, page);
-        }
-        return this.subjectService.getSubjectList(year, semester, major, department, page);
-    }
-
-    private int[] getPageBlock(int totalPages, int currentPage, int block) {
-        int startBlock = (((currentPage - 1) / block) * block) + 1;
-        int endBlock = startBlock + block - 1;
-
-        if (endBlock > totalPages) {
-            endBlock = totalPages;
-        }
-        return new int[] { startBlock, endBlock };
+        model.addAttribute("nextBoard",nextBoard);
+        model.addAttribute("previousBoard",previousBoard);
+        model.addAttribute("board", board);
+        return "portal/student/student_detail";
     }
 }
+

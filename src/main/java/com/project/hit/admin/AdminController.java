@@ -60,7 +60,13 @@ public class AdminController {
         Admin admin = this.adminService.getAdmin(principal.getName());
         List<Board> notices = this.boardService.getTop6Boards("notice");
         List<Board> educations = this.boardService.getTop6Boards("edu");
+        List<Board> freebulletins = this.boardService.getTop6Boards("free");
+        List<Board> jobpostings = this.boardService.getTop6Boards("hire");
+        List<Board> contents = this.boardService.getTop6Boards("con");
 
+        model.addAttribute("contents",contents);
+        model.addAttribute("jobpostings",jobpostings);
+        model.addAttribute("freebulletins",freebulletins);
         model.addAttribute("notices", notices);
         model.addAttribute("educations", educations);
         model.addAttribute("admin", admin);
@@ -103,6 +109,7 @@ public class AdminController {
         Page<Professor> professorPaging = this.professorService.getProfessors(field, keyword, page, major_id);
         Admin admin = this.adminService.getAdmin(principal.getName());
 
+
         int stu_totalPage = studentPaging.getTotalPages();
         int pro_totalPage = professorPaging.getTotalPages();
         int block = 5;
@@ -141,12 +148,18 @@ public class AdminController {
     @GetMapping("/board")
     public String notice(Principal principal, Model model) {
         Admin admin = this.adminService.getAdmin(principal.getName());
+        List<Board> notices = this.boardService.getTop6Boards("notice");
+
         model.addAttribute("admin", admin);
+        model.addAttribute("notices", notices);
         return "portal/admin/admin_board";
     }
 
+
     @PostMapping("/insert/board")
-    public String insertBoard(@RequestParam("type") String type, @RequestParam("title") String title, @RequestParam("content") String content) {
+    public String insertBoard(@RequestParam("type") String type,
+                              @RequestParam("title") String title,
+                              @RequestParam("content") String content) {
         Board board = new Board();
         board.setType(type);
         board.setTitle(title);
@@ -154,6 +167,8 @@ public class AdminController {
         board.setReg_date(LocalDateTime.now());
 
         this.boardService.insertBoard(board);
+
+
 
         return "redirect:/a/board";
     }
