@@ -2,7 +2,6 @@ package com.project.hit.major;
 
 import com.project.hit.DataNotFoundException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -30,4 +29,25 @@ public class MajorService {
         return this.majorRepository.findAll(sort);
     }
 
+    public void updateChairMan(Major major, String name) {
+        Optional<Major> _major = this.majorRepository.findById(major.getId());
+        if (_major.isPresent()) {
+            Major mjr = _major.get();
+            mjr.setChair(name);
+            this.majorRepository.save(mjr);
+        } else {
+            throw new DataNotFoundException("Not found for code : " + major.getId());
+        }
+    }
+
+    public void updateChairMan(Major major) {
+        Optional<Major> _major = this.majorRepository.findById(major.getId());
+        if (_major.isPresent()) {
+            Major mjr = _major.get();
+            mjr.setChair("");
+            this.majorRepository.save(mjr);
+        } else {
+            throw new DataNotFoundException("Not found for code : " + major.getId());
+        }
+    }
 }

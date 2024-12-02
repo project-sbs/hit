@@ -29,16 +29,12 @@
                             <th>수</th>
                             <th>목</th>
                             <th>금</th>
-                            <th>토</th>
-                            <th>일</th>
                         </tr>
                         </thead>
                         <tbody>
                         <!-- 시간대별 빈 열 생성 -->
                         <tr>
                             <td>9</td>
-                            <td></td>
-                            <td></td>
                             <td></td>
                             <td></td>
                             <td></td>
@@ -52,13 +48,9 @@
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td></td>
-                            <td></td>
                         </tr>
                         <tr>
                             <td>11</td>
-                            <td></td>
-                            <td></td>
                             <td></td>
                             <td></td>
                             <td></td>
@@ -72,13 +64,9 @@
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td></td>
-                            <td></td>
                         </tr>
                         <tr>
                             <td>13</td>
-                            <td></td>
-                            <td></td>
                             <td></td>
                             <td></td>
                             <td></td>
@@ -92,13 +80,9 @@
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td></td>
-                            <td></td>
                         </tr>
                         <tr>
                             <td>15</td>
-                            <td></td>
-                            <td></td>
                             <td></td>
                             <td></td>
                             <td></td>
@@ -112,13 +96,17 @@
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td></td>
-                            <td></td>
                         </tr>
                         <tr>
                             <td>17</td>
                             <td></td>
                             <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>18</td>
                             <td></td>
                             <td></td>
                             <td></td>
@@ -333,7 +321,7 @@
         displayTimetable(courses);
     });
 
-    const daysOrder = ["월", "화", "수", "목", "금", "토", "일"];
+    const daysOrder = ["월", "화", "수", "목", "금"];
 
     // HTML <ul>에서 <li> 항목 가져오기 및 파싱
     function parseCourseList() {
@@ -384,7 +372,7 @@
                     firstCell.addClass("subject");
 
                     // 행 병합 처리
-                    const rowSpan = (course.endHour - course.startHour) * 2; // 병합할 행 수 계산
+                    const rowSpan = (course.endHour - course.startHour); // 병합할 행 수 계산
                     if (rowSpan > 1) {
                         firstCell.attr("rowSpan", rowSpan); // rowSpan 설정
 

@@ -22,6 +22,8 @@ public class Major {
 
     private int totalStudent;
 
+    private String chair;
+
     @OneToMany(mappedBy = "major")
     private List<Student> students;
 

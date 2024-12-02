@@ -55,9 +55,7 @@
       <tr th:if="${!majorList.isEmpty()}" th:each="major, loop : ${majorList}">
         <td th:text="${#lists.size(majorList) - loop.index}"></td>
         <td th:text="${major.getName().substring(0, major.getName().length() - 1)}"></td>
-        <td th:each="professor, loop : ${major.getProfessors()}"
-            th:if="${professor.getMajor().getName() eq major.getName() && professor.getROLE() eq '학과장'}" th:text="${professor.getName()}"></td>
-        <td th:if="${major.getProfessors().size() == 0}" th:text="'X'"></td>
+        <td th:text="${#strings.isEmpty(major.getChair()) ? 'X' : major.getChair()}"></td>
         <td th:text="${#lists.size(major.getStudents())}"></td>
         <td th:text="${major.getTotalStudent()}"></td>
         <td><button>x</button></td>
