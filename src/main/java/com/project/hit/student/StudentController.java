@@ -1,5 +1,7 @@
 package com.project.hit.student;
 
+import com.project.hit.board.Board;
+import com.project.hit.board.BoardService;
 import com.project.hit.major.Major;
 import com.project.hit.major.MajorService;
 import com.project.hit.subject.Subject;
@@ -8,10 +10,15 @@ import com.project.hit.sugang.Sugang;
 import com.project.hit.sugang.SugangService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.util.UriUtils;
 
+import java.nio.charset.StandardCharsets;
 import java.security.Principal;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -26,12 +33,15 @@ public class StudentController {
     private final SugangService sugangService;
     private final MajorService majorService;
     private final SubjectService subjectService;
+    private final BoardService boardService;
 
     @GetMapping("/home")
     public String home(Model model, Principal principal) {
         Student student = this.studentService.getStudentById(principal.getName());
+        List<Board> noticeList = this.boardService.getTop6Boards("notice");
 
         model.addAttribute("student", student);
+        model.addAttribute("noticeList", noticeList);
         return "portal/student/student_home";
     }
 
@@ -75,7 +85,7 @@ public class StudentController {
         List<Integer> appliedSubjects = sugangList.stream().map(s -> s.getSubject().getNo()).toList();
 
         int totalPage = subjectList.getTotalPages();
-        int block = 10;
+        int block = 5;
         int currentPage = subjectList.getNumber() + 1;
 
         int[] pageBlock = getPageBlock(totalPage, currentPage, block);
@@ -89,6 +99,7 @@ public class StudentController {
         model.addAttribute("majorList", majorList);
         model.addAttribute("department", department);
         model.addAttribute("major", major);
+        model.addAttribute("page", page);
         model.addAttribute("subjectList", subjectList);
         model.addAttribute("startBlock", startBlock);
         model.addAttribute("endBlock", endBlock);
@@ -96,19 +107,30 @@ public class StudentController {
     }
 
     @PostMapping("/insert/course")
-    public String insertCourse(@RequestParam("selectedNo") List<Integer> selectedNo, Principal principal) {
+    public String insertCourse(@RequestParam("selectedNo") List<Integer> selectedNo, @RequestParam("major") String major,
+                               @RequestParam("department") int department, @RequestParam("page") int page, Principal principal,
+                               RedirectAttributes redirectAttr) {
         Student student = this.studentService.getStudentById(principal.getName());
         this.sugangService.insertSugang(selectedNo, student);
+
+        redirectAttr.addAttribute("major", major);
+        redirectAttr.addAttribute("department", department);
+        redirectAttr.addAttribute("page", page);
 
         return "redirect:/s/course";
     }
 
     @GetMapping("/delete/course/{no}")
-    public String deleteCourse(@PathVariable("no") int no, Principal principal) {
+    @ResponseBody
+    public ResponseEntity<String> deleteCourse(@PathVariable("no") int no, Principal principal) {
         Student student = this.studentService.getStudentById(principal.getName());
-        this.sugangService.deleteSugang(no, student);
+        boolean isDeleted = this.sugangService.deleteSugang(no, student);
 
-        return "redirect:/s/course";
+        if (isDeleted) {
+            return ResponseEntity.ok("삭제 성공.");
+        } else {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("삭제 오류.");
+        }
     }
 
     private String getSemester(int month) {

@@ -175,29 +175,9 @@
                 <!--위에 움직이는 줄-->
             </ul>
             <ul class="portal-college-notice-page portal-college-news-frame">
-                <li>
-                    <p>재목을 입력해주세요1</p>
-                    <p>24.10.11</p>
-                </li>
-                <li>
-                    <p>재목을 입력해주세요</p>
-                    <p>24.10.11</p>
-                </li>
-                <li>
-                    <p>재목을 입력해주세요</p>
-                    <p>24.10.11</p>
-                </li>
-                <li>
-                    <p>재목을 입력해주세요</p>
-                    <p>24.10.11</p>
-                </li>
-                <li>
-                    <p>재목을 입력해주세요</p>
-                    <p>24.10.11</p>
-                </li>
-                <li>
-                    <p>재목을 입력해주세요</p>
-                    <p>24.10.11</p>
+                <li th:each="notice, loop : ${noticeList}" th:if="${!noticeList.isEmpty()}">
+                    <p class="notice-title" th:data-no="${notice.getNo()}" th:text="${notice.getTitle()}"></p>
+                    <p th:text="${#temporals.format(notice.getReg_date(), 'yyyy-MM-dd')}"></p>
                 </li>
             </ul>
             <ul class="portal-college-class-page portal-college-news-frame">
@@ -557,6 +537,12 @@
         setActiveLine(buttons[0]);
     });
     //portal home 끝
+
+    $(".notice-title").on('click', function () {
+        const noticeNo = $(this).data('no');
+        openNewWindow("/s/detail/" + noticeNo, 1000, 800);
+        return false;
+    })
 
     // 새 창 띄우는 스크립트
     function openNewWindow(url, width, height) {
