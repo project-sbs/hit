@@ -93,8 +93,9 @@ public class StudentController {
     @GetMapping("/detail/{id}")
     public String detail(Principal principal, Model model, @PathVariable("id") Long no) {
         Board board = this.boardService.getBoard(no);
-        Board previousBoard = this.boardService.getPreviousBoard(no);
-        Board nextBoard = this.boardService.getNextBoard(no);
+        String type = board.getType();
+        Board previousBoard = this.boardService.getPreviousBoard(no, type);
+        Board nextBoard = this.boardService.getNextBoard(no, type);
 
         model.addAttribute("nextBoard",nextBoard);
         model.addAttribute("previousBoard",previousBoard);

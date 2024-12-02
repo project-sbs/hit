@@ -15,7 +15,9 @@ public interface BoardRepository extends JpaRepository<Board, Long> {
 //    Board findTopByIdGreaterThanOrderByIdAsc(Long no);
 
 
-    Board findTopByNoLessThanOrderByNoDesc(Long currentBoardNo);
+    Board findTopByTypeAndNoLessThanOrderByNoDesc(String type, Long no);
 
-    Board findTopByNoGreaterThanOrderByNoAsc(Long currentBoardNo);
+
+    Board findTopByTypeAndNoGreaterThanOrderByNoAsc(String type, Long no);
+
 }

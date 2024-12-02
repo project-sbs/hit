@@ -34,12 +34,11 @@ public class BoardService {
     }
 
 
-    public Board getPreviousBoard(Long currentBoardNo) {
-        return boardRepository.findTopByNoLessThanOrderByNoDesc(currentBoardNo);
+    public Board getPreviousBoard(Long currentBoardNo, String type) {
+        return boardRepository.findTopByTypeAndNoLessThanOrderByNoDesc(type, currentBoardNo);
     }
 
-
-    public Board getNextBoard(Long currentBoardNo) {
-        return boardRepository.findTopByNoGreaterThanOrderByNoAsc(currentBoardNo);
+    public Board getNextBoard(Long currentBoardNo, String type) {
+        return boardRepository.findTopByTypeAndNoGreaterThanOrderByNoAsc(type, currentBoardNo);
     }
 }
