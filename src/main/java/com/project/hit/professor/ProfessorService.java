@@ -3,6 +3,7 @@ package com.project.hit.professor;
 import com.project.hit.DataNotFoundException;
 import com.project.hit.major.Major;
 import com.project.hit.major.MajorRepository;
+import com.project.hit.major.MajorService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -19,6 +20,7 @@ import java.util.Optional;
 public class ProfessorService {
     private final ProfessorRepository professorRepository;
     private final MajorRepository majorRepository;
+    private final MajorService majorService;
 
     public Professor addProfessor(Professor professor) {
         this.professorRepository.save(professor);
@@ -75,6 +77,13 @@ public class ProfessorService {
                 temp.setEmail(professor.getEmail());
             }
             temp.setBirthday(professor.getBirthday());
+            if ("학과장".equals(temp.getROLE()) || "학과장".equals(professor.getROLE())) {
+                if ("학과장".equals(temp.getROLE())) {
+                    this.majorService.updateChairMan(professor.getMajor());
+                } else { // 교수의 역할이 학과장인 경우
+                    this.majorService.updateChairMan(professor.getMajor(), professor.getName());
+                }
+            }
             temp.setROLE(professor.getROLE());
             this.professorRepository.save(temp);
         } else {

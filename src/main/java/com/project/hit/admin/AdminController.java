@@ -236,6 +236,7 @@ public class AdminController {
         Major major = new Major();
         major.setName(name);
         major.setTotalStudent(capacity);
+        major.setChair("");
 
         this.majorService.insertMajor(major);
         return "redirect:/a/major";

@@ -264,15 +264,7 @@
         <div class="portal-callender">
             <!--이 부분은 데이터베이스를 받아와서 실제로는 보여지지 않으나 스크립트로 테이블로 정렬하기 위해 입력이 필요함 -->
             <ul id="courseList" style="display: none">
-                <li>월,9시~10시,컴퓨터교육</li>
-                <li>월,10시~11시,컴퓨터과학</li>
-                <li>화,9시~11시,수학</li>
-                <li>수,11시~12시,자료구조</li>
-                <li>목,13시~14시,알고리즘</li>
-                <li>금,9시~10시,통계학</li>
-                <li>금,11시~12시,물리학</li>
-                <li>금,12시~13시,성리학</li>
-                <li>토,10시~12시,프로그래밍 기초</li>
+                <li></li>
             </ul>
 
             <!-- 시간표 테이블 -->
@@ -285,16 +277,12 @@
                     <th>수</th>
                     <th>목</th>
                     <th>금</th>
-                    <th>토</th>
-                    <th>일</th>
                 </tr>
                 </thead>
                 <tbody>
                 <!-- 시간대별 빈 열 생성 -->
                 <tr>
                     <td>9</td>
-                    <td></td>
-                    <td></td>
                     <td></td>
                     <td></td>
                     <td></td>
@@ -308,13 +296,9 @@
                     <td></td>
                     <td></td>
                     <td></td>
-                    <td></td>
-                    <td></td>
                 </tr>
                 <tr>
                     <td>11</td>
-                    <td></td>
-                    <td></td>
                     <td></td>
                     <td></td>
                     <td></td>
@@ -328,13 +312,9 @@
                     <td></td>
                     <td></td>
                     <td></td>
-                    <td></td>
-                    <td></td>
                 </tr>
                 <tr>
                     <td>13</td>
-                    <td></td>
-                    <td></td>
                     <td></td>
                     <td></td>
                     <td></td>
@@ -348,13 +328,9 @@
                     <td></td>
                     <td></td>
                     <td></td>
-                    <td></td>
-                    <td></td>
                 </tr>
                 <tr>
                     <td>15</td>
-                    <td></td>
-                    <td></td>
                     <td></td>
                     <td></td>
                     <td></td>
@@ -368,13 +344,9 @@
                     <td></td>
                     <td></td>
                     <td></td>
-                    <td></td>
-                    <td></td>
                 </tr>
                 <tr>
                     <td>17</td>
-                    <td></td>
-                    <td></td>
                     <td></td>
                     <td></td>
                     <td></td>
@@ -422,9 +394,9 @@
     /*접속 시간을 가지고오는 스크립트 끝*/
     /*시간표 자동정렬 스크립트*/
     // 요일 순서 설정
-    const daysOrder = ["월", "화", "수", "목", "금", "토", "일"];
+    const daysOrder = ["월", "화", "수", "목", "금"];
 
-    // HTML <ul>에서 <li> 항목 가져오기 및 파싱
+    /*// HTML <ul>에서 <li> 항목 가져오기 및 파싱
     function parseCourseList() {
         const courseList = [];
         const items = document.querySelectorAll("#courseList li");
@@ -442,9 +414,76 @@
         });
 
         return courseList;
+    }*/
+
+    // HTML <ul>에서 <li> 항목 가져오기 및 파싱
+    function parseCourseList() {
+        const courseList = [];
+        $("#courseList li").each(function() {
+            const [days, time, courseName] = $(this).text().split("/");
+            const dayArray = days.split(",");
+            const [startTime, endTime] = time.split("-");
+
+            const [startHour, startMinute] = startTime.split(":").map(Number);
+            const [endHour, endMinute] = endTime.split(":").map(Number);
+
+            const startHourFraction = startHour + startMinute / 60; // 시작 시간을 0.5 단위로 변환
+            const endHourFraction = endHour + endMinute / 60; // 종료 시간을 0.5 단위로 변환
+
+            dayArray.forEach(day => {
+                courseList.push({
+                    day: day.trim(),
+                    startHour: startHourFraction,
+                    endHour: endHourFraction,
+                    courseName,
+                });
+            })
+
+        });
+
+        return courseList;
     }
 
     // 시간표에 정렬된 과목 추가하기
+    function displayTimetable(courses) {
+        const timetable = $(".student-timetable");
+        const rows = timetable.find("tbody tr");
+
+        courses.forEach((course) => {
+            const dayIndex = daysOrder.indexOf(course.day) + 1; // 요일 인덱스
+            const startTimeIndex = rows.toArray().findIndex(
+                (row) => parseInt($(row).find("td").first().text()) === course.startHour
+            );
+
+            // 셀에 수업 추가 및 병합 처리
+            if (startTimeIndex !== -1) {
+                const firstCell = $(rows[startTimeIndex]).find("td").eq(dayIndex);
+
+                // 이미 다른 과목이 있는지 체크
+                if (!firstCell.text()) {
+                    firstCell.text(course.courseName); // 과목 이름 설정
+                    firstCell.addClass("subject");
+
+                    // 행 병합 처리
+                    const rowSpan = (course.endHour - course.startHour); // 병합할 행 수 계산
+                    if (rowSpan > 1) {
+                        firstCell.attr("rowSpan", rowSpan); // rowSpan 설정
+
+                        // 나머지 셀 숨기기
+                        for (let i = 1; i < rowSpan; i++) {
+                            $(rows[startTimeIndex + i]).find("td").eq(dayIndex).hide(); // 숨기기
+                        }
+                    }
+                } else {
+                    console.warn(
+                        `Overlap detected for ${course.day} ${course.startHour}~${course.endHour}`
+                    );
+                }
+            }
+        });
+    }
+
+    /*// 시간표에 정렬된 과목 추가하기
     function displayTimetable(courses) {
         const timetable = document.querySelector(".student-timetable");
         const rows = timetable.querySelectorAll("tbody tr");
@@ -482,7 +521,7 @@
                 }
             }
         });
-    }
+    }*/
     // 메인 함수 실행
     document.addEventListener("DOMContentLoaded", () => {
         const courses = parseCourseList();
