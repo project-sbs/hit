@@ -44,6 +44,7 @@ public class AdminController {
     private final MajorService majorService;
     private final BoardService boardService;
     private final SubjectService subjectService;
+
     @Value("src/main/resources/static/profile/")
     private String profileDir;
 
@@ -104,7 +105,7 @@ public class AdminController {
 
         int stu_totalPage = studentPaging.getTotalPages();
         int pro_totalPage = professorPaging.getTotalPages();
-        int block = 10;
+        int block = 5;
         int stu_currentPage = studentPaging.getNumber() + 1;
         int pro_currentPage = professorPaging.getNumber() + 1;
 

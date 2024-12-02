@@ -1,5 +1,6 @@
 package com.project.hit.sugang;
 
+import com.project.hit.DataNotFoundException;
 import com.project.hit.student.Student;
 import com.project.hit.subject.Subject;
 import com.project.hit.subject.SubjectRepository;
@@ -38,15 +39,16 @@ public class SugangService {
     }
 
     @Transactional
-    public void deleteSugang(int subjectId, Student student) {
+    public boolean deleteSugang(int subjectId, Student student) {
         Sugang sugang = new Sugang();
         sugang.setStudent(student);
         Optional<Subject> _subject = subjectRepository.findById(subjectId);
         if(_subject.isPresent()) {
             sugang.setSubject(_subject.get());
             this.sugangRepository.deleteSugangBySubjectAndStudent(_subject.get(), student);
+            return true;
         } else {
-            throw new IllegalArgumentException("Subject not found");
+            throw new DataNotFoundException("Subject not found");
         }
     }
 }

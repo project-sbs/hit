@@ -124,7 +124,7 @@
       </tbody>
     </table>
     <!-- 학생 페이징 시작 -->
-    <div class="st_pagination">
+    <div class="st-pagination">
       <a class="prev_btn" href="javascript:void(0)" th:data-page="${studentPaging.number - 1}" th:if="${studentPaging.number != 0 && !studentPaging.isEmpty()}"><span>이전</span></a>
       <a class="page_link"
          href="javascript:void(0)" th:if="${!studentPaging.isEmpty()}" th:classappend="${page == studentPaging.number} ? 'on'" th:data-page="${page}" th:each="page: ${#numbers.sequence(stu_startBlock - 1, stu_endBlock - 1)}" th:text="${page+1}"></a>
@@ -132,7 +132,7 @@
     </div>
     <!-- 학생 페이징 끝 -->
     <!-- 교수 페이징 시작 -->
-    <div class="pr_pagination" th:if="${!professorPaging.isEmpty()}">
+    <div class="pr-pagination" th:if="${!professorPaging.isEmpty()}">
       <a class="prev_btn" href="javascript:void(0)" th:data-page="${professorPaging.number - 1}" th:if="${professorPaging.number != 0}"><span>이전</span></a>
       <a class="page_link"
          href="javascript:void(0)" th:classappend="${page == professorPaging.number} ? 'on'" th:data-page="${page}" th:each="page: ${#numbers.sequence(pro_startBlock - 1, pro_endBlock - 1)}" th:text="${page+1}"></a>
@@ -284,7 +284,7 @@
 <script>
   window.onload = function () {
     document.querySelector(".professor-managing-table").style.display = "none";
-    document.querySelector(".pr_pagination").style.display = "none";
+    document.querySelector(".pr-pagination").style.display = "none";
   };
   // 학과 및 유형 필터링
   document
@@ -310,14 +310,14 @@
     // 교수 테이블과 학생 테이블의 표시 여부 설정
     if (selectedPersonType === "학부생") {
       document.querySelector(".student-managing-table").style.display = "";
-      document.querySelector(".st_pagination").style.display = "";
+      document.querySelector(".st-pagination").style.display = "";
       document.querySelector(".professor-managing-table").style.display = "none";
-      document.querySelector(".pr_pagination").style.display = "none";
+      document.querySelector(".pr-pagination").style.display = "none";
     } else if (selectedPersonType === "교수") {
       document.querySelector(".student-managing-table").style.display = "none";
-      document.querySelector(".st_pagination").style.display = "none";
+      document.querySelector(".st-pagination").style.display = "none";
       document.querySelector(".professor-managing-table").style.display = "";
-      document.querySelector(".pr_pagination").style.display = "";
+      document.querySelector(".pr-pagination").style.display = "";
     }
 
     // 학생 테이블 필터링
