@@ -16,13 +16,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.springframework.web.util.UriUtils;
 
-import java.nio.charset.StandardCharsets;
 import java.security.Principal;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Controller
 @RequiredArgsConstructor
@@ -39,9 +36,16 @@ public class StudentController {
     public String home(Model model, Principal principal) {
         Student student = this.studentService.getStudentById(principal.getName());
         List<Board> noticeList = this.boardService.getTop6Boards("notice");
+        LocalDateTime today = LocalDateTime.now();
+        String year = String.valueOf(today.getYear());
+        int month = today.getMonthValue();
+        String semester = getSemester(month);
+
+        List<Sugang> sugangList = this.sugangService.getCurrentSugangs(student, semester, year);
 
         model.addAttribute("student", student);
         model.addAttribute("noticeList", noticeList);
+        model.addAttribute("sugangList", sugangList);
         return "portal/student/student_home";
     }
 
@@ -79,7 +83,7 @@ public class StudentController {
         String semester = getSemester(month);
 
         List<Major> majorList = this.majorService.getAllMajors();
-        Page<Subject> subjectList = getSubjectList(year, getSemester(month), major, department, page);
+        Page<Subject> subjectList = getSubjectList(year, semester, major, department, page);
         List<Sugang> sugangList = this.sugangService.getCurrentSugangs(student, semester, year);
         int totalCredit = getTotalCredit(sugangList);
         List<Integer> appliedSubjects = sugangList.stream().map(s -> s.getSubject().getNo()).toList();

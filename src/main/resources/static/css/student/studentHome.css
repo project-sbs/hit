@@ -257,8 +257,7 @@
   border-collapse: collapse;
   text-align: center;
 }
-.student-timetable th,
-td {
+.student-timetable th, td {
   border: 1px solid #d1d1d1;
   height: 40px; /* 셀 높이 */
 }
@@ -269,6 +268,9 @@ td {
   background-color: #0057b7;
   color: white;
   font-weight: bold;
+}
+.student-timetable th:not(:first-of-type) {
+  width: 106px;
 }
 .subject {
   background-color: #e8f1ff;

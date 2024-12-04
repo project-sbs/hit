@@ -25,10 +25,10 @@ td {
     border: 1px solid;
 }
 .course-schedule-table th:nth-of-type(1) {
-    width: 9%;
+    width: 67px;
 }
 .course-schedule-table th {
-    width: 13%;
+    width: 97px;
 }
 .course-schedule-table td {
     height: 40px;

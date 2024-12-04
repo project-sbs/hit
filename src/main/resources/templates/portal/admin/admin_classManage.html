@@ -175,17 +175,36 @@
                     <option value="" selected>=== 교수 선택 ===</option>
                     <option th:each="professor : ${professorList}"
                             th:value="${professor.no}"
-                            th:text="${professor.name}"></option>
+                            th:text="${professor.name +' [' + professor.getId() +']'}"></option>
                 </select>
                 <br />
 
                 <!-- 시간 -->
-                <label for="time" class="label-time">시간:</label>
                 <div class="time-wrap">
-                    <p>시작</p>
-                    <input type="time" th:field="*{startTime}" />
-                    <p>종료</p>
-                    <input type="time" th:field="*{endTime}" />
+                    <p>시작 시간:</p>
+                    <select th:field="*{startTime}" required>
+                        <option value="9:00">9:00</option>
+                        <option value="10:00">10:00</option>
+                        <option value="11:00">11:00</option>
+                        <option value="12:00">12:00</option>
+                        <option value="13:00">13:00</option>
+                        <option value="14:00">14:00</option>
+                        <option value="15:00">15:00</option>
+                        <option value="16:00">16:00</option>
+                        <option value="17:00">17:00</option>
+                    </select>
+                    <p>종료 시간:</p>
+                    <select th:field="*{endTime}" required>
+                        <option value="10:00">10:00</option>
+                        <option value="11:00">11:00</option>
+                        <option value="12:00">12:00</option>
+                        <option value="13:00">13:00</option>
+                        <option value="14:00">14:00</option>
+                        <option value="15:00">15:00</option>
+                        <option value="16:00">16:00</option>
+                        <option value="17:00">17:00</option>
+                        <option value="18:00">18:00</option>
+                    </select>
                 </div>
                 <br />
 
@@ -331,6 +350,49 @@
             departmentBox.disabled = false;
         }
     });
+
+    $(document).ready(function () {
+        $("#department").on('change', function () {
+            const departmentId = $(this).val();
+
+            if (!departmentId) {
+                updateProfessorSelect([]);
+                return;
+            }
+
+            $.ajax({
+                url: '/a/update/professorList',
+                type: 'GET',
+                data: {departmentId: departmentId},
+                success: function (dataList) {
+                    updateProfessorSelect(dataList);
+                },
+                error: function (xhr, status, error) {
+                    alert("교수 리스트를 가져오는데 실패했습니다." + error);
+                    updateProfessorSelect([]);
+                }
+            })
+        })
+    })
+
+    function updateProfessorSelect(professorList) {
+        const $professorSelect = $('#professor');
+        $professorSelect.empty();
+
+        if (professorList.length > 0) {
+            $professorSelect.append('<option value="" disabled>=== 교수선택 ===</option>');
+
+            professorList.forEach(function (professor) {
+                const option = `<option value="${professor.no}">${professor.name} [${professor.id}]</option>`;
+                $professorSelect.append(option);
+            })
+
+            $professorSelect.prop('disabled', false);
+        } else {
+            $professorSelect.append('<option value="" selected>리스트가 비었습니다.</option>');
+            $professorSelect.prop('disabled', true);
+        }
+    }
 </script>
 </body>
 </html>

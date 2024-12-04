@@ -168,3 +168,11 @@ br {
 .time-wrap input:nth-of-type(1) {
   margin-right: 20px;
 }
+/*2024-12-02 수정*/
+.time-wrap select {
+    width: 80px;
+    text-align: center;
+}
+.time-wrap select:nth-of-type(1) {
+    margin-right: 30px;
+}
