@@ -264,7 +264,7 @@
         <div class="portal-callender">
             <!--이 부분은 데이터베이스를 받아와서 실제로는 보여지지 않으나 스크립트로 테이블로 정렬하기 위해 입력이 필요함 -->
             <ul id="courseList" style="display: none">
-                <li></li>
+                <li th:each="sugang, loop : ${sugangList}" th:text="${sugang.getSubject().getWeek()}+'/'+${sugang.getSubject().getTime()+'/'}+${sugang.getSubject().getName()}"></li>
             </ul>
 
             <!-- 시간표 테이블 -->

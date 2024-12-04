@@ -5,6 +5,7 @@ import com.project.hit.board.BoardService;
 import com.project.hit.major.Major;
 import com.project.hit.major.MajorService;
 import com.project.hit.professor.Professor;
+import com.project.hit.professor.ProfessorDTO;
 import com.project.hit.professor.ProfessorService;
 import com.project.hit.student.Student;
 import com.project.hit.student.StudentService;
@@ -18,6 +19,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,6 +33,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.security.Principal;
 import java.time.LocalDateTime;
+import java.util.Collections;
 import java.util.List;
 
 @Controller
@@ -276,6 +279,17 @@ public class AdminController {
 
         this.professorService.updateProfessor(professor);
         return "redirect:/a/person";
+    }
+
+    @GetMapping("/update/professorList")
+    public ResponseEntity<List<ProfessorDTO>> updateProfessorList(@RequestParam("departmentId") Integer departmentId) {
+        if (departmentId == null) {
+            return ResponseEntity.badRequest().body(Collections.emptyList());
+        }
+        Major major = this.majorService.getMajor(departmentId);
+        List<ProfessorDTO> professorList = this.professorService.getProfessorsByMajor(major);
+
+        return ResponseEntity.ok(professorList);
     }
 
     private Subject insertSubject(SubjectInsertForm subjectInsertForm){

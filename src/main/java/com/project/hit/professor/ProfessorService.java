@@ -5,6 +5,7 @@ import com.project.hit.major.Major;
 import com.project.hit.major.MajorRepository;
 import com.project.hit.major.MajorService;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -21,6 +23,7 @@ public class ProfessorService {
     private final ProfessorRepository professorRepository;
     private final MajorRepository majorRepository;
     private final MajorService majorService;
+    private final ModelMapper modelMapper = new ModelMapper();
 
     public Professor addProfessor(Professor professor) {
         this.professorRepository.save(professor);
@@ -101,4 +104,8 @@ public class ProfessorService {
     }
 
 
+    public List<ProfessorDTO> getProfessorsByMajor(Major major) {
+        List<Professor> professors = this.professorRepository.findProfessorByMajor(major);
+        return professors.stream().map(p -> modelMapper.map(p, ProfessorDTO.class)) .collect(Collectors.toList());
+    }
 }
