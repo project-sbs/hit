@@ -108,4 +108,9 @@ public class ProfessorService {
         List<Professor> professors = this.professorRepository.findProfessorByMajor(major);
         return professors.stream().map(p -> modelMapper.map(p, ProfessorDTO.class)) .collect(Collectors.toList());
     }
+
+    public List<ProfessorDTO> getProfessorAllList() {
+        List<Professor> professors = this.professorRepository.findAll();
+        return professors.stream().map(p -> modelMapper.map(p, ProfessorDTO.class)) .collect(Collectors.toList());
+    }
 }

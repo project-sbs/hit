@@ -15,7 +15,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.security.Principal;
 import java.time.LocalDateTime;
@@ -107,10 +106,11 @@ public class StudentController {
         model.addAttribute("subjectList", subjectList);
         model.addAttribute("startBlock", startBlock);
         model.addAttribute("endBlock", endBlock);
+
         return "portal/student/student_courseChoice";
     }
 
-    @PostMapping("/insert/course")
+    /*@PostMapping("/insert/course")
     public String insertCourse(@RequestParam("selectedNo") List<Integer> selectedNo, @RequestParam("major") String major,
                                @RequestParam("department") int department, @RequestParam("page") int page, Principal principal,
                                RedirectAttributes redirectAttr) {
@@ -122,6 +122,34 @@ public class StudentController {
         redirectAttr.addAttribute("page", page);
 
         return "redirect:/s/course";
+    }*/
+
+    @PostMapping("/insert/course")
+    public ResponseEntity<String> insertCourse(@RequestBody List<Integer> selectedNo, Principal principal) {
+
+        LocalDateTime today = LocalDateTime.now();
+        String year = String.valueOf(today.getYear());
+        int month = today.getMonthValue();
+        String semester = getSemester(month);
+
+        Student student = this.studentService.getStudentById(principal.getName());
+        List<Sugang> sugangList = this.sugangService.getCurrentSugangs(student, semester, year);
+
+        boolean fullCheck = this.sugangService.isCourseFull(selectedNo);
+        boolean timeCheck = this.sugangService.isTimeOverLap(selectedNo, sugangList);
+        boolean applyTimeCheck = this.sugangService.applyListTimeCheck(selectedNo);
+        if (fullCheck || timeCheck || applyTimeCheck) {
+            if (fullCheck) {
+                return ResponseEntity.badRequest().body("이미 정원이 초과된 과목이 포함되었습니다.");
+            } else if (timeCheck) {
+                return ResponseEntity.badRequest().body("이미 신청한 시간과 중복되는 과목이 포함되었습니다.");
+            } else {
+                return ResponseEntity.badRequest().body("시간이 중복되는 과목이 포함되었습니다.");
+            }
+        }
+
+        this.sugangService.insertSugang(selectedNo, student);
+        return ResponseEntity.ok().body("수강신청이 완료되었습니다.");
     }
 
     @GetMapping("/delete/course/{no}")

@@ -9,6 +9,8 @@ import java.util.List;
 
 public interface SubjectRepository extends JpaRepository<Subject, Integer> {
 
+    Subject findByNo(int no);
+
     List<Subject> findAll();
 
     List<Subject> findSubjectByTypeContainingOrderByNoDesc(String type);

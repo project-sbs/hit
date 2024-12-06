@@ -15,6 +15,6 @@ public class BoardService {
     }
 
     public List<Board> getTop6Boards(String type) {
-        return this.boardRepository.findTop6ByTypeContainingOrderByNoDesc(type);
+        return this.boardRepository.findTop6ByTypeEqualsOrderByNoDesc(type);
     }
 }
