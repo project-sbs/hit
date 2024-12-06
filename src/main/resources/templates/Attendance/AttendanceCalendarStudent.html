@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="user-role" content="${userRole}">
+  <link rel="stylesheet" type="text/css" th:href="@{/css/reset.css}" />
+  <link rel="stylesheet" type="text/css" th:href="@{/css/commonElement.css}" />
+  <link rel="stylesheet" href="/css/Attendance/AttendanceCalendarStudent.css">
+  <script src="/js/AttendanceCalendarStudent.js" defer></script>
+  <link
+          href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap"
+          rel="stylesheet"
+  />
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <title>Portal</title>
+</head>
+<body>
+<header class="portal-head">
+  <div>
+    <h1><img src="/image/home/HitLogo.png" alt="" /></h1>
+  </div>
+</header>
+<section class="portal-main">
+  <nav class="portal-nav">
+    <ul>
+      <li class="portal-home-button" onclick="location.href='/s/home'"><div><img src="/image/home/homeicon.png" alt="" /></div>홈</li>
+      <li class="portal-student-info-button" onclick="location.href='/s/info'">
+        <div><img src="/image/home/userIcon.png" alt="" /></div>인적정보
+      </li>
+      <li class="portal-student-score-button" onclick="location.href='/s/score'">
+        <div><img src="/image/home/searchIcon.png" alt="" /></div>학점확인
+      </li>
+      <li class="portal-student-report-button" onclick="location.href='/s/report'"><div><img src="/image/home/reportIcon.png" alt="" /></div>과제제출</li>
+      <li class="portal-student-class-button" onclick="openNewWindow('/s/course', 1920, 1080); return false;">
+        <div><img src="/image/home/courseIcon.png" alt="" /></div>수강신청
+      </li>
+      </li>
+      <li class="portal-attendance-button" onclick="location.href='/Attendance/AttendanceCalendarStudent'"><div><img src="/image/home/Attendance.png" alt="" /></div>출석부</li>
+      <footer>
+        <p>© 2024 HITuniv. All rights reserved.</p>
+        <p>모든 저작권 권리는 HIT대학교에 있습니다.</p>
+      </footer>
+    </ul>
+  </nav>
+  <div class="portal-home portal-main-frame">
+    <div class="portal-user-login-etc">
+      <div class="calendar_head">
+        <button onclick="prevMonth()">◀</button>
+        <h2 id="month">2024년 11월</h2>
+        <button onclick="nextMonth()">▶</button>
+      </div>
+
+      <div class="calendar_day">
+        <div class="week">일</div>
+        <div class="week">월</div>
+        <div class="week">화</div>
+        <div class="week">수</div>
+        <div class="week">목</div>
+        <div class="week">금</div>
+        <div class="week">토</div>
+        <!-- 날짜를 추가할 컨테이너 추가 -->
+
+      </div>
+      <div class="calendar_days"></div>
+
+      <div id="attendance-info">
+        <h3>출석부</h3>
+        <div id="attendance-list" sec:authorize="hasRole('학생')"></div>
+
+        <button id="save-attendance" style="display:none;">출석 저장</button>
+      </div>
+
+
+
+    </div>
+  </div>
+  <!-----------------------------------portal home finish---------------------------------------------------------------->
+</section>
+<script>
+  const userRole = '${userRole}';  // 서버에서 전달한 userRole 값을 JavaScript 변수로 설정
+  console.log(userRole);  // 확인용
+
+  //portal home 스크립트
+  /*접속 ip를 갖고오는 스크립트*/
+  /* fetch("http://ip-api.com/json")
+    .then((response) => response.json())
+    .then((data) => {
+      document.getElementById("ip-address").textContent = data.query;
+    })
+    .catch((error) => {
+      console.error("Error fetching IP address:", error);
+      document.getElementById("ip-address").textContent =
+        "Could not retrieve IP address";
+    });*/
+  /*현재 접속 시간을 가지고 오는 스크립트*/
+  function showCurrentDateTime() {
+      const now = new Date();
+      const year = now.getFullYear();
+      const month = String(now.getMonth() + 1).padStart(2, "0"); // 월은 0부터 시작하므로 +1
+      const day = String(now.getDate()).padStart(2, "0");
+      const hours = String(now.getHours()).padStart(2, "0");
+      const minutes = String(now.getMinutes()).padStart(2, "0");
+      const seconds = String(now.getSeconds()).padStart(2, "0");
+
+      const formattedDateTime = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+      document.getElementById("current-time").textContent = formattedDateTime;
+  }
+
+  // Show date and time immediately
+  showCurrentDateTime();
+
+  // Update date and time every second
+  setInterval(showCurrentDateTime, 1000);
+  /*접속 시간을 가지고오는 스크립트 끝*/
+  /*시간표 자동정렬 스크립트*/
+  // 요일 순서 설정
+  const daysOrder = ["월", "화", "수", "목", "금", "토", "일"];
+
+  // HTML <ul>에서 <li> 항목 가져오기 및 파싱
+  function parseCourseList() {
+      const courseList = [];
+      const items = document.querySelectorAll("#courseList li");
+
+      items.forEach((item) => {
+          const [day, time, courseName] = item.textContent.split(",");
+          const [startHour, endHour] = time.split("~");
+
+          courseList.push({
+              day,
+              startHour: parseInt(startHour),
+              endHour: parseInt(endHour),
+              courseName,
+          });
+      });
+
+      return courseList;
+  }
+
+  // 시간표에 정렬된 과목 추가하기
+  function displayTimetable(courses) {
+      const timetable = document.querySelector(".student-timetable");
+      const rows = timetable.querySelectorAll("tbody tr");
+
+      courses.forEach((course) => {
+          const dayIndex = daysOrder.indexOf(course.day) + 1; // 요일 인덱스
+          const startTimeIndex = Array.from(rows).findIndex(
+              (row) => parseInt(row.cells[0].textContent) === course.startHour
+          );
+
+          // 셀에 수업 추가 및 병합 처리
+          if (startTimeIndex !== -1) {
+              const firstCell = rows[startTimeIndex].cells[dayIndex];
+
+              // 이미 다른 과목이 있는지 체크
+              if (!firstCell.textContent) {
+                  firstCell.textContent = course.courseName; // 과목 이름 설정
+                  firstCell.classList.add("subject");
+
+                  // 행 병합 처리
+                  const rowSpan = course.endHour - course.startHour; // 병합할 행 수 계산
+                  if (rowSpan > 1) {
+                      firstCell.rowSpan = rowSpan; // rowSpan 설정
+
+                      // 나머지 셀 숨기기
+                      for (let i = 1; i < rowSpan; i++) {
+                          rows[startTimeIndex + i].cells[dayIndex].style.display =
+                              "none"; // 숨기기
+                      }
+                  }
+              } else {
+                  console.warn(
+                      `Overlap detected for ${course.day} ${course.startHour}~${course.endHour}`
+                  );
+              }
+          }
+      });
+  }
+  // 메인 함수 실행
+  document.addEventListener("DOMContentLoaded", () => {
+      const courses = parseCourseList();
+      displayTimetable(courses);
+  });
+  /*시간표 자동정렬 스크립트끝*/
+  /*공지사항 및 기타 계시판 페이지 전환용의 스크립트*/
+  document.addEventListener("DOMContentLoaded", () => {
+      const pages = {
+          notice: document.querySelector(".portal-college-notice-page"),
+          class: document.querySelector(".portal-college-class-page"),
+          employee: document.querySelector(".portal-college-employee-page"),
+          conversation: document.querySelector(
+              ".portal-college-conversation-page"
+          ),
+      };
+
+      // 페이지 초기화
+      Object.keys(pages).forEach((key) => {
+          pages[key].style.display = "none";
+      });
+      pages.notice.style.display = "block"; // 처음에는 공지사항만 표시
+
+      const buttons = document.querySelectorAll(
+          ".portal-college-news-controller li"
+      );
+      const activeLine = document.querySelector(".active-line");
+
+      // 초기 활성 줄 위치 설정
+      function setActiveLine(target) {
+          activeLine.style.width = `${target.offsetWidth}px`;
+          activeLine.style.left = `${target.offsetLeft}px`;
+      }
+
+      // 버튼 클릭 이벤트 추가 및 페이지 전환
+      buttons.forEach((button) => {
+          button.addEventListener("click", () => {
+              const pageKey = button.classList[0].split("-")[1]; // 버튼 클래스에서 페이지 키 추출
+              showPage(pageKey);
+              setActiveLine(button); // 줄 위치 업데이트
+          });
+      });
+
+      // 페이지 전환 함수
+      function showPage(page) {
+          Object.keys(pages).forEach((key) => {
+              pages[key].style.display = key === page ? "block" : "none";
+          });
+      }
+
+      // 초기 활성 줄 위치 설정 (첫 번째 버튼 기준)
+      setActiveLine(buttons[0]);
+  });
+  //portal home 끝
+
+  $(".notice-title").on('click', function () {
+      const noticeNo = $(this).data('no');
+      openNewWindow("/s/detail/" + noticeNo, 1000, 800);
+      return false;
+  })
+
+  // 새 창 띄우는 스크립트
+  function openNewWindow(url, width, height) {
+      var screenWidth = window.innerWidth;
+      var screenHeight = window.innerHeight;
+
+      var left = (screenWidth - width) / 2 + window.screenX;
+      var top = (screenHeight - height) / 2 + window.screenY;
+
+      window.open(url, '_blank', `width=${width},height=${height},top=${top},left=${left}`);
+  }
+</script>
+</body>
+</html>

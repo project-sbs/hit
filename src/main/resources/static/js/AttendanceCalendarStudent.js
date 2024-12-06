@@ -78,7 +78,7 @@ async function showClassInfo(year, month, day) {
     studentRow.className = 'student-row';
     studentRow.innerHTML = `
       <span>${student.studentName}</span> <!-- studentName 확인 -->
-      <select data-student-id="${student.id}"
+      <select data-student-id="${student.id}" disabled> <!-- 학생일 경우 disabled 추가 -->
         <option value="미확인" ${student.attendanceStatus === '미확인' ? 'selected' : ''}>미확인</option>
         <option value="출석" ${student.attendanceStatus === '출석' ? 'selected' : ''}>출석</option>
         <option value="결석" ${student.attendanceStatus === '결석' ? 'selected' : ''}>결석</option>
