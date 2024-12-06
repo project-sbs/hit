@@ -1,37 +1,154 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/reset.css}" />
+    <meta name="user-role" content="${userRole}">
     <link rel="stylesheet" href="/css/Attendance/AttendanceCalendar.css">
     <script src="/js/AttendanceCalendar.js" defer></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- CSRF 토큰 관련 메타 태그 추가 -->
+    <meta name="_csrf" th:content="${_csrf.token}" />
+    <meta name="_csrf_header" th:content="${_csrf.headerName}" />
+    <title>Portal</title>
 </head>
 <body>
-    <div class="calendar_head">
-        <button onclick="prevMonth()">◀</button>
-            <h2 id="month">2024년 11월</h2>
-        <button onclick="nextMonth()">▶</button>
+<header class="portal-head">
+    <div class="portal-logo-name">
+        <img src="" alt="" />
+        <h1>포털시스템</h1>
     </div>
-
-    <div class="calendar_day">
-        <div class="week">일</div>
-        <div class="week">월</div>
-        <div class="week">화</div>
-        <div class="week">수</div>
-        <div class="week">목</div>
-        <div class="week">금</div>
-        <div class="week">토</div>
-        <!-- 날짜를 추가할 컨테이너 추가 -->
-
+    <div class="user-alarm">
+        <div class="user-photo"></div>
+        <p class="portal-user-name">길오성님</p>
     </div>
-        <div class="calendar_days"></div>
+</header>
+<section class="portal-main">
+    <nav class="portal-nav">
+        <ul>
+            <li class="portal-home-button" onclick="location.href='/p/home'"><img src="" alt="" />홈</li>
+            <li class="portal-profinfo-button" onclick="location.href='/p/info'"><img src="" alt="" />교수정보관리</li>
+            <li class="portal-attendance-button" onclick="location.href='/Attendance/AttendanceCalendar'"><img src="" alt="" />출석부</li>
+            <li class="portal-scoring-button" onclick="location.href='/p/score'">과목채점<img src="" alt="" /></li>
+            <li class="portal-report-check-button" onclick="location.href='/p/report'">과제확인<img src="" alt="" /></li>
+        </ul>
+    </nav>
+    <div class="portal-home portal-main-frame">
+        <div class="portal-user-login-etc">
+            <div class="calendar_head">
+                <button onclick="prevMonth()">◀</button>
+                <h2 id="month">2024년 11월</h2>
+                <button onclick="nextMonth()">▶</button>
+            </div>
 
-    <div id="attendance-info">
-        <h3>출석부</h3>
-        <div id="attendance-list"></div>
+            <div class="calendar_day">
+                <div class="week">일</div>
+                <div class="week">월</div>
+                <div class="week">화</div>
+                <div class="week">수</div>
+                <div class="week">목</div>
+                <div class="week">금</div>
+                <div class="week">토</div>
+                <!-- 날짜를 추가할 컨테이너 추가 -->
+
+            </div>
+            <div class="calendar_days"></div>
+
+            <div id="attendance-info">
+                <h3>출석부</h3>
+                <div id="attendance-list" sec:authorize="hasRole('교수')"></div>
+
+                <button id="save-attendance" style="display:block;">출석 저장</button>
+            </div>
+
+
+
+        </div>
     </div>
+        <!-----------------------------------portal home finish---------------------------------------------------------------->
+</section>
+<script>
+    //portal home 스크립트
+    /*접속 ip를 갖고오는 스크립트*/
+    /* fetch("http://ip-api.com/json")
+      .then((response) => response.json())
+      .then((data) => {
+        document.getElementById("ip-address").textContent = data.query;
+      })
+      .catch((error) => {
+        console.error("Error fetching IP address:", error);
+        document.getElementById("ip-address").textContent =
+          "Could not retrieve IP address";
+      });*/
+    /*현재 접속 시간을 가지고 오는 스크립트*/
+    function showCurrentDateTime() {
+        const now = new Date();
+        const year = now.getFullYear();
+        const month = String(now.getMonth() + 1).padStart(2, "0"); // 월은 0부터 시작하므로 +1
+        const day = String(now.getDate()).padStart(2, "0");
+        const hours = String(now.getHours()).padStart(2, "0");
+        const minutes = String(now.getMinutes()).padStart(2, "0");
+        const seconds = String(now.getSeconds()).padStart(2, "0");
 
-    <button id="save-attendance" style="display:block;">출석 저장</button>
+        const formattedDateTime = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+        document.getElementById("current-time").textContent = formattedDateTime;
+    }
 
+    // Show date and time immediately
+    showCurrentDateTime();
+
+    // Update date and time every second
+    setInterval(showCurrentDateTime, 1000);
+    /*접속 시간을 가지고오는 스크립트 끝*/
+
+    /*공지사항 및 기타 계시판 페이지 전환용의 스크립트*/
+    document.addEventListener("DOMContentLoaded", () => {
+        const pages = {
+            notice: document.querySelector(".portal-college-notice-page"),
+            class: document.querySelector(".portal-college-class-page"),
+            employee: document.querySelector(".portal-college-employee-page"),
+            conversation: document.querySelector(
+                ".portal-college-conversation-page"
+            ),
+        };
+
+        // 페이지 초기화
+        Object.keys(pages).forEach((key) => {
+            pages[key].style.display = "none";
+        });
+        pages.notice.style.display = "block"; // 처음에는 공지사항만 표시
+
+        const buttons = document.querySelectorAll(
+            ".portal-college-news-controller li"
+        );
+        const activeLine = document.querySelector(".active-line");
+
+        // 초기 활성 줄 위치 설정
+        function setActiveLine(target) {
+            activeLine.style.width = `${target.offsetWidth}px`;
+            activeLine.style.left = `${target.offsetLeft}px`;
+        }
+
+        // 버튼 클릭 이벤트 추가 및 페이지 전환
+        buttons.forEach((button) => {
+            button.addEventListener("click", () => {
+                const pageKey = button.classList[0].split("-")[1]; // 버튼 클래스에서 페이지 키 추출
+                showPage(pageKey);
+                setActiveLine(button); // 줄 위치 업데이트
+            });
+        });
+
+        // 페이지 전환 함수
+        function showPage(page) {
+            Object.keys(pages).forEach((key) => {
+                pages[key].style.display = key === page ? "block" : "none";
+            });
+        }
+
+        // 초기 활성 줄 위치 설정 (첫 번째 버튼 기준)
+        setActiveLine(buttons[0]);
+    });
+</script>
 </body>
 </html>

@@ -125,14 +125,7 @@ body {
     width: 100%;
     overflow: hidden;
 }
-header {
-    width: 100%;
-    padding: 1%;
-    height: 60px;
-    background: purple;
-    display: flex;
-    justify-content: space-between;
-}
+
 .portal-logo-name {
     display: flex;
 }
