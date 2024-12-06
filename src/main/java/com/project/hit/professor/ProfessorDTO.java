@@ -1,11 +1,7 @@
 package com.project.hit.professor;
 
-import com.project.hit.major.Major;
-import com.project.hit.subject.Subject;
 import lombok.Getter;
 import lombok.Setter;
-
-import java.util.List;
 
 @Getter
 @Setter

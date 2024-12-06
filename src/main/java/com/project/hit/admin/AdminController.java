@@ -292,6 +292,13 @@ public class AdminController {
         return ResponseEntity.ok(professorList);
     }
 
+    @GetMapping("/update/professorAllList")
+    public ResponseEntity<List<ProfessorDTO>> updateProfessorAllList() {
+        List<ProfessorDTO> professorDTOList = this.professorService.getProfessorAllList();
+
+        return ResponseEntity.ok(professorDTOList);
+    }
+
     private Subject insertSubject(SubjectInsertForm subjectInsertForm){
         Subject subject = new Subject();
 

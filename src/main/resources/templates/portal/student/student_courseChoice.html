@@ -6,6 +6,8 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/reset.css}" />
     <link rel="stylesheet" type="text/css" th:href="@{/css/student/studentCourseChoice.css}" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <meta name="_csrf" th:content="${_csrf.token}" />
+    <meta name="_csrf_header" th:content="${_csrf.headerName}" />
     <title>Document</title>
 </head>
 <body>
@@ -163,7 +165,7 @@
                         <option th:each="major, loop : ${majorList}" th:selected="${major.getId() == department}" th:value="${major.getId()}" th:text="${major.getName()}"></option>
                     </select>
                 </div>
-                <button type="submit" id="insertSubmitBtn">수강신청</button>
+                <button type="button" id="insertSubmitBtn">수강신청</button>
             </li>
             <li class="select-all-section">
                 <label for="selectAll">전체선택</label>
@@ -220,7 +222,7 @@
                 <form id="actionForm" method="get" th:action="@{/s/course}">
                     <input type="hidden" id="page" name="page" th:value="${page}">
                     <input type="hidden" id="type" name="major" th:value="${major}">
-                    <input type="hidden" id="paging-department" name="person" th:value="${department}">
+                    <input type="hidden" id="paging-department" name="department" th:value="${department}">
                 </form>
                 <!-- 페이징 끝 -->
             </li>
@@ -234,6 +236,9 @@
 <footer></footer>
 <script>
     $(document).ready(function () {
+        const csrfToken = $('meta[name="_csrf"]').attr('content');
+        const csrfHeader = $('meta[name="_csrf_header"]').attr('content');
+
         if($("#major").val() === "전공") {
             $("#departmentSelect").prop("disabled", false);
         } else {
@@ -257,7 +262,7 @@
             $("#filterForm").submit();
         })
 
-        $("#insertSubmitBtn").on('click', function () {
+        /*$("#insertSubmitBtn").on('click', function () {
             const newHidden = [
                 {name: "department", value: $("#department").val()},
                 {name: "major", value: $("#major").val()},
@@ -268,7 +273,35 @@
                 $("#sugangForm").append(newInput);
             })
             $("#sugangForm").submit();
-        })
+        })*/
+
+        $("#insertSubmitBtn").on('click', function () {
+            const selectedNos = [];
+            $("input[name='selectedNo']:checked").each(function () {
+                selectedNos.push($(this).val());
+            });
+
+            $.ajax({
+                url: "/s/insert/course",
+                type: "POST",
+                contentType: "application/json",
+                data: JSON.stringify(selectedNos),
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader(csrfHeader, csrfToken);
+                },
+                success: function (response) {
+                    alert(response);
+                    $("#actionForm").submit();
+                },
+                error: function (xhr) {
+                    if (xhr.status === 400) {
+                        alert(xhr.responseText);
+                    } else {
+                        alert("알 수 없는 오류가 발생했습니다.");
+                    }
+                }
+            });
+        });
 
         $("#selectAll").on('click', function () {
             $(".checkBox").prop("checked", this.checked);

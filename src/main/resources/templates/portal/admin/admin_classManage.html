@@ -373,6 +373,25 @@
                 }
             })
         })
+        $("#major-type").on('change', function () {
+            const majorType = $(this).val();
+
+            if (majorType === '교양') {
+                $.ajax({
+                    url: '/a/update/professorAllList',
+                    type: 'GET',
+                    success: function (dataList) {
+                        updateProfessorSelect(dataList);
+                    },
+                    error: function (xhr, status, error) {
+                        alert("교수 리스트를 가져오는데 실패했습니다."+error);
+                        updateProfessorSelect([]);
+                    }
+                })
+            } else {
+                $("#department").prop('selectedIndex', 0).trigger('change').focus();
+            }
+        })
     })
 
     function updateProfessorSelect(professorList) {
