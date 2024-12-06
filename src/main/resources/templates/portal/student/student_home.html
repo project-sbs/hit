@@ -6,10 +6,7 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/reset.css}" />
     <link rel="stylesheet" type="text/css" th:href="@{/css/commonElement.css}" />
     <link rel="stylesheet" type="text/css" th:href="@{/css/student/studentHome.css}" />
-    <link
-            href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap"
-            rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet"/>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <title>Portal</title>
 </head>
@@ -31,9 +28,8 @@
             </li>
             <li class="portal-student-report-button" onclick="location.href='/s/report'"><div><img src="/image/home/reportIcon.png" alt="" /></div>과제제출</li>
             <li class="portal-student-class-button" onclick="openNewWindow('/s/course', 1920, 1080); return false;">
-                <div><img src="/image/home/courseIcon.png" alt="" /></div>수강신청
+                <div><img src="/image/home/courseIcon.png" alt="" /></div>수강신청</li>
             <li class="portal-attendance-button" onclick="location.href='/Attendance/AttendanceCalendarStudent'"><div><img src="/image/home/Attendance.png" alt="" /></div>출석부</li>
-            </li>
             <footer>
                 <p>© 2024 HITuniv. All rights reserved.</p>
                 <p>모든 저작권 권리는 HIT대학교에 있습니다.</p>
@@ -126,7 +122,7 @@
                     <ul>
                         <li><img src="/image/home/trophyIcon.png" alt=""></li>
                         <li><p>제적상태</p></li>
-                        <li><p>재학</p></li>
+                        <li><p th:text="${student.getStatus()}"></p></li>
                     </ul>
                 </li>
                 <li>
@@ -147,7 +143,7 @@
                     <ul>
                         <li><img src="/image/home/schoolIcon.png" alt=""></li>
                         <li>학과</li>
-                        <li><p>컴퓨터공학과</p></li>
+                        <li><p th:text="${student.getMajor().getName()}"></p></li>
                     </ul>
                 </li>
                 <li>
@@ -200,7 +196,9 @@
             </ul>
         </div>
         <div class="portal-callender">
+            <!--이 부분은 데이터베이스를 받아와서 실제로는 보여지지 않으나 스크립트로 테이블로 정렬하기 위해 입력이 필요함 -->
             <ul id="courseList" style="display: none">
+                <li th:each="sugang, loop : ${sugangList}" th:text="${sugang.getSubject().getWeek()}+'/'+${sugang.getSubject().getTime()+'/'}+${sugang.getSubject().getName()}"></li>
                 <li></li>
             </ul>
 
@@ -523,14 +521,14 @@
 
      // 새 창 띄우는 스크립트
     function openNewWindow(url, width, height) {
-    var screenWidth = window.innerWidth;
-    var screenHeight = window.innerHeight;
+        var screenWidth = window.innerWidth;
+        var screenHeight = window.innerHeight;
 
-    var left = (screenWidth - width) / 2 + window.screenX;
-    var top = (screenHeight - height) / 2 + window.screenY;
+        var left = (screenWidth - width) / 2 + window.screenX;
+        var top = (screenHeight - height) / 2 + window.screenY;
 
-    window.open(url, '_blank', `width=${width},height=${height},top=${top},left=${left}`);
-}
+        window.open(url, '_blank', `width=${width},height=${height},top=${top},left=${left}`);
+    }
 
 
 </script>
