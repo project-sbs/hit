@@ -7,4 +7,8 @@ import java.util.List;
 public interface BoardRepository extends JpaRepository<Board, Long> {
 
     List<Board> findTop6ByTypeEqualsOrderByNoDesc(String type);
+
+    Board findTopByTypeAndNoLessThanOrderByNoDesc(String type, Long no);
+
+    Board findTopByTypeAndNoGreaterThanOrderByNoAsc(String type, Long no);
 }

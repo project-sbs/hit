@@ -39,18 +39,36 @@
         <h2>공지사항 기입</h2>
         <div class="portal-admin-notice-wrap">
             <form th:action="@{/a/insert/board}" method="post">
-                <select name="type" >
+                <select name="type" id="type-select">
                     <option value="notice">공지사항</option>
                     <option value="edu">학사공지</option>
                     <option value="hire">채용공고</option>
+                    <option value="scheduler">학사일정</option>
                     <option value="free">자유계시판</option>
                 </select>
+                <input type="date" name="date" id="scheduler" />
                 <input type="text" placeholder="제목을 입력해주세요" name="title"/>
-                <textarea name="content" id=""></textarea>
+                <textarea name="content" id="contents"></textarea>
                 <input type="submit" value="작성완료" />
             </form>
         </div>
     </div>
 </section>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const typeSelect = document.getElementById("type-select");
+        const schedulerInput = document.getElementById("scheduler");
+        const contents = document.getElementById("contents");
+        typeSelect.addEventListener("change", () => {
+            if (typeSelect.value === "scheduler") {
+                schedulerInput.style.display = "block";
+                contents.style.display ="none";
+            } else {
+                schedulerInput.style.display = "none";
+                contents.style.display ="block";
+            }
+        });
+    });
+</script>
 </body>
 </html>

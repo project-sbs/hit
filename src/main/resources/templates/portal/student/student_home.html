@@ -6,10 +6,7 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/reset.css}" />
     <link rel="stylesheet" type="text/css" th:href="@{/css/commonElement.css}" />
     <link rel="stylesheet" type="text/css" th:href="@{/css/student/studentHome.css}" />
-    <link
-            href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap"
-            rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet"/>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <title>Portal</title>
 </head>
@@ -130,7 +127,7 @@
                     <ul>
                         <li><img src="/image/home/trophyIcon.png" alt=""></li>
                         <li><p>제적상태</p></li>
-                        <li><p>재학</p></li>
+                        <li><p th:text="${student.getStatus()}"></p></li>
                     </ul>
                 </li>
                 <li>
@@ -151,7 +148,7 @@
                     <ul>
                         <li><img src="/image/home/schoolIcon.png" alt=""></li>
                         <li>학과</li>
-                        <li><p>컴퓨터공학과</p></li>
+                        <li><p th:text="${student.getMajor().getName()}"></p></li>
                     </ul>
                 </li>
                 <li>

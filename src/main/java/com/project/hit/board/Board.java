@@ -24,4 +24,6 @@ public class Board {
     private String content;
 
     private LocalDateTime reg_date;
+
+    private String date;
 }

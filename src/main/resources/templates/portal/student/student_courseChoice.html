@@ -8,7 +8,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <meta name="_csrf" th:content="${_csrf.token}" />
     <meta name="_csrf_header" th:content="${_csrf.headerName}" />
-    <title>Document</title>
+    <title>수강 신청</title>
 </head>
 <body>
 <header>
@@ -189,7 +189,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr th:if="${!subjectList.isEmpty()}" th:each="subject, loop : ${subjectList}" th:classappend="${subject.getMaxPersonnel() <= subject.getSugangList().size()} ? 'disabled' : ''">
+                        <tr th:if="${!subjectList.isEmpty()}" th:each="subject, loop : ${subjectList}" th:classappend="${subject.getMaxPersonnel() <= subject.getSugangList().size() || appliedSubjects.contains(subject.getNo())} ? 'select-disabled' : ''">
                             <td th:text="${subject.getNo()}"></td>
                             <td th:text="${subject.getName()}"></td>
                             <td th:text="${subject.getWeek()}"></td>
