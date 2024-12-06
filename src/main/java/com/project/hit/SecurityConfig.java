@@ -55,7 +55,6 @@ public class SecurityConfig {
                         .usernameParameter("id")
                         .successHandler((request, response, authentication) -> {
                             Collection<?> authorities = authentication.getAuthorities();
-                            System.out.println("Authentication success : " + authorities.toString());
 
                             if (authorities.contains(new SimpleGrantedAuthority("ROLE_관리자"))) {
                                 response.sendRedirect("/a/home");

@@ -94,17 +94,12 @@
                 </li>
                 <li>
                     <ul>
-                        <li>
-                            <p class="portal-college-schedule-date">01-08</p>
-                            <p>1학년 학생회모집</p>
-                        </li>
-                        <li>
-                            <p class="portal-college-schedule-date">01-08</p>
-                            <p>1학년 학생회모집</p>
-                        </li>
-                        <li>
-                            <p class="portal-college-schedule-date">01-08</p>
-                            <p>1학년 학생회모집</p>
+                        <li th:each="scheduler, loop : ${schedulers}" th:if="${!schedulers.isEmpty()}">
+                            <div th:if="${loop.index < 3}">
+                                <p class="portal-college-schedule-date"
+                                   th:text="${scheduler.getDate()}"></p>
+                                <p th:text="${scheduler.getTitle()}"></p>
+                            </div>
                         </li>
                     </ul>
                 </li>

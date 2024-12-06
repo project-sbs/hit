@@ -63,7 +63,15 @@ public class AdminController {
         Admin admin = this.adminService.getAdmin(principal.getName());
         List<Board> notices = this.boardService.getTop6Boards("notice");
         List<Board> educations = this.boardService.getTop6Boards("edu");
+        List<Board> freebulletins = this.boardService.getTop6Boards("free");
+        List<Board> jobpostings = this.boardService.getTop6Boards("hire");
+        List<Board> contents = this.boardService.getTop6Boards("con");
+        List<Board> schedulers = this.boardService.getTop3Schedulers("scheduler");
 
+        model.addAttribute("schedulers", schedulers);
+        model.addAttribute("contents", contents);
+        model.addAttribute("jobpostings", jobpostings);
+        model.addAttribute("freebulletins", freebulletins);
         model.addAttribute("notices", notices);
         model.addAttribute("educations", educations);
         model.addAttribute("admin", admin);
@@ -149,12 +157,20 @@ public class AdminController {
     }
 
     @PostMapping("/insert/board")
-    public String insertBoard(@RequestParam("type") String type, @RequestParam("title") String title, @RequestParam("content") String content) {
+    public String insertBoard(@RequestParam("type") String type, @RequestParam("title") String title, @RequestParam("content") String content,
+                              @RequestParam("date") String date) {
+
         Board board = new Board();
-        board.setType(type);
-        board.setTitle(title);
         board.setContent(content);
         board.setReg_date(LocalDateTime.now());
+        board.setTitle(title);
+        board.setType(type);
+        board.setDate(date);
+        if(!type.equals("scheduler")){
+            board.setContent(content);
+        } else {
+            board.setDate(date);
+        }
 
         this.boardService.insertBoard(board);
 

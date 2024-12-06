@@ -103,6 +103,14 @@ public class ProfessorService {
         }
     }
 
+    public Professor getProfessor(String id) {
+        Optional<Professor> _professor = this.professorRepository.findById(id);
+        if (_professor.isPresent()) {
+            return _professor.get();
+        } else {
+            throw new DataNotFoundException("Not found for professor ID: " + id);
+        }
+    }
 
     public List<ProfessorDTO> getProfessorsByMajor(Major major) {
         List<Professor> professors = this.professorRepository.findProfessorByMajor(major);
