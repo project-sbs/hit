@@ -35,6 +35,11 @@ public class StudentController {
     public String home(Model model, Principal principal) {
         Student student = this.studentService.getStudentById(principal.getName());
         List<Board> noticeList = this.boardService.getTop6Boards("notice");
+        List<Board> educations = this.boardService.getTop6Boards("edu");
+        List<Board> freebulletins = this.boardService.getTop6Boards("free");
+        List<Board> jobpostings = this.boardService.getTop6Boards("hire");
+        List<Board> schedulers = this.boardService.getTop3Schedulers("scheduler");
+        List<Board> notices = this.boardService.getTop6Boards("notice");
         LocalDateTime today = LocalDateTime.now();
         String year = String.valueOf(today.getYear());
         int month = today.getMonthValue();
@@ -42,7 +47,12 @@ public class StudentController {
 
         List<Sugang> sugangList = this.sugangService.getCurrentSugangs(student, semester, year);
 
+        model.addAttribute("schedulers", schedulers);
+        model.addAttribute("jobpostings", jobpostings);
+        model.addAttribute("freebulletins", freebulletins);
+        model.addAttribute("educations", educations);
         model.addAttribute("student", student);
+        model.addAttribute("notices", notices);
         model.addAttribute("noticeList", noticeList);
         model.addAttribute("sugangList", sugangList);
         return "portal/student/student_home";
@@ -163,6 +173,39 @@ public class StudentController {
         } else {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("삭제 오류.");
         }
+    }
+
+    @GetMapping("/board")
+    public String board(Model model, Principal principal) {
+        Student student = this.studentService.getStudentById(principal.getName());
+        List<Board> notices = this.boardService.getTop6Boards("notice");
+        List<Board> educations = this.boardService.getTop6Boards("edu");
+        List<Board> freebulletins = this.boardService.getTop6Boards("free");
+        List<Board> jobpostings = this.boardService.getTop6Boards("hire");
+        List<Board> contents = this.boardService.getTop6Boards("con");
+        List<Board> schedulers = this.boardService.getTop3Schedulers("scheduler");
+
+        model.addAttribute("schedulers", schedulers);
+        model.addAttribute("contents", contents);
+        model.addAttribute("jobpostings", jobpostings);
+        model.addAttribute("freebulletins", freebulletins);
+        model.addAttribute("notices", notices);
+        model.addAttribute("educations", educations);
+        model.addAttribute("student", student);
+        return "portal/student/student_board";
+    }
+
+    @GetMapping("/detail/{id}")
+    public String detail(Principal principal, Model model, @PathVariable("id") Long no) {
+        Board board = this.boardService.getBoard(no);
+        String type = board.getType();
+        Board previousBoard = this.boardService.getPreviousBoard(no, type);
+        Board nextBoard = this.boardService.getNextBoard(no, type);
+
+        model.addAttribute("nextBoard",nextBoard);
+        model.addAttribute("previousBoard",previousBoard);
+        model.addAttribute("board", board);
+        return "portal/student/student_detail";
     }
 
     private String getSemester(int month) {
