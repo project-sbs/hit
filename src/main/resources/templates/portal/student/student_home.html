@@ -6,7 +6,10 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/reset.css}" />
     <link rel="stylesheet" type="text/css" th:href="@{/css/commonElement.css}" />
     <link rel="stylesheet" type="text/css" th:href="@{/css/student/studentHome.css}" />
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet"/>
+    <link
+            href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap"
+            rel="stylesheet"
+    />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <title>Portal</title>
 </head>
@@ -95,17 +98,12 @@
                 </li>
                 <li>
                     <ul>
-                        <li>
-                            <p class="portal-college-schedule-date">01-08</p>
-                            <p>1학년 학생회모집</p>
-                        </li>
-                        <li>
-                            <p class="portal-college-schedule-date">01-08</p>
-                            <p>1학년 학생회모집</p>
-                        </li>
-                        <li>
-                            <p class="portal-college-schedule-date">01-08</p>
-                            <p>1학년 학생회모집</p>
+                        <li th:each="scheduler, loop : ${schedulers}" th:if="${!schedulers.isEmpty()}">
+                            <div th:if="${loop.index < 3}">
+                                <p class="portal-college-schedule-date"
+                                   th:text="${scheduler.getDate()}"></p>
+                                <p th:text="${scheduler.getTitle()}"></p>
+                            </div>
                         </li>
                     </ul>
                 </li>
@@ -128,7 +126,7 @@
                     <ul>
                         <li><img src="/image/home/trophyIcon.png" alt=""></li>
                         <li><p>제적상태</p></li>
-                        <li><p th:text="${student.getStatus()}"></p></li>
+                        <li><p>재학</p></li>
                     </ul>
                 </li>
                 <li>
@@ -149,7 +147,7 @@
                     <ul>
                         <li><img src="/image/home/schoolIcon.png" alt=""></li>
                         <li>학과</li>
-                        <li><p th:text="${student.getMajor().getName()}"></p></li>
+                        <li><p>컴퓨터공학과</p></li>
                     </ul>
                 </li>
                 <li>
@@ -172,97 +170,38 @@
                 <div class="active-line"></div>
                 <!--위에 움직이는 줄-->
             </ul>
+
             <ul class="portal-college-notice-page portal-college-news-frame">
-                <li th:each="notice, loop : ${noticeList}" th:if="${!noticeList.isEmpty()}">
-                    <p class="notice-title" th:data-no="${notice.getNo()}" th:text="${notice.getTitle()}"></p>
+                <li th:each="notice, loop : ${notices}" th:if="${!notices.isEmpty()}">
+                    <p class="board-title" th:data-no="${notice.getNo()}" th:text="${notice.getTitle()}"></p>
                     <p th:text="${#temporals.format(notice.getReg_date(), 'yyyy-MM-dd')}"></p>
                 </li>
             </ul>
+
             <ul class="portal-college-class-page portal-college-news-frame">
-                <li>
-                    <p>재목을 입력해주세요2</p>
-                    <p>24.10.11</p>
-                </li>
-                <li>
-                    <p>재목을 입력해주세요</p>
-                    <p>24.10.11</p>
-                </li>
-                <li>
-                    <p>재목을 입력해주세요</p>
-                    <p>24.10.11</p>
-                </li>
-                <li>
-                    <p>재목을 입력해주세요</p>
-                    <p>24.10.11</p>
-                </li>
-                <li>
-                    <p>재목을 입력해주세요</p>
-                    <p>24.10.11</p>
-                </li>
-                <li>
-                    <p>재목을 입력해주세요</p>
-                    <p>24.10.11</p>
+                <li th:each="edu, loop : ${educations}" th:if="${!educations.isEmpty()}">
+                    <p class="board-title" th:data-no="${edu.getNo()}" th:text="${edu.getTitle()}"></p>
+                    <p th:text="${#temporals.format(edu.getReg_date(), 'yyyy-MM-dd')}"></p>
                 </li>
             </ul>
+
             <ul class="portal-college-employee-page portal-college-news-frame">
-                <li>
-                    <p>재목을 입력해주세요3</p>
-                    <p>24.10.11</p>
-                </li>
-                <li>
-                    <p>재목을 입력해주세요</p>
-                    <p>24.10.11</p>
-                </li>
-                <li>
-                    <p>재목을 입력해주세요</p>
-                    <p>24.10.11</p>
-                </li>
-                <li>
-                    <p>재목을 입력해주세요</p>
-                    <p>24.10.11</p>
-                </li>
-                <li>
-                    <p>재목을 입력해주세요</p>
-                    <p>24.10.11</p>
-                </li>
-                <li>
-                    <p>재목을 입력해주세요</p>
-                    <p>24.10.11</p>
+                <li th:each="hire, loop : ${jobpostings}" th:if="${!jobpostings.isEmpty()}">
+                    <p class="board-title" th:data-no="${hire.getNo()}" th:text="${hire.getTitle()}"></p>
+                    <p th:text="${#temporals.format(hire.getReg_date(), 'yyyy-MM-dd')}"></p>
                 </li>
             </ul>
-            <ul
-                    class="portal-college-conversation-page portal-college-news-frame"
-            >
-                <li>
-                    <p>재목을 입력해주세요4</p>
-                    <p>24.10.11</p>
-                </li>
-                <li>
-                    <p>재목을 입력해주세요</p>
-                    <p>24.10.11</p>
-                </li>
-                <li>
-                    <p>재목을 입력해주세요</p>
-                    <p>24.10.11</p>
-                </li>
-                <li>
-                    <p>재목을 입력해주세요</p>
-                    <p>24.10.11</p>
-                </li>
-                <li>
-                    <p>재목을 입력해주세요</p>
-                    <p>24.10.11</p>
-                </li>
-                <li>
-                    <p>재목을 입력해주세요</p>
-                    <p>24.10.11</p>
+
+            <ul class="portal-college-conversation-page portal-college-news-frame">
+                <li th:each="free, loop : ${freebulletins}" th:if="${!freebulletins.isEmpty()}">
+                    <p class="board-title" th:data-no="${free.getNo()}" th:text="${free.getTitle()}"></p>
+                    <p th:text="${#temporals.format(free.getReg_date(), 'yyyy-MM-dd')}"></p>
                 </li>
             </ul>
         </div>
         <div class="portal-callender">
-            <!--이 부분은 데이터베이스를 받아와서 실제로는 보여지지 않으나 스크립트로 테이블로 정렬하기 위해 입력이 필요함 -->
             <ul id="courseList" style="display: none">
-                <li th:each="sugang, loop : ${sugangList}" th:text="${sugang.getSubject().getWeek()}+'/'+${sugang.getSubject().getTime()+'/'}+${sugang.getSubject().getName()}"></li>
+                <li></li>
             </ul>
 
             <!-- 시간표 테이블 -->
@@ -572,25 +511,28 @@
 
         // 초기 활성 줄 위치 설정 (첫 번째 버튼 기준)
         setActiveLine(buttons[0]);
+
     });
     //portal home 끝
 
-    $(".notice-title").on('click', function () {
+    $(".board-title").on('click', function () {
         const noticeNo = $(this).data('no');
         openNewWindow("/s/detail/" + noticeNo, 1000, 800);
         return false;
     })
 
-    // 새 창 띄우는 스크립트
+     // 새 창 띄우는 스크립트
     function openNewWindow(url, width, height) {
-        var screenWidth = window.innerWidth;
-        var screenHeight = window.innerHeight;
+    var screenWidth = window.innerWidth;
+    var screenHeight = window.innerHeight;
 
-        var left = (screenWidth - width) / 2 + window.screenX;
-        var top = (screenHeight - height) / 2 + window.screenY;
+    var left = (screenWidth - width) / 2 + window.screenX;
+    var top = (screenHeight - height) / 2 + window.screenY;
 
-        window.open(url, '_blank', `width=${width},height=${height},top=${top},left=${left}`);
-    }
+    window.open(url, '_blank', `width=${width},height=${height},top=${top},left=${left}`);
+}
+
+
 </script>
 </body>
 </html>
