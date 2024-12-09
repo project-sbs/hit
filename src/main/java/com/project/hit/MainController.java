@@ -11,4 +11,9 @@ public class MainController {
     @GetMapping("/")
     public String main() {return "main";}
 
+    @GetMapping("/check/account")
+    public String checkAccount() {
+        return "check_account";
+    }
+
 }

@@ -27,5 +27,7 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
     Page<Student> findStudentByNameContainingAndMajor(String name, Major major, Pageable pageable);
 
     Page<Student> findStudentByIdContainingAndMajor(String id, Major major, Pageable pageable);
+
+    boolean existsByIdAndEmail(String id, String email);
 }
 

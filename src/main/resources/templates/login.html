@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/css/reset.css" />
-    <link rel="stylesheet" href="/css/login.css" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/reset.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/login.css}" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <title>HitLogin</title>
 </head>
@@ -17,7 +17,8 @@
                 <div class="login-logo"></div>
                 <ul>
                     <li><a href="">아이디 찾기</a></li>
-                    <li><a href="">임시 비밀번호 발급</a></li>
+                    <li> | </li>
+                    <li><a th:href="@{/check/account}">비밀번호 찾기</a></li>
                 </ul>
             </div>
             <div class="login-input-box">

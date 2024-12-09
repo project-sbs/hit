@@ -91,4 +91,7 @@ public class StudentService {
         }
     }
 
+    public boolean isMatchedIdAndEmail(String id, String email) {
+        return this.studentRepository.existsByIdAndEmail(id, email);
+    }
 }

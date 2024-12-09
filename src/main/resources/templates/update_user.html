@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <p th:text="${student.getId()}"></p>
+    <p th:text="${student.getName()}"></p>
+    <p th:text="${student.getEmail()}">
+    <form th:action="@{/update/password}" method="post">
+        <input type="hidden" name="id" th:value="${student.getId()}">
+        <label for="password-input">새 비밀번호</label>
+        <input text="password" id="password-input">
+        <label for="password-check">비밀번호 확인</label>
+        <input type="password" id="password-check" name="password">
+
+        <input type="button" value="확인">
+    </form>
+</body>
+</html>

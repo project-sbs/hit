@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/reset.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/checkAccount.css}" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <meta name="_csrf" th:content="${_csrf.token}" />
+    <meta name="_csrf_header" th:content="${_csrf.headerName}" />
+    <title>비밀번호 찾기</title>
+</head>
+<body>
+<div>
+    <h1><img src="/image/HitLogo.png" alt="" /></h1>
+    <div class="check-account-box">
+        <input type="text" placeholder="학번을 입력하세요" id="class-num" />
+        <div class="email-checking">
+            <input type="email" id="email-input" placeholder="example@gmail.com"/>
+            <button type="button" class="certified">인증</button>
+        </div>
+        <input type="text" id="certifing-email" placeholder="인증번호를 입력하세요"/>
+        <p id="error-message"></p>
+        <input type="button" value="확인" id="code-check-btn"/>
+    </div>
+</div>
+</body>
+<script>
+    $(document).ready(() => {
+        const csrfToken = $('meta[name="_csrf"]').attr('content');
+        const csrfHeader = $('meta[name="_csrf_header"]').attr('content');
+        const $certified = $(".certified");             // 인증 버튼 input
+        const $emailInput = $("#email-input");          // email 입력 input
+        const $checkingE = $("#certifing-email");       // 인증번호 입력 input
+
+        $checkingE.hide();
+
+        $certified.on("click", () => {
+            const emailValue = $emailInput.val().trim();
+            const idValue = $("#class-num").val().trim();
+
+            // 이메일 형식 검증
+            if (!emailValue || !emailValue.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
+                alert("올바른 이메일을 입력하세요.");
+                $checkingE.hide();
+            } else {
+                checkAndSendEmail(idValue, emailValue);
+            }
+        });
+
+        $("#code-check-btn").on('click', ()=>{
+            const emailValue = $emailInput.val().trim();
+            const codeValue = $("#certifing-email").val().trim();
+
+            $.ajax({
+                url: '/api/verify-code',
+                method: 'POST',
+                contentType: "application/json",
+                data: JSON.stringify({ emailValue, codeValue }),
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader(csrfHeader, csrfToken);
+                },
+                success: function (response) {
+                    alert(response);
+                    location.href = "/update/user";
+                },
+                error: function (xhr) {
+                    if (xhr.status === 400) {
+                        $("#error-message").empty().text(xhr.responseText).css('display', 'block');
+                    } else if (xhr.status === 500) {
+                        $("#error-message").empty().text("서버에 문제가 발생했습니다. 다시 시도 해 주세요.").css('display', 'block');
+                    } else {
+                        alert("알 수 없는 오류가 발생했습니다.");
+                    }
+                }
+            })
+        })
+    });
+
+    function checkAndSendEmail(id, email) {
+        const csrfToken = $('meta[name="_csrf"]').attr('content');
+        const csrfHeader = $('meta[name="_csrf_header"]').attr('content');
+        $.ajax({
+            url: '/api/send-email',
+            method: 'POST',
+            contentType: "application/json",
+            data: JSON.stringify({ id, email }),
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader(csrfHeader, csrfToken);
+            },
+            success: function (response) {
+                alert(response);
+                $("#certifing-email").css('display', 'block');
+                $("#error-message").css('display', 'none');
+            },
+            error: function (xhr) {
+                if (xhr.status === 400) {
+                    $("#error-message").empty().text(xhr.responseText).css('display', 'block');
+                } else if (xhr.status === 500) {
+                    $("#error-message").empty().text("서버에 문제가 발생했습니다. 다시 시도 해 주세요.").css('display', 'block');
+                } else {
+                    alert("알 수 없는 오류가 발생했습니다.");
+                }
+            }
+        });
+    }
+</script>
+</html>
