@@ -91,7 +91,7 @@ public class AdminController {
         model.addAttribute("subjectList1",subjectList1);
         model.addAttribute("subjectList2",subjectList2);
         model.addAttribute("admin", admin);
-         return "portal/admin/admin_classManage";
+        return "portal/admin/admin_classManage";
     }
 
     @GetMapping("/major")
