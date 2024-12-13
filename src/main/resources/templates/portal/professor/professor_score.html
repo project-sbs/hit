@@ -7,6 +7,8 @@
   <link rel="stylesheet" type="text/css" th:href="@{/css/commonElement.css}" />
   <link rel="stylesheet" type="text/css" th:href="@{/css/professor/professorScore.css}" />
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <meta name="_csrf" th:content="${_csrf.token}" />
+  <meta name="_csrf_header" th:content="${_csrf.headerName}" />
   <title>Portal</title>
 </head>
 <body>
@@ -29,14 +31,16 @@
     <h2>과목 체점</h2>
     <div class="portal-professor-score-wrap">
       <div class="portal-professor-score-filter">
-        <select name="" id="">
-          <option value="">과목1</option>
-          <option value="">과목2</option>
-          <option value="">과목3</option>
+        <select id="subjectSelect">
+          <option th:if="${subjectList.isEmpty()}" th:text="'=== 과목선택 ==='" disabled></option>
+          <option th:each="subject, loop : ${subjectList}" th:selected="${subjectNo == subject.getNo()}" th:value="${subject.getNo()}" th:text="${subject.getName()}"></option>
         </select>
         <input type="button" id="submitBtn" value="입력완료" />
       </div>
-      <form action="/p/subject/update" method="post">
+      <form id="filterForm" th:action="@{/p/score}" method="get">
+        <input type="hidden" id="selectNum" name="subject_no" th:value="${subjectNo}">
+      </form>
+      <form id="modifyForm" action="" method="">
         <table>
           <thead>
           <tr>
@@ -47,86 +51,110 @@
             <th>과제2</th>
             <th>중간고사</th>
             <th>기말고서</th>
-            <th>전체선택 <input type="checkbox" /></th>
+            <th><label for="selectAll">전체선택 </label><input type="checkbox" id="selectAll"/></th>
           </tr>
           </thead>
           <tbody>
-          <tr>
-            <td>컴퓨터과학</td>
-            <td>20110222</td>
-            <td>길오성1</td>
+          <tr th:if="${!sugangList.isEmpty()}" th:each="sugang, loop : ${sugangList}">
+            <td th:text="${sugang.getSubject().getName()}"></td>
+            <td th:text="${sugang.getStudent().getId()}"></td>
+            <td th:text="${sugang.getStudent().getName()}"></td>
             <td>
-              <input type="number" min="0" max="20" />
+              <input type="number" min="0" max="20" name="assignment1" th:value="${sugang.getAssignment1()}" id="assignment1"/>
             </td>
             <td>
-              <input type="number" min="0" max="20" />
+              <input type="number" min="0" max="20" name="assignment2" th:value="${sugang.getAssignment2()}" id="assignment2"/>
             </td>
-            <td><input type="number" min="0" max="20" /></td>
-            <td><input type="number" min="0" max="20" /></td>
-            <td><input type="checkbox" /></td>
+            <td><input type="number" min="0" max="20" name="semi" th:value="${sugang.getSemi_score()}" id="semi"/></td>
+            <td><input type="number" min="0" max="20" name="final" th:value="${sugang.getFinal_score()}" id="final"/></td>
+            <td><input type="checkbox" class="checkBox" name="no" th:value="${sugang.getNo()}"/></td>
           </tr>
-          <tr>
-            <td>컴퓨터과학</td>
-            <td>20110222</td>
-            <td>길오성2</td>
-            <td>
-              <input type="number" min="0" max="20" />
-            </td>
-            <td>
-              <input type="number" min="0" max="20" />
-            </td>
-            <td><input type="number" min="0" max="20" /></td>
-            <td><input type="number" min="0" max="20" /></td>
-            <td><input type="checkbox" /></td>
-          </tr>
-          <tr>
-            <td>컴퓨터과학</td>
-            <td>20110222</td>
-            <td>길오성3</td>
-            <td>
-              <input type="number" min="0" max="20" />
-            </td>
-            <td>
-              <input type="number" min="0" max="20" />
-            </td>
-            <td><input type="number" min="0" max="20" /></td>
-            <td><input type="number" min="0" max="20" /></td>
-            <td><input type="checkbox" /></td>
-          </tr>
-          <tr>
-            <td>컴퓨터과학</td>
-            <td>20110222</td>
-            <td>길오성4</td>
-            <td>
-              <input type="number" min="0" max="20" />
-            </td>
-            <td>
-              <input type="number" min="0" max="20" />
-            </td>
-            <td><input type="number" min="0" max="20" /></td>
-            <td><input type="number" min="0" max="20" /></td>
-            <td><input type="checkbox" /></td>
-          </tr>
-          <tr>
-            <td>컴퓨터과학</td>
-            <td>20110222</td>
-            <td>길오성5</td>
-            <td>
-              <input type="number" min="0" max="20" />
-            </td>
-            <td>
-              <input type="number" min="0" max="20" />
-            </td>
-            <td><input type="number" min="0" max="20" /></td>
-            <td><input type="number" min="0" max="20" /></td>
-            <td><input type="checkbox" /></td>
+          <tr th:if="${sugangList.isEmpty()}">
+            <td colspan="8">학생 리스트가 비었습니다.</td>
           </tr>
           </tbody>
         </table>
       </form>
     </div>
+    <!-- 페이징 시작 -->
+    <div class="pagination" th:if="${!sugangList.isEmpty()}">
+      <a class="prev_btn" href="javascript:void(0)" th:data-page="${sugangList.number - 1}" th:if="${sugangList.number != 0}"><span>이전</span></a>
+      <a class="page_link"
+         href="javascript:void(0)" th:classappend="${page == sugangList.number} ? 'on'" th:data-page="${page}" th:each="page: ${#numbers.sequence(startBlock - 1, endBlock - 1)}" th:text="${page+1}"></a>
+      <a class="next_btn" href="javascript:void(0)" th:data-page="${sugangList.number + 1}" th:if="${sugangList.hasNext()}"><span>다음</span></a>
+    </div>
+    <form id="actionForm" method="get" th:action="@{/p/score}">
+      <input type="hidden" id="page" name="page" th:value="${page}">
+      <input type="hidden" id="type" name="subject_no" th:value="${subjectNo}">
+    </form>
+    <!-- 페이징 끝 -->
   </div>
 </section>
-<script></script>
+<script>
+  $(document).ready(function () {
+    const csrfToken = $('meta[name="_csrf"]').attr('content');
+    const csrfHeader = $('meta[name="_csrf_header"]').attr('content');
+
+    $("#selectAll").on('click', function () {
+      $(".checkBox").prop("checked", this.checked);
+    })
+
+    $("#submitBtn").on('click', function () {
+      const data = [];
+      let hasError = false;
+      $("input[name='no']:checked").each(function () {
+        const row = $(this).closest('tr');
+        const no = $(this).val();
+        const assignment1 = row.find("input[name='assignment1']").val();
+        const assignment2 = row.find("input[name='assignment2']").val();
+        const semi_score = row.find("input[name='semi']").val();
+        const final_score = row.find("input[name='final']").val();
+
+        if (assignment1 === "" || assignment1 === null ||
+                assignment2 === "" || assignment2 === null ||
+                semi_score === "" || semi_score === null ||
+                final_score === "" || final_score === null) {
+          alert("모든 점수를 입력해주세요.");
+          hasError = true;
+          return false;
+        }
+        data.push({
+          no: no,
+          assignment1: assignment1,
+          assignment2: assignment2,
+          semi_score: semi_score,
+          final_score: final_score
+        })
+      })
+      if (hasError) {
+        return;
+      }
+
+      $.ajax({
+        url: '/p/modify/score',
+        type: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify(data),
+        beforeSend: function (xhr) {
+          xhr.setRequestHeader(csrfHeader, csrfToken);
+        },
+        success: function (response) {
+          alert(response);
+          $("actionForm").submit();
+        },
+        error: function (xhr, status, error) {
+          alert("저장 중 오류 발생: "+error);
+        }
+      })
+    })
+
+    $("#subjectSelect").on('change', function () {
+      $("#selectNum").val($(this).val());
+      $("#filterForm").submit();
+    })
+
+  })
+</script>
+<script th:src="@{/js/pagination.js}"></script>
 </body>
 </html>

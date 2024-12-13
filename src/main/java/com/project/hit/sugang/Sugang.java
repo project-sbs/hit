@@ -1,5 +1,6 @@
 package com.project.hit.sugang;
 
+import com.project.hit.grade.Grade;
 import com.project.hit.student.Student;
 import com.project.hit.subject.Subject;
 import jakarta.persistence.*;
@@ -38,4 +39,7 @@ public class Sugang {
 
     @Column(columnDefinition = "INT DEFAULT 0")
     private int assignment2;                    // 과제2
+
+    @OneToOne(mappedBy = "sugang", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Grade grade;
 }

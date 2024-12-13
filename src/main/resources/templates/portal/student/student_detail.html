@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/student/studentDetail.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/admin/adminHome.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/commonElement.css}" />
+    <title>Title</title>
+</head>
+<body>
+<header class="portal-head">
+    <div>
+        <h1><img src="/image/home/HitLogo.png" alt="" /></h1>
+    </div>
+</header>
+<div class="detail-type">
+    <span th:switch="${board.getType()}">
+        <span th:case="'notice'">공지사항</span>
+        <span th:case="'edu'">학사공지</span>
+        <span th:case="hire">채용공고</span>
+        <span th:case="'free'">자유게시판</span>
+    </span>
+</div>
+<h1 class="detail-title" th:text="${board.getTitle()}"></h1>
+<div class="detail-content" th:text="${board.getContent()}"></div>
+
+<div class="detail-navigation">
+    <div class="previous-board">
+        <a th:if="${previousBoard != null}" th:href="@{/s/detail/{id}(id=${previousBoard.getNo()})}">이전 게시글</a>
+    </div>
+
+    <div class="next-board">
+        <a th:if="${nextBoard != null}" th:href="@{/s/detail/{id}(id=${nextBoard.getNo()})}">다음 게시글</a>
+    </div>
+</div>
+</body>
+</html>

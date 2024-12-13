@@ -1,21 +1,115 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/reset.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/updateUserPwd.css}" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <meta name="_csrf" th:content="${_csrf.token}" />
+    <meta name="_csrf_header" th:content="${_csrf.headerName}" />
+    <title>비밀번호 변경</title>
 </head>
 <body>
-    <p th:text="${student.getId()}"></p>
-    <p th:text="${student.getName()}"></p>
-    <p th:text="${student.getEmail()}">
-    <form th:action="@{/update/password}" method="post">
+<div>
+    <h1><img src="/image/HitLogo.png" alt="" /></h1>
+    <form class="pwdForm" th:action="@{/modify/password}" method="post">
+        <div class="password-wrap">
+            <input type="password" id="password-input" name="password" placeholder="새로운 비밀번호를 입력하세요" />
+            <img class="toggle-visibility" src="/image/visibility_off.png" alt="" />
+        </div>
+        <span id="password-error-msg"></span>
+        <div class="password-wrap">
+            <input type="password" id="check-input" placeholder="비밀번호를 재 입력해주세요" />
+            <img class="toggle-visibility" src="/image/visibility_off.png" alt="" />
+        </div>
+        <span id="check-error-msg"></span>
+        <p>영문 대소문자/숫자/특수문자 중 2가지 이상조합, 8 ~ 16자</p>
+        <input type="submit" value="확인" id="submit-button" />
         <input type="hidden" name="id" th:value="${student.getId()}">
-        <label for="password-input">새 비밀번호</label>
-        <input text="password" id="password-input">
-        <label for="password-check">비밀번호 확인</label>
-        <input type="password" id="password-check" name="password">
-
-        <input type="button" value="확인">
     </form>
+</div>
 </body>
+<script>
+    $(document).ready(function() {
+        const pwd_error_msg = $("#password-error-msg");
+        const check_error_msg = $("#check-error-msg");
+
+        $('.toggle-visibility').on('click', function() {
+            const $input = $(this).siblings('input');
+
+            if ($input.attr('type') === 'password') {
+                $input.attr('type', 'text');
+                $(this).attr('src', '/image/visibility.png');
+            } else {
+                $input.attr('type', 'password');
+                $(this).attr('src', '/image/visibility_off.png');
+            }
+        });
+
+        $("#password-input").on('input', function () {
+            const inputVal = $(this).val().trim();
+
+            if(inputVal === "") {
+                return false;
+            }
+            const lengthValid = inputVal.length >= 8 && inputVal.length < 16;
+            const pwdRuleCheck = /[!@#$%.*^&+=]/.test(inputVal);
+            pwd_error_msg.hide();
+
+            if (!lengthValid || !pwdRuleCheck) {
+                pwd_error_msg.css('color', 'red');
+                if (!lengthValid) {
+                    pwd_error_msg.empty().text("8자리 이상 16자리 미만으로 설정하세요.").show();
+                } else {
+                    pwd_error_msg.empty().text("특수문자를 하나 이상 포함해야 합니다.").show();
+                }
+                return false;
+            } else {
+                pwd_error_msg.empty().text("유효한 비밀번호 입니다.").css('color', 'green').show();
+                return true;
+            }
+        })
+
+        $("#check-input").on('input', function () {
+            check_error_msg.hide();
+            const password = $("#password-input").val().trim();
+            const check_password = $("#check-input").val().trim();
+
+            if(password !== check_password) {
+                check_error_msg.css('color', 'red');
+                check_error_msg.empty().text("비밀번호가 일치하지 않습니다.").show();
+                return false;
+            } else {
+                check_error_msg.empty().text("비밀번호가 일치합니다.").css('color', 'green').show();
+                return true;
+            }
+        })
+
+        $(".pwdForm").on('submit', function (e) {
+            const password = $("#password-input").val().trim();
+            const checkPassword = $("#check-input").val().trim();
+
+            if (password === "" || checkPassword === "") {
+                alert("비밀번호를 입력하세요.");
+                e.preventDefault();
+                return false;
+            }
+
+            if ($("#password-error-msg").text() !== "유효한 비밀번호 입니다.") {
+                alert("비밀번호가 올바르지 않습니다.");
+                e.preventDefault();
+                return false;
+            }
+
+            if ($("#check-error-msg").text() !== "비밀번호가 일치합니다.") {
+                alert("비밀번호가 일치하지 않습니다.");
+                e.preventDefault();
+                return false;
+            }
+
+            return true;
+        })
+    });
+</script>
 </html>

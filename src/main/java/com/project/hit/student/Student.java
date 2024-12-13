@@ -1,5 +1,6 @@
 package com.project.hit.student;
 
+import com.project.hit.grade.Grade;
 import com.project.hit.major.Major;
 import com.project.hit.subject.Subject;
 import com.project.hit.sugang.Sugang;
@@ -46,4 +47,6 @@ public class Student {
     @OneToMany(mappedBy = "student")
     private List<Sugang> sugangList;
 
+    @OneToMany(mappedBy = "student")
+    private List<Grade> gradeList;
 }

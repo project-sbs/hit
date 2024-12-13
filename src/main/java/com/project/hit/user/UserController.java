@@ -5,6 +5,7 @@ import com.project.hit.student.StudentService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -43,7 +44,6 @@ public class UserController {
     public ResponseEntity<String> verifyCode(@RequestBody Map<String, String> data) {
         String email = data.get("emailValue");
         String code = data.get("codeValue");
-        System.out.println(email+" / "+code);
         boolean isSuccess = this.userService.checkCode(email, code);
 
         if (isSuccess) {
@@ -62,15 +62,19 @@ public class UserController {
             return "redirect:/login";
         }
         httpSession.removeAttribute("userId");
-        Student student = studentService.getStudentById(userId);
+        Student student = this.studentService.getStudentById(userId);
 
         model.addAttribute("student", student);
         return "update_user";
     }
 
-    /*@PostMapping("/update/password")
+    @PostMapping("/modify/password")
     public String updatePassword(@RequestParam("id") String id, @RequestParam("password") String password) {
         Student student = studentService.getStudentById(id);
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        student.setPassword(passwordEncoder.encode(password));
+        this.studentService.modifyPassword(student);
 
-    }*/
+        return "redirect:/login";
+    }
 }
