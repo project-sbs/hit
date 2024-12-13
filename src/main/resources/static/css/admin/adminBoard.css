@@ -1,6 +1,6 @@
 .portal-admin-notice {
     width: 100%;
-    border-left: #ececec 1px solid;
+    border-left: #d1d9e6 1px solid;
 }
 .portal-admin-notice-wrap form {
     width: 80%;
@@ -27,5 +27,4 @@
     margin-left: 1204px;
 }
 #scheduler{
-    display:none;
-}
+display:none;}

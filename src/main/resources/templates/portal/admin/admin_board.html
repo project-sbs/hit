@@ -5,14 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" th:href="@{/css/reset.css}" type="text/css" />
     <link rel="stylesheet" type="text/css" th:href="@{/css/commonElement.css}" />
-    <link rel="stylesheet" th:href="@{/css/admin/adminNotice.css}" type="text/css" />
+    <link rel="stylesheet" th:href="@{/css/admin/adminBoard.css}" type="text/css" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <title>Portal</title>
 </head>
 <body>
 <header class="portal-head">
     <div>
-        <h1><img src="/image/home/HitLogo.png" alt="" /></h1>
+        <h1><img src="/image/home/HitLogo2.png" alt="" /></h1>
+        <button class="logout-wrap" onclick="location.href='/logout'"><span class="logout-text">Logout</span><img src="/image/home/handgesture.png" alt="" class="logout-img"></button>
     </div>
 </header>
 <section class="portal-main">
@@ -34,6 +35,10 @@
                 <div><img src="/image/home/courseIcon.png" alt="" /></div>수강신청
             </li>
         </ul>
+        <footer>
+            <p>© 2024 HITuniv. All rights reserved.</p>
+            <p>모든 저작권 권리는 HIT대학교에 있습니다.</p>
+        </footer>
     </nav>
     <div class="portal-admin-notice">
         <h2>공지사항 기입</h2>

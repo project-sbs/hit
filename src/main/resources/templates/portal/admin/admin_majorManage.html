@@ -12,7 +12,8 @@
 <body>
 <header class="portal-head">
   <div>
-    <h1><img src="/image/home/HitLogo.png" alt="" /></h1>
+    <h1><img src="/image/home/HitLogo2.png" alt="" /></h1>
+    <button class="logout-wrap" onclick="location.href='/logout'"><span class="logout-text">Logout</span><img src="/image/home/handgesture.png" alt="" class="logout-img"></button>
   </div>
 </header>
 <section class="portal-main">
@@ -34,11 +35,15 @@
         <div><img src="/image/home/courseIcon.png" alt="" /></div>수강신청
       </li>
     </ul>
+    <footer>
+      <p>© 2024 HITuniv. All rights reserved.</p>
+      <p>모든 저작권 권리는 HIT대학교에 있습니다.</p>
+    </footer>
   </nav>
   <div class="portal-major-managing-frame">
     <h2>학과기입</h2>
-    <button class="portal-major-id-sort">학과아이디정렬</button>
-    <button class="portal-major-person-sort">인원수정렬</button>
+    <button class="portal-major-id-sort">아이디 정렬</button>
+    <button class="portal-major-person-sort">인원수 정렬</button>
     <button class="portal-major-add-button">학과 기입</button>
     <table>
       <thead>
@@ -58,7 +63,7 @@
         <td th:text="${#strings.isEmpty(major.getChair()) ? 'X' : major.getChair()}"></td>
         <td th:text="${#lists.size(major.getStudents())}"></td>
         <td th:text="${major.getTotalStudent()}"></td>
-        <td><button>x</button></td>
+        <td><button><img src="/image/home/close.png" alt=""></button></td>
       </tr>
       </tbody>
     </table>

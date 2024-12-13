@@ -3,16 +3,19 @@
     width: 100%;
     border-left: #ececec 1px solid;
 }
-.portal-class-managing-frame h2 {
-    padding: 3%;
-    margin-bottom: 5px;
-}
-.class-adder-button {
-    margin-left: 1400px;
+
+.btn-add-course {
+   margin-left: 1400px;
+    position: relative;
     width: 120px;
     height: 35px;
-    background: beige;
-    border: 1px solid #ddd;
+    top: -50px;
+   right: -30px;
+    background: #d3d3d3;
+    border: none;
+    color: black;
+    font-size: 16px;
+    font-weight: bold;
 }
 .portal-class-managing-frame ul {
     width: 90%;
@@ -26,13 +29,27 @@
     width: 90%;
     border-collapse: collapse;
     text-align: center;
-    border: 1px solid #ddd;
-    margin: 0 auto;
+   background-color: white;
+   color: #2c3e50;
+   border: 1px solid #e6e6e6;
+   box-shadow: 5px 5px 10px gray;
+   margin: 0 auto;
+   margin-top:10px;
 }
 .portal-class-managing-frame table th,
 .portal-class-managing-frame table td {
-    border: 1px solid #ddd;
-    width: 12.5px;
+    height: 50px;
+    width:10%;
+    border-bottom: 1px solid #e6e6e6;;
+}
+th {
+  background-color: #3f94f5;
+  color: white;
+  font-weight: bold;
+}
+
+td {
+  font-weight: 600;
 }
 /*.major-class-table th:last-of-type,
 .major-class-table td:last-of-type {
@@ -40,18 +57,7 @@
 }*/
 /*모달창*/
 /* 수강 과목 기입 버튼 */
-.btn-add-course {
-    background-color: #4caf50;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    cursor: pointer;
-    margin-left: 1428px;
-}
 
-.btn-add-course:hover {
-    background-color: #45a049;
-}
 
 /* 모달 창 */
 .modal-container {
@@ -122,17 +128,16 @@ label {
     color: #555;
 }
 
-select,
+#course-modal select,
 input[type="text"],
 input[type="number"] {
-    padding: 8px;
-    margin-bottom: 5px;
+    padding: 5px;
     border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 14px;
 }
 
-select:disabled {
+#course-modal select:disabled {
     background-color: #f1f1f1;
 }
 

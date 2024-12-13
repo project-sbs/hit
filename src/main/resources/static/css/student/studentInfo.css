@@ -1,154 +1,231 @@
-
 .portal-student-info {
-    width: 100%;
-    border-left: 1px solid #ececec;
+  width: 100%;
+  border-left: 1px solid #ececec;
 }
 .portal-student-info h2 {
-    padding: 2%;
-    margin-bottom: 5px;
+  padding: 2%;
+  margin-bottom: 5px;
 }
 .portal-student-info-basic {
-    width: 80%;
-    margin: 0 auto;
-    display: flex;
+  width: 80%;
+  margin: 0 auto;
+  display: flex;
 }
 .portal-student-pic {
-    width: 240px;
-    height: 250px;
-    border: 1px solid;
-    margin-right: 100px;
+  width: 240px;
+  height: 250px;
+  border: 1px solid #e6e6e6;
+  margin-right: 100px;
 }
 .portal-student-pic > img {
-    width: 240px;
-    height: 250px;
-    background-size: cover;
+  width: 240px;
+  height: 250px;
+  background-size: cover;
 }
 .portal-student-info-basic table {
-    display: flex;
-    border-collapse: collapse;
-    text-align: center;
-    border: 1px solid;
-    width: 100%;
+  display: flex;
+  border-collapse: collapse;
+  text-align: center;
+  border: 1px solid #e6e6e6;
+  width: 100%;
+}
+.portal-student-info-basic table th,
+.portal-student-info-basic table td {
+  border: 1px solid #e6e6e6;
 }
 .portal-student-info-basic table th {
-    height: 41.6px;
-    width: 173.8px;
+  height: 41.6px;
+  width: 173.8px;
+  background-color: #3f94f5;
+  color: white;
+  font-weight: bold;
 }
 .portal-student-info-basic table td {
-    width: 173.8px;
+  width: 173.8px;
 }
 .portal-student-info-specific-frame {
-    width: 80%;
-    margin: 0 auto;
-    margin-top: 30px;
+  width: 80%;
+  margin: 0 auto;
+  margin-top: 30px;
 }
 .portal-student-info-specific-controller {
-    display: flex;
-    width: 510px;
-    border-top: 1px solid;
+  display: flex;
+  width: 210px;
+  border-top: 1px solid #d4d4d4;
 }
 .portal-student-info-specific-controller li {
-    text-align: center;
-    width: 70px;
-    border-right: 1px solid;
+  text-align: center;
+  width: 70px;
+  border-right: 1px solid #d4d4d4;
+}
+.portal-student-info-specific-controller > li.active {
+  background-color: #007bff;
+  color: white;
+  font-weight: bold;
 }
 .portal-student-info-specific-controller li:nth-of-type(1) {
-    border-left: 1px solid;
+  border-left: 1px solid #d4d4d4;
 }
 .portal-student-info-specific-controller li:nth-of-type(5) {
-    width: 160px;
+  width: 160px;
 }
 .portal-student-info-specific {
-    width: 100%;
-    border: 1px solid;
-    height: 420px;
+  width: 100%;
+  border: 1px solid #d4d4d4;
+  height: 420px;
 }
-.portal-student-info-specific-basic {
-    width: 100%;
+.info-frame {
+  width: 100%;
 }
-.portal-student-info-specific-basic h3 {
-    padding: 2%;
+.info-frame h3 {
+  padding: 2%;
 }
-.portal-student-info-specific-basic table {
-    width: 90%;
-    margin: 5px auto;
-    border-collapse: collapse;
-    border: 1px solid #ddd;
+.info-frame table {
+  width: 90%;
+  margin: 5px auto;
+  border-collapse: collapse;
+  border: 1px solid #ddd;
+  text-align: left;
 }
-.portal-student-info-specific-basic table th {
-    padding-left: 30px;
-    width: 170px;
-    border: 1px solid #ddd;
+.info-frame table th {
+  padding-left: 10px;
+  width: 170px;
+  border: 1px solid #ddd;
+  background-color: #3f94f5;
+  color: white;
+  height: 30px;
 }
-.portal-student-info-specific-basic table td {
-    text-align: center;
-    width: 213px;
-    border: 1px solid #ddd;
+.info-frame table td {
+  text-align: center;
+  width: 213px;
+  border: 1px solid #ddd;
 }
-.portal-student-info-specific-basic table tr:nth-of-type(2) td:nth-of-type(1) {
-    width: 233px;
+.info-frame table tr:nth-of-type(2) td:nth-of-type(1) {
+  width: 233px;
 }
-.portal-student-info-specific-basic table tr:nth-of-type(2) td:nth-of-type(2) {
-    width: 233px;
+.info-frame table tr:nth-of-type(2) td:nth-of-type(2) {
+  width: 233px;
 }
-.portal-student-info-specific-basic table tr:nth-of-type(2) td:nth-of-type(3) {
-    width: 400px;
+.info-frame table tr:nth-of-type(2) td:nth-of-type(3) {
+  width: 400px;
 }
-.portal-student-info-specific-basic table tr:nth-of-type(3) td:nth-of-type(1) {
-    width: 400px;
+.info-frame table tr:nth-of-type(3) td:nth-of-type(1) {
+  width: 400px;
 }
-.portal-student-info-specific-basic ul {
-    width: 85%;
-    display: flex;
-    margin: 0 auto;
-    border: 1px solid;
-    text-align: center;
+.info-frame ul {
+  width: 85%;
+  display: flex;
+  margin: 0 auto;
+  border: 1px solid #d4d4d4;
+  text-align: center;
 }
-.portal-student-info-specific-basic ul li {
-    display: flex;
-    width: 25%;
+.info-frame ul li {
+  display: flex;
+  width: 25%;
 }
-.portal-student-info-specific-basic ul li:nth-of-type(2) {
-    border-left: 1px solid;
-    border-right: 1px solid;
-    margin-left: 5px;
+.info-frame ul li:nth-of-type(2) {
+  border-left: 1px solid #d4d4d4;
+  margin-left: 5px;
 }
-.portal-student-info-specific-basic ul li p {
-    width: 100px;
-    border-right: 1px solid;
-    margin-right: 5px;
+.info-frame ul li p {
+  width: 100px;
+  border-right: 1px solid #d4d4d4;
+  margin-right: 5px;
 }
-.portal-student-info-specific-basic ul li input {
-    border: none;
+.info-frame ul li input {
+  border: none;
 }
-.portal-student-info-specific-basic ul li select {
-    margin: 0 auto;
+.info-frame ul li select {
+  margin: 0 auto;
 }
-.portal-student-info-specific-basic ul li:nth-of-type(1) select {
-    margin: 0 auto;
-    width: 80%;
+.info-frame ul li:nth-of-type(1) select {
+  margin: 0 auto;
+  width: 80%;
 }
-.portal-student-info-specific-basic ul li:nth-of-type(2) input {
-    margin: 0 auto;
+.info-frame ul li:nth-of-type(2) input {
+  margin: 0 auto;
 }
-.portal-student-info-specific-basic ul li:nth-of-type(3) {
-    border-left: 1px solid;
-    border-right: 1px solid;
-    margin-left: 10px;
+.info-frame ul li:nth-of-type(3) {
+  border-left: 1px solid #d4d4d4;
+  margin-left: 10px;
 }
-.portal-student-info-specific-basic ul li:nth-of-type(4) {
-    border-left: 1px solid;
-    margin-left: 10px;
+.info-frame ul li:nth-of-type(4) {
+  border-left: 1px solid #d4d4d4;
+  margin-left: 10px;
 }
-.portal-student-info-specific > li:nth-of-type(1) {
-    margin-bottom: 30px;
+.info-frame select {
+  border: none;
 }
-.portal-student-info-specific li:nth-of-type(2) {
-    margin-left: 1160px;
+.info-frame button {
+  width: 120px;
+  height: 40px;
+  margin-left: 1120px;
+  margin-top: 50px;
+  background: orange;
+  border: none;
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
 }
-.portal-student-info-specific li:nth-of-type(2) button {
-    width: 120px;
-    height: 40px;
-    background: white;
+.portal-student-info-specific > li {
+  display: none;
 }
 /*-------------------------------portal-studentinfo-end-----------------------------------------*/
+.address-frame {
+  width: 100%;
+}
+.address-frame h3 {
+  padding: 2%;
+}
+.address-frame ul > li:nth-of-type(2) {
+  display: flex;
+  width: 80%;
+  margin: 0 auto;
+}
+.address-frame ul > li:nth-of-type(2) h4 {
+  border: 1px solid #d4d4d4;
+  width: 10%;
+  text-align: center;
+  line-height: 26px;
+  background-color: #3f94f5;
+  color: white;
+}
+.address-frame ul > li:nth-of-type(2) p {
+  border-top: 1px solid #d4d4d4;
+  border-bottom: 1px solid #d4d4d4;
+  border-right: 1px solid #d4d4d4;
+  width: 80%;
+  padding-left: 10px;
+}
+.address-frame ul > li:nth-of-type(4) {
+  width: 80%;
+  margin: 0 auto;
+}
+.address-frame ul > li:nth-of-type(4) input {
+  width: 25%;
+  height: 30px;
+  padding: 10px;
+}
+.address-frame ul > li:nth-of-type(4) input:last-of-type {
+  width: 39%;
+}
+.address-frame ul > li:nth-of-type(4) button {
+  background-color: orange;
+  border: none;
+  color: white;
+  font-weight: bold;
+  height: 30px;
+}
+.address-frame ul > li:last-of-type {
+  margin-left: 1120px;
+  margin-top: 50px;
+}
+.address-frame ul > li:last-of-type button {
+  width: 120px;
+  height: 40px;
+  background: orange;
+  border: none;
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+}

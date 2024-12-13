@@ -10,13 +10,15 @@
             href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap"
             rel="stylesheet"
     />
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <title>Portal</title>
 </head>
 <body>
 <header class="portal-head">
     <div>
-        <h1><img src="/image/home/HitLogo.png" alt="" /></h1>
+        <h1><img src="/image/home/HitLogo2.png" alt="" /></h1>
+        <button class="logout-wrap" onclick="location.href='/logout'"><span class="logout-text">Logout</span><img src="/image/home/handgesture.png" alt="" class="logout-img"></button>
     </div>
 </header>
 <section class="portal-main">
@@ -33,11 +35,11 @@
             <li class="portal-student-class-button" onclick="openNewWindow('/s/course', 1920, 1080); return false;">
                 <div><img src="/image/home/courseIcon.png" alt="" /></div>수강신청
             </li>
-            <footer>
-                <p>© 2024 HITuniv. All rights reserved.</p>
-                <p>모든 저작권 권리는 HIT대학교에 있습니다.</p>
-            </footer>
         </ul>
+        <footer>
+            <p>© 2024 HITuniv. All rights reserved.</p>
+            <p>모든 저작권 권리는 HIT대학교에 있습니다.</p>
+        </footer>
     </nav>
     <div class="portal-student-info portal-main-frame">
         <h2>학적사항</h2>
@@ -104,77 +106,128 @@
         </div>
         <div class="portal-student-info-specific-frame">
             <ul class="portal-student-info-specific-controller">
-                <li>기본</li>
-                <li>주소</li>
-                <li>등록</li>
-                <li>학적변동</li>
-                <li>부,복수/전공심화</li>
-                <li>자격어학</li>
+                <li class="info-frame-button" onclick="showFrame(0, this)">기본</li>
+                <li class="address-frame-button" onclick="showFrame(1, this)">
+                    주소
+                </li>
+                <li class="take-semester-frame-button" onclick="showFrame(2, this)">
+                    학적변동
+                </li>
             </ul>
             <ul class="portal-student-info-specific">
-                <li>
-                    <div class="portal-student-info-specific-basic">
-                        <h3>학적 기본 사항</h3>
-                        <table>
-                            <tr>
-                                <th>성명</th>
-                                <td th:text="${student.getName()}"></td>
-                                <th>연락처</th>
-                                <td th:text="${student.getPhone()}"></td>
-                                <th>생년월일</th>
-                                <td th:text="${student.getBirthday()}"></td>
-                            </tr>
-                            <tr>
-                                <th>휴학사용학기</th>
-                                <td>0</td>
-                                <th>휴학가능학기</th>
-                                <td>2</td>
-                                <th>복학예정일</th>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <th>전자우편주소</th>
-                                <td th:text="${student.getEmail()}"></td>
-                                <th>지도교수</th>
-                                <td>콘코드교수</td>
-                            </tr>
-                        </table>
-                        <h3>계좌정보</h3>
-                        <ul>
-                            <li>
-                                <p>은행</p>
-                                <select name="" id="">
-                                    <option value="">카카오뱅크</option>
-                                    <option value="">농협</option>
-                                    <option value="">하나은행</option>
-                                    <option value="">국민은행</option>
-                                    <option value="">기업은행</option>
-                                </select>
-                            </li>
-                            <li>
-                                <p>계좌번호</p>
-                                <input type="text" value="77717171717" />
-                            </li>
-                            <li>
-                                <p>예금주</p>
-                                <input type="text" value="길오성" />
-                            </li>
-                            <li>
-                                <p>관계</p>
-                                <select name="" id="">
-                                    <option value="">부</option>
-                                    <option value="">모</option>
-                                    <option value="">본인</option>
-                                </select>
-                            </li>
-                        </ul>
-                    </div>
+                <li class="info-frame">
+                    <h3>학적 기본 사항</h3>
+                    <table>
+                        <tr>
+                            <th>성명</th>
+                            <td>길오성</td>
+                            <th>성명(영문)</th>
+                            <td>gil oseong</td>
+                            <th>생년월일</th>
+                            <td>2077-07-07</td>
+                        </tr>
+                        <tr>
+                            <th>휴학사용학기</th>
+                            <td>0</td>
+                            <th>휴학가능학기</th>
+                            <td>2</td>
+                            <th>복학예정일</th>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th>전자우편주소</th>
+                            <td>amolang@and.com</td>
+                            <th>지도교수</th>
+                            <td>콘코드교수</td>
+                        </tr>
+                    </table>
+                    <h3>계좌정보</h3>
+                    <ul>
+                        <li>
+                            <p>은행</p>
+                            <select name="" id="">
+                                <option value="">카카오뱅크</option>
+                                <option value="">농협</option>
+                                <option value="">하나은행</option>
+                                <option value="">국민은행</option>
+                                <option value="">기업은행</option>
+                            </select>
+                        </li>
+                        <li>
+                            <p>계좌번호</p>
+                            <input type="text" value="77717171717" />
+                        </li>
+                        <li>
+                            <p>예금주</p>
+                            <input type="text" value="길오성" />
+                        </li>
+                        <li>
+                            <p>관계</p>
+                            <select name="" id="">
+                                <option value="">부</option>
+                                <option value="">모</option>
+                                <option value="">본인</option>
+                            </select>
+                        </li>
+                        <li></li>
+                    </ul>
+                    <button>등록하기</button>
                 </li>
-                <li><button>등록하기</button></li>
+                <li class="address-frame">
+                    <ul>
+                        <li><h3>주소 확인란</h3></li>
+                        <li>
+                            <h4>현재 주소</h4>
+                            <p>서울특별시 강남구 테헤란로 41길</p>
+                        </li>
+                        <li><h3>주소 변경란</h3></li>
+                        <li>
+                            <input type="text" id="zip-code" placeholder="우편번호" />
+                            <input type="text" id="address-1" placeholder="도로명" />
+                            <input type="text" placeholder="상세정보 입력하기" />
+                            <button onclick="execDaumPostcode()">우편번호찾기</button>
+                        </li>
+                        <li><button>등록하기</button></li>
+                    </ul>
+                </li>
+                <li class="take-semester-frame"></li>
             </ul>
         </div>
     </div>
 </section>
-<script></script>
+<script>
+    function showFrame(index, clickedButton) {
+        const frames = document.querySelectorAll(
+          ".portal-student-info-specific > li"
+        );
+
+        frames.forEach((frame, i) => {
+          frame.style.display = i === index ? "block" : "none";
+        });
+
+        // 버튼 스타일 변경
+        const buttons = document.querySelectorAll(
+          ".portal-student-info-specific-controller > li"
+        );
+        buttons.forEach((button) => button.classList.remove("active"));
+        clickedButton.classList.add("active");
+      }
+      function execDaumPostcode() {
+        new daum.Postcode({
+          oncomplete: function (data) {
+            document.getElementById("zip-code").value = data.zonecode;
+            document.getElementById("address-1").value = data.address;
+          },
+        }).open();
+      }
+      // 초기 설정: 첫 번째 프레임만 표시하고 첫 번째 버튼 활성화
+      document.addEventListener("DOMContentLoaded", () => {
+        const firstButton = document.querySelector(
+          ".portal-student-info-specific-controller > li"
+        );
+        firstButton.classList.add("active"); // 첫 번째 버튼에 기본 색상 적용
+        showFrame(0, firstButton);
+      });
+</script>
 </body>
 </html>
