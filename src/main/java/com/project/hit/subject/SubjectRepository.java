@@ -1,6 +1,7 @@
 package com.project.hit.subject;
 
 import com.project.hit.major.Major;
+import com.project.hit.professor.Professor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -23,6 +24,10 @@ public interface SubjectRepository extends JpaRepository<Subject, Integer> {
 
     // 전체 과목 페이징
     Page<Subject> findAllBySemesterContainingAndYearContaining(String semester, String year, Pageable pageable);
+
+    List<Subject> findSubjectByProfessor(Professor professor);
+
+    Subject findFirstByProfessor(Professor professor);
 }
 
 

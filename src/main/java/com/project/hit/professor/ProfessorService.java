@@ -4,6 +4,10 @@ import com.project.hit.DataNotFoundException;
 import com.project.hit.major.Major;
 import com.project.hit.major.MajorRepository;
 import com.project.hit.major.MajorService;
+import com.project.hit.subject.Subject;
+import com.project.hit.subject.SubjectRepository;
+import com.project.hit.sugang.Sugang;
+import com.project.hit.sugang.SugangService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
@@ -21,6 +25,8 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class ProfessorService {
     private final ProfessorRepository professorRepository;
+    private final SubjectRepository subjectRepository;
+    private final SugangService sugangService;
     private final MajorRepository majorRepository;
     private final MajorService majorService;
     private final ModelMapper modelMapper = new ModelMapper();
@@ -121,4 +127,13 @@ public class ProfessorService {
         List<Professor> professors = this.professorRepository.findAll();
         return professors.stream().map(p -> modelMapper.map(p, ProfessorDTO.class)) .collect(Collectors.toList());
     }
+
+    public List<Subject> getProfessorSubjects(Professor professor) {
+        return this.subjectRepository.findSubjectByProfessor(professor);
+    }
+
+    public Subject getFirstProfessorSubject(Professor professor) {
+        return this.subjectRepository.findFirstByProfessor(professor);
+    }
+
 }

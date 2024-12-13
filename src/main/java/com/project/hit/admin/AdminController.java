@@ -264,7 +264,7 @@ public class AdminController {
     @PostMapping("/modify/student")
     public String modifyStudent(@RequestParam("major") int major, @RequestParam("studentId") String id, @RequestParam("name") String name, @RequestParam("dob") String dob,
                                 @RequestParam("phone") String phone, @RequestParam("email") String email, @RequestParam("credits") String credits,
-                                @RequestParam("status") String status, Principal principal) {
+                                @RequestParam("status") String status) {
         Student student = new Student();
         Major mjr = this.majorService.getMajor(major);
         student.setMajor(mjr);

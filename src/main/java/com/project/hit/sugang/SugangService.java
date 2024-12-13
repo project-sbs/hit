@@ -1,6 +1,9 @@
 package com.project.hit.sugang;
 
 import com.project.hit.DataNotFoundException;
+import com.project.hit.grade.Grade;
+import com.project.hit.grade.GradeRepository;
+import com.project.hit.grade.GradeService;
 import com.project.hit.student.Student;
 import com.project.hit.subject.Subject;
 import com.project.hit.subject.SubjectRepository;
@@ -17,6 +20,8 @@ import java.util.Optional;
 public class SugangService {
     private final SugangRepository sugangRepository;
     private final SubjectRepository subjectRepository;
+    private final GradeRepository gradeRepository;
+    private final GradeService gradeService;
 
     public List<Sugang> getCurrentSugangs(Student student, String semester, String year) {
         return this.sugangRepository.findCurrentSubjectList(student, semester, year);
@@ -31,7 +36,14 @@ public class SugangService {
                 sugang.setStudent(student);
                 sugang.setReg_date(today);
                 sugang.setSubject(_subject.get());
-                this.sugangRepository.save(sugang);
+                Sugang _sugang = this.sugangRepository.save(sugang);
+                Grade grade = new Grade();
+                grade.setStudent(student);
+                grade.setYear(_sugang.getSubject().getYear());
+                grade.setSemester(_sugang.getSubject().getSemester());
+                grade.setSugang(_sugang);
+                grade.setGrade("미반영");
+                this.gradeRepository.save(grade);
             } else {
                 throw new IllegalArgumentException("Subject not found");
             }
@@ -144,6 +156,31 @@ public class SugangService {
             return true;
         } else {
             throw new DataNotFoundException("Subject not found");
+        }
+    }
+
+    public void updateSugang(Sugang sugang) {
+        Sugang _sugang = this.sugangRepository.save(sugang);
+        if (_sugang.getFinal_score() != 0) {        // 기말점수 입력 된 상태. -> 등급 update O
+            Grade grade = this.gradeRepository.findGradeBySugang(_sugang);
+            int total;
+            if (_sugang.getFinal_score() > 0) {
+                total = _sugang.getAssignment1() + _sugang.getAssignment2() + _sugang.getSemi_score() + _sugang.getFinal_score();
+            } else {
+                total = _sugang.getAssignment1() + _sugang.getAssignment2() + _sugang.getSemi_score();
+            }
+            grade.setTotal_point(total);
+            this.gradeRepository.save(grade);
+            this.gradeService.updateGrade(_sugang.getSubject().getNo());
+        }
+    }
+
+    public Sugang getSugang(int no) {
+        Optional<Sugang> _sugang = this.sugangRepository.findByNo(no);
+        if(_sugang.isPresent()) {
+            return _sugang.get();
+        } else {
+            throw new DataNotFoundException("Sugang not found No: " + no);
         }
     }
 }

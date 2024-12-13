@@ -3,6 +3,8 @@ package com.project.hit.subject;
 import com.project.hit.DataNotFoundException;
 import com.project.hit.major.Major;
 import com.project.hit.major.MajorRepository;
+import com.project.hit.sugang.Sugang;
+import com.project.hit.sugang.SugangRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -20,6 +22,7 @@ public class SubjectService {
 
     private final SubjectRepository subjectRepository;
     private final MajorRepository majorRepository;
+    private final SugangRepository sugangRepository;
 
     public Subject addSubject(Subject subject) {
         this.subjectRepository.save(subject);
@@ -58,5 +61,16 @@ public class SubjectService {
         sorts.add(Sort.Order.desc("no"));
         Pageable pageable = PageRequest.of(page, 10, Sort.by(sorts));
         return this.subjectRepository.findAllBySemesterContainingAndYearContaining(semester, year, pageable);
+    }
+
+    public Subject getSubject(int no) {
+        return this.subjectRepository.findByNo(no);
+    }
+
+    public Page<Sugang> getSubjectSugangs(Subject subject, int page) {
+        List<Sort.Order> sorts = new ArrayList<>();
+        sorts.add(Sort.Order.desc("no"));
+        Pageable pageable = PageRequest.of(page, 10, Sort.by(sorts));
+        return this.sugangRepository.findSugangsBySubject(subject, pageable);
     }
 }

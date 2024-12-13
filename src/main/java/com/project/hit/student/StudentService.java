@@ -8,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -80,7 +81,7 @@ public class StudentService {
             temp.setName(student.getName());
             temp.setBirthday(student.getBirthday());
             temp.setPhone(student.getPhone());
-            if(!temp.getEmail().equals(student.getEmail())) {
+            if (!temp.getEmail().equals(student.getEmail())) {
                 temp.setEmail(student.getEmail());
             }
             temp.setBirthday(student.getBirthday());
@@ -93,5 +94,9 @@ public class StudentService {
 
     public boolean isMatchedIdAndEmail(String id, String email) {
         return this.studentRepository.existsByIdAndEmail(id, email);
+    }
+
+    public void modifyPassword(Student student) {
+        this.studentRepository.save(student);
     }
 }
