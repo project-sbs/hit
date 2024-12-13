@@ -40,9 +40,11 @@
 }
 .login-logo {
   width: 125px;
-  height: 38px;
-  border: 1px solid blue;
+  height: 50px;
   margin-right: 38px;
+}
+.login-logo{
+background: url(../image/HitLogo.png) no-repeat center center/cover;
 }
 .login-top ul {
   display: flex;
@@ -52,7 +54,7 @@
   font-weight: bold;
   line-height: 38px;
 }
-.login-top ul li:nth-of-type(2) {
+.login-top ul li:nth-of-type(1) {
   margin-left: 5px;
   margin-right: 5px;
 }
@@ -73,7 +75,7 @@
   width: 408px;
   height: 48px;
 }
-.login-input-box p:nth-of-type(2) {
+.login-input-box p:nth-of-type(1) {
   font-size: 14px;
   color: red;
   font-weight: lighter;
