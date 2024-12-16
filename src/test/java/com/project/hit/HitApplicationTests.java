@@ -2,6 +2,8 @@ package com.project.hit;
 
 import com.project.hit.admin.Admin;
 import com.project.hit.admin.AdminService;
+import com.project.hit.course.Course;
+import com.project.hit.course.CourseService;
 import com.project.hit.major.Major;
 import com.project.hit.major.MajorService;
 import com.project.hit.professor.Professor;
@@ -24,6 +26,8 @@ class HitApplicationTests {
 	private StudentService studentService;
 	@Autowired
 	private ProfessorService professorService;
+	@Autowired
+	private CourseService courseService;
 
 	@Test
 	void contextLoads() {
@@ -357,5 +361,12 @@ class HitApplicationTests {
 		professor9.setPhone("010-1010-1010");
 		professor9.setMajor(this.majorService.getMajor(5));
 		this.professorService.insertProfessor(professor9);
+	}
+
+	@Test
+	void testInsertCourseStatus() {
+		Course course = new Course();
+		course.setStatus("OPEN");
+		this.courseService.addCourse(course);
 	}
 }

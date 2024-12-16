@@ -1,6 +1,7 @@
 package com.project.hit.board;
 
 import com.project.hit.DataNotFoundException;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +13,7 @@ import java.util.Optional;
 public class BoardService {
     private final BoardRepository boardRepository;
 
+    @Transactional
     public void insertBoard(Board board) {
         boardRepository.save(board);
     }

@@ -7,6 +7,7 @@ import com.project.hit.major.MajorService;
 import com.project.hit.subject.Subject;
 import com.project.hit.subject.SubjectRepository;
 import com.project.hit.sugang.SugangService;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
@@ -30,11 +31,13 @@ public class ProfessorService {
     private final MajorService majorService;
     private final ModelMapper modelMapper = new ModelMapper();
 
+    @Transactional
     public Professor addProfessor(Professor professor) {
         this.professorRepository.save(professor);
         return professor;
     }
 
+    @Transactional
     public void insertProfessor(Professor professor) {      // test 상의 더미 데이터 insert 시 사용하는 메서드
         this.professorRepository.save(professor);
     }
@@ -73,6 +76,7 @@ public class ProfessorService {
         return this.professorRepository.findAllByOrderByNoDesc(pageable);
     }
 
+    @Transactional
     public void updateProfessor(Professor professor) {
         Optional<Professor> prof = this.professorRepository.findById(professor.getId());
         if (prof.isPresent()) {

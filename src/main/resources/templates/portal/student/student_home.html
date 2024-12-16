@@ -28,7 +28,7 @@
                 <div><img src="/image/home/searchIcon.png" alt="" /></div>학점확인
             </li>
             <li class="portal-student-report-button" onclick="location.href='/s/report'"><div><img src="/image/home/reportIcon.png" alt="" /></div>과제제출</li>
-            <li class="portal-student-class-button" onclick="openNewWindow('/s/course', 1920, 1080); return false;">
+            <li class="portal-student-course-button">
                 <div><img src="/image/home/courseIcon.png" alt="" /></div>수강신청</li>
             <li class="portal-attendance-button" onclick="location.href='/Attendance/AttendanceCalendarStudent'"><div><img src="/image/home/Attendance.png" alt="" /></div>출석부</li>
         </ul>
@@ -520,19 +520,7 @@
         openNewWindow("/s/detail/" + noticeNo, 1000, 800);
         return false;
     })
-
-     // 새 창 띄우는 스크립트
-    function openNewWindow(url, width, height) {
-        var screenWidth = window.innerWidth;
-        var screenHeight = window.innerHeight;
-
-        var left = (screenWidth - width) / 2 + window.screenX;
-        var top = (screenHeight - height) / 2 + window.screenY;
-
-        window.open(url, '_blank', `width=${width},height=${height},top=${top},left=${left}`);
-    }
-
-
 </script>
+<script th:src="@{/js/common.js}"></script>
 </body>
 </html>
