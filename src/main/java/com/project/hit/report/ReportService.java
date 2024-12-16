@@ -1,6 +1,7 @@
 package com.project.hit.report;
 
 import com.project.hit.subject.Subject;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
@@ -18,6 +19,7 @@ public class ReportService {
     private final ReportRepository reportRepository;
     private final ModelMapper modelMapper = new ModelMapper();
 
+    @Transactional
     public void insertReport(Report report) {
         reportRepository.save(report);
     }

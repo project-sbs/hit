@@ -27,6 +27,7 @@ public class SugangService {
         return this.sugangRepository.findCurrentSubjectList(student, semester, year);
     }
 
+    @Transactional
     public void insertSugang(List<Integer> subjectIds, Student student) {
         for(int no : subjectIds) {
             Optional<Subject> _subject = subjectRepository.findById(no);
@@ -159,6 +160,7 @@ public class SugangService {
         }
     }
 
+    @Transactional
     public void updateSugang(Sugang sugang) {
         Sugang _sugang = this.sugangRepository.save(sugang);
         if (_sugang.getFinal_score() != 0) {        // 기말점수 입력 된 상태. -> 등급 update O

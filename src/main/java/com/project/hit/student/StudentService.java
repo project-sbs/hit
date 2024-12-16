@@ -3,6 +3,7 @@ package com.project.hit.student;
 import com.project.hit.DataNotFoundException;
 import com.project.hit.major.Major;
 import com.project.hit.major.MajorRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -21,11 +22,13 @@ public class StudentService {
     private final StudentRepository studentRepository;
     private final MajorRepository majorRepository;
 
+    @Transactional
     public Student addStudent(Student student) {
         this.studentRepository.save(student);
         return student;
     }
 
+    @Transactional
     public void insertStudent(Student student) {    // test 상의 더미 데이터 insert 시 사용하는 메서드
         this.studentRepository.save(student);
     }
@@ -73,6 +76,7 @@ public class StudentService {
         return this.studentRepository.findAllByOrderByNoDesc(pageable);
     }
 
+    @Transactional
     public void updateStudent(Student student) {
         Optional<Student> stud = this.studentRepository.findById(student.getId());
         if (stud.isPresent()) {
@@ -96,6 +100,7 @@ public class StudentService {
         return this.studentRepository.existsByIdAndEmail(id, email);
     }
 
+    @Transactional
     public void modifyPassword(Student student) {
         this.studentRepository.save(student);
     }

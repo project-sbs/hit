@@ -34,8 +34,8 @@
         <h2>과제확인</h2>
         <div class="portal-professor-report-check-wrap">
             <select id="selectSubject">
-                <option th:if="${subjectList.isEmpty()}" disabled>=== 과목선택 ===</option>
-                <option th:each="subject, loop : ${subjectList}" th:selected="${subjectNo == subject.getNo()}" th:value="${subject.getNo()}" th:text="${subject.getName()}"></option>
+                <option th:selected="${isEmpty}" disabled>=== 과목선택 ===</option>
+                <option th:if="${!subjectList.isEmpty()}" th:each="subject, loop : ${subjectList}" th:selected="${subjectNo == subject.getNo()}" th:value="${subject.getNo()}" th:text="${subject.getName()}"></option>
             </select>
             <form id="filterForm" th:action="@{/p/report}" method="get">
                 <input type="hidden" name="subjectNo" id="subjectNo" th:value="${subjectNo}">
@@ -69,10 +69,13 @@
                         </div>
                     </td>
                 </tr>
+                <tr th:if="${isEmpty}">
+                    <td colspan="6">조회 목록이 비었습니다.</td>
+                </tr>
                 </tbody>
             </table>
             <!-- 페이징 시작 -->
-            <div class="pagination" th:if="${!reportList.isEmpty()}">
+            <div class="pagination" th:if="${!isEmpty}">
                 <a class="prev_btn" href="javascript:void(0)" th:data-page="${reportList.number - 1}" th:if="${reportList.number != 0}"><span>이전</span></a>
                 <a class="page_link"
                    href="javascript:void(0)" th:classappend="${page == reportList.number} ? 'on'" th:data-page="${page}" th:each="page: ${#numbers.sequence(startBlock - 1, endBlock - 1)}" th:text="${page+1}"></a>

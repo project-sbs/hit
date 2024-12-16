@@ -1,6 +1,7 @@
 package com.project.hit.admin;
 
 import com.project.hit.DataNotFoundException;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -11,6 +12,7 @@ import java.util.Optional;
 public class AdminService {
     private final AdminRepository adminRepository;
 
+    @Transactional
     public void insertAdmin(Admin admin) {
         this.adminRepository.save(admin);
     }

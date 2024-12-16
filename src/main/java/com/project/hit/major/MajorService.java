@@ -1,6 +1,7 @@
 package com.project.hit.major;
 
 import com.project.hit.DataNotFoundException;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -22,6 +23,7 @@ public class MajorService {
         }
     }
 
+    @Transactional
     public void insertMajor(Major major) {this.majorRepository.save(major);}
 
     public List<Major> getAllMajors() {
@@ -29,6 +31,7 @@ public class MajorService {
         return this.majorRepository.findAll(sort);
     }
 
+    @Transactional
     public void updateChairMan(Major major, String name) {
         Optional<Major> _major = this.majorRepository.findById(major.getId());
         if (_major.isPresent()) {
@@ -40,6 +43,7 @@ public class MajorService {
         }
     }
 
+    @Transactional
     public void updateChairMan(Major major) {
         Optional<Major> _major = this.majorRepository.findById(major.getId());
         if (_major.isPresent()) {

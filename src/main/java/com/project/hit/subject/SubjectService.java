@@ -5,6 +5,7 @@ import com.project.hit.major.Major;
 import com.project.hit.major.MajorRepository;
 import com.project.hit.sugang.Sugang;
 import com.project.hit.sugang.SugangRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -24,11 +25,13 @@ public class SubjectService {
     private final MajorRepository majorRepository;
     private final SugangRepository sugangRepository;
 
+    @Transactional
     public Subject addSubject(Subject subject) {
         this.subjectRepository.save(subject);
         return subject;
     }
 
+    @Transactional
     public void insertSubject(Subject subject) {
         this.subjectRepository.save(subject);
     }

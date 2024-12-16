@@ -65,10 +65,22 @@ public class ProfessorController {
         String semester = getSemester(month);
         List<Subject> subjectList = this.professorService.getProfessorSubjects(professor, year, semester);
         if (subjectNo == 0) {
-            subjectNo = this.professorService.getFirstProfessorSubject(professor, year, semester).getNo();
+            Subject _subject = this.professorService.getFirstProfessorSubject(professor, year, semester);
+            if (_subject != null) {
+                subjectNo = _subject.getNo();
+            } else {
+                boolean isEmpty = true;
+                model.addAttribute("isEmpty", isEmpty);
+                model.addAttribute("professor", professor);
+                return "portal/professor/professor_report_check";
+            }
         }
         Subject subject = this.subjectService.getSubject(subjectNo);
         Page<Report> reportList = this.reportService.getReportsPagingList(subject, page);
+        boolean isEmpty = false;
+        if (reportList.isEmpty()) {
+            isEmpty = true;
+        }
         Map<Integer, List<FileData>> fileDataMap = new HashMap<>();
 
         for (Report report : reportList.getContent()) {
@@ -105,6 +117,7 @@ public class ProfessorController {
         model.addAttribute("fileDataMap", fileDataMap);
         model.addAttribute("startBlock", startBlock);
         model.addAttribute("endBlock", endBlock);
+        model.addAttribute("isEmpty", isEmpty);
         return "portal/professor/professor_report_check";
     }
 
@@ -139,10 +152,22 @@ public class ProfessorController {
         String semester = getSemester(month);
         List<Subject> subjectList = this.professorService.getProfessorSubjects(professor, year, semester);
         if (subject_no == 0) {
-            subject_no = this.professorService.getFirstProfessorSubject(professor, year, semester).getNo();
+            Subject _subject = this.professorService.getFirstProfessorSubject(professor, year, semester);
+            if (_subject != null) {
+                subject_no = _subject.getNo();
+            } else {
+                boolean isEmpty = true;
+                model.addAttribute("isEmpty", isEmpty);
+                model.addAttribute("professor", professor);
+                return "portal/professor/professor_score";
+            }
         }
         Subject subject = this.subjectService.getSubject(subject_no);
         Page<Sugang> sugangList = this.subjectService.getSubjectSugangs(subject, page);
+        boolean isEmpty = false;
+        if (sugangList.isEmpty()) {
+            isEmpty = true;
+        }
 
         int totalPage = sugangList.getTotalPages();
         int block = 5;
@@ -158,6 +183,7 @@ public class ProfessorController {
         model.addAttribute("page", page);
         model.addAttribute("startBlock", startBlock);
         model.addAttribute("endBlock", endBlock);
+        model.addAttribute("isEmpty", isEmpty);
         return "portal/professor/professor_score";
     }
 

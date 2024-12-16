@@ -31,9 +31,9 @@
                 <div><img src="/image/home/searchIcon.png" alt="" /></div>학점확인
             </li>
             <li class="portal-student-report-button" onclick="location.href='/s/report'"><div><img src="/image/home/reportIcon.png" alt="" /></div>과제제출</li>
-            <li class="portal-student-class-button" onclick="openNewWindow('/s/course', 1920, 1080); return false;">
-                <div><img src="/image/home/courseIcon.png" alt="" /></div>수강신청
-            </li>
+            <li class="portal-student-course-button">
+                <div><img src="/image/home/courseIcon.png" alt="" /></div>수강신청</li>
+            <li class="portal-attendance-button" onclick="location.href='/Attendance/AttendanceCalendarStudent'"><div><img src="/image/home/Attendance.png" alt="" /></div>출석부</li>
         </ul>
         <footer>
             <p>© 2024 HITuniv. All rights reserved.</p>
@@ -246,5 +246,6 @@
         }
     });
 </script>
+<script th:src="@{/js/common.js}"></script>
 </body>
 </html>
