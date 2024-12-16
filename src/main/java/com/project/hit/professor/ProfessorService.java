@@ -6,7 +6,6 @@ import com.project.hit.major.MajorRepository;
 import com.project.hit.major.MajorService;
 import com.project.hit.subject.Subject;
 import com.project.hit.subject.SubjectRepository;
-import com.project.hit.sugang.Sugang;
 import com.project.hit.sugang.SugangService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -128,12 +127,20 @@ public class ProfessorService {
         return professors.stream().map(p -> modelMapper.map(p, ProfessorDTO.class)) .collect(Collectors.toList());
     }
 
-    public List<Subject> getProfessorSubjects(Professor professor) {
-        return this.subjectRepository.findSubjectByProfessor(professor);
+    public List<Subject> getProfessorSubjects(Professor professor, String year, String semester) {
+        return this.subjectRepository.findSubjectByProfessor(professor, year, semester);
     }
 
-    public Subject getFirstProfessorSubject(Professor professor) {
-        return this.subjectRepository.findFirstByProfessor(professor);
+    public Page<Subject> getSubjectListByYear(Professor professor, String year, String semester, int page) {
+        List<Sort.Order> sorts = new ArrayList<>();
+        sorts.add(Sort.Order.desc("no"));
+        Pageable pageable = PageRequest.of(page, 10, Sort.by(sorts));
+
+        return this.subjectRepository.findSubjectPageByProfessor(professor, year, semester, pageable);
+    }
+
+    public Subject getFirstProfessorSubject(Professor professor, String year, String semester) {
+        return this.subjectRepository.findTopByProfessorOrderByNoDesc(professor, year, semester);
     }
 
 }

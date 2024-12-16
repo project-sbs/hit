@@ -33,11 +33,13 @@
     <div class="portal-professor-report-check portal-main-frame">
         <h2>과제확인</h2>
         <div class="portal-professor-report-check-wrap">
-            <select name="" id="">
-                <option value="">과목1</option>
-                <option value="">과목2</option>
-                <option value="">과목3</option>
+            <select id="selectSubject">
+                <option th:if="${subjectList.isEmpty()}" disabled>=== 과목선택 ===</option>
+                <option th:each="subject, loop : ${subjectList}" th:selected="${subjectNo == subject.getNo()}" th:value="${subject.getNo()}" th:text="${subject.getName()}"></option>
             </select>
+            <form id="filterForm" th:action="@{/p/report}" method="get">
+                <input type="hidden" name="subjectNo" id="subjectNo" th:value="${subjectNo}">
+            </form>
             <table>
                 <thead>
                 <tr>
@@ -50,42 +52,48 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>과목1</td>
-                    <td>20115022</td>
-                    <td>길오성1</td>
-                    <td>과제입니다1</td>
-                    <td>2022-02-03</td>
-                    <td>파일</td>
-                </tr>
-                <tr>
-                    <td>과목2</td>
-                    <td>20115023</td>
-                    <td>길오성2</td>
-                    <td>과제입니다2</td>
-                    <td>2022-02-03</td>
-                    <td>파일</td>
-                </tr>
-                <tr>
-                    <td>과목3</td>
-                    <td>20115024</td>
-                    <td>길오성3</td>
-                    <td>과제입니다3</td>
-                    <td>2022-02-03</td>
-                    <td>파일</td>
-                </tr>
-                <tr>
-                    <td>과목4</td>
-                    <td>20115025</td>
-                    <td>길오성4</td>
-                    <td>과제입니다4</td>
-                    <td>2022-02-03</td>
-                    <td>파일</td>
+                <tr th:if="${!reportList.isEmpty()}" th:each="report, loop : ${reportList}">
+                    <td th:text="${report.getSubject().getName()}"></td>
+                    <td th:text="${report.getStudent().getId()}"></td>
+                    <td th:text="${report.getStudent().getName()}"></td>
+                    <td th:text="${report.getTitle()}"></td>
+                    <td th:text="${#temporals.format(report.getRegDate(), 'yyyy-MM-dd HH:mm')}"></td>
+                    <td>
+                        <div class="dropdown">
+                            <p class="dropbtn">더 보기</p>
+                            <div class="dropdown-content">
+                                <a th:each="file, loop : ${fileDataMap[report.getNo()]}"
+                                   th:href="@{|/p/report/download?no=${report.getNo()}&filename=${file.getEncodeName()}|}"
+                                   th:text="${file.getDecodeName()}" th:attr="title=${file.getDecodeName()}"></a>
+                            </div>
+                        </div>
+                    </td>
                 </tr>
                 </tbody>
             </table>
+            <!-- 페이징 시작 -->
+            <div class="pagination" th:if="${!reportList.isEmpty()}">
+                <a class="prev_btn" href="javascript:void(0)" th:data-page="${reportList.number - 1}" th:if="${reportList.number != 0}"><span>이전</span></a>
+                <a class="page_link"
+                   href="javascript:void(0)" th:classappend="${page == reportList.number} ? 'on'" th:data-page="${page}" th:each="page: ${#numbers.sequence(startBlock - 1, endBlock - 1)}" th:text="${page+1}"></a>
+                <a class="next_btn" href="javascript:void(0)" th:data-page="${reportList.number + 1}" th:if="${reportList.hasNext()}"><span>다음</span></a>
+            </div>
+            <form id="actionForm" method="get" th:action="@{/p/report}">
+                <input type="hidden" id="page" name="page" th:value="${page}">
+                <input type="hidden" id="type" name="subjectNo" th:value="${subjectNo}">
+            </form>
+            <!-- 페이징 끝 -->
         </div>
     </div>
 </section>
+<script>
+    $(document).ready(function () {
+        $("#selectSubject").on('change', function () {
+            $("#subjectNo").val($(this).val());
+            $("#filterForm").submit();
+        })
+    })
+</script>
+<script th:src="@{/js/pagination.js}"></script>
 </body>
 </html>

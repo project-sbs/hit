@@ -2,23 +2,37 @@ package com.project.hit.student;
 
 import com.project.hit.board.Board;
 import com.project.hit.board.BoardService;
+import com.project.hit.grade.Grade;
+import com.project.hit.grade.GradeService;
+import com.project.hit.grade.TotalGradeDTO;
 import com.project.hit.major.Major;
 import com.project.hit.major.MajorService;
+import com.project.hit.report.Report;
+import com.project.hit.report.ReportService;
 import com.project.hit.subject.Subject;
 import com.project.hit.subject.SubjectService;
 import com.project.hit.sugang.Sugang;
 import com.project.hit.sugang.SugangService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.security.Principal;
 import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 @Controller
 @RequiredArgsConstructor
@@ -30,6 +44,18 @@ public class StudentController {
     private final MajorService majorService;
     private final SubjectService subjectService;
     private final BoardService boardService;
+    private final GradeService gradeService;
+    private final ReportService reportService;
+
+    @Value("${upload.dir}/report/")
+    private String uploadDir;
+
+    private void createUploadDir() {
+        File dir = new File(uploadDir);
+        if (!dir.exists()) {
+            dir.mkdirs();
+        }
+    }
 
     @GetMapping("/home")
     public String home(Model model, Principal principal) {
@@ -69,17 +95,82 @@ public class StudentController {
     @GetMapping("/score")
     public String score(Model model, Principal principal) {
         Student student = this.studentService.getStudentById(principal.getName());
+        List<String[]> yearAndSemesters = this.gradeService.getYearAndSemester(student);
+        List<TotalGradeDTO> totalGradeDTOList = this.gradeService.getTotalGrade(yearAndSemesters, student);
+        List<Sugang> sugangList = this.sugangService.getSugangList(student);
+        List<Grade> gradeList = this.gradeService.getGradeList(student);
+        int courseCredits = 0;
+        int totalCredits = 0;
+        double percentage = 0;
+        for (TotalGradeDTO totalGradeDTO : totalGradeDTOList) {
+            courseCredits += totalGradeDTO.getCourseCredits();
+            totalCredits += totalGradeDTO.getTotalCredits();
+            percentage += totalGradeDTO.getDivScore();
+        }
+        percentage = (percentage / totalGradeDTOList.size()) * 10 + 54;
 
         model.addAttribute("student", student);
+        model.addAttribute("totalGradeDTOList", totalGradeDTOList);
+        model.addAttribute("sugangList", sugangList);
+        model.addAttribute("gradeList", gradeList);
+        model.addAttribute("courseCredits", courseCredits);
+        model.addAttribute("totalCredits", totalCredits);
+        model.addAttribute("percentage", percentage);
         return "portal/student/student_score";
     }
 
     @GetMapping("/report")
     public String report(Model model, Principal principal) {
         Student student = this.studentService.getStudentById(principal.getName());
+        LocalDateTime today = LocalDateTime.now();
+        String year = String.valueOf(today.getYear());
+        int month = today.getMonthValue();
+        String semester = getSemester(month);
+        List<Sugang> sugangList = this.sugangService.getCurrentSugangs(student, semester, year);
 
         model.addAttribute("student", student);
+        model.addAttribute("sugangList", sugangList);
         return "portal/student/student_report";
+    }
+
+    @PostMapping("/report/insert")
+    @ResponseBody
+    public Map<String, String> insertReport(@RequestParam("files") List<MultipartFile> files, @RequestParam("title") String title,
+                                            @RequestParam("selectNo") int selectNo , Principal principal) {
+        Map<String, String> response = new HashMap<>();
+        createUploadDir();
+        try {
+            Student student = this.studentService.getStudentById(principal.getName());
+            Subject subject = this.subjectService.getSubject(selectNo);
+            String folderPath = subject.getNo() + "/" + UUID.randomUUID();
+            File folder = new File(uploadDir + folderPath);
+            if (!folder.exists()) {
+                folder.mkdirs();
+            }
+            for (MultipartFile file : files) {
+                String fileName = file.getOriginalFilename();
+                Path filePath = Paths.get(folder.getAbsolutePath(), fileName);
+                Files.write(filePath, file.getBytes());
+            }
+            Report report = new Report();
+
+            report.setTitle(title);
+            report.setStudent(student);
+            report.setSubject(subject);
+            report.setFilePath(folder.getAbsolutePath());
+            report.setRegDate(LocalDateTime.now());
+
+            response.put("status", "success");
+            response.put("message", "저장되었습니다.");
+            response.put("redirectUrl", "/s/report");
+
+            this.reportService.insertReport(report);
+        } catch (Exception e) {
+            response.put("error", "error");
+            response.put("message", e.getMessage());
+        }
+
+        return response;
     }
 
     @GetMapping("/course")

@@ -45,11 +45,7 @@
         <button class="btn-add-course">과목기입</button>
         <ul>
             <li>
-                <select
-                        name=""
-                        class="major-type-select"
-                        onchange="handleSelectChange()"
-                >
+                <select name="" class="major-type-select" onchange="handleSelectChange()">
                     <option value="">=== 전공구분 ===</option>
                     <option value="">전공</option>
                     <option value="">교양</option>
@@ -57,12 +53,8 @@
             </li>
             <li>
                 <select name="" class="department-select">
-                    <option value="">=== 학과 ===</option>
-                    <option value="">컴퓨터소프트웨어</option>
-                    <option value="">컴퓨터공학</option>
-                    <option value="">전자공학</option>
-                    <option value="">화학공학</option>
-                    <option value="">생물학</option>
+                    <option value="" disabled>=== 학과 ===</option>
+                    <option th:each="major, loop : ${majorList}" th:text="${major.getName()}">/option>
                 </select>
             </li>
         </ul>
@@ -241,9 +233,7 @@
     };
 
     // 전공 구분 선택 시 필터링 처리
-    document
-        .querySelector(".major-type-select")
-        .addEventListener("change", function () {
+    document.querySelector(".major-type-select").addEventListener("change", function () {
             filterData();
         });
 

@@ -23,3 +23,57 @@
     height: 30px;
     line-height: 30px;
 }
+/* 페이징 처리 */
+.pagination {
+    width: 13%;
+    margin: 0 auto;
+    margin-top:50px;
+}
+.pagination a {
+    border: 1px solid;
+    color: black;
+}
+.pagination a.on {
+    background-color: black;
+    color: #fff;
+}
+/*파일 드롭다운 BOX*/
+.dropdown{
+    display : inline-block;
+    width: 100%;
+}
+.dropbtn{
+    font-weight: 600;
+    color : rgb(37, 37, 37);
+    text-align: center;
+    cursor : pointer;
+    font-size : 12px;
+}
+.dropbtn:hover {
+    text-decoration: underline;
+}
+.dropdown-content{
+    display : none;
+    position : absolute;
+    z-index : 1; /*다른 요소들보다 앞에 배치*/
+    font-weight: 400;
+    background-color: #f9f9f9;
+    width : 215px;
+    border: 1px solid #ccc;
+}
+.dropdown-content a{
+    display : block;
+    text-decoration : none;
+    color : rgb(37, 37, 37);
+    font-size: 12px;
+    padding : 5px 5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.dropdown-content a:hover{
+    background-color : #ececec
+}
+.dropdown:hover .dropdown-content {
+    display: block;
+}

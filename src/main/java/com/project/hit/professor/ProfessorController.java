@@ -1,19 +1,38 @@
 package com.project.hit.professor;
 
+import com.project.hit.FileData;
+import com.project.hit.report.Report;
+import com.project.hit.report.ReportService;
 import com.project.hit.subject.Subject;
 import com.project.hit.subject.SubjectService;
 import com.project.hit.sugang.Sugang;
 import com.project.hit.sugang.SugangDTO;
 import com.project.hit.sugang.SugangService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
+import org.springframework.web.util.UriUtils;
 
+import java.io.File;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.security.Principal;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequiredArgsConstructor
@@ -23,6 +42,7 @@ public class ProfessorController {
     private final ProfessorService professorService;
     private final SubjectService subjectService;
     private final SugangService sugangService;
+    private final ReportService reportService;
 
     @GetMapping("/home")
     public String home(Principal principal, Model model) {
@@ -36,14 +56,90 @@ public class ProfessorController {
     public String info() {return "portal/professor/professor_info";}
 
     @GetMapping("/report")
-    public String report() {return "portal/professor/professor_report_check";}
+    public String report(@RequestParam(name = "subjectNo", defaultValue = "0") int subjectNo, @RequestParam(name = "page", defaultValue = "0") int page,
+                         Principal principal, Model model) {
+        Professor professor = this.professorService.getProfessor(principal.getName());
+        LocalDateTime today = LocalDateTime.now();
+        String year = String.valueOf(today.getYear());
+        int month = today.getMonthValue();
+        String semester = getSemester(month);
+        List<Subject> subjectList = this.professorService.getProfessorSubjects(professor, year, semester);
+        if (subjectNo == 0) {
+            subjectNo = this.professorService.getFirstProfessorSubject(professor, year, semester).getNo();
+        }
+        Subject subject = this.subjectService.getSubject(subjectNo);
+        Page<Report> reportList = this.reportService.getReportsPagingList(subject, page);
+        Map<Integer, List<FileData>> fileDataMap = new HashMap<>();
+
+        for (Report report : reportList.getContent()) {
+            File path = new File(report.getFilePath());
+            File[] files = path.listFiles();
+            List<FileData> fileDataList = new ArrayList<>();
+            if (files != null) {
+                for (File file : files) {
+                    try {
+                        String encodedName = URLEncoder.encode(file.getName(), StandardCharsets.UTF_8).replace("+", "%20");
+                        String decodedName = URLDecoder.decode(file.getName(), StandardCharsets.UTF_8);
+                        fileDataList.add(new FileData(encodedName, decodedName));
+                    } catch (Exception e) {
+                        throw new RuntimeException("URL Encoding/Decoding failed!", e);
+                    }
+                }
+            }
+            fileDataMap.put(report.getNo(), fileDataList);
+        }
+
+        int totalPage = reportList.getTotalPages();
+        int block = 5;
+        int currentPage = reportList.getNumber() + 1;
+
+        int[] pageBlock = getPageBlock(totalPage, currentPage, block);
+        int startBlock = pageBlock[0];
+        int endBlock = pageBlock[1];
+
+        model.addAttribute("professor", professor);
+        model.addAttribute("subjectList", subjectList);
+        model.addAttribute("subjectNo", subjectNo);
+        model.addAttribute("reportList", reportList);
+        model.addAttribute("page", page);
+        model.addAttribute("fileDataMap", fileDataMap);
+        model.addAttribute("startBlock", startBlock);
+        model.addAttribute("endBlock", endBlock);
+        return "portal/professor/professor_report_check";
+    }
+
+    @GetMapping("/report/download")
+    public ResponseEntity<Resource> download(@RequestParam("no") int no, @RequestParam("filename") String filename) {
+        Report report = this.reportService.getReportByNo(no);
+        try {
+            String encodedFilename = UriUtils.encode(filename, StandardCharsets.UTF_8);
+
+            Path path = Paths.get(report.getFilePath() + "/" + filename);
+            Resource resource = new UrlResource(path.toUri());
+
+            if (resource.exists() || resource.isReadable()) {
+                return ResponseEntity.ok()
+                        .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + encodedFilename + "\"")
+                        .body(resource);
+            } else {
+                throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
     @GetMapping("/score")
-    public String score(@RequestParam(name = "subject_no", defaultValue = "0") int subject_no,@RequestParam(name = "page", defaultValue = "0") int page,Principal principal, Model model) {
+    public String score(@RequestParam(name = "subject_no", defaultValue = "0") int subject_no,@RequestParam(name = "page", defaultValue = "0") int page, Principal principal, Model model) {
         Professor professor = this.professorService.getProfessor(principal.getName());
-        List<Subject> subjectList = this.professorService.getProfessorSubjects(professor);
+        LocalDateTime today = LocalDateTime.now();
+        String year = String.valueOf(today.getYear());
+        int month = today.getMonthValue();
+        String semester = getSemester(month);
+        List<Subject> subjectList = this.professorService.getProfessorSubjects(professor, year, semester);
         if (subject_no == 0) {
-            subject_no = this.professorService.getFirstProfessorSubject(professor).getNo();
+            subject_no = this.professorService.getFirstProfessorSubject(professor, year, semester).getNo();
         }
         Subject subject = this.subjectService.getSubject(subject_no);
         Page<Sugang> sugangList = this.subjectService.getSubjectSugangs(subject, page);
@@ -83,6 +179,22 @@ public class ProfessorController {
             }
         }
         return ResponseEntity.ok("저장 되었습니다.");
+    }
+
+    private String getSemester(int month) {
+        String semester;
+        switch (month) {
+            case 3: case 4: case 5: case 6:
+                semester = "semester1";
+                break;
+            case 9: case 10: case 11: case 12:
+                semester = "semester2";
+                break;
+            default:
+                semester = "계절학기";
+                break;
+        }
+        return semester;
     }
 
     private int[] getPageBlock(int totalPages, int currentPage, int block) {
