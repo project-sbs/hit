@@ -1,9 +1,11 @@
 package com.project.hit.grade;
 
+import com.project.hit.student.Student;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -84,4 +86,39 @@ public class GradeService {
         }
     }
 
+    public List<String[]> getYearAndSemester(Student student) {
+        return this.gradeRepository.findDistinctYearAndSemesterByStudentNo(student);
+    }
+
+    public List<TotalGradeDTO> getTotalGrade(List<String[]> yearAndSemesters, Student student) {
+        List<TotalGradeDTO> totalGradeDTOList = new ArrayList<>();
+        for (String[] yearAndSemester : yearAndSemesters) {
+            TotalGradeDTO totalGradeDTO = new TotalGradeDTO();
+            List<Grade> gradeList = this.gradeRepository.findGradeByYearAndSemesterAndStudent(yearAndSemester[0], yearAndSemester[1], student);
+            int courseCredits = 0;
+            int totalCredits = 0;
+            double temptScore = 0;
+            int totalPoints = 0;
+            for (Grade grade : gradeList) {
+                courseCredits += grade.getSugang().getSubject().getCredits();
+                if (!grade.getGrade().equals("F")) {
+                    totalCredits += grade.getSugang().getSubject().getCredits();
+                }
+                temptScore += grade.getScore() * grade.getSugang().getSubject().getCredits();
+                totalPoints += grade.getTotal_point();
+            }
+            totalGradeDTO.setYear(yearAndSemester[0]);
+            totalGradeDTO.setSemester(yearAndSemester[1]);
+            totalGradeDTO.setCourseCredits(courseCredits);
+            totalGradeDTO.setTotalCredits(totalCredits);
+            totalGradeDTO.setDivScore(temptScore/totalCredits);
+            totalGradeDTO.setDivPoint(totalPoints/gradeList.size());
+            totalGradeDTOList.add(totalGradeDTO);
+        }
+        return totalGradeDTOList;
+    }
+
+    public List<Grade> getGradeList(Student student) {
+        return this.gradeRepository.findGradeByStudent(student);
+    }
 }

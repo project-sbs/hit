@@ -81,47 +81,18 @@
                     <th>학기</th>
                     <th>신청학점</th>
                     <th>취득학점</th>
-                    <th>총평점</th>
                     <th>평균평점</th>
                     <th>실점총점</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>2022</td>
-                    <td>1학기</td>
-                    <td>15</td>
-                    <td>13</td>
-                    <td>4.2</td>
-                    <td>3.5</td>
-                    <td>52</td>
-                </tr>
-                <tr>
-                    <td>2022</td>
-                    <td>2학기</td>
-                    <td>18</td>
-                    <td>17</td>
-                    <td>3.8</td>
-                    <td>3.7</td>
-                    <td>67</td>
-                </tr>
-                <tr>
-                    <td>2023</td>
-                    <td>1학기</td>
-                    <td>16</td>
-                    <td>15</td>
-                    <td>3.9</td>
-                    <td>3.6</td>
-                    <td>60</td>
-                </tr>
-                <tr>
-                    <td>2023</td>
-                    <td>2학기</td>
-                    <td>20</td>
-                    <td>19</td>
-                    <td>4.0</td>
-                    <td>3.8</td>
-                    <td>76</td>
+                <tr th:each="gradeDTO, loop : ${totalGradeDTOList}">
+                    <td th:text="${gradeDTO.getYear()}"></td>
+                    <td th:text="${gradeDTO.getSemester().equals('semester1') ? '1학기' : '2학기'}"></td>
+                    <td th:text="${gradeDTO.getCourseCredits()}"></td>
+                    <td th:text="${gradeDTO.getTotalCredits()}"></td>
+                    <td th:text="${gradeDTO.getDivScore()}"></td>
+                    <td th:text="${gradeDTO.getDivPoint()}"></td>
                 </tr>
                 </tbody>
             </table>
@@ -129,15 +100,15 @@
                 <p>누적성적</p>
                 <li>
                     <p>백분율</p>
-                    <p>92.8</p>
+                    <p th:text="${percentage}"></p>
                 </li>
                 <li>
                     <p>신청학점</p>
-                    <p>69</p>
+                    <p th:text="${courseCredits}"></p>
                 </li>
                 <li>
                     <p>취득학점</p>
-                    <p>64</p>
+                    <p th:text="${totalCredits}"></p>
                 </li>
             </ul>
         </div>
@@ -151,7 +122,6 @@
                 <tr>
                     <th>년도</th>
                     <th>학기</th>
-                    <th>학년</th>
                     <th>수강번호</th>
                     <th>과목명</th>
                     <th>학점</th>
@@ -163,272 +133,17 @@
                 </tr>
                 </thead>
                 <tbody>
-                <!-- 2022년 1학기 -->
-                <tr>
-                    <td>2022</td>
-                    <td>1학기</td>
-                    <td>1</td>
-                    <td>10101</td>
-                    <td>컴퓨터 개론</td>
-                    <td>3</td>
-                    <td>전공</td>
-                    <td>95</td>
-                    <td>A+</td>
-                    <td>4.5</td>
-                    <td>김철수</td>
-                </tr>
-                <tr>
-                    <td>2022</td>
-                    <td>1학기</td>
-                    <td>1</td>
-                    <td>10102</td>
-                    <td>프로그래밍 기초</td>
-                    <td>3</td>
-                    <td>전공</td>
-                    <td>88</td>
-                    <td>A</td>
-                    <td>4.0</td>
-                    <td>이영희</td>
-                </tr>
-                <tr>
-                    <td>2022</td>
-                    <td>1학기</td>
-                    <td>1</td>
-                    <td>10103</td>
-                    <td>기초 수학</td>
-                    <td>3</td>
-                    <td>교양</td>
-                    <td>82</td>
-                    <td>B+</td>
-                    <td>3.5</td>
-                    <td>박준호</td>
-                </tr>
-                <tr>
-                    <td>2022</td>
-                    <td>1학기</td>
-                    <td>1</td>
-                    <td>10104</td>
-                    <td>기초 물리</td>
-                    <td>3</td>
-                    <td>교양</td>
-                    <td>76</td>
-                    <td>B</td>
-                    <td>3.0</td>
-                    <td>최민수</td>
-                </tr>
-                <tr>
-                    <td>2022</td>
-                    <td>1학기</td>
-                    <td>1</td>
-                    <td>10105</td>
-                    <td>글쓰기</td>
-                    <td>3</td>
-                    <td>교양</td>
-                    <td>90</td>
-                    <td>A</td>
-                    <td>4.0</td>
-                    <td>홍길동</td>
-                </tr>
-
-                <!-- 2022년 2학기 -->
-                <tr>
-                    <td>2022</td>
-                    <td>2학기</td>
-                    <td>1</td>
-                    <td>10201</td>
-                    <td>자료구조</td>
-                    <td>3</td>
-                    <td>전공</td>
-                    <td>92</td>
-                    <td>A</td>
-                    <td>4.0</td>
-                    <td>김철수</td>
-                </tr>
-                <tr>
-                    <td>2022</td>
-                    <td>2학기</td>
-                    <td>1</td>
-                    <td>10202</td>
-                    <td>이산수학</td>
-                    <td>3</td>
-                    <td>전공</td>
-                    <td>85</td>
-                    <td>B+</td>
-                    <td>3.5</td>
-                    <td>이영희</td>
-                </tr>
-                <tr>
-                    <td>2022</td>
-                    <td>2학기</td>
-                    <td>1</td>
-                    <td>10203</td>
-                    <td>대학영어</td>
-                    <td>3</td>
-                    <td>교양</td>
-                    <td>88</td>
-                    <td>A</td>
-                    <td>4.0</td>
-                    <td>박준호</td>
-                </tr>
-                <tr>
-                    <td>2022</td>
-                    <td>2학기</td>
-                    <td>1</td>
-                    <td>10204</td>
-                    <td>일반화학</td>
-                    <td>3</td>
-                    <td>교양</td>
-                    <td>80</td>
-                    <td>B</td>
-                    <td>3.0</td>
-                    <td>최민수</td>
-                </tr>
-                <tr>
-                    <td>2022</td>
-                    <td>2학기</td>
-                    <td>1</td>
-                    <td>10205</td>
-                    <td>세계사</td>
-                    <td>3</td>
-                    <td>교양</td>
-                    <td>90</td>
-                    <td>A</td>
-                    <td>4.0</td>
-                    <td>홍길동</td>
-                </tr>
-                <tr>
-                    <td>2022</td>
-                    <td>2학기</td>
-                    <td>1</td>
-                    <td>10206</td>
-                    <td>철학개론</td>
-                    <td>3</td>
-                    <td>교양</td>
-                    <td>70</td>
-                    <td>C+</td>
-                    <td>2.5</td>
-                    <td>이순신</td>
-                </tr>
-
-                <!-- 2023년 1학기 -->
-                <tr>
-                    <td>2023</td>
-                    <td>1학기</td>
-                    <td>2</td>
-                    <td>20101</td>
-                    <td>운영체제</td>
-                    <td>3</td>
-                    <td>전공</td>
-                    <td>95</td>
-                    <td>A+</td>
-                    <td>4.5</td>
-                    <td>김철수</td>
-                </tr>
-                <tr>
-                    <td>2023</td>
-                    <td>1학기</td>
-                    <td>2</td>
-                    <td>20102</td>
-                    <td>데이터베이스</td>
-                    <td>3</td>
-                    <td>전공</td>
-                    <td>87</td>
-                    <td>A</td>
-                    <td>4.0</td>
-                    <td>이영희</td>
-                </tr>
-                <tr>
-                    <td>2023</td>
-                    <td>1학기</td>
-                    <td>2</td>
-                    <td>20103</td>
-                    <td>수치해석</td>
-                    <td>3</td>
-                    <td>전공</td>
-                    <td>82</td>
-                    <td>B+</td>
-                    <td>3.5</td>
-                    <td>박준호</td>
-                </tr>
-                <tr>
-                    <td>2023</td>
-                    <td>1학기</td>
-                    <td>2</td>
-                    <td>20104</td>
-                    <td>경제학</td>
-                    <td>3</td>
-                    <td>교양</td>
-                    <td>80</td>
-                    <td>B</td>
-                    <td>3.0</td>
-                    <td>최민수</td>
-                </tr>
-                <tr>
-                    <td>2023</td>
-                    <td>1학기</td>
-                    <td>2</td>
-                    <td>20105</td>
-                    <td>인문학 개론</td>
-                    <td>2</td>
-                    <td>교양</td>
-                    <td>88</td>
-                    <td>A</td>
-                    <td>4.0</td>
-                    <td>홍길동</td>
-                </tr>
-
-                <!-- 2023년 2학기 -->
-                <tr>
-                    <td>2023</td>
-                    <td>2학기</td>
-                    <td>2</td>
-                    <td>20201</td>
-                    <td>알고리즘</td>
-                    <td>3</td>
-                    <td>전공</td>
-                    <td>85</td>
-                    <td>B+</td>
-                    <td>3.5</td>
-                    <td>김철수</td>
-                </tr>
-                <tr>
-                    <td>2023</td>
-                    <td>2학기</td>
-                    <td>2</td>
-                    <td>20202</td>
-                    <td>네트워크</td>
-                    <td>3</td>
-                    <td>전공</td>
-                    <td>90</td>
-                    <td>A</td>
-                    <td>4.0</td>
-                    <td>이영희</td>
-                </tr>
-                <tr>
-                    <td>2023</td>
-                    <td>2학기</td>
-                    <td>2</td>
-                    <td>20203</td>
-                    <td>문학 개론</td>
-                    <td>3</td>
-                    <td>교양</td>
-                    <td>78</td>
-                    <td>B</td>
-                    <td>3.0</td>
-                    <td>박준호</td>
-                </tr>
-                <tr>
-                    <td>2023</td>
-                    <td>2학기</td>
-                    <td>2</td>
-                    <td>20204</td>
-                    <td>법학 개론</td>
-                    <td>2</td>
-                    <td>교양</td>
-                    <td>88</td>
-                    <td>A</td>
-                    <td>4.0</td>
-                    <td>최민수</td>
+                <tr th:each="grade, loop : ${gradeList}">
+                    <td th:text="${grade.getSugang().getSubject().getYear()}"></td>
+                    <td th:text="${grade.getSugang().getSubject().getSemester().equals('semester1') ? '1학기' : '2학기'}"></td>
+                    <td th:text="${grade.getSugang().getSubject().getNo()}"></td>
+                    <td th:text="${grade.getSugang().getSubject().getName()}"></td>
+                    <td th:text="${grade.getSugang().getSubject().getCredits()}"></td>
+                    <td th:text="${grade.getSugang().getSubject().getType()}"></td>
+                    <td th:text="${grade.getTotal_point()}"></td>
+                    <td th:text="${grade.getGrade()}"></td>
+                    <td th:text="${grade.getScore()}"></td>
+                    <td th:text="${grade.getSugang().getSubject().getProfessor().getName()}"></td>
                 </tr>
                 </tbody>
             </table>

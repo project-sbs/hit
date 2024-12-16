@@ -11,6 +11,8 @@
             rel="stylesheet"
     />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <meta name="_csrf" th:content="${_csrf.token}" />
+    <meta name="_csrf_header" th:content="${_csrf.headerName}" />
     <title>Portal</title>
 </head>
 <body>
@@ -43,19 +45,69 @@
     <div class="portal-student-report-frame">
         <h2>과제제출</h2>
         <div class="portal-student-report-wrap">
-            <form action="">
-                <select name="" id="">
-                    <option value="">콤퓨터과학</option>
-                    <option value="">컴퓨터공학</option>
-                    <option value="">컴퓨터구조</option>
-                    <option value="">컴활</option>
+            <form id="reportForm" enctype="multipart/form-data">
+                <select id="subjectSelect" name="selectNo">
+                    <option value="" disabled>=== 과목선택 ===</option>
+                    <option th:each="sugang, loop : ${sugangList}" th:value="${sugang.getSubject().getNo()}" th:text="${sugang.getSubject().getName()}"></option>
                 </select>
-                <input type="text" placeholder="제목을 입력하시오" />
-                <input type="file" placeholder="파일첨부" />
-                <input type="submit" value="과제제출" />
+                <input type="text" name="title" placeholder="제목을 입력하세요." />
+                <input type="file" id="files" name="files" placeholder="파일첨부" multiple/>
+                <input type="button" id="report-submit-btn" value="과제제출" />
             </form>
         </div>
     </div>
 </section>
+<script>
+    $(document).ready(function () {
+        const csrfToken = $('meta[name="_csrf"]').attr('content');
+        const csrfHeader = $('meta[name="_csrf_header"]').attr('content');
+
+        $("#report-submit-btn").on('click', function () {
+            const fileInput = $("#files")[0].files;
+            const formData = new FormData();
+
+            formData.append('title', $("input[name='title']").val());
+            formData.append('selectNo', $("select[name='selectNo']").val());
+
+            if (fileInput.length === 0) {
+                alert("파일을 첨부해주세요.");
+                return;
+            }
+
+            for(let i = 0; i < fileInput.length; i++) {
+                const file = fileInput[i];
+                if(file.size === 0) {
+                    alert("빈 파일은 첨부할 수 없습니다.");
+                    return;
+                }
+                formData.append('files', file);
+            }
+
+
+
+            $.ajax({
+                type: 'POST',
+                url: '/s/report/insert',
+                processData: false,     // FormData 를 전송하기 위한 사전설정
+                contentType: false,     // FormData에 의해 ContentType 자동 설정
+                data: formData,
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader(csrfHeader, csrfToken);
+                },
+                success: function (response) {
+                    if (response.status === "success") {
+                        alert(response.message);
+                        location.href = response.redirectUrl;
+                    } else {
+                        alert(response.message);
+                    }
+                },
+                error: function (xhr, status, error) {
+                    alert(xhr.responseText);
+                }
+            })
+        })
+    })
+</script>
 </body>
 </html>

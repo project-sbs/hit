@@ -183,4 +183,8 @@ public class SugangService {
             throw new DataNotFoundException("Sugang not found No: " + no);
         }
     }
+
+    public List<Sugang> getSugangList(Student student) {
+        return this.sugangRepository.findSugangByStudent(student);
+    }
 }
