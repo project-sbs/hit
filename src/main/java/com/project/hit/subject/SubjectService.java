@@ -78,10 +78,12 @@ public class SubjectService {
         return subjectRepository.findSubjectByTypeContaining(type, pageable);
     }
 
+    @Transactional
     public void delete(Subject subject){
         this.subjectRepository.delete(subject);
     }
 
+    @Transactional
     public void deleteSubject(Subject subject) {
         subjectRepository.delete(subject);
     }

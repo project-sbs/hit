@@ -27,10 +27,10 @@
             </li>
             <li class="portal-class-add-button" onclick="location.href='/a/class'"><div><img src="/image/home/importIcon.png" alt=""></div>과목기입</li>
             <li class="portal-notice-add-button" onclick="location.href='/a/board'"><div><img src="/image/home/noticeIcon.png" alt=""></div>게시판</li>
-            <li class="portal-student-pay-check-button" onclick="location.href=''">
+            <li class="portal-student-pay-check-button">
                 <div><img src="/image/home/paymentsIcon.png" alt=""></div>등록금확인
             </li>
-            <li class="portal-class-open-button" onclick="location.href=''">
+            <li class="portal-admin-course-open-button">
                 <div><img src="/image/home/courseIcon.png" alt="" /></div>수강신청
             </li>
         </ul>
@@ -234,7 +234,7 @@
                     <div class="time-wrap">
                         <p>시작 시간:</p>
                         <select th:field="*{startTime}" required>
-                            <option value="9:00">9:00</option>
+                            <option value="09:00">9:00</option>
                             <option value="10:00">10:00</option>
                             <option value="11:00">11:00</option>
                             <option value="12:00">12:00</option>
@@ -466,21 +466,22 @@
 
      const delete_elements = document.querySelectorAll(".delete");
 
-delete_elements.forEach(function (element) {
-    element.addEventListener('click', function () {
-        const sugangSize = parseInt(this.getAttribute('data-sugang-size')); // 수강 신청 인원
-        if (sugangSize > 0) {
-            alert("현재 수강생이 있습니다. 삭제할 수 없습니다.");
-        } else {
-            if (confirm("정말로 삭제하시겠습니까?")) {
-                const deleteUrl = this.getAttribute('data-uri');
-                console.log('삭제 URL:', deleteUrl);
-                location.href = deleteUrl;
+    delete_elements.forEach(function (element) {
+        element.addEventListener('click', function () {
+            const sugangSize = parseInt(this.getAttribute('data-sugang-size')); // 수강 신청 인원
+            if (sugangSize > 0) {
+                alert("현재 수강생이 있습니다. 삭제할 수 없습니다.");
+            } else {
+                if (confirm("정말로 삭제하시겠습니까?")) {
+                    const deleteUrl = this.getAttribute('data-uri');
+                    console.log('삭제 URL:', deleteUrl);
+                    location.href = deleteUrl;
+                }
             }
-        }
+        });
     });
-});
 </script>
 <script th:src="@{/js/pagination.js}"></script>
+<script th:src="@{/js/common.js}"></script>
 </body>
 </html>
