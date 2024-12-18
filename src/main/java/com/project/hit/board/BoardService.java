@@ -1,10 +1,13 @@
 package com.project.hit.board;
 
 import com.project.hit.DataNotFoundException;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -13,7 +16,6 @@ import java.util.Optional;
 public class BoardService {
     private final BoardRepository boardRepository;
 
-    @Transactional
     public void insertBoard(Board board) {
         boardRepository.save(board);
     }
@@ -47,4 +49,14 @@ public class BoardService {
     public Board getNextBoard(Long currentBoardNo, String type) {
         return boardRepository.findTopByTypeAndNoGreaterThanOrderByNoAsc(type, currentBoardNo);
     }
+
+    public List<Board> getSchedulersByPage(int page, int size) {
+        PageRequest pageRequest = PageRequest.of(page, size);
+        return boardRepository.findByTypeOrderByDateDesc("scheduler", pageRequest).getContent();
+    }
+
+    public int getTotalSchedulersCount() {
+        return boardRepository.countByType("scheduler");
+    }
+
 }

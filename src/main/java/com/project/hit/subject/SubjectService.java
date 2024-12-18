@@ -66,6 +66,30 @@ public class SubjectService {
         return this.subjectRepository.findAllBySemesterContainingAndYearContaining(semester, year, pageable);
     }
 
+    public Page<Subject>getList(int page,int major_id){
+        Pageable pageable = PageRequest.of(page,10);
+        return this.subjectRepository.findAll(pageable);
+    }
+
+    public Page<Subject> getSubjectList(String type, int page, int major_id) {
+        List<Sort.Order> sorts = new ArrayList<>();
+        sorts.add(Sort.Order.desc("no"));
+        Pageable pageable = PageRequest.of(page, 10, Sort.by(sorts));
+        return subjectRepository.findSubjectByTypeContaining(type, pageable);
+    }
+
+    public void delete(Subject subject){
+        this.subjectRepository.delete(subject);
+    }
+
+    public void deleteSubject(Subject subject) {
+        subjectRepository.delete(subject);
+    }
+
+    public Subject getSubjectById(int no) {
+        return subjectRepository.findById(no).orElse(null);
+    }
+
     public Subject getSubject(int no) {
         return this.subjectRepository.findByNo(no);
     }
@@ -76,4 +100,5 @@ public class SubjectService {
         Pageable pageable = PageRequest.of(page, 10, Sort.by(sorts));
         return this.sugangRepository.findSugangsBySubject(subject, pageable);
     }
+
 }
