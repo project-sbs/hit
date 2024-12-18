@@ -21,9 +21,9 @@
 .portal-major-managing-frame > button {
     width: 120px;
     height: 35px;
-    background: #d3d3d3;
+    background: orange;
     border: none;
-    color: black;
+    color: white;
     font-size: 16px;
     font-weight: bold;
 }

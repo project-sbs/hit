@@ -19,15 +19,23 @@
 .portal-professor-score-wrap table {
     width: 100%;
     text-align: center;
-    border: 1px solid #888;
+    border: 1px solid #e6e6e6;
     margin-top: 50px;
     border-collapse: collapse;
 }
+.portal-professor-score-wrap table th{
+  background-color: #3f94f5;
+  color: white;
+  font-weight: bold;
+  border:none;
+}
+.portal-professor-score-wrap table td{
+border-bottom:1px solid #e6e6e6;
+}
 .portal-professor-score-wrap table th,
 .portal-professor-score-wrap table td {
-    border: 1px solid #888;
-    height: 30px;
-    line-height: 30px;
+    height: 40px;
+    line-height: 40px;
 }
 .pagination {
     width: 13%;

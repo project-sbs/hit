@@ -6,6 +6,7 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/reset.css}" />
     <link rel="stylesheet" type="text/css" th:href="@{/css/commonElement.css}" />
     <link rel="stylesheet" type="text/css" th:href="@{/css/professor/professorInfo.css}" />
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <title>Portal</title>
 </head>
@@ -59,13 +60,16 @@
         </div>
         <div class="portal-professor-info-specific-frame">
             <ul class="portal-professor-info-specific-controller">
-                <li>기본</li>
-                <li>주소</li>
-                <li>자격어학</li>
+                <li class="info-frame-button" onclick="showFrame(0, this)">기본</li>
+                <li class="address-frame-button" onclick="showFrame(1, this)">
+                    주소
+                </li>
+                <li class="license-frame-button" onclick="showFrame(2, this)">
+                    자격어학
+                </li>
             </ul>
             <ul class="portal-professor-info-specific">
-                <li>
-                    <div class="portal-professor-info-specific-basic">
+                <li class="info-frame">
                         <h3>학적 기본 사항</h3>
                         <table>
                             <tr>
@@ -112,13 +116,63 @@
                                 </select>
                             </li>
                         </ul>
-                    </div>
+                    <button>등록하기</button>
                 </li>
-                <li><button>등록하기</button></li>
+                <li class="address-frame">
+                    <ul>
+                        <li><h3>주소 확인란</h3></li>
+                        <li>
+                            <h4>현재 주소</h4>
+                            <p>서울특별시 강남구 테헤란로 41길</p>
+                        </li>
+                        <li><h3>주소 변경란</h3></li>
+                        <li>
+                            <input type="text" id="zip-code" placeholder="우편번호" />
+                            <input type="text" id="address-1" placeholder="도로명" />
+                            <input type="text" placeholder="상세정보 입력하기" />
+                            <button onclick="execDaumPostcode()">우편번호찾기</button>
+                        </li>
+                        <li><button>등록하기</button></li>
+                    </ul>
+                </li>
+                <li class="take-semester-frame"></li>
             </ul>
         </div>
     </div>
 </section>
-<script></script>
+<script>
+    function showFrame(index, clickedButton) {
+       const frames = document.querySelectorAll(
+         ".portal-professor-info-specific > li"
+       );
+
+       frames.forEach((frame, i) => {
+         frame.style.display = i === index ? "block" : "none";
+       });
+
+       // 버튼 스타일 변경
+       const buttons = document.querySelectorAll(
+         ".portal-professor-info-specific-controller > li"
+       );
+       buttons.forEach((button) => button.classList.remove("active"));
+       clickedButton.classList.add("active");
+     }
+     function execDaumPostcode() {
+       new daum.Postcode({
+         oncomplete: function (data) {
+           document.getElementById("zip-code").value = data.zonecode;
+           document.getElementById("address-1").value = data.address;
+         },
+       }).open();
+     }
+     // 초기 설정: 첫 번째 프레임만 표시하고 첫 번째 버튼 활성화
+     document.addEventListener("DOMContentLoaded", () => {
+       const firstButton = document.querySelector(
+         ".portal-professor-info-specific-controller > li"
+       );
+       firstButton.classList.add("active"); // 첫 번째 버튼에 기본 색상 적용
+       showFrame(0, firstButton);
+     });
+</script>
 </body>
 </html>
