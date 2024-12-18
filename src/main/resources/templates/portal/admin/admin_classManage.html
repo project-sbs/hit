@@ -52,12 +52,8 @@
             </li>
             <li>
                 <select name="" class="department-select">
-                    <option value="">=== 학과 ===</option>
-                    <option value="">컴퓨터소프트웨어</option>
-                    <option value="">컴퓨터공학</option>
-                    <option value="">전자공학</option>
-                    <option value="">화학공학</option>
-                    <option value="">생물학</option>
+                    <option disabled>=== 학과 ===</option>
+                    <option th:each="major, loop : ${majorList}" th:text="${major.getName()}"></option>
                 </select>
             </li>
         </ul>
@@ -99,21 +95,27 @@
             </tr>
             </tbody>
         </table>
-        <div class="pagination">
-            <a class="prev_btn" href="javascript:void(0)" th:data-page="${subjectPage1.number - 1}"
-               th:if="${subjectPage1.number != 0 && !subjectPage1.isEmpty()}"><span>이전</span>
-            </a>
 
-            <a class="page_link"
-               href="javascript:void(0)" th:if="${!subjectPage1.isEmpty()}"
+        <div class="major-pagination">
+            <a class="prev_btn" href="javascript:void(0)" th:data-page="${subjectPage1.number - 1}"
+               th:if="${subjectPage1.number != 0 && !subjectPage1.isEmpty()}">
+                <span>이전</span>
+            </a>
+            <a class="page_link" href="javascript:void(0)" th:if="${!subjectPage1.isEmpty()}"
                th:classappend="${page == subjectPage1.number} ? 'on' : ''"
-               th:data-page="${page}" th:each="page : ${#numbers.sequence(0, subjectPage1.totalPages - 1)}"
+               th:data-page="${majorPage}" th:each="page : ${#numbers.sequence(0, subjectPage1.totalPages - 1)}"
                th:text="${page + 1}"></a>
             <a class="next_btn" href="javascript:void(0)" th:data-page="${subjectPage1.number + 1}"
                th:if="${subjectPage1.hasNext() && !subjectPage1.isEmpty()}"><span>다음</span></a>
         </div>
 
+        <form id="major-actionForm" method="get" th:action="@{/a/class}">
+            <input type="hidden" id="major-page" name="majorPage" th:value="${subjectPage1.number}">
+            <input type="hidden" id="major-major" name="major" th:value="${major}">
+            <input type="hidden" id="major-class" name="class" th:value="${class}">
+        </form>
 
+        <!-- 교양 클래스 테이블 -->
         <table class="liberal-class-table">
             <thead>
             <tr>
@@ -152,24 +154,23 @@
             </tbody>
         </table>
 
-        <div class="st-pagination">
+        <div class="general-pagination">
             <a class="prev_btn" href="javascript:void(0)" th:data-page="${subjectPage2.number - 1}"
-               th:if="${subjectPage2.number != 0 && !subjectPage2.isEmpty()}"><span>이전</span>
+               th:if="${subjectPage2.number != 0 && !subjectPage2.isEmpty()}">
+                <span>이전</span>
             </a>
-
-            <a class="page_link"
-               href="javascript:void(0)" th:if="${!subjectPage2.isEmpty()}"
+            <a class="page_link" href="javascript:void(0)" th:if="${!subjectPage2.isEmpty()}"
                th:classappend="${page == subjectPage2.number} ? 'on' : ''"
-               th:data-page="${page}" th:each="page : ${#numbers.sequence(0, subjectPage2.totalPages - 1)}"
+               th:data-page="${generalPage}" th:each="page : ${#numbers.sequence(0, subjectPage2.totalPages - 1)}"
                th:text="${page + 1}"></a>
             <a class="next_btn" href="javascript:void(0)" th:data-page="${subjectPage2.number + 1}"
                th:if="${subjectPage2.hasNext() && !subjectPage2.isEmpty()}"><span>다음</span></a>
         </div>
 
-        <form id="actionForm" method="get" th:action="@{/a/class}">
-            <input type="hidden" id="page" name="page" th:value="${page}">
-            <input type="hidden" id="major" name="major" th:value="${major}">
-            <input type="hidden" id="person" name="class" th:value="${class}">
+        <form id="general-actionForm" method="get" th:action="@{/a/class}">
+            <input type="hidden" id="general-page" name="generalPage" th:value="${subjectPage2.number}">
+            <input type="hidden" id="general-major" name="major" th:value="${major}">
+            <input type="hidden" id="general-class" name="class" th:value="${class}">
         </form>
 
 

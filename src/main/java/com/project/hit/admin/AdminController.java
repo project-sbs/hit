@@ -101,15 +101,16 @@ public class AdminController {
 
     @GetMapping("/class")
     public String classManage(SubjectInsertForm subjectInsertForm, Principal principal, Model model,
-                              @RequestParam(value = "page", defaultValue = "0") int page,
+                              @RequestParam(value = "majorPage", defaultValue = "0") int majorPage,
+                              @RequestParam(value = "generalPage", defaultValue = "0") int generalPage,
                               @RequestParam(value = "major", defaultValue = "-1") int major_id,
                               @RequestParam(value = "class", defaultValue = "학생") String classType) {
 
         Admin admin = this.adminService.getAdmin(principal.getName());
         List<Major> majorList = this.majorService.getAllMajors();
         List<Professor> professorList = this.professorService.getAllProfessors();
-        Page<Subject> subjectPage1 = this.subjectService.getSubjectList("전공", page, major_id);
-        Page<Subject> subjectPage2 = this.subjectService.getSubjectList("교양", page, major_id);
+        Page<Subject> subjectPage1 = this.subjectService.getSubjectList("전공", majorPage, major_id);
+        Page<Subject> subjectPage2 = this.subjectService.getSubjectList("교양", generalPage, major_id);
 
         int sub_totalPage = subjectPage1.getTotalPages();
         int sub2_totalPage = subjectPage2.getTotalPages();
@@ -135,7 +136,6 @@ public class AdminController {
         model.addAttribute("sub2_totalPage", sub2_totalPage);
         model.addAttribute("sub_endBlock", sub_endBlock);
         model.addAttribute("sub2_endBlock", sub2_endBlock);
-
         model.addAttribute("class", classType);
         model.addAttribute("professorList", professorList);
         model.addAttribute("majorList", majorList);
