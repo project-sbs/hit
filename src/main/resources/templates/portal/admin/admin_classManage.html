@@ -12,8 +12,7 @@
 <body>
 <header class="portal-head">
     <div>
-        <h1><img src="/image/home/HitLogo2.png" alt="" /></h1>
-        <button class="logout-wrap" onclick="location.href='/logout'"><span class="logout-text">Logout</span><img src="/image/home/handgesture.png" alt="" class="logout-img"></button>
+        <h1><img src="/image/home/HitLogo.png" alt="" /></h1>
     </div>
 </header>
 <section class="portal-main">
@@ -31,21 +30,21 @@
             <li class="portal-student-pay-check-button" onclick="location.href=''">
                 <div><img src="/image/home/paymentsIcon.png" alt=""></div>등록금확인
             </li>
-            <li class="portal-admin-course-open-button">
+            <li class="portal-class-open-button" onclick="location.href=''">
                 <div><img src="/image/home/courseIcon.png" alt="" /></div>수강신청
             </li>
         </ul>
-        <footer>
-            <p>© 2024 HITuniv. All rights reserved.</p>
-            <p>모든 저작권 권리는 HIT대학교에 있습니다.</p>
-        </footer>
     </nav>
     <div class="portal-class-managing-frame">
         <h2>수강과목관리</h2>
-        <button class="btn-add-course">과목기입</button>
+        <button class="btn-add-course">수강과목기입</button>
         <ul>
             <li>
-                <select name="" class="major-type-select" onchange="handleSelectChange()">
+                <select
+                        name=""
+                        class="major-type-select"
+                        onchange="handleSelectChange()"
+                >
                     <option value="">=== 전공구분 ===</option>
                     <option value="">전공</option>
                     <option value="">교양</option>
@@ -53,8 +52,12 @@
             </li>
             <li>
                 <select name="" class="department-select">
-                    <option value="" disabled>=== 학과 ===</option>
-                    <option th:each="major, loop : ${majorList}" th:text="${major.getName()}">/option>
+                    <option value="">=== 학과 ===</option>
+                    <option value="">컴퓨터소프트웨어</option>
+                    <option value="">컴퓨터공학</option>
+                    <option value="">전자공학</option>
+                    <option value="">화학공학</option>
+                    <option value="">생물학</option>
                 </select>
             </li>
         </ul>
@@ -74,7 +77,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="subject, loop : ${subjectList1}">
+            <tr th:each="subject : ${subjectPage1.content}">
                 <td th:text="${subject.getNo()}"></td>
                 <td th:text="${subject.getName()}" th:attr="title=${subject.getName()}"></td>
                 <td th:text="${subject.getMajor().getName()}"></td>
@@ -84,10 +87,33 @@
                 <td th:text="${subject.credits}"></td>
                 <td th:text="${subject.maxPersonnel}"></td>
                 <td th:text="${#lists.size(subject.getSugangList())}"></td>
-                <td><button>X</button></td>
+                <td>
+                    <a href="javascript:void(0);"
+                       th:data-uri="@{|/a/subject/delete/${subject.getNo()}|}"
+                       th:data-sugang-size="${#lists.size(subject.getSugangList())}"
+                       class="delete btn btn-sm btn-outline-danger"
+                       sec:authorize="isAuthenticated()"
+                       th:if="${#authentication.getName() == 'admin'}"
+                       th:text="삭제"></a>
+                </td>
             </tr>
             </tbody>
         </table>
+        <div class="pagination">
+            <a class="prev_btn" href="javascript:void(0)" th:data-page="${subjectPage1.number - 1}"
+               th:if="${subjectPage1.number != 0 && !subjectPage1.isEmpty()}"><span>이전</span>
+            </a>
+
+            <a class="page_link"
+               href="javascript:void(0)" th:if="${!subjectPage1.isEmpty()}"
+               th:classappend="${page == subjectPage1.number} ? 'on' : ''"
+               th:data-page="${page}" th:each="page : ${#numbers.sequence(0, subjectPage1.totalPages - 1)}"
+               th:text="${page + 1}"></a>
+            <a class="next_btn" href="javascript:void(0)" th:data-page="${subjectPage1.number + 1}"
+               th:if="${subjectPage1.hasNext() && !subjectPage1.isEmpty()}"><span>다음</span></a>
+        </div>
+
+
         <table class="liberal-class-table">
             <thead>
             <tr>
@@ -104,7 +130,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="subject, loop : ${subjectList2}">
+            <tr th:each="subject : ${subjectPage2.content}">
                 <td th:text="${subject.getNo()}"></td>
                 <td th:text="${subject.name}"></td>
                 <td>교양</td>
@@ -114,117 +140,145 @@
                 <td th:text="${subject.credits}"></td>
                 <td th:text="${subject.maxPersonnel}"></td>
                 <td th:text="${#lists.size(subject.getSugangList())}"></td>
-                <td><button>X</button></td>
+                <td>
+                    <a href="javascript:void(0);"
+                       th:data-uri="@{|/a/subject/delete/${subject.getNo()}|}"
+                       class="delete btn btn-sm btn-outline-danger"
+                       sec:authorize="isAuthenticated()"
+                       th:if="${#authentication.getName() == 'admin'}"
+                       th:text="삭제"></a>
+                </td>
             </tr>
             </tbody>
         </table>
-    </div>
-    <!-- 수강 과목 기입 모달 창 -->
-    <div id="course-modal" class="modal-container">
-        <div class="modal-content-wrapper">
-            <span class="close-modal-btn">&times;</span>
-            <h2 class="modal-title">수강 과목 기입</h2>
 
-            <!-- 타임리프 폼 시작 -->
-            <form id="course-form" class="course-form" method="post" th:action="@{/a/insert/subject}" th:object="${subjectInsertForm}">
+        <div class="st-pagination">
+            <a class="prev_btn" href="javascript:void(0)" th:data-page="${subjectPage2.number - 1}"
+               th:if="${subjectPage2.number != 0 && !subjectPage2.isEmpty()}"><span>이전</span>
+            </a>
 
-                <!-- 년도 -->
-                <label for="course-year" class="label-course-year">년도:</label>
-                <input type="number" id="course-year" name="course-year" th:field="*{year}" required />
-                <br />
-
-                <!-- 학기 -->
-                <label for="course-semester" class="label-course-semester">학기:</label>
-                <select id="course-semester" class="select-semester-count" th:field="*{semester}">
-                    <option value="" disabled selected>=== 학기 ===</option>
-                    <option value="semester1">1학기</option>
-                    <option value="semester2">2학기</option>
-                </select>
-                <br />
-
-                <!-- 전공/교양 -->
-                <label for="major-type" class="label-major-type">전공/교양:</label>
-                <select id="major-type" class="select-major-type" th:field="*{type}">
-                    <option value="" disabled selected>=== 전공/교양 ===</option>
-                    <option value="전공">전공</option>
-                    <option value="교양">교양</option>
-                </select>
-                <br />
-
-                <!-- 학과 -->
-                <label for="department" class="label-department">학과:</label>
-                <select id="department" class="select-department" th:field="*{major}">
-                    <option value="" selected>=== 학과 ===</option>
-                    <option th:each="major : ${majorList}"
-                            th:value="${major.id}"
-                            th:text="${major.name.substring(0, major.name.length() - 1)}"></option>
-                </select>
-                <br />
-
-                <!-- 과목명 -->
-                <label for="course-name" class="label-course-name">과목명:</label>
-                <input type="text" id="course-name" name="course-name" th:field="*{name}" required />
-                <br />
-
-                <!-- 교수명 -->
-                <label for="professor" class="label-professor">교수명:</label>
-                <select id="professor" class="select-professor" th:field="*{professorNo}">
-                    <option value="" selected>=== 교수 선택 ===</option>
-                    <option th:each="professor : ${professorList}"
-                            th:value="${professor.no}"
-                            th:text="${professor.name +' [' + professor.getId() +']'}"></option>
-                </select>
-                <br />
-
-                <!-- 시간 -->
-                <div class="time-wrap">
-                    <p>시작 시간:</p>
-                    <select th:field="*{startTime}" required>
-                        <option value="09:00">09:00</option>
-                        <option value="10:00">10:00</option>
-                        <option value="11:00">11:00</option>
-                        <option value="12:00">12:00</option>
-                        <option value="13:00">13:00</option>
-                        <option value="14:00">14:00</option>
-                        <option value="15:00">15:00</option>
-                        <option value="16:00">16:00</option>
-                        <option value="17:00">17:00</option>
-                    </select>
-                    <p>종료 시간:</p>
-                    <select th:field="*{endTime}" required>
-                        <option value="10:00">10:00</option>
-                        <option value="11:00">11:00</option>
-                        <option value="12:00">12:00</option>
-                        <option value="13:00">13:00</option>
-                        <option value="14:00">14:00</option>
-                        <option value="15:00">15:00</option>
-                        <option value="16:00">16:00</option>
-                        <option value="17:00">17:00</option>
-                        <option value="18:00">18:00</option>
-                    </select>
-                </div>
-                <br />
-
-                <!-- 요일 -->
-                <label for="day" class="label-day">요일:</label>
-                <input type="text" id="day" name="day" placeholder="예: 월, 화, 수, 목, 금" th:field="*{week}" required />
-                <br />
-
-                <!--최대 수강인원-->
-                <label for="max-personnel" class="label-max-personnel">최대 수강 인원:</label>
-                <input type="number" id="max-personnel" name="maxpersonnel" min="1" th:field="*{maxPersonnel}" required />
-                <br />
-
-                <!-- 수강학점 -->
-                <label for="score" class="label-score">수강학점:</label>
-                <input type="number" id="score" name="credits" min="1" max="3"
-                       placeholder="최대 3학점까지 기입할 수 있습니다." th:field="*{credits}" required />
-                <br />
-
-                <button type="submit" class="submit-course">과목 추가</button>
-            </form>
+            <a class="page_link"
+               href="javascript:void(0)" th:if="${!subjectPage2.isEmpty()}"
+               th:classappend="${page == subjectPage2.number} ? 'on' : ''"
+               th:data-page="${page}" th:each="page : ${#numbers.sequence(0, subjectPage2.totalPages - 1)}"
+               th:text="${page + 1}"></a>
+            <a class="next_btn" href="javascript:void(0)" th:data-page="${subjectPage2.number + 1}"
+               th:if="${subjectPage2.hasNext() && !subjectPage2.isEmpty()}"><span>다음</span></a>
         </div>
-    </div>
+
+        <form id="actionForm" method="get" th:action="@{/a/class}">
+            <input type="hidden" id="page" name="page" th:value="${page}">
+            <input type="hidden" id="major" name="major" th:value="${major}">
+            <input type="hidden" id="person" name="class" th:value="${class}">
+        </form>
+
+
+        <!-- 수강 과목 기입 모달 창 -->
+        <div id="course-modal" class="modal-container">
+            <div class="modal-content-wrapper">
+                <span class="close-modal-btn">&times;</span>
+                <h2 class="modal-title">수강 과목 기입</h2>
+
+                <!-- 타임리프 폼 시작 -->
+                <form id="course-form" class="course-form" get="post" th:action="@{/a/insert/subject}" th:object="${subjectInsertForm}">
+
+                    <!-- 년도 -->
+                    <label for="course-year" class="label-course-year">년도:</label>
+                    <input type="number" id="course-year" name="course-year" th:field="*{year}" required />
+                    <br />
+
+                    <!-- 학기 -->
+                    <label for="course-semester" class="label-course-semester">학기:</label>
+                    <select id="course-semester" class="select-semester-count" th:field="*{semester}">
+                        <option value="" disabled selected>=== 학기 ===</option>
+                        <option value="semester1">1학기</option>
+                        <option value="semester2">2학기</option>
+                    </select>
+                    <br />
+
+                    <!-- 전공/교양 -->
+                    <label for="major-type" class="label-major-type">전공/교양:</label>
+                    <select id="major-type" class="select-major-type" th:field="*{type}">
+                        <option value="" disabled selected>=== 전공/교양 ===</option>
+                        <option value="전공">전공</option>
+                        <option value="교양">교양</option>
+                    </select>
+                    <br />
+
+                    <!-- 학과 -->
+                    <label for="department" class="label-department">학과:</label>
+                    <select id="department" class="select-department" th:field="*{major}">
+                        <option value="" selected>=== 학과 ===</option>
+                        <option th:each="major : ${majorList}"
+                                th:value="${major.id}"
+                                th:text="${major.name.substring(0, major.name.length() - 1)}"></option>
+                    </select>
+                    <br />
+
+                    <!-- 과목명 -->
+                    <label for="course-name" class="label-course-name">과목명:</label>
+                    <input type="text" id="course-name" name="course-name" th:field="*{name}" required />
+                    <br />
+
+                    <!-- 교수명 -->
+                    <label for="professor" class="label-professor">교수명:</label>
+                    <select id="professor" class="select-professor" th:field="*{professorNo}">
+                        <option value="" selected>=== 교수 선택 ===</option>
+                        <option th:each="professor : ${professorList}"
+                                th:value="${professor.no}"
+                                th:text="${professor.name +' [' + professor.getId() +']'}"></option>
+                    </select>
+                    <br />
+
+                    <!-- 시간 -->
+                    <div class="time-wrap">
+                        <p>시작 시간:</p>
+                        <select th:field="*{startTime}" required>
+                            <option value="9:00">9:00</option>
+                            <option value="10:00">10:00</option>
+                            <option value="11:00">11:00</option>
+                            <option value="12:00">12:00</option>
+                            <option value="13:00">13:00</option>
+                            <option value="14:00">14:00</option>
+                            <option value="15:00">15:00</option>
+                            <option value="16:00">16:00</option>
+                            <option value="17:00">17:00</option>
+                        </select>
+                        <p>종료 시간:</p>
+                        <select th:field="*{endTime}" required>
+                            <option value="10:00">10:00</option>
+                            <option value="11:00">11:00</option>
+                            <option value="12:00">12:00</option>
+                            <option value="13:00">13:00</option>
+                            <option value="14:00">14:00</option>
+                            <option value="15:00">15:00</option>
+                            <option value="16:00">16:00</option>
+                            <option value="17:00">17:00</option>
+                            <option value="18:00">18:00</option>
+                        </select>
+                    </div>
+                    <br />
+
+                    <!-- 요일 -->
+                    <label for="day" class="label-day">요일:</label>
+                    <input type="text" id="day" name="day" placeholder="예: 월, 화, 수, 목, 금" th:field="*{week}" required />
+                    <br />
+
+                    <!--최대 수강인원-->
+                    <label for="max-personnel" class="label-max-personnel">최대 수강 인원:</label>
+                    <input type="number" id="max-personnel" name="maxpersonnel" min="1" th:field="*{maxPersonnel}" required />
+                    <br />
+
+                    <!-- 수강학점 -->
+                    <label for="score" class="label-score">수강학점:</label>
+                    <input type="number" id="score" name="credits" min="1" max="3"
+                           placeholder="최대 3학점까지 기입할 수 있습니다." th:field="*{credits}" required />
+                    <br />
+
+                    <button type="submit" class="submit-course">과목 추가</button>
+                </form>
+            </div>
+        </div>
 </section>
 <script>
     window.onload = function () {
@@ -233,7 +287,9 @@
     };
 
     // 전공 구분 선택 시 필터링 처리
-    document.querySelector(".major-type-select").addEventListener("change", function () {
+    document
+        .querySelector(".major-type-select")
+        .addEventListener("change", function () {
             filterData();
         });
 
@@ -407,7 +463,24 @@
             $professorSelect.prop('disabled', true);
         }
     }
+
+     const delete_elements = document.querySelectorAll(".delete");
+
+delete_elements.forEach(function (element) {
+    element.addEventListener('click', function () {
+        const sugangSize = parseInt(this.getAttribute('data-sugang-size')); // 수강 신청 인원
+        if (sugangSize > 0) {
+            alert("현재 수강생이 있습니다. 삭제할 수 없습니다.");
+        } else {
+            if (confirm("정말로 삭제하시겠습니까?")) {
+                const deleteUrl = this.getAttribute('data-uri');
+                console.log('삭제 URL:', deleteUrl);
+                location.href = deleteUrl;
+            }
+        }
+    });
+});
 </script>
-<script th:src="@{/js/common.js}"></script>
+<script th:src="@{/js/pagination.js}"></script>
 </body>
 </html>
