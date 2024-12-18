@@ -208,7 +208,7 @@ public class AdminController {
         return "portal/admin/admin_board";
     }
 
-    @GetMapping("subject/delete/{no}")
+    @GetMapping("/subject/delete/{no}")
     public String deleteSubject(@PathVariable("no") Integer no, Principal principal) {
         if (!"admin".equals(principal.getName())) {
             throw new ResponseStatusException(HttpStatus.FORBIDDEN, "삭제 권한이 없습니다.");
@@ -222,10 +222,8 @@ public class AdminController {
     }
 
     @PostMapping("/insert/board")
-    public String insertBoard(@RequestParam("type") String type,
-                              @RequestParam("title") String title,
-                              @RequestParam("content") String content,
-                              @RequestParam("date") String date) {
+    public String insertBoard(@RequestParam("type") String type, @RequestParam("title") String title,
+                              @RequestParam("content") String content, @RequestParam("date") String date) {
 
         Board board = new Board();
         board.setContent(content);
