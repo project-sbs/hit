@@ -198,43 +198,6 @@
     // Update date and time every second
     setInterval(showCurrentDateTime, 1000);
     /*접속 시간을 가지고오는 스크립트 끝*/
-    // 학생 인원 수 그래프
-    const canvas = document.getElementById("studentChart");
-    canvas.width = 600; // 너비 설정
-    canvas.height = 350; // 높이를 기존보다 50px 더 늘린 400px로 설정
-
-    const ctx = canvas.getContext("2d");
-    const studentChart = new Chart(ctx, {
-        type: "bar",
-        data: {
-            labels: ["총학생수", "재학생수", "휴학생수"],
-            datasets: [
-                {
-                    label: "학생 수",
-                    data: [1000, 700, 200], // 임의의 데이터
-                    backgroundColor: [
-                        "rgba(75, 192, 192, 0.6)",
-                        "rgba(54, 162, 235, 0.6)",
-                        "rgba(255, 206, 86, 0.6)"
-                    ],
-                    borderColor: [
-                        "rgba(75, 192, 192, 1)",
-                        "rgba(54, 162, 235, 1)",
-                        "rgba(255, 206, 86, 1)"
-                    ],
-                    borderWidth: 1,
-                },
-            ],
-        },
-        options: {
-            responsive: false, // 크기 설정을 위해 false로 설정
-            scales: {
-                y: {
-                    beginAtZero: true,
-                },
-            },
-        },
-    });
 
     /*공지사항 및 기타 계시판 페이지 전환용의 스크립트*/
     document.addEventListener("DOMContentLoaded", () => {
@@ -282,7 +245,56 @@
 
         // 초기 활성 줄 위치 설정 (첫 번째 버튼 기준)
         setActiveLine(buttons[0]);
+
+        $.ajax({
+            url: '/a/student/count',
+            type: 'GET',
+            success: function (response) {
+                const countStudent = response;
+                // 학생 인원 수 그래프
+                const canvas = document.getElementById("studentChart");
+                canvas.width = 600; // 너비 설정
+                canvas.height = 350; // 높이를 기존보다 50px 더 늘린 400px로 설정
+
+                const ctx = canvas.getContext("2d");
+                const studentChart = new Chart(ctx, {
+                    type: "bar",
+                    data: {
+                        labels: ["총학생수", "재학생수", "휴학생수"],
+                        datasets: [
+                            {
+                                label: "학생 수",
+                                data: countStudent, // 임의의 데이터
+                                backgroundColor: [
+                                    "rgba(75, 192, 192, 0.6)",
+                                    "rgba(54, 162, 235, 0.6)",
+                                    "rgba(255, 206, 86, 0.6)"
+                                ],
+                                borderColor: [
+                                    "rgba(75, 192, 192, 1)",
+                                    "rgba(54, 162, 235, 1)",
+                                    "rgba(255, 206, 86, 1)"
+                                ],
+                                borderWidth: 1,
+                            },
+                        ],
+                    },
+                    options: {
+                        responsive: false, // 크기 설정을 위해 false로 설정
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                            },
+                        },
+                    },
+                });
+            },
+            error: function (xhr) {
+                alert(xhr.responseText);
+            }
+        })
     });
+
     // 총등록금과 결제인원 확인 그래프
     // canvas 크기 설정
     const tuitionCanvas = document.getElementById("tuitionChart");

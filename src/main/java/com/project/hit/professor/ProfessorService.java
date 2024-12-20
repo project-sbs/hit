@@ -103,6 +103,18 @@ public class ProfessorService {
         }
     }
 
+    @Transactional
+    public void updatePassword(Professor professor) {
+        Optional<Professor> temp = this.professorRepository.findById(professor.getId());
+        if (temp.isPresent()) {
+            Professor _professor = temp.get();
+            _professor.setPassword(professor.getPassword());
+            this.professorRepository.save(_professor);
+        } else {
+            throw new DataNotFoundException("Professor not found for " + professor.getId());
+        }
+    }
+
     public Professor getProfessor(long professorNo) {
         Optional<Professor> professor = this.professorRepository.findById(professorNo);
         if (professor.isPresent()) {

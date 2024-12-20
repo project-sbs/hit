@@ -15,6 +15,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -205,6 +207,58 @@ public class ProfessorController {
             }
         }
         return ResponseEntity.ok("저장 되었습니다.");
+    }
+
+    @GetMapping("/check/pwd")
+    public String checkPwd(Principal principal, Model model) {
+        Professor professor = this.professorService.getProfessor(principal.getName());
+        model.addAttribute("professor", professor);
+        return "portal/professor/professor_password_check";
+    }
+
+    @PostMapping("/check/pwd")
+    @ResponseBody
+    public Map<String, String> checkPwd(Principal principal, @RequestParam("password") String password) {
+        Professor professor = this.professorService.getProfessor(principal.getName());
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        Map<String, String> response = new HashMap<>();
+        if (professor == null) {
+            response.put("message", "일치하는 정보를 찾을수 없습니다.");
+
+        } else if (passwordEncoder.matches(password, professor.getPassword())) {
+            response.put("status", "success");
+            response.put("message", "일치하는 비밀번호입니다.");
+            response.put("redirectUrl", "/p/modify/pwd");
+
+        } else {
+            response.put("message", "비밀번호가 일치하지 않습니다.");
+        }
+        return response;
+    }
+
+    @GetMapping("/modify/pwd")
+    public String modifyPwd(Principal principal, Model model) {
+        Professor professor = this.professorService.getProfessor(principal.getName());
+        model.addAttribute("professor", professor);
+        return "portal/professor/professor_password_modify";
+    }
+
+    @PostMapping("/modify/pwd")
+    @ResponseBody
+    public Map<String, String> modifyPwd(Principal principal, @RequestParam("password") String password) {
+        Map<String, String> response = new HashMap<>();
+        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        Professor professor = this.professorService.getProfessor(principal.getName());
+        if (professor == null) {
+            response.put("message", "일치하는 정보를 찾을수 없습니다.");
+        } else {
+            professor.setPassword(passwordEncoder.encode(password));
+            this.professorService.updatePassword(professor);
+            response.put("status", "success");
+            response.put("message", "비밀번호를 변경했습니다. 재로그인 해주세요.");
+            response.put("redirectUrl", "/logout");
+        }
+        return response;
     }
 
     private String getSemester(int month) {

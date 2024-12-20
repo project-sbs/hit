@@ -29,5 +29,11 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
     Page<Student> findStudentByIdContainingAndMajor(String id, Major major, Pageable pageable);
 
     boolean existsByIdAndEmail(String id, String email);
+
+    @Query("select count(st) from Student st where st.status in ('재학', '휴학')")
+    long countByStudent();
+
+    @Query("select count(st) from Student st where st.status = :status")
+    long countBySpecificStatus(@Param("status") String status);
 }
 
