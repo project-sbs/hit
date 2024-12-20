@@ -96,6 +96,18 @@ public class StudentService {
         }
     }
 
+    @Transactional
+    public void updatePassword(Student student) {
+        Optional<Student> temp = this.studentRepository.findById(student.getId());
+        if (temp.isPresent()) {
+            Student _student = temp.get();
+            _student.setPassword(student.getPassword());
+            this.studentRepository.save(_student);
+        } else {
+            throw new DataNotFoundException("Student not found for " + student.getId());
+        }
+    }
+
     public boolean isMatchedIdAndEmail(String id, String email) {
         return this.studentRepository.existsByIdAndEmail(id, email);
     }

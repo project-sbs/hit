@@ -62,8 +62,7 @@ public class AdminController {
     }
 
     @GetMapping("/home")
-    public String home(Principal principal, Model model,
-                       @RequestParam(value = "page", defaultValue = "0") int page,
+    public String home(Principal principal, Model model, @RequestParam(value = "page", defaultValue = "0") int page,
                        @RequestParam(value = "size", defaultValue = "3") int size){
 
         int totalSchedulers = this.boardService.getTotalSchedulersCount();
@@ -378,6 +377,12 @@ public class AdminController {
         List<ProfessorDTO> professorDTOList = this.professorService.getProfessorAllList();
 
         return ResponseEntity.ok(professorDTOList);
+    }
+
+    @GetMapping("/student/count")
+    @ResponseBody
+    public long[] getStudentCount() {
+        return this.adminService.getStduentCnt();
     }
 
     private Subject insertSubject(SubjectInsertForm subjectInsertForm){

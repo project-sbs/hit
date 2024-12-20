@@ -42,7 +42,7 @@
             <div>
                 <p><b th:text="${student.getName()}"></b>님 환영합니다</p>
                 <ul>
-                    <li>비밀번호 변경</li>
+                    <li onclick="location.href='/s/check/pwd'">비밀번호 변경</li>
                     <li>|</li>
                     <li>인증서 등록</li>
                 </ul>
@@ -80,7 +80,7 @@
                     <p id="ip-address">Loading...</p>
                 </li>
                 <li>
-                    <button>마이페이지</button>
+                    <button onclick="location.href='/s/info'">마이페이지</button>
                     <button onclick="location.href='/logout'">로그아웃</button>
                 </li>
             </ul>
