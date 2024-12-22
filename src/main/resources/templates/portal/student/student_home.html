@@ -87,25 +87,33 @@
         </div>
         <div class="portal-college-schedule">
             <h2>학사일정</h2>
-            <ul>
-                <li>
-                    <button><img src="/image/home/arrowBack.png" alt=""></button>
-                    <p class="portal-college-schedule-control-date">일자</p>
-                    <button><img src="/image/home/arrowForward.png" alt=""></button>
-                </li>
-                <li>
-                    <ul>
-                        <li th:each="scheduler, loop : ${schedulers}" th:if="${!schedulers.isEmpty()}">
-                            <div th:if="${loop.index < 3}">
-                                <p class="portal-college-schedule-date"
-                                   th:text="${scheduler.getDate()}"></p>
-                                <p th:text="${scheduler.getTitle()}"></p>
-                            </div>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
+            <form action="/s/home" method="get" id="scheduleForm">
+                <ul>
+                    <li>
+                        <button type="submit" name="page" th:value="${page - 1}" th:disabled="${page == 0}">
+                            <img src="/image/home/arrowBack.png" alt="Back">
+                        </button>
+
+                        <p class="portal-college-schedule-control-date">일자</p>
+
+                        <button type="submit" name="page" th:value="${page + 1}">
+                            <img src="/image/home/arrowForward.png" alt="Forward">
+                        </button>
+                    </li>
+                    <li>
+                        <ul>
+                            <li th:each="scheduler, loop : ${schedulers}" th:if="${loop.index <= 3}">
+                                <div>
+                                    <p class="portal-college-schedule-date" th:text="${scheduler.date}"></p>
+                                    <p th:text="${scheduler.title}"></p>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </form>
         </div>
+
         <div class="portal-user-main-info">
             <h2>학사정보</h2>
             <ul>
@@ -114,7 +122,7 @@
                         <li><img src="/image/home/importIcon.png" alt=""></li>
                         <li><p>이수/졸업학점</p></li>
                         <li>
-                            <p>126</p>
+                            <p th:text="${totalCredits}"></p>
                             <p>/150</p>
                         </li>
                     </ul>

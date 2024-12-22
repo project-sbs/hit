@@ -1,5 +1,6 @@
 package com.project.hit.admin;
 
+import com.project.hit.DataNotFoundException;
 import com.project.hit.board.Board;
 import com.project.hit.board.BoardService;
 import com.project.hit.major.Major;
@@ -21,6 +22,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -62,7 +64,8 @@ public class AdminController {
     }
 
     @GetMapping("/home")
-    public String home(Principal principal, Model model, @RequestParam(value = "page", defaultValue = "0") int page,
+    public String home(Principal principal, Model model,
+                       @RequestParam(value = "page", defaultValue = "0") int page,
                        @RequestParam(value = "size", defaultValue = "3") int size){
 
         int totalSchedulers = this.boardService.getTotalSchedulersCount();
@@ -208,15 +211,14 @@ public class AdminController {
     }
 
     @GetMapping("/subject/delete/{no}")
-    public String deleteSubject(@PathVariable("no") Integer no, Principal principal) {
-        if (!"admin".equals(principal.getName())) {
-            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "삭제 권한이 없습니다.");
-        }
+    @PreAuthorize("hasRole('ROLE_관리자')")
+    public String deleteSubjects(@PathVariable("no") Integer no) {
         Subject subject = subjectService.getSubjectById(no);
         if (subject != null) {
-            subjectService.deleteSubject(subject);
+            subjectService.deleteSubjects(subject);
+        } else {
+            throw new DataNotFoundException("Subject not found for id: " + no);
         }
-
         return "redirect:/a/class";
     }
 
