@@ -84,9 +84,8 @@
                        th:data-uri="@{|/a/subject/delete/${subject.getNo()}|}"
                        th:data-sugang-size="${#lists.size(subject.getSugangList())}"
                        class="delete btn btn-sm btn-outline-danger"
-                       sec:authorize="isAuthenticated()"
-                       th:if="${#authentication.getName() == 'admin'}"
-                       th:text="삭제"></a>
+                       sec:authorize="hasRole('ROLE_관리자')"
+                        th:text="삭제"></a>
                 </td>
             </tr>
             </tbody>
@@ -141,9 +140,9 @@
                 <td>
                     <a href="javascript:void(0);"
                        th:data-uri="@{|/a/subject/delete/${subject.getNo()}|}"
+                       th:data-sugang-size="${#lists.size(subject.getSugangList())}"
                        class="delete btn btn-sm btn-outline-danger"
-                       sec:authorize="isAuthenticated()"
-                       th:if="${#authentication.getName() == 'admin'}"
+                       sec:authorize="hasRole('ROLE_관리자')"
                        th:text="삭제"></a>
                 </td>
             </tr>

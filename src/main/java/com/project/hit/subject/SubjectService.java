@@ -11,6 +11,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -101,6 +102,12 @@ public class SubjectService {
         sorts.add(Sort.Order.desc("no"));
         Pageable pageable = PageRequest.of(page, 10, Sort.by(sorts));
         return this.sugangRepository.findSugangsBySubject(subject, pageable);
+    }
+
+    @Transactional
+//    @PreAuthorize("hasRole('ROLE_관리자')")
+    public void deleteSubjects(Subject subject) {
+        this.subjectRepository.delete(subject);
     }
 
 }

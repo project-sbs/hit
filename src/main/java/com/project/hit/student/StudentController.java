@@ -29,6 +29,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.security.Principal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
@@ -59,21 +60,43 @@ public class StudentController {
     }
 
     @GetMapping("/home")
-    public String home(Model model, Principal principal) {
+    public String home(Model model, Principal principal,
+                       @RequestParam(value = "page", defaultValue = "0") int page,
+                       @RequestParam(value = "size", defaultValue = "3") int size) {
+
+        int totalSchedulers = this.boardService.getTotalSchedulersCount();
+        int totalPages = (int) Math.ceil((double) totalSchedulers / size);
+
+        if (page >= totalPages) {
+            page = totalPages - 1;
+        }
+        if (page < 0) {
+            page = 0;
+        }
+
+        LocalDate currentDate = LocalDate.now();
         Student student = this.studentService.getStudentById(principal.getName());
         List<Board> noticeList = this.boardService.getTop6Boards("notice");
         List<Board> educations = this.boardService.getTop6Boards("edu");
         List<Board> freebulletins = this.boardService.getTop6Boards("free");
         List<Board> jobpostings = this.boardService.getTop6Boards("hire");
-        List<Board> schedulers = this.boardService.getTop3Schedulers("scheduler");
+        List<Board> schedulersa = this.boardService.getTop3Schedulers("scheduler");
         List<Board> notices = this.boardService.getTop6Boards("notice");
+        List<Board> schedulers = this.boardService.getSchedulersByPage(page, size);
         LocalDateTime today = LocalDateTime.now();
         String year = String.valueOf(today.getYear());
         int month = today.getMonthValue();
         String semester = getSemester(month);
+        int totalCredits = 0;
 
         List<Sugang> sugangList = this.sugangService.getCurrentSugangs(student, semester, year);
 
+        for (Sugang sugang : sugangList) {
+            totalCredits += sugang.getSubject().getCredits();
+        }
+
+        model.addAttribute("page", page);
+        model.addAttribute("currentDate", currentDate);
         model.addAttribute("schedulers", schedulers);
         model.addAttribute("jobpostings", jobpostings);
         model.addAttribute("freebulletins", freebulletins);
@@ -82,8 +105,11 @@ public class StudentController {
         model.addAttribute("notices", notices);
         model.addAttribute("noticeList", noticeList);
         model.addAttribute("sugangList", sugangList);
+        model.addAttribute("totalCredits", totalCredits);
+
         return "portal/student/student_home";
     }
+
 
     @GetMapping("/info")   // 학생
     public String info(Model model, Principal principal) {
@@ -119,6 +145,7 @@ public class StudentController {
         model.addAttribute("percentage", percentage);
         return "portal/student/student_score";
     }
+
 
     @GetMapping("/report")
     public String report(Model model, Principal principal) {

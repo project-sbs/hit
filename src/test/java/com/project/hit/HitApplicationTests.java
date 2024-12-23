@@ -44,7 +44,18 @@ class HitApplicationTests {
 		admin.setROLE("관리자");
 		admin.setPhone("010-1234-1234");
 		this.adminService.insertAdmin(admin);
+
+		Admin admin2 = new Admin();
+		admin2.setId("admin2");
+		admin2.setPassword(bCryptPasswordEncoder.encode("5678"));
+		admin2.setName("보조 관리자");
+		admin2.setEmail("admin2@gmail.com");
+		admin2.setROLE("관리자");
+		admin2.setPhone("010-5678-5678");
+		this.adminService.insertAdmin(admin2);
 	}
+
+
 
 	@Test
 	void testInsertMajor() {
