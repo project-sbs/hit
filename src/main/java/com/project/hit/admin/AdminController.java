@@ -65,9 +65,8 @@ public class AdminController {
 
     @GetMapping("/home")
     public String home(Principal principal, Model model,
-                       @RequestParam(value = "page", defaultValue = "0") int page,
-                       @RequestParam(value = "size", defaultValue = "3") int size){
-
+                       @RequestParam(value = "page", defaultValue = "0") int page){
+        int size = 3;
         int totalSchedulers = this.boardService.getTotalSchedulersCount();
         int totalPages = (int) Math.ceil((double) totalSchedulers / size);
 
@@ -86,7 +85,6 @@ public class AdminController {
         List<Board> jobpostings = this.boardService.getTop6Boards("hire");
         List<Board> contents = this.boardService.getTop6Boards("con");
         List<Board> schedulers = this.boardService.getSchedulersByPage(page, size);
-        List<Board> schedulersa = this.boardService.getTop3Schedulers("scheduler");
 
         model.addAttribute("currentDate", currentDate);
         model.addAttribute("notices", notices);

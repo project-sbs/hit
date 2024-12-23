@@ -53,7 +53,6 @@
         <th>학과장</th>
         <th>학과현재인원수</th>
         <th>학과정원</th>
-        <th>삭제</th>
       </tr>
       </thead>
       <tbody>
@@ -63,7 +62,6 @@
         <td th:text="${#strings.isEmpty(major.getChair()) ? 'X' : major.getChair()}"></td>
         <td th:text="${#lists.size(major.getStudents())}"></td>
         <td th:text="${major.getTotalStudent()}"></td>
-        <td><button><img src="/image/home/close.png" alt=""></button></td>
       </tr>
       </tbody>
     </table>
