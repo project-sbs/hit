@@ -105,7 +105,7 @@ public class SubjectService {
     }
 
     @Transactional
-    @PreAuthorize("hasRole('ROLE_관리자')")
+//    @PreAuthorize("hasRole('ROLE_관리자')")
     public void deleteSubjects(Subject subject) {
         this.subjectRepository.delete(subject);
     }
