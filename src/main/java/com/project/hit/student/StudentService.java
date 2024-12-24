@@ -3,11 +3,13 @@ package com.project.hit.student;
 import com.project.hit.DataNotFoundException;
 import com.project.hit.major.Major;
 import com.project.hit.major.MajorRepository;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +22,7 @@ import java.util.Optional;
 public class StudentService {
     private final StudentRepository studentRepository;
     private final MajorRepository majorRepository;
+    private final HttpSession session;
 
     public Student addStudent(Student student) {
         this.studentRepository.save(student);
@@ -99,4 +102,8 @@ public class StudentService {
     public void modifyPassword(Student student) {
         this.studentRepository.save(student);
     }
+
+
 }
+
+

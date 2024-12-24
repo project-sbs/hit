@@ -1,5 +1,6 @@
 package com.project.hit.sugang;
 
+import com.project.hit.Attendance.AttendanceService;
 import com.project.hit.DataNotFoundException;
 import com.project.hit.grade.Grade;
 import com.project.hit.grade.GradeRepository;
@@ -12,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,12 +24,16 @@ public class SugangService {
     private final SubjectRepository subjectRepository;
     private final GradeRepository gradeRepository;
     private final GradeService gradeService;
+    private final AttendanceService attendanceService;
 
     public List<Sugang> getCurrentSugangs(Student student, String semester, String year) {
         return this.sugangRepository.findCurrentSubjectList(student, semester, year);
     }
 
     public void insertSugang(List<Integer> subjectIds, Student student) {
+
+        List<Sugang> sugangList = new ArrayList<>();
+
         for(int no : subjectIds) {
             Optional<Subject> _subject = subjectRepository.findById(no);
             if(_subject.isPresent()) {
@@ -37,6 +43,7 @@ public class SugangService {
                 sugang.setReg_date(today);
                 sugang.setSubject(_subject.get());
                 Sugang _sugang = this.sugangRepository.save(sugang);
+                sugangList.add(_sugang);
                 Grade grade = new Grade();
                 grade.setStudent(student);
                 grade.setYear(_sugang.getSubject().getYear());
@@ -44,10 +51,13 @@ public class SugangService {
                 grade.setSugang(_sugang);
                 grade.setGrade("미반영");
                 this.gradeRepository.save(grade);
+
+
             } else {
                 throw new IllegalArgumentException("Subject not found");
             }
         }
+
     }
 
     public boolean isCourseFull(List<Integer> subjectIds) {
@@ -185,6 +195,14 @@ public class SugangService {
     }
 
     public List<Sugang> getSugangList(Student student) {
-        return this.sugangRepository.findSugangByStudent(student);
+        List<Sugang> sugangList = sugangRepository.findSugangByStudent(student.getNo());
+
+        // 디버깅: 수강 리스트 출력
+        System.out.println("Sugang List for student " + student.getId() + ": " + sugangList);
+
+        return sugangList;
     }
+
+
+
 }
