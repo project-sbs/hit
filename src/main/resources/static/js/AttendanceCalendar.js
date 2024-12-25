@@ -54,19 +54,19 @@ async function showClassInfo(year, month, day) {
   }
 
   const attendanceData = await response.json();
-  console.log('Fetched Data:', attendanceData); // 데이터가 제대로 반환되는지 확인
+
 
   const attendanceList = document.getElementById('attendance-list');
   attendanceList.innerHTML = '';
 
   if (!attendanceData || attendanceData.length === 0) {
     attendanceList.innerHTML = '<p>수업이 없습니다.</p>';
-    document.getElementById('save-attendance').style.display = 'none'; // 저장 버튼 숨김
+
     return;
   }
 
   const userRole = document.querySelector('meta[name="user-role"]').getAttribute('content');
-  console.log(userRole);
+
 
 
   // 출석 데이터 처리
