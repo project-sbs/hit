@@ -18,6 +18,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -28,6 +29,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.security.Principal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
@@ -58,21 +60,43 @@ public class StudentController {
     }
 
     @GetMapping("/home")
-    public String home(Model model, Principal principal) {
+    public String home(Model model, Principal principal,
+                       @RequestParam(value = "page", defaultValue = "0") int page,
+                       @RequestParam(value = "size", defaultValue = "3") int size) {
+
+        int totalSchedulers = this.boardService.getTotalSchedulersCount();
+        int totalPages = (int) Math.ceil((double) totalSchedulers / size);
+
+        if (page >= totalPages) {
+            page = totalPages - 1;
+        }
+        if (page < 0) {
+            page = 0;
+        }
+
+        LocalDate currentDate = LocalDate.now();
         Student student = this.studentService.getStudentById(principal.getName());
         List<Board> noticeList = this.boardService.getTop6Boards("notice");
         List<Board> educations = this.boardService.getTop6Boards("edu");
         List<Board> freebulletins = this.boardService.getTop6Boards("free");
         List<Board> jobpostings = this.boardService.getTop6Boards("hire");
-        List<Board> schedulers = this.boardService.getTop3Schedulers("scheduler");
+        List<Board> schedulersa = this.boardService.getTop3Schedulers("scheduler");
         List<Board> notices = this.boardService.getTop6Boards("notice");
+        List<Board> schedulers = this.boardService.getSchedulersByPage(page, size);
         LocalDateTime today = LocalDateTime.now();
         String year = String.valueOf(today.getYear());
         int month = today.getMonthValue();
         String semester = getSemester(month);
+        int totalCredits = 0;
 
         List<Sugang> sugangList = this.sugangService.getCurrentSugangs(student, semester, year);
 
+        for (Sugang sugang : sugangList) {
+            totalCredits += sugang.getSubject().getCredits();
+        }
+
+        model.addAttribute("page", page);
+        model.addAttribute("currentDate", currentDate);
         model.addAttribute("schedulers", schedulers);
         model.addAttribute("jobpostings", jobpostings);
         model.addAttribute("freebulletins", freebulletins);
@@ -81,8 +105,11 @@ public class StudentController {
         model.addAttribute("notices", notices);
         model.addAttribute("noticeList", noticeList);
         model.addAttribute("sugangList", sugangList);
+        model.addAttribute("totalCredits", totalCredits);
+
         return "portal/student/student_home";
     }
+
 
     @GetMapping("/info")   // 학생
     public String info(Model model, Principal principal) {
@@ -118,6 +145,7 @@ public class StudentController {
         model.addAttribute("percentage", percentage);
         return "portal/student/student_score";
     }
+
 
     @GetMapping("/report")
     public String report(Model model, Principal principal) {
@@ -297,6 +325,58 @@ public class StudentController {
         model.addAttribute("previousBoard",previousBoard);
         model.addAttribute("board", board);
         return "portal/student/student_detail";
+    }
+
+    @GetMapping("/check/pwd")
+    public String checkPwd(Principal principal, Model model) {
+        Student student = this.studentService.getStudentById(principal.getName());
+        model.addAttribute("student", student);
+        return "portal/student/student_password_check";
+    }
+
+    @PostMapping("/check/pwd")
+    @ResponseBody
+    public Map<String, String> checkPwd(Principal principal, @RequestParam("password") String password) {
+        Student student = this.studentService.getStudentById(principal.getName());
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        Map<String, String> response = new HashMap<>();
+        if (student == null) {
+            response.put("message", "일치하는 정보를 찾을수 없습니다.");
+
+        } else if (passwordEncoder.matches(password, student.getPassword())) {
+            response.put("status", "success");
+            response.put("message", "일치하는 비밀번호입니다.");
+            response.put("redirectUrl", "/s/modify/pwd");
+
+        } else {
+            response.put("message", "비밀번호가 일치하지 않습니다.");
+        }
+        return response;
+    }
+
+    @GetMapping("/modify/pwd")
+    public String modifyPwd(Principal principal, Model model) {
+        Student student = this.studentService.getStudentById(principal.getName());
+        model.addAttribute("student", student);
+        return "portal/student/student_password_modify";
+    }
+
+    @PostMapping("/modify/pwd")
+    @ResponseBody
+    public Map<String, String> modifyPwd(Principal principal, @RequestParam("password") String password, Model model) {
+        Student student = this.studentService.getStudentById(principal.getName());
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        Map<String, String> response = new HashMap<>();
+        if (student == null) {
+            response.put("message", "일치하는 정보를 찾을 수 없습니다.");
+        } else {
+            student.setPassword(passwordEncoder.encode(password));
+            this.studentService.updatePassword(student);
+            response.put("status", "success");
+            response.put("message", "비밀번호를 변경했습니다. 재로그인 해주세요.");
+            response.put("redirectUrl", "/logout");
+        }
+        return response;
     }
 
     private String getSemester(int month) {

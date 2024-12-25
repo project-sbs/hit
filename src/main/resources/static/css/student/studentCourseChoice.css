@@ -1,110 +1,136 @@
 header {
-    width: 100%;
-    height: 60px;
+  width: 100%;
+  height: 100px;
+  padding: 1%;
+}
+h1 {
+  font-size: 30px;
+}
+img {
+  width: 200px;
+  height: 80px;
 }
 .course-container {
-    width: 100%;
-    display: flex;
-    padding: 1.5%;
+  width: 100%;
+  display: flex;
+  padding: 1.5%;
 }
 .course-container section:nth-of-type(1) {
-    width: 30%;
-    border: 1px solid red;
+  width: 30%;
 }
 .course-container section:nth-of-type(2) {
-    width: 70%;
-    padding: 1%;
+  width: 70%;
+  padding: 1%;
 }
 table {
-    border-collapse: collapse;
-    width: 100%;
-    text-align: center;
+  border-collapse: collapse;
+  width: 100%;
+  text-align: center;
 }
 th,
 td {
-    border: 1px solid;
+  border: 1px solid;
 }
 .course-schedule-table th:nth-of-type(1) {
-    width: 67px;
+  width: 9%;
 }
 .course-schedule-table th {
-    width: 97px;
+  background-color: #3f94f5;
+  color: white;
+  width: 13%;
 }
 .course-schedule-table td {
-    height: 40px;
+  height: 40px;
+  border: 1px solid #e6e6e6;
+}
+.course-schedule-table td:first-of-type {
+  background-color: #e3d4f3;
 }
 footer {
-    width: 100%;
-    height: 100px;
+  width: 100%;
+  height: 100px;
 }
 section:nth-of-type(1) > ul > li:nth-of-type(1) {
-    margin-bottom: 50px;
+  margin-bottom: 50px;
 }
 section:nth-of-type(1) > ul > li:nth-of-type(2) h2 {
-    margin-bottom: 30px;
+  margin-bottom: 30px;
 }
 .course-choose-list-wrap ul {
-    margin-top: 20px;
-    display: flex;
+  margin-top: 20px;
+  display: flex;
 }
 .course-choose-list-wrap ul li {
-    display: flex;
-    width: 50%;
-    padding: 1%;
-    height: 35px;
+  display: flex;
+  width: 50%;
+  padding: 1%;
+  height: 35px;
 }
 .course-choose-list-wrap ul li h3 {
-    margin-right: 20px;
-    line-height: 23px;
+  margin-right: 20px;
+  line-height: 23px;
 }
 .course-choose-list-wrap ul li p {
-    width: 30px;
-    text-align: center;
-    border: 1px solid;
+  width: 30px;
+  text-align: center;
+  border: 1px solid;
 }
 .course-filter {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
 }
 .course-filter select {
-    height: 40px;
-    width: 150px;
-    text-align: center;
+  height: 40px;
+  width: 150px;
+  text-align: center;
 }
 .course-filter button {
-    width: 120px;
+  width: 120px;
+  height: 40px;
+  background-color: orange;
+  border: none;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
 }
-.select-all-section {
-    text-align: right;
+.course-table {
+  border: 1px solid #e6e6e6;
 }
 .course-table th {
-    height: 40px;
-}
-/*선택 불가능한 테이블 tr*/
-.course-table tr.select-disabled {
-    background-color: #f2f2f2;
-    color: #a0a0a0;
+  height: 40px;
+  background-color: #3f94f5;
+  color: white;
 }
 .course-table tbody tr td {
-    height: 26px;
+  height: 26px;
+  border: 1px solid #e6e6e6;
 }
 .course-table tbody tr td:last-of-type input {
-    margin-right: 20px;
+  margin-right: 20px;
 }
 .course-table tbody tr td button {
-    height: 26px;
+  height: 26px;
 }
-/* 페이징 처리 */
-.pagination {
-    width: 13%;
-    margin: 100px auto 0;
+.subject {
+  background-color: #e8f1ff;
+  color: #333;
+  font-size: 14px;
+  padding: 5px;
 }
-.pagination a {
-    border: 1px solid;
-    color: black;
+section:nth-of-type(1) > ul > li:nth-of-type(2) {
 }
-.pagination a.on{
-    background-color: black;
-    color: #fff;
+section:nth-of-type(1) > ul > li:nth-of-type(2) table th {
+  background-color: #3f94f5;
+  color: white;
+}
+section:nth-of-type(1) > ul > li:nth-of-type(2) table td {
+  border: 1px solid #e6e6e6;
+}
+footer {
+  margin-top: 60px;
+  text-align: center;
+}
+footer p:nth-of-type(1) {
+  font-weight: bold;
 }

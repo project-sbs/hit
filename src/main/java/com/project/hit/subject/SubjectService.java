@@ -5,11 +5,13 @@ import com.project.hit.major.Major;
 import com.project.hit.major.MajorRepository;
 import com.project.hit.sugang.Sugang;
 import com.project.hit.sugang.SugangRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -24,11 +26,13 @@ public class SubjectService {
     private final MajorRepository majorRepository;
     private final SugangRepository sugangRepository;
 
+    @Transactional
     public Subject addSubject(Subject subject) {
         this.subjectRepository.save(subject);
         return subject;
     }
 
+    @Transactional
     public void insertSubject(Subject subject) {
         this.subjectRepository.save(subject);
     }
@@ -63,6 +67,32 @@ public class SubjectService {
         return this.subjectRepository.findAllBySemesterContainingAndYearContaining(semester, year, pageable);
     }
 
+    public Page<Subject>getList(int page,int major_id){
+        Pageable pageable = PageRequest.of(page,10);
+        return this.subjectRepository.findAll(pageable);
+    }
+
+    public Page<Subject> getSubjectList(String type, int page, int major_id) {
+        List<Sort.Order> sorts = new ArrayList<>();
+        sorts.add(Sort.Order.desc("no"));
+        Pageable pageable = PageRequest.of(page, 10, Sort.by(sorts));
+        return subjectRepository.findSubjectByTypeContaining(type, pageable);
+    }
+
+    @Transactional
+    public void delete(Subject subject){
+        this.subjectRepository.delete(subject);
+    }
+
+    @Transactional
+    public void deleteSubject(Subject subject) {
+        subjectRepository.delete(subject);
+    }
+
+    public Subject getSubjectById(int no) {
+        return subjectRepository.findById(no).orElse(null);
+    }
+
     public Subject getSubject(int no) {
         return this.subjectRepository.findByNo(no);
     }
@@ -73,4 +103,11 @@ public class SubjectService {
         Pageable pageable = PageRequest.of(page, 10, Sort.by(sorts));
         return this.sugangRepository.findSugangsBySubject(subject, pageable);
     }
+
+    @Transactional
+//    @PreAuthorize("hasRole('ROLE_관리자')")
+    public void deleteSubjects(Subject subject) {
+        this.subjectRepository.delete(subject);
+    }
+
 }

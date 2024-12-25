@@ -15,6 +15,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -65,10 +67,22 @@ public class ProfessorController {
         String semester = getSemester(month);
         List<Subject> subjectList = this.professorService.getProfessorSubjects(professor, year, semester);
         if (subjectNo == 0) {
-            subjectNo = this.professorService.getFirstProfessorSubject(professor, year, semester).getNo();
+            Subject _subject = this.professorService.getFirstProfessorSubject(professor, year, semester);
+            if (_subject != null) {
+                subjectNo = _subject.getNo();
+            } else {
+                boolean isEmpty = true;
+                model.addAttribute("isEmpty", isEmpty);
+                model.addAttribute("professor", professor);
+                return "portal/professor/professor_report_check";
+            }
         }
         Subject subject = this.subjectService.getSubject(subjectNo);
         Page<Report> reportList = this.reportService.getReportsPagingList(subject, page);
+        boolean isEmpty = false;
+        if (reportList.isEmpty()) {
+            isEmpty = true;
+        }
         Map<Integer, List<FileData>> fileDataMap = new HashMap<>();
 
         for (Report report : reportList.getContent()) {
@@ -105,6 +119,7 @@ public class ProfessorController {
         model.addAttribute("fileDataMap", fileDataMap);
         model.addAttribute("startBlock", startBlock);
         model.addAttribute("endBlock", endBlock);
+        model.addAttribute("isEmpty", isEmpty);
         return "portal/professor/professor_report_check";
     }
 
@@ -139,10 +154,22 @@ public class ProfessorController {
         String semester = getSemester(month);
         List<Subject> subjectList = this.professorService.getProfessorSubjects(professor, year, semester);
         if (subject_no == 0) {
-            subject_no = this.professorService.getFirstProfessorSubject(professor, year, semester).getNo();
+            Subject _subject = this.professorService.getFirstProfessorSubject(professor, year, semester);
+            if (_subject != null) {
+                subject_no = _subject.getNo();
+            } else {
+                boolean isEmpty = true;
+                model.addAttribute("isEmpty", isEmpty);
+                model.addAttribute("professor", professor);
+                return "portal/professor/professor_score";
+            }
         }
         Subject subject = this.subjectService.getSubject(subject_no);
         Page<Sugang> sugangList = this.subjectService.getSubjectSugangs(subject, page);
+        boolean isEmpty = false;
+        if (sugangList.isEmpty()) {
+            isEmpty = true;
+        }
 
         int totalPage = sugangList.getTotalPages();
         int block = 5;
@@ -158,6 +185,7 @@ public class ProfessorController {
         model.addAttribute("page", page);
         model.addAttribute("startBlock", startBlock);
         model.addAttribute("endBlock", endBlock);
+        model.addAttribute("isEmpty", isEmpty);
         return "portal/professor/professor_score";
     }
 
@@ -179,6 +207,58 @@ public class ProfessorController {
             }
         }
         return ResponseEntity.ok("저장 되었습니다.");
+    }
+
+    @GetMapping("/check/pwd")
+    public String checkPwd(Principal principal, Model model) {
+        Professor professor = this.professorService.getProfessor(principal.getName());
+        model.addAttribute("professor", professor);
+        return "portal/professor/professor_password_check";
+    }
+
+    @PostMapping("/check/pwd")
+    @ResponseBody
+    public Map<String, String> checkPwd(Principal principal, @RequestParam("password") String password) {
+        Professor professor = this.professorService.getProfessor(principal.getName());
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        Map<String, String> response = new HashMap<>();
+        if (professor == null) {
+            response.put("message", "일치하는 정보를 찾을수 없습니다.");
+
+        } else if (passwordEncoder.matches(password, professor.getPassword())) {
+            response.put("status", "success");
+            response.put("message", "일치하는 비밀번호입니다.");
+            response.put("redirectUrl", "/p/modify/pwd");
+
+        } else {
+            response.put("message", "비밀번호가 일치하지 않습니다.");
+        }
+        return response;
+    }
+
+    @GetMapping("/modify/pwd")
+    public String modifyPwd(Principal principal, Model model) {
+        Professor professor = this.professorService.getProfessor(principal.getName());
+        model.addAttribute("professor", professor);
+        return "portal/professor/professor_password_modify";
+    }
+
+    @PostMapping("/modify/pwd")
+    @ResponseBody
+    public Map<String, String> modifyPwd(Principal principal, @RequestParam("password") String password) {
+        Map<String, String> response = new HashMap<>();
+        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        Professor professor = this.professorService.getProfessor(principal.getName());
+        if (professor == null) {
+            response.put("message", "일치하는 정보를 찾을수 없습니다.");
+        } else {
+            professor.setPassword(passwordEncoder.encode(password));
+            this.professorService.updatePassword(professor);
+            response.put("status", "success");
+            response.put("message", "비밀번호를 변경했습니다. 재로그인 해주세요.");
+            response.put("redirectUrl", "/logout");
+        }
+        return response;
     }
 
     private String getSemester(int month) {

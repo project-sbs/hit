@@ -4,6 +4,7 @@ import com.project.hit.DataNotFoundException;
 import com.project.hit.major.Major;
 import com.project.hit.major.MajorRepository;
 import jakarta.servlet.http.HttpSession;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -24,11 +25,13 @@ public class StudentService {
     private final MajorRepository majorRepository;
     private final HttpSession session;
 
+    @Transactional
     public Student addStudent(Student student) {
         this.studentRepository.save(student);
         return student;
     }
 
+    @Transactional
     public void insertStudent(Student student) {    // test 상의 더미 데이터 insert 시 사용하는 메서드
         this.studentRepository.save(student);
     }
@@ -76,6 +79,7 @@ public class StudentService {
         return this.studentRepository.findAllByOrderByNoDesc(pageable);
     }
 
+    @Transactional
     public void updateStudent(Student student) {
         Optional<Student> stud = this.studentRepository.findById(student.getId());
         if (stud.isPresent()) {
@@ -95,10 +99,23 @@ public class StudentService {
         }
     }
 
+    @Transactional
+    public void updatePassword(Student student) {
+        Optional<Student> temp = this.studentRepository.findById(student.getId());
+        if (temp.isPresent()) {
+            Student _student = temp.get();
+            _student.setPassword(student.getPassword());
+            this.studentRepository.save(_student);
+        } else {
+            throw new DataNotFoundException("Student not found for " + student.getId());
+        }
+    }
+
     public boolean isMatchedIdAndEmail(String id, String email) {
         return this.studentRepository.existsByIdAndEmail(id, email);
     }
 
+    @Transactional
     public void modifyPassword(Student student) {
         this.studentRepository.save(student);
     }

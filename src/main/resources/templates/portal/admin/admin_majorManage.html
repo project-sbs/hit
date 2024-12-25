@@ -31,7 +31,7 @@
       <li class="portal-student-pay-check-button" onclick="location.href=''">
         <div><img src="/image/home/paymentsIcon.png" alt=""></div>등록금확인
       </li>
-      <li class="portal-class-open-button" onclick="location.href=''">
+      <li class="portal-admin-course-open-button">
         <div><img src="/image/home/courseIcon.png" alt="" /></div>수강신청
       </li>
     </ul>
@@ -53,7 +53,6 @@
         <th>학과장</th>
         <th>학과현재인원수</th>
         <th>학과정원</th>
-        <th>삭제</th>
       </tr>
       </thead>
       <tbody>
@@ -63,7 +62,6 @@
         <td th:text="${#strings.isEmpty(major.getChair()) ? 'X' : major.getChair()}"></td>
         <td th:text="${#lists.size(major.getStudents())}"></td>
         <td th:text="${major.getTotalStudent()}"></td>
-        <td><button><img src="/image/home/close.png" alt=""></button></td>
       </tr>
       </tbody>
     </table>
@@ -144,5 +142,6 @@
     }
   });
 </script>
+<script th:src="@{/js/common.js}"></script>
 </body>
 </html>

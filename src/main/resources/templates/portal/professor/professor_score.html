@@ -27,17 +27,17 @@
       <li class="portal-scoring-button" onclick="location.href='/p/score'"><div><img src="/image/home/importIcon.png" alt=""></div>과목채점</li>
       <li class="portal-report-check-button" onclick="location.href='/p/report'"><div><img src="/image/home/importIcon.png" alt=""></div>과제확인</li>
     </ul>
+    <footer>
+      <p>© 2024 HITuniv. All rights reserved.</p>
+      <p>모든 저작권 권리는 HIT대학교에 있습니다.</p>
+    </footer>
   </nav>
-  <footer>
-    <p>© 2024 HITuniv. All rights reserved.</p>
-    <p>모든 저작권 권리는 HIT대학교에 있습니다.</p>
-  </footer>
   <div class="portal-professor-score portal-main-frame">
     <h2>과목 체점</h2>
     <div class="portal-professor-score-wrap">
       <div class="portal-professor-score-filter">
         <select id="subjectSelect">
-          <option th:if="${subjectList.isEmpty()}" th:text="'=== 과목선택 ==='" disabled></option>
+          <option th:selected="${isEmpty}" th:text="'=== 과목선택 ==='" disabled></option>
           <option th:each="subject, loop : ${subjectList}" th:selected="${subjectNo == subject.getNo()}" th:value="${subject.getNo()}" th:text="${subject.getName()}"></option>
         </select>
         <input type="button" id="submitBtn" value="입력완료" />
@@ -45,7 +45,6 @@
       <form id="filterForm" th:action="@{/p/score}" method="get">
         <input type="hidden" id="selectNum" name="subject_no" th:value="${subjectNo}">
       </form>
-      <form id="modifyForm" action="" method="">
         <table>
           <thead>
           <tr>
@@ -74,7 +73,7 @@
             <td><input type="number" min="0" max="20" name="final" th:value="${sugang.getFinal_score()}" id="final"/></td>
             <td><input type="checkbox" class="checkBox" name="no" th:value="${sugang.getNo()}"/></td>
           </tr>
-          <tr th:if="${sugangList.isEmpty()}">
+          <tr th:if="${isEmpty}">
             <td colspan="8">학생 리스트가 비었습니다.</td>
           </tr>
           </tbody>
@@ -82,7 +81,7 @@
       </form>
     </div>
     <!-- 페이징 시작 -->
-    <div class="pagination" th:if="${!sugangList.isEmpty()}">
+    <div class="pagination" th:if="${!isEmpty}">
       <a class="prev_btn" href="javascript:void(0)" th:data-page="${sugangList.number - 1}" th:if="${sugangList.number != 0}"><span>이전</span></a>
       <a class="page_link"
          href="javascript:void(0)" th:classappend="${page == sugangList.number} ? 'on'" th:data-page="${page}" th:each="page: ${#numbers.sequence(startBlock - 1, endBlock - 1)}" th:text="${page+1}"></a>
@@ -119,7 +118,7 @@
                 assignment2 === "" || assignment2 === null ||
                 semi_score === "" || semi_score === null ||
                 final_score === "" || final_score === null) {
-          alert("모든 점수를 입력해주세요.");
+          alert("모든 점수를 입력해주세요(최소 0점).");
           hasError = true;
           return false;
         }
@@ -161,5 +160,6 @@
   })
 </script>
 <script th:src="@{/js/pagination.js}"></script>
+<script th:src="@{/js/common.js}"></script>
 </body>
 </html>

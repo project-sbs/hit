@@ -1,5 +1,6 @@
 package com.project.hit.admin;
 
+import com.project.hit.DataNotFoundException;
 import com.project.hit.board.Board;
 import com.project.hit.board.BoardService;
 import com.project.hit.major.Major;
@@ -19,19 +20,23 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.security.Principal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
@@ -59,38 +64,85 @@ public class AdminController {
     }
 
     @GetMapping("/home")
-    public String home(Principal principal, Model model) {
+    public String home(Principal principal, Model model,
+                       @RequestParam(value = "page", defaultValue = "0") int page){
+        int size = 3;
+        int totalSchedulers = this.boardService.getTotalSchedulersCount();
+        int totalPages = (int) Math.ceil((double) totalSchedulers / size);
+
+        if (page >= totalPages) {
+            page = totalPages - 1;
+        }
+        if (page < 0) {
+            page = 0;
+        }
+
+        LocalDate currentDate = LocalDate.now();
         Admin admin = this.adminService.getAdmin(principal.getName());
         List<Board> notices = this.boardService.getTop6Boards("notice");
         List<Board> educations = this.boardService.getTop6Boards("edu");
         List<Board> freebulletins = this.boardService.getTop6Boards("free");
         List<Board> jobpostings = this.boardService.getTop6Boards("hire");
         List<Board> contents = this.boardService.getTop6Boards("con");
-        List<Board> schedulers = this.boardService.getTop3Schedulers("scheduler");
+        List<Board> schedulers = this.boardService.getSchedulersByPage(page, size);
 
-        model.addAttribute("schedulers", schedulers);
-        model.addAttribute("contents", contents);
-        model.addAttribute("jobpostings", jobpostings);
-        model.addAttribute("freebulletins", freebulletins);
+        model.addAttribute("currentDate", currentDate);
         model.addAttribute("notices", notices);
         model.addAttribute("educations", educations);
+        model.addAttribute("freebulletins", freebulletins);
+        model.addAttribute("jobpostings", jobpostings);
+        model.addAttribute("contents", contents);
+        model.addAttribute("schedulers", schedulers);
         model.addAttribute("admin", admin);
+        model.addAttribute("page", page);
+
         return "portal/admin/admin_home";
     }
 
     @GetMapping("/class")
-    public String classManage(SubjectInsertForm subjectInsertForm, Principal principal, Model model) {
-        Admin admin = this.adminService.getAdmin(principal.getName());
-        List<Subject> subjectList1 = this.subjectService.getSubjectList("전공");
-        List<Subject> subjectList2 = this.subjectService.getSubjectList("교양");
-        List<Major> majorList = this.majorService.getAllMajors();
-        List<Professor> professorList =this.professorService.getAllProfessors();
+    public String classManage(SubjectInsertForm subjectInsertForm, Principal principal, Model model,
+                              @RequestParam(value = "majorPage", defaultValue = "0") int majorPage,
+                              @RequestParam(value = "generalPage", defaultValue = "0") int generalPage,
+                              @RequestParam(value = "major", defaultValue = "-1") int major_id,
+                              @RequestParam(value = "class", defaultValue = "학생") String classType) {
 
-        model.addAttribute("professorList",professorList);
+        Admin admin = this.adminService.getAdmin(principal.getName());
+        List<Major> majorList = this.majorService.getAllMajors();
+        List<Professor> professorList = this.professorService.getAllProfessors();
+        Page<Subject> subjectPage1 = this.subjectService.getSubjectList("전공", majorPage, major_id);
+        Page<Subject> subjectPage2 = this.subjectService.getSubjectList("교양", generalPage, major_id);
+
+        int sub_totalPage = subjectPage1.getTotalPages();
+        int sub2_totalPage = subjectPage2.getTotalPages();
+        int block = 5;
+        int sub_currentPage = subjectPage1.getNumber() + 1;
+        int sub2_currentPage = subjectPage2.getNumber() + 1;
+
+        int sub_startBlock = (((sub_currentPage - 1) / block) * block) + 1;
+        int sub_endBlock  = sub_startBlock + block - 1;
+        if (sub_endBlock > sub_totalPage) {
+            sub_endBlock = sub_totalPage;
+        }
+
+        int sub2_startBlock = (((sub2_currentPage - 1) / block) * block) + 1;
+        int sub2_endBlock = sub2_startBlock + block - 1;
+        if (sub2_endBlock > sub2_totalPage) {
+            sub2_endBlock = sub2_totalPage;
+        }
+
+        model.addAttribute("sub_startBlock", sub_startBlock);
+        model.addAttribute("sub2_sub_startBlock", sub2_startBlock);
+        model.addAttribute("sub_totalPage", sub_totalPage);
+        model.addAttribute("sub2_totalPage", sub2_totalPage);
+        model.addAttribute("sub_endBlock", sub_endBlock);
+        model.addAttribute("sub2_endBlock", sub2_endBlock);
+        model.addAttribute("class", classType);
+        model.addAttribute("professorList", professorList);
         model.addAttribute("majorList", majorList);
-        model.addAttribute("subjectList1",subjectList1);
-        model.addAttribute("subjectList2",subjectList2);
+        model.addAttribute("subjectPage1", subjectPage1);
+        model.addAttribute("subjectPage2", subjectPage2);
         model.addAttribute("admin", admin);
+
         return "portal/admin/admin_classManage";
     }
 
@@ -156,9 +208,21 @@ public class AdminController {
         return "portal/admin/admin_board";
     }
 
+    @GetMapping("/subject/delete/{no}")
+    @PreAuthorize("hasRole('ROLE_관리자')")
+    public String deleteSubjects(@PathVariable("no") Integer no) {
+        Subject subject = subjectService.getSubjectById(no);
+        if (subject != null) {
+            subjectService.deleteSubjects(subject);
+        } else {
+            throw new DataNotFoundException("Subject not found for id: " + no);
+        }
+        return "redirect:/a/class";
+    }
+
     @PostMapping("/insert/board")
-    public String insertBoard(@RequestParam("type") String type, @RequestParam("title") String title, @RequestParam("content") String content,
-                              @RequestParam("date") String date) {
+    public String insertBoard(@RequestParam("type") String type, @RequestParam("title") String title,
+                              @RequestParam("content") String content, @RequestParam("date") String date) {
 
         Board board = new Board();
         board.setContent(content);
@@ -177,7 +241,7 @@ public class AdminController {
         return "redirect:/a/board";
     }
 
-    @PostMapping("/insert/subject")
+    @GetMapping("/insert/subject")
     public String subjectInsert(@Valid SubjectInsertForm subjectInsertForm, BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
@@ -313,6 +377,12 @@ public class AdminController {
         List<ProfessorDTO> professorDTOList = this.professorService.getProfessorAllList();
 
         return ResponseEntity.ok(professorDTOList);
+    }
+
+    @GetMapping("/student/count")
+    @ResponseBody
+    public long[] getStudentCount() {
+        return this.adminService.getStduentCnt();
     }
 
     private Subject insertSubject(SubjectInsertForm subjectInsertForm){

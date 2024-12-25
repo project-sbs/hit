@@ -29,10 +29,10 @@
             </li>
             <li class="portal-class-add-button" onclick="location.href='/a/class'"><div><img src="/image/home/importIcon.png" alt=""></div>과목기입</li>
             <li class="portal-notice-add-button" onclick="location.href='/a/board'"><div><img src="/image/home/noticeIcon.png" alt=""></div>게시판</li>
-            <li class="portal-student-pay-check-button" onclick="location.href=''">
+            <li class="portal-student-pay-check-button">
                 <div><img src="/image/home/paymentsIcon.png" alt=""></div>등록금확인
             </li>
-            <li class="portal-class-open-button" onclick="location.href=''">
+            <li class="portal-admin-course-open-button">
                 <div><img src="/image/home/courseIcon.png" alt="" /></div>수강신청
             </li>
         </ul>
@@ -91,25 +91,33 @@
         </div>
         <div class="portal-college-schedule">
             <h2>학사일정</h2>
-            <ul>
-                <li>
-                    <button><img src="/image/home/arrowBack.png" alt=""></button>
-                    <p class="portal-college-schedule-control-date">일자</p>
-                    <button><img src="/image/home/arrowForward.png" alt=""></button>
-                </li>
-                <li>
-                    <ul>
-                        <li th:each="scheduler, loop : ${schedulers}" th:if="${!schedulers.isEmpty()}">
-                            <div th:if="${loop.index < 3}">
-                                <p class="portal-college-schedule-date"
-                                   th:text="${scheduler.getDate()}"></p>
-                                <p th:text="${scheduler.getTitle()}"></p>
-                            </div>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
+            <form action="/a/home" method="get" id="scheduleForm">
+                <ul>
+                    <li>
+                        <button type="submit" name="page" th:value="${page - 1}" th:disabled="${page == 0}">
+                            <img src="/image/home/arrowBack.png" alt="Back">
+                        </button>
+
+                        <p class="portal-college-schedule-control-date">일자</p>
+
+                        <button type="submit" name="page" th:value="${page + 1}">
+                            <img src="/image/home/arrowForward.png" alt="Forward">
+                        </button>
+                    </li>
+                    <li>
+                        <ul>
+                            <li th:each="scheduler, loop : ${schedulers}" th:if="${loop.index <= 3}">
+                                <div>
+                                    <p class="portal-college-schedule-date" th:text="${scheduler.date}"></p>
+                                    <p th:text="${scheduler.title}"></p>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </form>
         </div>
+
         <div class="portal-admin-student-check">
             <canvas id="studentChart"></canvas>
         </div>
@@ -190,43 +198,6 @@
     // Update date and time every second
     setInterval(showCurrentDateTime, 1000);
     /*접속 시간을 가지고오는 스크립트 끝*/
-    // 학생 인원 수 그래프
-    const canvas = document.getElementById("studentChart");
-    canvas.width = 600; // 너비 설정
-    canvas.height = 350; // 높이를 기존보다 50px 더 늘린 400px로 설정
-
-    const ctx = canvas.getContext("2d");
-    const studentChart = new Chart(ctx, {
-        type: "bar",
-        data: {
-            labels: ["총학생수", "재학생수", "휴학생수"],
-            datasets: [
-                {
-                    label: "학생 수",
-                    data: [1000, 700, 200], // 임의의 데이터
-                    backgroundColor: [
-                        "rgba(75, 192, 192, 0.6)",
-                        "rgba(54, 162, 235, 0.6)",
-                        "rgba(255, 206, 86, 0.6)"
-                    ],
-                    borderColor: [
-                        "rgba(75, 192, 192, 1)",
-                        "rgba(54, 162, 235, 1)",
-                        "rgba(255, 206, 86, 1)"
-                    ],
-                    borderWidth: 1,
-                },
-            ],
-        },
-        options: {
-            responsive: false, // 크기 설정을 위해 false로 설정
-            scales: {
-                y: {
-                    beginAtZero: true,
-                },
-            },
-        },
-    });
 
     /*공지사항 및 기타 계시판 페이지 전환용의 스크립트*/
     document.addEventListener("DOMContentLoaded", () => {
@@ -274,7 +245,56 @@
 
         // 초기 활성 줄 위치 설정 (첫 번째 버튼 기준)
         setActiveLine(buttons[0]);
+
+        $.ajax({
+            url: '/a/student/count',
+            type: 'GET',
+            success: function (response) {
+                const countStudent = response;
+                // 학생 인원 수 그래프
+                const canvas = document.getElementById("studentChart");
+                canvas.width = 600; // 너비 설정
+                canvas.height = 350; // 높이를 기존보다 50px 더 늘린 400px로 설정
+
+                const ctx = canvas.getContext("2d");
+                const studentChart = new Chart(ctx, {
+                    type: "bar",
+                    data: {
+                        labels: ["총학생수", "재학생수", "휴학생수"],
+                        datasets: [
+                            {
+                                label: "학생 수",
+                                data: countStudent, // 임의의 데이터
+                                backgroundColor: [
+                                    "rgba(75, 192, 192, 0.6)",
+                                    "rgba(54, 162, 235, 0.6)",
+                                    "rgba(255, 206, 86, 0.6)"
+                                ],
+                                borderColor: [
+                                    "rgba(75, 192, 192, 1)",
+                                    "rgba(54, 162, 235, 1)",
+                                    "rgba(255, 206, 86, 1)"
+                                ],
+                                borderWidth: 1,
+                            },
+                        ],
+                    },
+                    options: {
+                        responsive: false, // 크기 설정을 위해 false로 설정
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                            },
+                        },
+                    },
+                });
+            },
+            error: function (xhr) {
+                alert(xhr.responseText);
+            }
+        })
     });
+
     // 총등록금과 결제인원 확인 그래프
     // canvas 크기 설정
     const tuitionCanvas = document.getElementById("tuitionChart");
@@ -355,17 +375,7 @@
         openNewWindow("/s/detail/" + noticeNo, 1000, 800);
         return false;
     })
-
-     // 새 창 띄우는 스크립트
-    function openNewWindow(url, width, height) {
-    var screenWidth = window.innerWidth;
-    var screenHeight = window.innerHeight;
-
-    var left = (screenWidth - width) / 2 + window.screenX;
-    var top = (screenHeight - height) / 2 + window.screenY;
-
-    window.open(url, '_blank', `width=${width},height=${height},top=${top},left=${left}`);
-}
 </script>
+<script th:src="@{/js/common.js}"></script>
 </body>
 </html>

@@ -26,7 +26,6 @@ public class UserService {
             message.setSubject("비밀번호 찾기 인증번호");
             message.setText("인증번호는 다음과 같습니다: " + randomCode);
             mailSender.send(message);
-            System.out.println("randomCode: " + randomCode);
             authcode.setEmail(email);
             authcode.setCode(randomCode);
         } catch (Exception e) {

@@ -109,7 +109,7 @@
   border: 1px solid #d1d9e6;
   margin: 0 60px;
 }
-.portal-college-schedule > ul > li:nth-of-type(1) {
+.portal-college-schedule > form > ul > li:nth-of-type(1) {
   display: flex;
   width: 300px;
   height: 50px;
@@ -136,7 +136,7 @@
   height: 50px;
 }
 /*학사 일정 컨트롤러 날짜*/
-.portal-college-schedule > ul > li:nth-of-type(1) p {
+.portal-college-schedule > form > ul > li:nth-of-type(1) p {
   width: 220px;
   padding-left: 20px;
 }
@@ -196,7 +196,7 @@
   height: 400px;
   border: 1px solid #d1d9e6;
   margin-right: 60px;
-  margin-bottom: 80px;
+  margin-bottom: 120px;
 }
 .portal-college-news-controller {
   display: flex;
@@ -270,7 +270,7 @@
   font-weight: bold;
 }
 .student-timetable th:not(:first-of-type) {
-  width: 106px;
+  width: 105px;
 }
 .subject {
   background-color: #e8f1ff;

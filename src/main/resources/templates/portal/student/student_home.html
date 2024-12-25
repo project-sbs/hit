@@ -28,7 +28,7 @@
                 <div><img src="/image/home/searchIcon.png" alt="" /></div>학점확인
             </li>
             <li class="portal-student-report-button" onclick="location.href='/s/report'"><div><img src="/image/home/reportIcon.png" alt="" /></div>과제제출</li>
-            <li class="portal-student-class-button" onclick="openNewWindow('/s/course', 1920, 1080); return false;">
+            <li class="portal-student-course-button">
                 <div><img src="/image/home/courseIcon.png" alt="" /></div>수강신청</li>
             <li class="portal-attendance-button" onclick="location.href='/Attendance/AttendanceCalendarStudent'"><div><img src="/image/home/Attendance.png" alt="" /></div>출석부</li>
         </ul>
@@ -42,7 +42,7 @@
             <div>
                 <p><b th:text="${student.getName()}"></b>님 환영합니다</p>
                 <ul>
-                    <li>비밀번호 변경</li>
+                    <li onclick="location.href='/s/check/pwd'">비밀번호 변경</li>
                     <li>|</li>
                     <li>인증서 등록</li>
                 </ul>
@@ -80,32 +80,40 @@
                     <p id="ip-address">Loading...</p>
                 </li>
                 <li>
-                    <button>마이페이지</button>
+                    <button onclick="location.href='/s/info'">마이페이지</button>
                     <button onclick="location.href='/logout'">로그아웃</button>
                 </li>
             </ul>
         </div>
         <div class="portal-college-schedule">
             <h2>학사일정</h2>
-            <ul>
-                <li>
-                    <button><img src="/image/home/arrowBack.png" alt=""></button>
-                    <p class="portal-college-schedule-control-date">일자</p>
-                    <button><img src="/image/home/arrowForward.png" alt=""></button>
-                </li>
-                <li>
-                    <ul>
-                        <li th:each="scheduler, loop : ${schedulers}" th:if="${!schedulers.isEmpty()}">
-                            <div th:if="${loop.index < 3}">
-                                <p class="portal-college-schedule-date"
-                                   th:text="${scheduler.getDate()}"></p>
-                                <p th:text="${scheduler.getTitle()}"></p>
-                            </div>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
+            <form action="/s/home" method="get" id="scheduleForm">
+                <ul>
+                    <li>
+                        <button type="submit" name="page" th:value="${page - 1}" th:disabled="${page == 0}">
+                            <img src="/image/home/arrowBack.png" alt="Back">
+                        </button>
+
+                        <p class="portal-college-schedule-control-date">일자</p>
+
+                        <button type="submit" name="page" th:value="${page + 1}">
+                            <img src="/image/home/arrowForward.png" alt="Forward">
+                        </button>
+                    </li>
+                    <li>
+                        <ul>
+                            <li th:each="scheduler, loop : ${schedulers}" th:if="${loop.index <= 3}">
+                                <div>
+                                    <p class="portal-college-schedule-date" th:text="${scheduler.date}"></p>
+                                    <p th:text="${scheduler.title}"></p>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </form>
         </div>
+
         <div class="portal-user-main-info">
             <h2>학사정보</h2>
             <ul>
@@ -114,7 +122,7 @@
                         <li><img src="/image/home/importIcon.png" alt=""></li>
                         <li><p>이수/졸업학점</p></li>
                         <li>
-                            <p>126</p>
+                            <p th:text="${totalCredits}"></p>
                             <p>/150</p>
                         </li>
                     </ul>
@@ -520,19 +528,7 @@
         openNewWindow("/s/detail/" + noticeNo, 1000, 800);
         return false;
     })
-
-     // 새 창 띄우는 스크립트
-    function openNewWindow(url, width, height) {
-        var screenWidth = window.innerWidth;
-        var screenHeight = window.innerHeight;
-
-        var left = (screenWidth - width) / 2 + window.screenX;
-        var top = (screenHeight - height) / 2 + window.screenY;
-
-        window.open(url, '_blank', `width=${width},height=${height},top=${top},left=${left}`);
-    }
-
-
 </script>
+<script th:src="@{/js/common.js}"></script>
 </body>
 </html>

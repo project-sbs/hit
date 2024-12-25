@@ -64,21 +64,28 @@
 td {
     border: 1px solid #ddd;
 }
+.portal-score-total-year table th{
+  height: 40px;
+  background-color: #3f94f5;
+  color: white;
+}
 .portal-score-total-year ul {
-    border: 1px solid;
     width: 150px;
 }
 .portal-score-total-year ul > p {
     padding: 3%;
-    margin-top: 10px;
+    background:#3f94f5;
+    color:white;
+    font-size:20px;
+    font-weight:bold;
 }
 .portal-score-total-year ul li {
     display: flex;
     margin-top: 10px;
-    border: 1px solid;
+    border: 1px solid #ddd;
 }
 .portal-score-total-year ul li p:nth-of-type(1) {
-    border-right: 1px solid;
+    border-right: 1px solid #ddd;
     width: 65px;
     text-align: center;
 }
@@ -114,4 +121,9 @@ td {
     border: 1px solid #ddd;
     text-align: center;
     width: 9%;
+}
+.portal-score-each-year table th{
+  height: 40px;
+  background-color: #3f94f5;
+  color: white;
 }

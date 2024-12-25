@@ -12,8 +12,7 @@
 <body>
 <header class="portal-head">
     <div>
-        <h1><img src="/image/home/HitLogo2.png" alt="" /></h1>
-        <button class="logout-wrap" onclick="location.href='/logout'"><span class="logout-text">Logout</span><img src="/image/home/handgesture.png" alt="" class="logout-img"></button>
+        <h1><img src="/image/home/HitLogo.png" alt="" /></h1>
     </div>
 </header>
 <section class="portal-main">
@@ -28,24 +27,20 @@
             </li>
             <li class="portal-class-add-button" onclick="location.href='/a/class'"><div><img src="/image/home/importIcon.png" alt=""></div>과목기입</li>
             <li class="portal-notice-add-button" onclick="location.href='/a/board'"><div><img src="/image/home/noticeIcon.png" alt=""></div>게시판</li>
-            <li class="portal-student-pay-check-button" onclick="location.href=''">
+            <li class="portal-student-pay-check-button">
                 <div><img src="/image/home/paymentsIcon.png" alt=""></div>등록금확인
             </li>
-            <li class="portal-class-open-button" onclick="location.href=''">
+            <li class="portal-admin-course-open-button">
                 <div><img src="/image/home/courseIcon.png" alt="" /></div>수강신청
             </li>
         </ul>
-        <footer>
-            <p>© 2024 HITuniv. All rights reserved.</p>
-            <p>모든 저작권 권리는 HIT대학교에 있습니다.</p>
-        </footer>
     </nav>
     <div class="portal-class-managing-frame">
         <h2>수강과목관리</h2>
-        <button class="btn-add-course">과목기입</button>
+        <button class="btn-add-course">수강과목기입</button>
         <ul>
             <li>
-                <select name="" class="major-type-select" onchange="handleSelectChange()">
+                <select name="" class="major-type-select">
                     <option value="">=== 전공구분 ===</option>
                     <option value="">전공</option>
                     <option value="">교양</option>
@@ -53,8 +48,8 @@
             </li>
             <li>
                 <select name="" class="department-select">
-                    <option value="" disabled>=== 학과 ===</option>
-                    <option th:each="major, loop : ${majorList}" th:text="${major.getName()}">/option>
+                    <option disabled>=== 학과 ===</option>
+                    <option th:each="major, loop : ${majorList}" th:text="${major.getName()}"></option>
                 </select>
             </li>
         </ul>
@@ -74,7 +69,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="subject, loop : ${subjectList1}">
+            <tr th:each="subject : ${subjectPage1}">
                 <td th:text="${subject.getNo()}"></td>
                 <td th:text="${subject.getName()}" th:attr="title=${subject.getName()}"></td>
                 <td th:text="${subject.getMajor().getName()}"></td>
@@ -84,10 +79,38 @@
                 <td th:text="${subject.credits}"></td>
                 <td th:text="${subject.maxPersonnel}"></td>
                 <td th:text="${#lists.size(subject.getSugangList())}"></td>
-                <td><button>X</button></td>
+                <td>
+                    <a href="javascript:void(0);"
+                       th:data-uri="@{|/a/subject/delete/${subject.getNo()}|}"
+                       th:data-sugang-size="${#lists.size(subject.getSugangList())}"
+                       class="delete btn btn-sm btn-outline-danger"
+                       sec:authorize="hasRole('ROLE_관리자')"
+                        th:text="삭제"></a>
+                </td>
             </tr>
             </tbody>
         </table>
+
+        <div class="major-pagination">
+            <a class="prev_btn" href="javascript:void(0)" th:data-page="${subjectPage1.number - 1}"
+               th:if="${subjectPage1.number != 0 && !subjectPage1.isEmpty()}">
+                <span>이전</span>
+            </a>
+            <a class="page_link" href="javascript:void(0)" th:if="${!subjectPage1.isEmpty()}"
+               th:classappend="${page == subjectPage1.number} ? 'on' : ''"
+               th:data-page="${majorPage}" th:each="page : ${#numbers.sequence(0, subjectPage1.totalPages - 1)}"
+               th:text="${page + 1}"></a>
+            <a class="next_btn" href="javascript:void(0)" th:data-page="${subjectPage1.number + 1}"
+               th:if="${subjectPage1.hasNext() && !subjectPage1.isEmpty()}"><span>다음</span></a>
+        </div>
+
+        <form id="major-actionForm" method="get" th:action="@{/a/class}">
+            <input type="hidden" id="major-page" name="majorPage" th:value="${subjectPage1.number}">
+            <input type="hidden" id="major-major" name="major" th:value="${major}">
+            <input type="hidden" id="major-class" name="class" th:value="${class}">
+        </form>
+
+        <!-- 교양 클래스 테이블 -->
         <table class="liberal-class-table">
             <thead>
             <tr>
@@ -104,7 +127,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="subject, loop : ${subjectList2}">
+            <tr th:each="subject : ${subjectPage2}">
                 <td th:text="${subject.getNo()}"></td>
                 <td th:text="${subject.name}"></td>
                 <td>교양</td>
@@ -114,11 +137,37 @@
                 <td th:text="${subject.credits}"></td>
                 <td th:text="${subject.maxPersonnel}"></td>
                 <td th:text="${#lists.size(subject.getSugangList())}"></td>
-                <td><button>X</button></td>
+                <td>
+                    <a href="javascript:void(0);"
+                       th:data-uri="@{|/a/subject/delete/${subject.getNo()}|}"
+                       th:data-sugang-size="${#lists.size(subject.getSugangList())}"
+                       class="delete btn btn-sm btn-outline-danger"
+                       sec:authorize="hasRole('ROLE_관리자')"
+                       th:text="삭제"></a>
+                </td>
             </tr>
             </tbody>
         </table>
+        <div class="general-pagination">
+            <a class="prev_btn" href="javascript:void(0)" th:data-page="${subjectPage2.number - 1}"
+               th:if="${subjectPage2.number != 0 && !subjectPage2.isEmpty()}">
+                <span>이전</span>
+            </a>
+            <a class="page_link" href="javascript:void(0)" th:if="${!subjectPage2.isEmpty()}"
+               th:classappend="${page == subjectPage2.number} ? 'on' : ''"
+               th:data-page="${generalPage}" th:each="page : ${#numbers.sequence(0, subjectPage2.totalPages - 1)}"
+               th:text="${page + 1}"></a>
+            <a class="next_btn" href="javascript:void(0)" th:data-page="${subjectPage2.number + 1}"
+               th:if="${subjectPage2.hasNext() && !subjectPage2.isEmpty()}"><span>다음</span></a>
+        </div>
+
+        <form id="general-actionForm" method="get" th:action="@{/a/class}">
+            <input type="hidden" id="general-page" name="generalPage" th:value="${subjectPage2.number}">
+            <input type="hidden" id="general-major" name="major" th:value="${major}">
+            <input type="hidden" id="general-class" name="class" th:value="${class}">
+        </form>
     </div>
+
     <!-- 수강 과목 기입 모달 창 -->
     <div id="course-modal" class="modal-container">
         <div class="modal-content-wrapper">
@@ -126,7 +175,7 @@
             <h2 class="modal-title">수강 과목 기입</h2>
 
             <!-- 타임리프 폼 시작 -->
-            <form id="course-form" class="course-form" method="post" th:action="@{/a/insert/subject}" th:object="${subjectInsertForm}">
+            <form id="course-form" class="course-form" get="post" th:action="@{/a/insert/subject}" th:object="${subjectInsertForm}">
 
                 <!-- 년도 -->
                 <label for="course-year" class="label-course-year">년도:</label>
@@ -233,7 +282,9 @@
     };
 
     // 전공 구분 선택 시 필터링 처리
-    document.querySelector(".major-type-select").addEventListener("change", function () {
+    document
+        .querySelector(".major-type-select")
+        .addEventListener("change", function () {
             filterData();
         });
 
@@ -407,6 +458,25 @@
             $professorSelect.prop('disabled', true);
         }
     }
+
+     const delete_elements = document.querySelectorAll(".delete");
+
+    delete_elements.forEach(function (element) {
+        element.addEventListener('click', function () {
+            const sugangSize = parseInt(this.getAttribute('data-sugang-size')); // 수강 신청 인원
+            if (sugangSize > 0) {
+                alert("현재 수강생이 있습니다. 삭제할 수 없습니다.");
+            } else {
+                if (confirm("정말로 삭제하시겠습니까?")) {
+                    const deleteUrl = this.getAttribute('data-uri');
+                    console.log('삭제 URL:', deleteUrl);
+                    location.href = deleteUrl;
+                }
+            }
+        });
+    });
 </script>
+<script th:src="@{/js/pagination.js}"></script>
+<script th:src="@{/js/common.js}"></script>
 </body>
 </html>

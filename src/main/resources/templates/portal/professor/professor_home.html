@@ -35,7 +35,7 @@
             <div>
                 <p><b th:text="${professor.getName()}"></b>님 환영합니다</p>
                 <ul>
-                    <li>비밀번호 변경</li>
+                    <li onclick="location.href='/p/check/pwd'">비밀번호 변경</li>
                     <li>|</li>
                     <li>인증서 등록</li>
                 </ul>
@@ -307,5 +307,6 @@
         setActiveLine(buttons[0]);
     });
 </script>
+<script th:src="@{/js/common.js}"></script>
 </body>
 </html>

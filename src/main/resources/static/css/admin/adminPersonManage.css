@@ -11,9 +11,9 @@
      height: 35px;
      top: -50px;
      right: -30px;
-     background: #d3d3d3;
+     background: orange;
      border: none;
-     color: black;
+     color: white;
      font-size: 16px;
      font-weight: bold;
 }
@@ -50,6 +50,7 @@ th {
   background-color: #3f94f5;
   color: white;
   font-weight: bold;
+  border:none;
 }
 
 td {
