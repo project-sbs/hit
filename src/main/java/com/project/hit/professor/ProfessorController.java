@@ -1,8 +1,12 @@
 package com.project.hit.professor;
 
 import com.project.hit.FileData;
+import com.project.hit.admin.Admin;
+import com.project.hit.board.Board;
+import com.project.hit.board.BoardService;
 import com.project.hit.report.Report;
 import com.project.hit.report.ReportService;
+import com.project.hit.student.StudentService;
 import com.project.hit.subject.Subject;
 import com.project.hit.subject.SubjectService;
 import com.project.hit.sugang.Sugang;
@@ -30,6 +34,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.security.Principal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -45,13 +50,57 @@ public class ProfessorController {
     private final SubjectService subjectService;
     private final SugangService sugangService;
     private final ReportService reportService;
+    private final BoardService boardService;
 
     @GetMapping("/home")
-    public String home(Principal principal, Model model) {
-        Professor professor = this.professorService.getProfessor(principal.getName());
+    public String home(Principal principal, Model model,
+                       @RequestParam(value = "page", defaultValue = "0") int page,
+                       @RequestParam(value = "size", defaultValue = "3") int size){
 
-        model.addAttribute("professor", professor);
+        int totalSchedulers = this.boardService.getTotalSchedulersCount();
+        int totalPages = (int) Math.ceil((double) totalSchedulers / size);
+
+        if (page >= totalPages) {
+            page = totalPages - 1;
+        }
+        if (page < 0) {
+            page = 0;
+        }
+
+        LocalDate currentDate = LocalDate.now();
+        Professor professor = this.professorService.getProfessor(principal.getName());
+        List<Board> notices = this.boardService.getTop6Boards("notice");
+        List<Board> educations = this.boardService.getTop6Boards("edu");
+        List<Board> freebulletins = this.boardService.getTop6Boards("free");
+        List<Board> jobpostings = this.boardService.getTop6Boards("hire");
+        List<Board> contents = this.boardService.getTop6Boards("con");
+        List<Board> schedulers = this.boardService.getSchedulersByPage(page, size);
+        List<Board> schedulersa = this.boardService.getTop3Schedulers("scheduler");
+
+        model.addAttribute("currentDate", currentDate);
+        model.addAttribute("notices", notices);
+        model.addAttribute("educations", educations);
+        model.addAttribute("freebulletins", freebulletins);
+        model.addAttribute("jobpostings", jobpostings);
+        model.addAttribute("contents", contents);
+        model.addAttribute("schedulers", schedulers);
+        model.addAttribute("professor",professor);
+        model.addAttribute("page", page);
+
         return "portal/professor/professor_home";
+    }
+
+    @GetMapping("/detail/{id}")
+    public String detail(Principal principal, Model model, @PathVariable("id") Long no) {
+        Board board = this.boardService.getBoard(no);
+        String type = board.getType();
+        Board previousBoard = this.boardService.getPreviousBoard(no, type);
+        Board nextBoard = this.boardService.getNextBoard(no, type);
+
+        model.addAttribute("nextBoard",nextBoard);
+        model.addAttribute("previousBoard",previousBoard);
+        model.addAttribute("board", board);
+        return "portal/professor/professor_detail";
     }
 
     @GetMapping("/info")

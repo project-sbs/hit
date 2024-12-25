@@ -11,6 +11,7 @@ import java.util.Optional;
 
 public interface StudentRepository extends JpaRepository<Student, Long> {
 
+
     @Query("select distinct st from Student st where st.id = :id")
     Optional<Student> findById(@Param("id") String id);
 
@@ -35,5 +36,8 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
 
     @Query("select count(st) from Student st where st.status = :status")
     long countBySpecificStatus(@Param("status") String status);
+
+
+
 }
 

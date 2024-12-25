@@ -2,6 +2,7 @@ package com.project.hit.student;
 
 import com.project.hit.grade.Grade;
 import com.project.hit.major.Major;
+import com.project.hit.professor.Professor;
 import com.project.hit.subject.Subject;
 import com.project.hit.sugang.Sugang;
 import jakarta.persistence.*;
@@ -34,12 +35,16 @@ public class Student {
 
     private String ROLE;                                // 역할
 
+    private int gradeYear;                               // 학년
+
     private String profile;                             // 프로필 저장경로
 
     @Column(columnDefinition = "INT DEFAULT 0")         // 이수학점
     private int credits;
 
     private String status;                              // 상태(재학, 휴학, 졸업)
+
+    private String address;                             // 주소
 
     @ManyToOne
     private Major major;
@@ -49,4 +54,5 @@ public class Student {
 
     @OneToMany(mappedBy = "student")
     private List<Grade> gradeList;
+
 }

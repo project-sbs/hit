@@ -7,6 +7,7 @@ import com.project.hit.grade.GradeService;
 import com.project.hit.grade.TotalGradeDTO;
 import com.project.hit.major.Major;
 import com.project.hit.major.MajorService;
+import com.project.hit.professor.ProfessorRepository;
 import com.project.hit.report.Report;
 import com.project.hit.report.ReportService;
 import com.project.hit.subject.Subject;
@@ -48,6 +49,7 @@ public class StudentController {
     private final BoardService boardService;
     private final GradeService gradeService;
     private final ReportService reportService;
+    private final ProfessorRepository professorRepository;
 
     @Value("${upload.dir}/report/")
     private String uploadDir;
@@ -110,13 +112,25 @@ public class StudentController {
         return "portal/student/student_home";
     }
 
-
     @GetMapping("/info")   // 학생
     public String info(Model model, Principal principal) {
         Student student = this.studentService.getStudentById(principal.getName());
-
+        this.studentService.calculateGradeYear(student.getId());
         model.addAttribute("student", student);
         return "portal/student/student_info";
+    }
+
+    @PostMapping("/modify/address")
+    public String modifyAddress(@RequestParam("address") String address,
+                                @RequestParam("newAddress") String newAddress, Principal principal) {
+        System.out.println("Received address: " + address);
+        System.out.println("Received new address (detail): " + newAddress);
+        String studentId = principal.getName();
+        Student student = studentService.getStudentById(studentId);
+        student.setAddress(address + " " + newAddress);
+        studentService.updateStudent(student);
+
+        return "redirect:/s/info";
     }
 
     @GetMapping("/score")
@@ -294,25 +308,25 @@ public class StudentController {
         }
     }
 
-    @GetMapping("/board")
-    public String board(Model model, Principal principal) {
-        Student student = this.studentService.getStudentById(principal.getName());
-        List<Board> notices = this.boardService.getTop6Boards("notice");
-        List<Board> educations = this.boardService.getTop6Boards("edu");
-        List<Board> freebulletins = this.boardService.getTop6Boards("free");
-        List<Board> jobpostings = this.boardService.getTop6Boards("hire");
-        List<Board> contents = this.boardService.getTop6Boards("con");
-        List<Board> schedulers = this.boardService.getTop3Schedulers("scheduler");
-
-        model.addAttribute("schedulers", schedulers);
-        model.addAttribute("contents", contents);
-        model.addAttribute("jobpostings", jobpostings);
-        model.addAttribute("freebulletins", freebulletins);
-        model.addAttribute("notices", notices);
-        model.addAttribute("educations", educations);
-        model.addAttribute("student", student);
-        return "portal/student/student_board";
-    }
+//    @GetMapping("/board")
+//    public String board(Model model, Principal principal) {
+//        Student student = this.studentService.getStudentById(principal.getName());
+//        List<Board> notices = this.boardService.getTop6Boards("notice");
+//        List<Board> educations = this.boardService.getTop6Boards("edu");
+//        List<Board> freebulletins = this.boardService.getTop6Boards("free");
+//        List<Board> jobpostings = this.boardService.getTop6Boards("hire");
+//        List<Board> contents = this.boardService.getTop6Boards("con");
+//        List<Board> schedulers = this.boardService.getTop3Schedulers("scheduler");
+//
+//        model.addAttribute("schedulers", schedulers);
+//        model.addAttribute("contents", contents);
+//        model.addAttribute("jobpostings", jobpostings);
+//        model.addAttribute("freebulletins", freebulletins);
+//        model.addAttribute("notices", notices);
+//        model.addAttribute("educations", educations);
+//        model.addAttribute("student", student);
+//        return "portal/student/student_board";
+//    }
 
     @GetMapping("/detail/{id}")
     public String detail(Principal principal, Model model, @PathVariable("id") Long no) {
@@ -419,4 +433,5 @@ public class StudentController {
         }
         return new int[] { startBlock, endBlock };
     }
+
 }

@@ -1,34 +1,23 @@
-let studentNo; // studentNo를 외부에서도 사용
-
-// DOMContentLoaded 이벤트로 초기화
-document.addEventListener("DOMContentLoaded", () => {
-  studentNo = document.querySelector('meta[name="studentNo"]').getAttribute('content');
-  console.log("DOMContentLoaded에서 studentNo:", studentNo); // studentNo 값 확인
-});
-
-// sessionStorage 값 확인 (테스트용)
-console.log(sessionStorage.getItem('username'));
-console.log(sessionStorage.getItem('token'));
-
-// 달력 관련 요소
-const calendarDays = document.querySelector('.calendar_days');
-const monthDisplay = document.getElementById('month');
+console.log(sessionStorage.getItem('username')); // 저장된 사용자명 확인
+console.log(sessionStorage.getItem('token'));    // 저장된 토큰 확인
+const calendarDays = document.querySelector('.calendar_days'); // calendar_day 클래스를 가진 요소
+const monthDisplay = document.getElementById('month'); // 달력 상단 월 표시
 let date = new Date(); // 현재 날짜
 
 // 달력 렌더링 함수
 function renderCalendar() {
-  const year = date.getFullYear();
-  const month = date.getMonth();
+  const year = date.getFullYear(); // 현재 연도
+  const month = date.getMonth(); // 현재 월
   monthDisplay.innerText = `${year}년 ${month + 1}월`; // 월 출력
 
   // 달력 초기화
   calendarDays.innerHTML = '';
 
   // 월의 첫 번째 날과 마지막 날 계산
-  const firstDay = new Date(year, month, 1).getDay();
-  const lastDate = new Date(year, month + 1, 0).getDate();
+  const firstDay = new Date(year, month, 1).getDay(); // 해당 월의 첫날 요일
+  const lastDate = new Date(year, month + 1, 0).getDate(); // 해당 월의 마지막 날
 
-  // 빈칸 채우기
+  // 빈칸 채우기 (첫날이 일요일이면 첫 번째 칸에 빈칸이 없고, 월요일이면 첫 번째 칸에 빈칸 하나 추가)
   for (let i = 0; i < firstDay; i++) {
     calendarDays.appendChild(document.createElement('div'));
   }
@@ -42,21 +31,21 @@ function renderCalendar() {
   }
 }
 
-// 이전 달로 이동
+// 이전 달로 이동하는 함수
 function prevMonth() {
-  date.setMonth(date.getMonth() - 1);
-  renderCalendar();
+  date.setMonth(date.getMonth() - 1); // 한 달 빼기
+  renderCalendar(); // 달력 다시 렌더링
 }
 
-// 다음 달로 이동
+// 다음 달로 이동하는 함수
 function nextMonth() {
-  date.setMonth(date.getMonth() + 1);
-  renderCalendar();
+  date.setMonth(date.getMonth() + 1); // 한 달 더하기
+  renderCalendar(); // 달력 다시 렌더링
 }
 
-// 수업 정보 표시
+// 수업 정보 표시하는 함수
 async function showClassInfo(year, month, day) {
-  const dateString = `${year}-${month}-${day}`;
+  const dateString = `${year}-${month}-${day}`; // 날짜 형식
   const response = await fetch(`/Attendance/date?date=${dateString}`);
 
   if (!response.ok) {
@@ -65,7 +54,7 @@ async function showClassInfo(year, month, day) {
   }
 
   const attendanceData = await response.json();
-  console.log('Fetched Data:', attendanceData); // 데이터 확인
+  console.log('Fetched Data:', attendanceData); // 데이터가 제대로 반환되는지 확인
 
   const attendanceList = document.getElementById('attendance-list');
   attendanceList.innerHTML = '';
@@ -75,56 +64,60 @@ async function showClassInfo(year, month, day) {
     document.getElementById('save-attendance').style.display = 'none'; // 저장 버튼 숨김
     return;
   }
-  console.log('attendanceData:', attendanceData);
-  attendanceData.forEach((item, index) => {
-    console.log(`Item ${index}:`, item);
-  });
 
   const userRole = document.querySelector('meta[name="user-role"]').getAttribute('content');
   console.log(userRole);
 
-  attendanceData.forEach(attendance => {
-   console.log('student.no:', attendance.studentNo, 'studentNo:', studentNo);
-      // 로그인한 학생 번호와 일치하는 학생만 처리
-      if (String(attendance.studentNo) === String(studentNo)) {  // loggedInStudentNo 대신 studentNo를 사용
-        const studentRow = document.createElement('div');
-        studentRow.className = 'student-row';
-        studentRow.innerHTML = `
-          <span>${attendance.studentName}</span>  <!-- 여기서 attendance.studentName 사용 -->
-                   <select data-student-id="${attendance.studentName}" ${attendance.studentName ? 'disabled' : ''}>  <!-- attendance.student 사용 -->
-                      <option value="미확인" ${attendance.attendanceStatus === '미확인' ? 'selected' : ''}>미확인</option>
-                      <option value="출석" ${attendance.attendanceStatus === '출석' ? 'selected' : ''}>출석</option>
-                      <option value="결석" ${attendance.attendanceStatus === '결석' ? 'selected' : ''}>결석</option>
-                      <option value="지각" ${attendance.attendanceStatus === '지각' ? 'selected' : ''}>지각</option>
-                   </select>
-        `;
-        attendanceList.appendChild(studentRow);
-      }
-    });
+
+  // 출석 데이터 처리
+  attendanceData.forEach(student => {
+    // student 객체의 데이터가 제대로 전달되는지 확인하는 로그
+
+
+    const studentRow = document.createElement('div');
+    studentRow.className = 'student-row';
+    studentRow.innerHTML = `
+      <span>${student.studentName}</span> <!-- studentName 확인 -->
+      <select data-student-id="${student.id}" disabled> <!-- 학생일 경우 disabled 추가 -->
+        <option value="미확인" ${student.attendanceStatus === '미확인' ? 'selected' : ''}>미확인</option>
+        <option value="출석" ${student.attendanceStatus === '출석' ? 'selected' : ''}>출석</option>
+        <option value="결석" ${student.attendanceStatus === '결석' ? 'selected' : ''}>결석</option>
+        <option value="지각" ${student.attendanceStatus === '지각' ? 'selected' : ''}>지각</option>
+      </select>
+    `;
+    attendanceList.appendChild(studentRow);
+  });
+
+
+
 }
 
-// 출석 상태 저장
 document.getElementById('save-attendance').addEventListener('click', async () => {
   const selects = document.querySelectorAll('#attendance-list select');
 
+  // 출석 상태 데이터 생성
   const updatedData = Array.from(selects).map(select => ({
     studentId: select.getAttribute('data-student-id'),
     attendanceStatus: select.value
   }));
 
   try {
+    // CSRF 토큰 가져오기
+    // CSRF 토큰 및 헤더 이름 읽기
     const csrfToken = document.querySelector('meta[name="_csrf"]').getAttribute('content');
     const csrfHeader = document.querySelector('meta[name="_csrf_header"]').getAttribute('content');
 
+    // POST 요청
     const response = await fetch('/Attendance/save', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        [csrfHeader]: csrfToken
+        [csrfHeader]: csrfToken // 동적으로 읽은 CSRF 헤더와 토큰 사용
       },
       body: JSON.stringify(updatedData)
     });
 
+    // 응답 처리
     if (response.ok) {
       alert('출석 상태가 저장되었습니다.');
     } else if (response.status === 403) {
@@ -138,5 +131,5 @@ document.getElementById('save-attendance').addEventListener('click', async () =>
   }
 });
 
-// 초기화
+// 달력 렌더링 초기화
 renderCalendar();
