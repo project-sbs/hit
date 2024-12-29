@@ -66,89 +66,10 @@
 
         </div>
     </div>
-        <!-----------------------------------portal home finish---------------------------------------------------------------->
+    <!-----------------------------------portal home finish---------------------------------------------------------------->
 </section>
 <script>
-    //portal home 스크립트
-    /*접속 ip를 갖고오는 스크립트*/
-    /* fetch("http://ip-api.com/json")
-      .then((response) => response.json())
-      .then((data) => {
-        document.getElementById("ip-address").textContent = data.query;
-      })
-      .catch((error) => {
-        console.error("Error fetching IP address:", error);
-        document.getElementById("ip-address").textContent =
-          "Could not retrieve IP address";
-      });*/
-    /*현재 접속 시간을 가지고 오는 스크립트*/
-    function showCurrentDateTime() {
-        const now = new Date();
-        const year = now.getFullYear();
-        const month = String(now.getMonth() + 1).padStart(2, "0"); // 월은 0부터 시작하므로 +1
-        const day = String(now.getDate()).padStart(2, "0");
-        const hours = String(now.getHours()).padStart(2, "0");
-        const minutes = String(now.getMinutes()).padStart(2, "0");
-        const seconds = String(now.getSeconds()).padStart(2, "0");
 
-        const formattedDateTime = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
-        document.getElementById("current-time").textContent = formattedDateTime;
-    }
-
-    // Show date and time immediately
-    showCurrentDateTime();
-
-    // Update date and time every second
-    setInterval(showCurrentDateTime, 1000);
-    /*접속 시간을 가지고오는 스크립트 끝*/
-
-    /*공지사항 및 기타 계시판 페이지 전환용의 스크립트*/
-    document.addEventListener("DOMContentLoaded", () => {
-        const pages = {
-            notice: document.querySelector(".portal-college-notice-page"),
-            class: document.querySelector(".portal-college-class-page"),
-            employee: document.querySelector(".portal-college-employee-page"),
-            conversation: document.querySelector(
-                ".portal-college-conversation-page"
-            ),
-        };
-
-        // 페이지 초기화
-        Object.keys(pages).forEach((key) => {
-            pages[key].style.display = "none";
-        });
-        pages.notice.style.display = "block"; // 처음에는 공지사항만 표시
-
-        const buttons = document.querySelectorAll(
-            ".portal-college-news-controller li"
-        );
-        const activeLine = document.querySelector(".active-line");
-
-        // 초기 활성 줄 위치 설정
-        function setActiveLine(target) {
-            activeLine.style.width = `${target.offsetWidth}px`;
-            activeLine.style.left = `${target.offsetLeft}px`;
-        }
-
-        // 버튼 클릭 이벤트 추가 및 페이지 전환
-        buttons.forEach((button) => {
-            button.addEventListener("click", () => {
-                const pageKey = button.classList[0].split("-")[1]; // 버튼 클래스에서 페이지 키 추출
-                showPage(pageKey);
-                setActiveLine(button); // 줄 위치 업데이트
-            });
-        });
-
-        // 페이지 전환 함수
-        function showPage(page) {
-            Object.keys(pages).forEach((key) => {
-                pages[key].style.display = key === page ? "block" : "none";
-            });
-        }
-
-        // 초기 활성 줄 위치 설정 (첫 번째 버튼 기준)
-        setActiveLine(buttons[0]);
-    });
 </script>
 </body>
 </html>
