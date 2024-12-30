@@ -22,5 +22,5 @@ public interface SugangRepository extends JpaRepository<Sugang, Long> {
     Optional<Sugang> findByNo(int no);
 
     @Query("select sg from Sugang sg where sg.student = :student order by sg.subject.year asc")
-    List<Sugang> findSugangByStudent(Long student);
+    List<Sugang> findSugangByStudent(Student student);
 }

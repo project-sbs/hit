@@ -69,41 +69,41 @@ public class AttendanceService {
 
             if (subject.getWeek() == null || subject.getWeek().isEmpty()) {
                 continue; // 요일 정보가 없는 경우 스킵
-                }
+            }
 
 
 
-                String[] days = daysOfWeek.split(","); // 요일을 분리
-                Sugang savedSugang = sugangRepository.save(sugang);
+            String[] days = daysOfWeek.split(","); // 요일을 분리
+            Sugang savedSugang = sugangRepository.save(sugang);
 
-                for (String day : days) {
-                    day = day.trim(); // 공백 제거
+            for (String day : days) {
+                day = day.trim(); // 공백 제거
 
-                    DayOfWeek targetDayOfWeek = convertDayToDayOfWeek(day); // 요일을 DayOfWeek로 변환
-                    LocalDate targetDate = semesterStartDate.with(TemporalAdjusters.nextOrSame(targetDayOfWeek));
+                DayOfWeek targetDayOfWeek = convertDayToDayOfWeek(day); // 요일을 DayOfWeek로 변환
+                LocalDate targetDate = semesterStartDate.with(TemporalAdjusters.nextOrSame(targetDayOfWeek));
 
-                    while (!targetDate.isAfter(semesterEndDate)) {
-                        Attendance existingAttendance = attendanceRepository.findByStudentAndSubjectAndDate(student, subject, targetDate.toString());
-                        if (existingAttendance != null) {
-                            // 이미 해당 날짜에 출석 기록이 있으면 새로운 출석을 생성하지 않음
-                            targetDate = targetDate.plusWeeks(1);  // 다음 주로 넘어가기
-                            continue;
-                            }
-                        // 출석 정보 생성
-                        Attendance attendance = new Attendance();
-                        attendance.setStudent(student);
-                        attendance.setAttendanceStatus("미확인");
-                        attendance.setDate(targetDate.toString());
-                        attendance.setDayOfWeek(day);
-                        attendance.setSubject(subject);
-                        attendance.setSugang(savedSugang);
-
-                        attendanceRepository.save(attendance);
-
-                        // 다음 주의 동일 요일로 이동
-                        targetDate = targetDate.plusWeeks(1);
+                while (!targetDate.isAfter(semesterEndDate)) {
+                    Attendance existingAttendance = attendanceRepository.findByStudentAndSubjectAndDate(student, subject, targetDate.toString());
+                    if (existingAttendance != null) {
+                        // 이미 해당 날짜에 출석 기록이 있으면 새로운 출석을 생성하지 않음
+                        targetDate = targetDate.plusWeeks(1);  // 다음 주로 넘어가기
+                        continue;
                     }
+                    // 출석 정보 생성
+                    Attendance attendance = new Attendance();
+                    attendance.setStudent(student);
+                    attendance.setAttendanceStatus("미확인");
+                    attendance.setDate(targetDate.toString());
+                    attendance.setDayOfWeek(day);
+                    attendance.setSubject(subject);
+                    attendance.setSugang(savedSugang);
+
+                    attendanceRepository.save(attendance);
+
+                    // 다음 주의 동일 요일로 이동
+                    targetDate = targetDate.plusWeeks(1);
                 }
+            }
 
         }
     }
@@ -127,6 +127,15 @@ public class AttendanceService {
             case "일": return DayOfWeek.SUNDAY;
             default: throw new IllegalArgumentException("Invalid day: " + day);
         }
+    }
+
+    public void createInitialAttendance(Student student, Subject subject) {
+        Attendance attendance = new Attendance();
+        attendance.setStudent(student);
+        attendance.setSubject(subject);
+        attendance.setAttendanceStatus("미확인");
+        attendance.setDate(String.valueOf(LocalDate.now())); // 초기 날짜 설정
+        attendanceRepository.save(attendance);
     }
 
 

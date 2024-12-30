@@ -3,17 +3,21 @@ package com.project.hit.student;
 import com.project.hit.DataNotFoundException;
 import com.project.hit.major.Major;
 import com.project.hit.major.MajorRepository;
-import jakarta.servlet.http.HttpSession;
+import com.project.hit.professor.Professor;
+import com.project.hit.professor.ProfessorRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.apache.catalina.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -23,7 +27,7 @@ import java.util.Optional;
 public class StudentService {
     private final StudentRepository studentRepository;
     private final MajorRepository majorRepository;
-    private final HttpSession session;
+    private final ProfessorRepository professorRepository;
 
     @Transactional
     public Student addStudent(Student student) {
@@ -91,9 +95,11 @@ public class StudentService {
             if (!temp.getEmail().equals(student.getEmail())) {
                 temp.setEmail(student.getEmail());
             }
+            temp.setAddress(student.getAddress());
             temp.setBirthday(student.getBirthday());
             temp.setStatus(student.getStatus());
             this.studentRepository.save(temp);
+            System.out.println("Student address updated: " + temp.getAddress());
         } else {
             throw new DataNotFoundException("Student not found for " + student.getId());
         }
@@ -121,6 +127,24 @@ public class StudentService {
     }
 
 
+    // 학년계산 나중에 더 공부!!
+    @Transactional
+    public void calculateGradeYear(String studentId) {
+        Student student = studentRepository.findById(studentId)
+                .orElseThrow(() -> new RuntimeException("학생을 찾을 수 없습니다."));
+
+        if (student.getId() != null && student.getId().length() >= 4) {
+            int entryYear = Integer.parseInt(student.getId().substring(0, 4));
+            int currentYear = LocalDate.now().getYear();
+            int gradeYear = currentYear - entryYear + 1;
+
+            if (gradeYear > 3) {
+                gradeYear = 3;
+            }
+            student.setGradeYear(gradeYear);
+            studentRepository.save(student);
+        } else {
+            throw new IllegalArgumentException("학번이 유효하지 않습니다.");
+        }
+    }
 }
-
-

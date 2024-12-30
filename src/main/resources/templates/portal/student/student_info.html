@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -12,6 +12,7 @@
     />
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!--    <script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>-->
     <title>Portal</title>
 </head>
 <body>
@@ -55,7 +56,7 @@
                     <th>성명</th>
                     <td th:text="${student.getName()}"></td>
                     <th>학년/성적이수</th>
-                    <td>2학년/4학기이수</td>
+                    <td th:text="${student.getGradeYear()} + '학년/' + ${student.getCredits()} + '학기이수'"></td>
                 </tr>
                 <!-- 두 번째 행 -->
                 <tr>
@@ -64,7 +65,7 @@
                     <th>학과</th>
                     <td th:text="${student.getMajor().getName()}"></td>
                     <th>전공</th>
-                    <td></td>
+                    <td th:text="${student.getMajor().getName()}"></td>
                 </tr>
                 <!-- 세 번째 행 -->
                 <tr>
@@ -120,11 +121,11 @@
                     <table>
                         <tr>
                             <th>성명</th>
-                            <td>길오성</td>
+                            <td th:text="${student.getName()}"></td>
                             <th>성명(영문)</th>
                             <td>gil oseong</td>
                             <th>생년월일</th>
-                            <td>2077-07-07</td>
+                            <td th:text="${student.getBirthday()}"></td>
                         </tr>
                         <tr>
                             <th>휴학사용학기</th>
@@ -136,9 +137,9 @@
                         </tr>
                         <tr>
                             <th>전자우편주소</th>
-                            <td>amolang@and.com</td>
+                            <td th:text="${student.getEmail()}"></td>
                             <th>지도교수</th>
-                            <td>콘코드교수</td>
+                            <td >몰라</td>
                         </tr>
                     </table>
                     <h3>계좌정보</h3>
@@ -178,16 +179,21 @@
                         <li><h3>주소 확인란</h3></li>
                         <li>
                             <h4>현재 주소</h4>
-                            <p>서울특별시 강남구 테헤란로 41길</p>
+                            <p id="current-address" th:text="${student.getAddress()}">현재 주소</p>
                         </li>
                         <li><h3>주소 변경란</h3></li>
-                        <li>
-                            <input type="text" id="zip-code" placeholder="우편번호" />
-                            <input type="text" id="address-1" placeholder="도로명" />
-                            <input type="text" placeholder="상세정보 입력하기" />
-                            <button onclick="execDaumPostcode()">우편번호찾기</button>
-                        </li>
-                        <li><button>등록하기</button></li>
+
+                        <form th:action="@{/s/modify/address}" method="POST">
+                            <li>
+                                <input type="text" id="zip-code" name="zipCode" placeholder="우편번호" readonly />
+                                <input type="text" id="address-1" name="address" placeholder="도로명" readonly />
+                                <input type="text" id="new-address" name="newAddress" placeholder="상세정보 입력하기" />
+                                <button type="button" id="postcode-btn" onclick="execDaumPostcode()">우편번호찾기</button>
+                            </li>
+                            <li>
+                                <button type="submit" id="modify-address-btn">주소 변경하기</button>
+                            </li>
+                        </form>
                     </ul>
                 </li>
                 <li class="take-semester-frame"></li>
@@ -230,5 +236,6 @@
       });
 </script>
 <script th:src="@{/js/common.js}"></script>
+<script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
 </body>
 </html>
