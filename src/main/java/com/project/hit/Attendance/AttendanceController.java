@@ -45,12 +45,12 @@ public class AttendanceController {
     @GetMapping("/Attendance/date")
     @ResponseBody
     public List<AttendanceDTO> getAttendanceData(@RequestParam String date, HttpServletRequest request) {
-        System.out.println("요청받은 날짜: " + date);
+        //System.out.println("요청받은 날짜: " + date);
         // 세션에서 사용자 역할과 ID 가져오기
         String userRole = (String) request.getSession().getAttribute("userRole");
-        System.out.println("userRole: " + userRole);
+
         String studentId = (String) request.getSession().getAttribute("studentId");
-        System.out.println("Student_id: " + studentId);
+
 
         // 역할이 학생(STUDENT)인 경우 본인의 출석 데이터만 반환
         if ("STUDENT".equals(userRole)) {

@@ -151,11 +151,62 @@
 }
 /*portal-college-schdule css 끝*/
 
+
+/*수업목록 css*/
 .portal-admin-student-check {
     width: 600px;
     height: 350px;
     border: 1px solid black;
+    overflow: auto; /* 스크롤 추가 */
+    padding: 10px; /* 내부 여백 추가 */
+    box-sizing: border-box; /* 패딩 포함 크기 계산 */
 }
+
+.portal-admin-student-check h1 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.portal-admin-student-check h3 {
+    font-size: 18px;
+    color: #555;
+    margin-bottom: 15px;
+}
+
+.portal-admin-student-check ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex; /* flexbox로 변환 */
+    flex-wrap: wrap; /* 줄바꿈 허용 */
+    gap: 10px; /* 카드 간 간격 */
+    justify-content: flex-start; /* 좌측 정렬 */
+}
+
+.portal-admin-student-check li {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 15px;
+    margin-bottom: 10px;
+    width: calc(50% - 20px); /* 화면의 50% 크기, 간격 보정 */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box; /* 패딩 포함 크기 계산 */
+}
+
+.portal-admin-student-check li strong {
+    font-weight: bold;
+    font-size: 16px;
+    color: #222;
+}
+
+.portal-admin-student-check li span {
+    font-size: 14px;
+    color: #777;
+}
+
 /**/
 .portal-college-news {
     width: 820px;
@@ -217,7 +268,43 @@
 .portal-admin-paycheck {
     width: 600px;
     height: 400px;
-    display: flex;
     border: 1px solid;
     padding-top: 40px;
+}
+
+.portal-admin-paycheck h1 {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.portal-admin-paycheck li {
+    grid-template-columns: repeat(2, 1fr); /* 2열 구조 */
+    gap: 10px; /* 항목 간격 추가 */
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 8px 10px; /* 패딩 줄이기 */
+    font-size: 14px; /* 글씨 크기 줄임 */
+    line-height: 1.2; /* 줄 간격 조정 */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.portal-admin-paycheck li {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px 15px;
+    font-size: 14px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+    text-align: center; /* 텍스트 가운데 정렬 */
+}
+
+.portal-admin-paycheck li:hover {
+    transform: scale(1.05); /* 살짝 확대 효과 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 호버 시 강조 */
 }

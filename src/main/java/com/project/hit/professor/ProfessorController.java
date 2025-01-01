@@ -36,10 +36,7 @@ import java.nio.file.Paths;
 import java.security.Principal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 @RequiredArgsConstructor
@@ -77,6 +74,28 @@ public class ProfessorController {
         List<Board> schedulers = this.boardService.getSchedulersByPage(page, size);
         List<Board> schedulersa = this.boardService.getTop3Schedulers("scheduler");
 
+        LocalDateTime today = LocalDateTime.now();
+        String year = String.valueOf(today.getYear());
+        int month = today.getMonthValue();
+        String semester = getSemester(month);
+
+
+
+        // 교수의 과목 리스트 가져오기
+        List<Subject> subjects = this.professorService.getProfessorSubjects(professor, year, semester);
+
+
+
+        // 점심 메뉴 리스트
+        List<String> lunchMenu = Arrays.asList(
+                "불고기", "김치찌개", "된장찌개", "비빔밥", "떡볶이",
+                "돈까스", "김밥", "제육덮밥", "닭갈비", "짜장면"
+        );
+
+        // 점심 메뉴 랜덤 4개 선택
+        Collections.shuffle(lunchMenu);
+        List<String> randomLunchMenu = lunchMenu.subList(0, 4);
+
         model.addAttribute("currentDate", currentDate);
         model.addAttribute("notices", notices);
         model.addAttribute("educations", educations);
@@ -86,6 +105,8 @@ public class ProfessorController {
         model.addAttribute("schedulers", schedulers);
         model.addAttribute("professor",professor);
         model.addAttribute("page", page);
+        model.addAttribute("subjects", subjects);
+        model.addAttribute("lunchMenu", randomLunchMenu);
 
         return "portal/professor/professor_home";
     }

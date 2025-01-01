@@ -104,7 +104,23 @@
             </form>
         </div>
 
-        <div class="portal-admin-student-check"></div>
+        <div class="portal-admin-student-check">
+            <h1>교수 수업 정보</h1>
+
+            <!-- 교수 정보 표시 -->
+            <h3>교수명: <span th:text="${professor.name}"></span></h3>
+
+            <!-- 수업 목록 -->
+            <h3>수업 목록</h3>
+            <ul>
+                <!-- 수업 리스트 반복문 (Thymeleaf 사용) -->
+                <li th:each="subject : ${subjects}">
+                    <strong th:text="${subject.name}"></strong><br>
+                    요일: <span th:text="${subject.week}"></span><br>
+                    시간: <span th:text="${subject.time}"></span><br>
+                </li>
+            </ul>
+        </div>
         <div class="portal-college-news">
             <ul class="portal-college-news-controller">
                 <li class="portal-notice-button">공지사항</li>
@@ -143,6 +159,13 @@
             </ul>
         </div>
         <div class="portal-admin-paycheck">
+            <div>
+                <h1>오늘의 점심 메뉴</h1>
+                <ul>
+                    <li th:each="menu : ${lunchMenu}" th:text="${menu}"></li>
+                </ul>
+            </div>
+
             <canvas id="tuitionChart"></canvas>
             <canvas id="paymentStatusChart"></canvas>
         </div>
