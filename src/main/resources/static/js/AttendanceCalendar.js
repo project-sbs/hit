@@ -45,7 +45,7 @@ function nextMonth() {
 
 // 수업 정보 표시하는 함수
 async function showClassInfo(year, month, day) {
-  const dateString = `${year}-${month}-${day}`; // 날짜 형식
+  const dateString = `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
   const response = await fetch(`/Attendance/date?date=${dateString}`);
 
   if (!response.ok) {

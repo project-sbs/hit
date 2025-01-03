@@ -16,6 +16,7 @@
     background: none;
     border: none;
     cursor: pointer;
+    margin-bottom: 15px;
 }
 
 .CalendarHead H2 {
@@ -167,9 +168,10 @@ body {
 
 
 .portal-user-login-etc > div p {
-    border-bottom: 1px solid;
+    margin-bottom: 15px;
     height: 40px;
-    font-size: 18px;
+    font-size: 23px;
+    font-weight: bold;
     line-height: 40px;
 }
 .portal-user-login-etc div ul {
