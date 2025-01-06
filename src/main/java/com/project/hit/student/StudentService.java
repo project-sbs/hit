@@ -3,18 +3,12 @@ package com.project.hit.student;
 import com.project.hit.DataNotFoundException;
 import com.project.hit.major.Major;
 import com.project.hit.major.MajorRepository;
-import com.project.hit.professor.Professor;
-import com.project.hit.professor.ProfessorRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.apache.catalina.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -27,7 +21,6 @@ import java.util.Optional;
 public class StudentService {
     private final StudentRepository studentRepository;
     private final MajorRepository majorRepository;
-    private final ProfessorRepository professorRepository;
 
     @Transactional
     public Student addStudent(Student student) {
@@ -99,7 +92,6 @@ public class StudentService {
             temp.setBirthday(student.getBirthday());
             temp.setStatus(student.getStatus());
             this.studentRepository.save(temp);
-            System.out.println("Student address updated: " + temp.getAddress());
         } else {
             throw new DataNotFoundException("Student not found for " + student.getId());
         }

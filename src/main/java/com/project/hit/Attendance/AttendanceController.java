@@ -29,8 +29,6 @@ public class AttendanceController {
         return "Attendance/AttendanceCalendar";
     }
 
-
-
     public static class SemesterUtil {
         public static String getSemester(int month) {
             if (month >= 1 && month <= 6) {
