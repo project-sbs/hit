@@ -88,7 +88,7 @@ public class AttendanceService {
                         // 이미 해당 날짜에 출석 기록이 있으면 새로운 출석을 생성하지 않음
                         targetDate = targetDate.plusWeeks(1);  // 다음 주로 넘어가기
                         continue;
-                    }
+                        }
                     // 출석 정보 생성
                     Attendance attendance = new Attendance();
                     attendance.setStudent(student);
@@ -104,7 +104,6 @@ public class AttendanceService {
                     targetDate = targetDate.plusWeeks(1);
                 }
             }
-
         }
     }
 
