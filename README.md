@@ -30,7 +30,7 @@
 |Backend 길호성(PL)|Backend 이재성|Backend 권오성|Frontend 이동훈|
 |:---:|:---:|:---:|:---:|
 | <img src="https://github.com/hirit98.png" width="120"> | <img src="https://github.com/LeeJaesunga.png" width="120"> | <img src="https://github.com/KwonOSung.png" width="120"> | <img src="https://github.com/LeeIsGenius.png" width="120"> |
-|[Github](https://github.com/yewon-Noh)|[Github](https://github.com/LeeJaesunga)|[Github](https://github.com/KwonOSung)|[Github](https://github.com/LeeIsGenius)|
+|[Github](https://github.com/hirit98)|[Github](https://github.com/LeeJaesunga)|[Github](https://github.com/KwonOSung)|[Github](https://github.com/LeeIsGenius)|
 
 <br />
 
