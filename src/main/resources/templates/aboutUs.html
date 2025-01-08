@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/reset.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/m-common.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/about-us.css}" />
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville&display=swap" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <title>AboutHit</title>
+</head>
+<body>
+<header>
+    <nav class="gnb-wrap">
+        <h1 class="logo-wrap"><img src="/image/HitLogo.png" alt="" /></h1>
+        <ul>
+            <li><a th:href="@{/about/hit}">About Hit</a></li>
+            <li><a th:href="@{/research/overview}">Research</a></li>
+            <li><a th:href="@{/apply}">Admissions</a></li>
+            <li><a th:href="@{/about/department}">Campus Life</a></li>
+        </ul>
+    </nav>
+</header>
+<div class="container">
+    <ul class="container-side-menu">
+        <li class="menu-item">
+            <a th:href="@{/about/hit}" class="menu-title">Admissions</a>
+            <ul class="submenu">
+                <li><a th:href="@{/about/hit}">How to Apply</a></li>
+                <li><a th:href="@{/study}">Study in Korea at Hit</a></li>
+            </ul>
+        </li>
+        <li class="menu-item">
+            <a th:href="@{/about/department}" class="menu-title">Campus Life</a>
+            <ul class="submenu">
+                <li><a th:href="@{/about/department}">Admission Departments</a></li>
+                <li><a th:href="@{/about/notice}">Notice</a></li>
+            </ul>
+        </li>
+        <li class="menu-item">
+            <a th:href="@{/research/overview}" class="menu-title">Research</a>
+            <ul class="submenu">
+                <li><a th:href="@{/research/overview}">Research Overview</a></li>
+                <li><a th:href="@{/research/archive}">Research Archive</a></li>
+            </ul>
+        </li>
+        <li class="menu-item">
+            <a th:href="@{/about/hit}" class="menu-title">About Hit</a>
+            <ul class="submenu">
+                <li><a th:href="@{/about/hit}">About President</a></li>
+                <li><a th:href="@{/about/us}">About Us</a></li>
+            </ul>
+        </li>
+    </ul>
+    <div class="section-wrap">
+        <section class="campus-info">
+            <h2>About Campus</h2>
+            <p>
+                HIT University consists of four main buildings: the Science and
+                Engineering Building, the Grand Auditorium, the Arts Building, and
+                the Humanities Building.
+            </p>
+            <ul class="campus-specific">
+                <li>
+                    <ul>
+                        <li class="campus-photo-wrap">
+                            <img src="/image/campus3.jpg" alt="캠퍼스사진" />
+                        </li>
+                        <li class="campus-txt-wrap">
+                            <h3>The Engineering Building at HIT University</h3>
+                            <p>
+                                The Engineering Building at HIT University is a modern
+                                facility designed to foster innovation and collaboration. It
+                                features advanced labs, lecture halls, and collaborative
+                                spaces equipped with cutting-edge technology. Emphasizing
+                                sustainability, the building incorporates eco-friendly
+                                materials and energy-efficient systems. It offers hands-on
+                                learning in fields like robotics, computer science, civil,
+                                and mechanical engineering, and serves as a hub for academic
+                                excellence and research partnerships.
+                            </p>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <ul>
+                        <li class="campus-txt-wrap">
+                            <h3>The Arts Building at HIT University</h3>
+                            <p>
+                                The Arts Building at HIT University provides a creative
+                                space for students to explore and develop their artistic
+                                talents. With specialized studios for fine arts, music, and
+                                performing arts, it offers a dynamic environment for
+                                artistic expression. The building also hosts exhibitions,
+                                performances, and workshops, fostering a vibrant arts
+                                community within the university.
+                            </p>
+                        </li>
+                        <li class="campus-photo-wrap">
+                            <img src="/image/campus2.jpg" alt="캠퍼스사진" />
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <ul>
+                        <li class="campus-photo-wrap">
+                            <img src="/image/campus1.jpg" alt="캠퍼스사진" />
+                        </li>
+                        <li class="campus-txt-wrap">
+                            <h3>The Humanities Building at HIT University</h3>
+                            <p>
+                                The Humanities Building at HIT University is dedicated to
+                                the study of languages, philosophy, history, and social
+                                sciences. Its modern classrooms and lecture halls provide an
+                                ideal environment for in-depth learning and critical
+                                thinking. The building encourages interdisciplinary
+                                dialogue, offering students a comprehensive education in the
+                                humanities while supporting research and cultural
+                                activities.
+                            </p>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <ul>
+                        <li class="campus-txt-wrap">
+                            <h3>The Conference Hall at HIT University</h3>
+                            <p>
+                                The Conference Hall at HIT University is a state-of-the-art
+                                venue designed to host a variety of events, including
+                                academic conferences, seminars, and large-scale meetings.
+                                Equipped with advanced audiovisual technology, it offers a
+                                comfortable and professional environment for speakers and
+                                attendees. Its spacious design fosters collaboration and
+                                knowledge exchange, making it a key center for intellectual
+                                engagement on campus.
+                            </p>
+                        </li>
+                        <li class="campus-photo-wrap">
+                            <img src="/image/campus4.jpg" alt="캠퍼스사진" />
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </section>
+        <section class="campus-student-info">
+            <h2>About Students</h2>
+            <p>
+                HIT University has a total student population of 20,000, including
+                15,000 undergraduates and 5,000 graduate students.
+            </p>
+            <div class="campus-student-wrap">
+                <div class="campus-student-graph">
+                    <canvas id="studentChart"></canvas>
+                </div>
+                <div class="campus-exchange-student-info">
+                    <ul>
+                        <li>
+                            <ul>
+                                <li class="campus-exchange-student-photo-wrap">
+                                    <img src="/image/student1.png" alt="내국인학생" />
+                                </li>
+                                <li><h3>Domestic Students</h3></li>
+                                <li><b>15,000</b></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <ul>
+                                <li class="campus-exchange-student-photo-wrap">
+                                    <img src="/image/student2.png" alt="교호나학생" />
+                                </li>
+                                <li><h3>Exchange Students</h3></li>
+                                <li><b>5,000 </b></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        <section class="about-international-organizations">
+            <h2>Status of Membership in International Organizations</h2>
+            <div class="aio-wrap">
+                <div class="aio-photo-wrap">
+                    <img src="/image/about-us-banner.png" alt="" />
+                </div>
+                <ul>
+                    <li>
+                        <h3>U21(Universitas21)</h3>
+                        <p>
+                            Universitas 21 is a global network of research-focused
+                            universities established in 1997, with the aim of fostering
+                            research collaboration, sharing information, and promoting
+                            exchange among its member institutions. The network comprises
+                            29 universities from 19 countries, including the National
+                            University of Singapore, the University of Nottingham, the
+                            University of Zurich, and the University of Sydney.
+                        </p>
+                        <a href="#">http://www.universitas21.com</a>
+                    </li>
+                    <li>
+                        <h3>APRU(Association of Pacific Rim Universities)</h3>
+                        <p>
+                            The Association of Pacific Rim Universities (APRU) is an
+                            international consortium of research-focused universities
+                            established to promote collaboration in education and
+                            research, while fostering economic, scientific, and cultural
+                            development across the Asia-Pacific region. The network
+                            comprises 60 member universities from 18 countries, including
+                            UCLA, USC, UBC, Peking University, and the Australian National
+                            University.
+                        </p>
+                        <a href="#">http://www.apru.org</a>
+                    </li>
+                    <li>
+                        <h3>
+                            iCUBE(International Consortium of Universities for the study
+                            of Biodiversity & the Environment)
+                        </h3>
+                        <p>
+                            A consortium of research-focused universities worldwide,
+                            established to advance research and education on biodiversity,
+                            climate change, and environmental issues.
+                        </p>
+                        <a href="#">http://icubeconsortium.org</a>
+                    </li>
+                    <li>
+                        <h3>
+                            APAIE(Asia-Pacific Association for International Education)
+                        </h3>
+                        <p>
+                            An international higher education association established in
+                            December 2004 to enhance exchange and cooperation among higher
+                            education stakeholders in the Asia-Pacific region and improve
+                            the quality of international education programs. Universities
+                            from 13 countries, including South Korea, China, Japan, the
+                            United States (Hawaii), Australia, New Zealand, Hong Kong,
+                            Taiwan, the Philippines, Singapore, Thailand, Indonesia, and
+                            India, participated in its founding. HIT University actively
+                            participates in the annual APAIE Conference and Exhibition
+                            held every March.
+                        </p>
+                        <a href="#">http://www.apaie.net</a>
+                    </li>
+                    <li>
+                        <h3>VIU(Venice International University)</h3>
+                        <p>
+                            Venice International University (VIU) is a global consortium
+                            of 19 universities and institutions that share an autonomous
+                            campus located on the island of San Servolo in Venice, Italy.
+                            Based on an innovative platform, VIU fosters unrestricted
+                            global thinking and promotes international collaboration
+                            through diverse forms of education that transcend national
+                            boundaries.
+                        </p>
+                        <a href="#">http://www.univiu.org</a>
+                    </li>
+                    <li>
+                        <h3>W100 Reputation Network(World 100 Reputation Network)</h3>
+                        <p>
+                            The network consists of 46 member universities worldwide,
+                            focusing on building a reputation network and fostering
+                            partnerships through promotion, marketing, communications, and
+                            branding among the world's top 200 leading universities. It
+                            actively participates in annual conferences and other events.
+                        </p>
+                        <a href="#">http://theworld100.com</a>
+                    </li>
+                </ul>
+            </div>
+        </section>
+    </div>
+</div>
+<footer>
+    <ul>
+        <li><a href="#">Recruit</a></li>
+        <li>|</li>
+        <li>
+            <a href="#"><b>Privacy Policy</b></a>
+        </li>
+        <li>|</li>
+        <li><a href="#"></a>Cookie Policy</li>
+        <li>|</li>
+        <li><a href="#">Site Map</a></li>
+    </ul>
+    <div class="footer-address">
+        <p>
+            HIT University 50 HIT-ro Seodaemun-gu, Seoul, 03722, Republic of Korea
+            <br />
+            <br />
+            COPYRIGHT© 2015 HIT UNIV. ALL RIGHTS RESERVED.
+        </p>
+        <button>Related Links +</button>
+    </div>
+</footer>
+</body>
+<script>
+    // 메뉴 항목 클릭 시 서브 메뉴 토글
+    document.querySelectorAll(".menu-title").forEach(function (menuTitle) {
+        menuTitle.addEventListener("click", function (e) {
+            const menuItem = e.target.closest(".menu-item"); // 클릭된 메뉴 항목
+
+            // 다른 메뉴들이 열려 있으면 닫기
+            document.querySelectorAll(".menu-item").forEach(function (item) {
+                if (item !== menuItem) {
+                    item.classList.remove("active");
+                }
+            });
+
+            // 현재 메뉴 항목을 활성화/비활성화
+            menuItem.classList.toggle("active");
+        });
+    });
+
+    // 페이지 로딩 시 첫 번째 메뉴 항목 활성화
+    window.addEventListener("DOMContentLoaded", function () {
+        const firstMenuItem = document.querySelector(
+            ".container-side-menu .menu-item"
+        );
+        if (firstMenuItem) {
+            firstMenuItem.classList.add("active");
+        }
+    });
+    //그래프를 위한 스크립트
+    var ctx = document.getElementById("studentChart").getContext("2d");
+    var studentChart = new Chart(ctx, {
+        type: "doughnut", // 도넛 차트
+        data: {
+            labels: ["Undergraduate", "Graduate"], // 레이블: 학부, 대학원
+            datasets: [
+                {
+                    label: "Number of Students",
+                    data: [15000, 5000], // 학부 15000, 대학원 5000
+                    backgroundColor: ["#FF6384", "#36A2EB"], // 색상
+                    borderColor: ["#FF6384", "#36A2EB"],
+                    borderWidth: 1,
+                },
+            ],
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: "top",
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function (tooltipItem) {
+                            return tooltipItem.label + ": " + tooltipItem.raw;
+                        },
+                    },
+                },
+                // 도넛 안에 텍스트 추가
+                doughnutLabel: {
+                    beforeDraw: function (chart) {
+                        var width = chart.width,
+                            height = chart.height,
+                            ctx = chart.ctx;
+
+                        ctx.restore();
+                        var fontSize = (height / 114).toFixed(2); // 텍스트 크기 조정
+                        ctx.font = fontSize + "em sans-serif";
+                        ctx.fillStyle = "#FFF"; // 텍스트 색상
+                        ctx.textBaseline = "middle";
+
+                        var text = "20,000", // 구멍 안에 표시할 텍스트
+                            textX = Math.round((width - ctx.measureText(text).width) / 2), // 가운데 정렬
+                            textY = height / 2; // 수직 가운데 정렬
+
+                        ctx.fillText(text, textX, textY); // 텍스트 그리기
+                        ctx.save();
+                    },
+                },
+            },
+        },
+    });
+</script>
+</html>

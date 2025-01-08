@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/reset.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/m-common.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/howToApply.css}" />
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville&display=swap" rel="stylesheet"/>
+    <title>AboutHit</title>
+</head>
+<body>
+<header>
+    <nav class="gnb-wrap">
+        <h1 class="logo-wrap"><img src="/image/HitLogo.png" alt="" /></h1>
+        <ul>
+            <li><a th:href="@{/about/hit}">About Hit</a></li>
+            <li><a th:href="@{/research/overview}">Research</a></li>
+            <li><a th:href="@{/apply}">Admissions</a></li>
+            <li><a th:href="@{/about/department}">Campus Life</a></li>
+        </ul>
+    </nav>
+</header>
+<div class="container">
+    <ul class="container-side-menu">
+        <li class="menu-item">
+            <a th:href="@{/about/hit}" class="menu-title">Admissions</a>
+            <ul class="submenu">
+                <li><a th:href="@{/about/hit}">How to Apply</a></li>
+                <li><a th:href="@{/study}">Study in Korea at Hit</a></li>
+            </ul>
+        </li>
+        <li class="menu-item">
+            <a th:href="@{/about/department}" class="menu-title">Campus Life</a>
+            <ul class="submenu">
+                <li><a th:href="@{/about/department}">Admission Departments</a></li>
+                <li><a th:href="@{/about/notice}">Notice</a></li>
+            </ul>
+        </li>
+        <li class="menu-item">
+            <a th:href="@{/research/overview}" class="menu-title">Research</a>
+            <ul class="submenu">
+                <li><a th:href="@{/research/overview}">Research Overview</a></li>
+                <li><a th:href="@{/research/archive}">Research Archive</a></li>
+            </ul>
+        </li>
+        <li class="menu-item">
+            <a th:href="@{/about/hit}" class="menu-title">About Hit</a>
+            <ul class="submenu">
+                <li><a th:href="@{/about/hit}">About President</a></li>
+                <li><a th:href="@{/about/us}">About Us</a></li>
+            </ul>
+        </li>
+    </ul>
+    <div class="section-wrap">
+        <section class="apply">
+            <h2>How to Apply</h2>
+            <div class="apply-img-wrap">
+                <img src="/image/apply.jpg" alt="" />
+                <p>HIT UNVIERSITY</p>
+            </div>
+            <ul class="apply-info-list">
+                <li class="apply-info">
+                    <ul>
+                        <li>
+                            <h3>Office of Admissions(Colleges)<img src="" alt="" /></h3>
+                        </li>
+                        <li><a href="">https://admission.HIT.ac.kr</a></li>
+                        <li>
+                            <p>
+                                HIT University's admissions programs are designed to
+                                accommodate the following school missions: First, to select
+                                talented students who can contribute to the Korean society
+                                as global leader with the spirit of truth and liberty.
+                                Second, to develop admissions policies and systems through
+                                which HIT can lead visions of higher education. Third, to
+                                make contributions to the Korean society and its social
+                                solidarity.
+                            </p>
+                        </li>
+                    </ul>
+                </li>
+                <li class="apply-info">
+                    <ul>
+                        <li>
+                            <h3>
+                                Underwood International College (UIC)<img src="" alt="" />
+                            </h3>
+                        </li>
+                        <li><a href="">(http://admission.HIT.ac.kr/seoul)</a></li>
+                        <li>
+                            <p>
+                                Every year Underwood International College (UIC) brings
+                                together students from a diverse range of national and
+                                ethnic backgrounds, providing them with a rigorous,
+                                world-class education through its innovative programs. The
+                                admission process is designed to accommodate different
+                                educational systems and to support equality of opportunity.
+                                An admissions committee reviews applications and
+                                comprehensively evaluates each prospective student. While
+                                admission to UIC is competitive, UIC looks beyond the
+                                numbers and seeks applicants with global mindsets, strong
+                                academic aspirations, and a spirit of dedication to
+                                community. UIC is looking forward to receiving your
+                                application! International students are admitted on a
+                                rolling basis, while Korean applicants are admitted
+                                according to an annual admissions schedule. Korean and
+                                Overseas Korean students are advised to refer to the website
+                                of the Office of Admissions for more detailed information
+                            </p>
+                        </li>
+                    </ul>
+                </li>
+                <li class="apply-info">
+                    <ul>
+                        <li>
+                            <h3>Global Leaders College<img src="" alt="" /></h3>
+                        </li>
+                        <li>
+                            <p>
+                                Global Leaders College (GLC) is for overseas Korean students
+                                and International students who have completed all 12 years
+                                of pre-university education overseas or the equivalent. GLC
+                                is designed to shape and foster overseas Korean students as
+                                well as international students adapt to HIT University and
+                                complete their studies.
+                            </p>
+                            <span>Features:</span>
+                            <ul class="about-glc">
+                                <li>
+                                    Specialized intensive language classes aimed at university
+                                    lecture attendance
+                                </li>
+                                <li>
+                                    Through reinforcement of general education courses, make
+                                    GLC students improve their communication ability suitable
+                                    for Korean society.
+                                </li>
+                                <li>
+                                    Individualized and specialized curriculum designed for
+                                    each student through specialized academic and counseling
+                                    program
+                                </li>
+                                <li>
+                                    By drastically reducing class sizes, a specialized
+                                    small-scale education process is maintained with
+                                    one-on-one discussion sessions, small-group seminars, and
+                                    research studies.
+                                </li>
+                                <li>Internship opportunity</li>
+                                <li>Explore Korean Culture</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </section>
+    </div>
+</div>
+<footer>
+    <ul>
+        <li><a href="#">Recruit</a></li>
+        <li>|</li>
+        <li>
+            <a href="#"><b>Privacy Policy</b></a>
+        </li>
+        <li>|</li>
+        <li><a href="#"></a>Cookie Policy</li>
+        <li>|</li>
+        <li><a href="#">Site Map</a></li>
+    </ul>
+    <div class="footer-address">
+        <p>
+            HIT University 50 HIT-ro Seodaemun-gu, Seoul, 03722, Republic of Korea
+            <br />
+            <br />
+            COPYRIGHT© 2015 HIT UNIV. ALL RIGHTS RESERVED.
+        </p>
+        <button>Related Links +</button>
+    </div>
+</footer>
+</body>
+<script>
+    // 메뉴 항목 클릭 시 서브 메뉴 토글
+    document.querySelectorAll(".menu-title").forEach(function (menuTitle) {
+        menuTitle.addEventListener("click", function (e) {
+            const menuItem = e.target.closest(".menu-item"); // 클릭된 메뉴 항목
+
+            // 다른 메뉴들이 열려 있으면 닫기
+            document.querySelectorAll(".menu-item").forEach(function (item) {
+                if (item !== menuItem) {
+                    item.classList.remove("active");
+                }
+            });
+
+            // 현재 메뉴 항목을 활성화/비활성화
+            menuItem.classList.toggle("active");
+        });
+    });
+
+    // 페이지 로딩 시 첫 번째 메뉴 항목 활성화
+    window.addEventListener("DOMContentLoaded", function () {
+        const firstMenuItem = document.querySelector(
+            ".container-side-menu .menu-item"
+        );
+        if (firstMenuItem) {
+            firstMenuItem.classList.add("active");
+        }
+    });
+</script>
+</html>

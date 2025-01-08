@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/reset.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/m-common.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/studyInKorea.css}" />
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville&display=swap" rel="stylesheet"/>
+    <title>AboutHit</title>
+</head>
+<body>
+<header>
+    <nav class="gnb-wrap">
+        <h1 class="logo-wrap"><img src="/image/HitLogo.png" alt="" /></h1>
+        <ul>
+            <li><a th:href="@{/about/hit}">About Hit</a></li>
+            <li><a th:href="@{/research/overview}">Research</a></li>
+            <li><a th:href="@{/apply}">Admissions</a></li>
+            <li><a th:href="@{/about/department}">Campus Life</a></li>
+        </ul>
+    </nav>
+</header>
+<div class="container">
+    <ul class="container-side-menu">
+        <li class="menu-item">
+            <a th:href="@{/about/hit}" class="menu-title">Admissions</a>
+            <ul class="submenu">
+                <li><a th:href="@{/about/hit}">How to Apply</a></li>
+                <li><a th:href="@{/study}">Study in Korea at Hit</a></li>
+            </ul>
+        </li>
+        <li class="menu-item">
+            <a th:href="@{/about/department}" class="menu-title">Campus Life</a>
+            <ul class="submenu">
+                <li><a th:href="@{/about/department}">Admission Departments</a></li>
+                <li><a th:href="@{/about/notice}">Notice</a></li>
+            </ul>
+        </li>
+        <li class="menu-item">
+            <a th:href="@{/research/overview}" class="menu-title">Research</a>
+            <ul class="submenu">
+                <li><a th:href="@{/research/overview}">Research Overview</a></li>
+                <li><a th:href="@{/research/archive}">Research Archive</a></li>
+            </ul>
+        </li>
+        <li class="menu-item">
+            <a th:href="@{/about/hit}" class="menu-title">About Hit</a>
+            <ul class="submenu">
+                <li><a th:href="@{/about/hit}">About President</a></li>
+                <li><a th:href="@{/about/us}">About Us</a></li>
+            </ul>
+        </li>
+    </ul>
+    <div class="section-wrap">
+        <section class="korea-now">
+            <h2>Korea Now</h2>
+            <ul class="search-place">
+                <select name="" id="">
+                    <option value="">Title</option>
+                    <option value="">Content</option>
+                    <option value="">Name</option>
+                </select>
+                <input type="text" placeholder="Search word..." />
+                <button class="submit-button" type="submit">
+                    <img src="/image/search-icon.png" alt="" />
+                </button>
+                <button class="reset-button" type="reset">
+                    <img src="/image/reset-icon.png" alt="" />
+                </button>
+            </ul>
+            <ul class="kr-now-list">
+                <li class="kr-now-info">
+                    <ul>
+                        <li>
+                            <h3><a href="">The Waiting Phenomenon</a></h3>
+                        </li>
+                        <li><p>Queuing for trends may be the new trend in seoul</p></li>
+                        <li><span>August 29, 2024</span></li>
+                    </ul>
+                    <div class="kr-now-img-wrap">
+                        <img src="/image/krnow1.jpg" alt="" />
+                    </div>
+                </li>
+                <li class="kr-now-info">
+                    <ul>
+                        <li>
+                            <h3><a href="">Sokcho's Timeless Cultural Transition</a></h3>
+                        </li>
+                        <li><p>On-foot journet to Sokcho;s recreational spots</p></li>
+                        <li><span>July 25, 2024</span></li>
+                    </ul>
+                    <div class="kr-now-img-wrap">
+                        <img src="/image/krnow2.jpg" alt="" />
+                    </div>
+                </li>
+                <li class="kr-now-info">
+                    <ul>
+                        <li>
+                            <h3><a href="">Templestay at Naksansa Temple</a></h3>
+                        </li>
+                        <li>
+                            <p>An immersive retreat into ancient Buddhist traditions</p>
+                        </li>
+                        <li><span>July 02, 2024</span></li>
+                    </ul>
+                    <div class="kr-now-img-wrap">
+                        <img src="/image/krnow3.jpg" alt="" />
+                    </div>
+                </li>
+                <li class="kr-now-info">
+                    <ul>
+                        <li>
+                            <h3><a href="">Uniquely Relaxing</a></h3>
+                        </li>
+                        <li><p>Unexpected places to unwind on campus</p></li>
+                        <li><span>May 24, 2024</span></li>
+                    </ul>
+                    <div class="kr-now-img-wrap">
+                        <img src="/image/krnow6.jpg" alt="" />
+                    </div>
+                </li>
+                <li class="kr-now-info">
+                    <ul>
+                        <li>
+                            <h3><a href="">Into the ALlures of Ganghwa Isalnd</a></h3>
+                        </li>
+                        <li><p>Ganghwa's eclectic charms</p></li>
+                        <li><span>April 24, 2024</span></li>
+                    </ul>
+                    <div class="kr-now-img-wrap">
+                        <img src="/image/krnow4.jpg" alt="" />
+                    </div>
+                </li>
+                <li class="kr-now-info">
+                    <ul>
+                        <li>
+                            <h3><a href="">Full Metal JAcket in Dongducheon</a></h3>
+                        </li>
+                        <li><p>Traces of war and division in the city</p></li>
+                        <li><span>March 28, 2024</span></li>
+                    </ul>
+                    <div class="kr-now-img-wrap">
+                        <img src="/image/krnow5.jpg" alt="" />
+                    </div>
+                </li>
+            </ul>
+            <ul class="pagination">
+                <li><a href="">1</a></li>
+                <li><a href="">2</a></li>
+                <li><a href="">3</a></li>
+                <li><a href="">4</a></li>
+                <li><a href="">5</a></li>
+            </ul>
+        </section>
+    </div>
+</div>
+<footer>
+    <ul>
+        <li><a href="#">Recruit</a></li>
+        <li>|</li>
+        <li>
+            <a href="#"><b>Privacy Policy</b></a>
+        </li>
+        <li>|</li>
+        <li><a href="#"></a>Cookie Policy</li>
+        <li>|</li>
+        <li><a href="#">Site Map</a></li>
+    </ul>
+    <div class="footer-address">
+        <p>
+            HIT University 50 HIT-ro Seodaemun-gu, Seoul, 03722, Republic of Korea
+            <br />
+            <br />
+            COPYRIGHT© 2015 HIT UNIV. ALL RIGHTS RESERVED.
+        </p>
+        <button>Related Links +</button>
+    </div>
+</footer>
+</body>
+<script>
+    // 메뉴 항목 클릭 시 서브 메뉴 토글
+    document.querySelectorAll(".menu-title").forEach(function (menuTitle) {
+        menuTitle.addEventListener("click", function (e) {
+            const menuItem = e.target.closest(".menu-item"); // 클릭된 메뉴 항목
+
+            // 다른 메뉴들이 열려 있으면 닫기
+            document.querySelectorAll(".menu-item").forEach(function (item) {
+                if (item !== menuItem) {
+                    item.classList.remove("active");
+                }
+            });
+
+            // 현재 메뉴 항목을 활성화/비활성화
+            menuItem.classList.toggle("active");
+        });
+    });
+
+    // 페이지 로딩 시 첫 번째 메뉴 항목 활성화
+    window.addEventListener("DOMContentLoaded", function () {
+        const firstMenuItem = document.querySelector(
+            ".container-side-menu .menu-item"
+        );
+        if (firstMenuItem) {
+            firstMenuItem.classList.add("active");
+        }
+    });
+</script>
+</html>

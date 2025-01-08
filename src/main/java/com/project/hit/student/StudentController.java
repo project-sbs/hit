@@ -308,26 +308,6 @@ public class StudentController {
         }
     }
 
-//    @GetMapping("/board")
-//    public String board(Model model, Principal principal) {
-//        Student student = this.studentService.getStudentById(principal.getName());
-//        List<Board> notices = this.boardService.getTop6Boards("notice");
-//        List<Board> educations = this.boardService.getTop6Boards("edu");
-//        List<Board> freebulletins = this.boardService.getTop6Boards("free");
-//        List<Board> jobpostings = this.boardService.getTop6Boards("hire");
-//        List<Board> contents = this.boardService.getTop6Boards("con");
-//        List<Board> schedulers = this.boardService.getTop3Schedulers("scheduler");
-//
-//        model.addAttribute("schedulers", schedulers);
-//        model.addAttribute("contents", contents);
-//        model.addAttribute("jobpostings", jobpostings);
-//        model.addAttribute("freebulletins", freebulletins);
-//        model.addAttribute("notices", notices);
-//        model.addAttribute("educations", educations);
-//        model.addAttribute("student", student);
-//        return "portal/student/student_board";
-//    }
-
     @GetMapping("/detail/{id}")
     public String detail(Principal principal, Model model, @PathVariable("id") Long no) {
         Board board = this.boardService.getBoard(no);

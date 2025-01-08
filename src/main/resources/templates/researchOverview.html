@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/reset.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/m-common.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/research-overview.css}" />
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville&display=swap" rel="stylesheet"/>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <title>AboutHit</title>
+</head>
+<body>
+<header>
+    <nav class="gnb-wrap">
+        <h1 class="logo-wrap"><img src="/image/HitLogo.png" alt="" /></h1>
+        <ul>
+            <li><a th:href="@{/about/hit}">About Hit</a></li>
+            <li><a th:href="@{/research/overview}">Research</a></li>
+            <li><a th:href="@{/apply}">Admissions</a></li>
+            <li><a th:href="@{/about/department}">Campus Life</a></li>
+        </ul>
+    </nav>
+</header>
+<div class="container">
+    <ul class="container-side-menu">
+        <li class="menu-item">
+            <a th:href="@{/about/hit}" class="menu-title">Admissions</a>
+            <ul class="submenu">
+                <li><a th:href="@{/about/hit}">How to Apply</a></li>
+                <li><a th:href="@{/study}">Study in Korea at Hit</a></li>
+            </ul>
+        </li>
+        <li class="menu-item">
+            <a th:href="@{/about/department}" class="menu-title">Campus Life</a>
+            <ul class="submenu">
+                <li><a th:href="@{/about/department}">Admission Departments</a></li>
+                <li><a th:href="@{/about/notice}">Notice</a></li>
+            </ul>
+        </li>
+        <li class="menu-item">
+            <a th:href="@{/research/overview}" class="menu-title">Research</a>
+            <ul class="submenu">
+                <li><a th:href="@{/research/overview}">Research Overview</a></li>
+                <li><a th:href="@{/research/archive}">Research Archive</a></li>
+            </ul>
+        </li>
+        <li class="menu-item">
+            <a th:href="@{/about/hit}" class="menu-title">About Hit</a>
+            <ul class="submenu">
+                <li><a th:href="@{/about/hit}">About President</a></li>
+                <li><a th:href="@{/about/us}">About Us</a></li>
+            </ul>
+        </li>
+    </ul>
+    <div class="section-wrap">
+        <section class="campus-info">
+            <h2>Research Overview</h2>
+            <p>
+                HIT University is one of Korea’s most research-intensive
+                universities with a thriving community of innovative and
+                world-leading researchers. The scope of significant research at HIT
+                University is broad and diverse, including the fields of medicine,
+                biochemistry, health, engineering, materials science, chemistry, and
+                neuroscience, as well as the areas of the humanities and social
+                sciences. To address the challenges of a rapidly changing society,
+                HIT University pursues interdisciplinary and convergence research
+                initiatives to energize networks between academic fields and across
+                campuses, supported with a research ecosystem that increasingly
+                transcends disciplinary boundaries via university policies. HIT
+                University’s 123 research centers conduct interdisciplinary,
+                policy-relevant research and foster globally-minded, creative
+                leaders of convergence research. Aspiring researchers can choose
+                from a wide variety of options, from a short summer research
+                internship in Seoul to a postdoctoral placement in nanomaterials at
+                Y-IBS Center for Nanomedicine. Learn more about HIT University’s
+                research statistics, research-focused centers, and researcher
+                stories that help provide insight into the present and future
+                society.
+            </p>
+            <ul>
+                <li class="magazine">
+                    <h2>HIT Research Magazine</h2>
+                    <ul>
+                        <li>2022 HIT Research Magazine</li>
+                        <li>2023 HIT Research Magazine</li>
+                        <li>2024 HIT Research Magazine</li>
+                    </ul>
+                </li>
+                <li class="outstanding">
+                    <h2>Outstanding Facultry Research</h2>
+                    <ul>
+                        <li>
+                            <div class="outstanding-img-wrap">
+                                <img src="/image/research1.png" alt="" />
+                            </div>
+                            <h3>
+                                Harnessing the Power of
+                                <br />
+                                Magnetism to Control Animal Behavior
+                            </h3>
+                            <small>Hyunwoo Lee</small>
+                        </li>
+                        <li>
+                            <div class="outstanding-img-wrap">
+                                <img src="/image/research2.png" alt="" />
+                            </div>
+                            <h3>Boosting the Flavor and Aroma of Cultured Meat</h3>
+                            <small>Jinkee Hong</small>
+                        </li>
+                        <li>
+                            <div class="outstanding-img-wrap">
+                                <img src="/image/analysis.jpg" alt="" />
+                            </div>
+                            <h3>
+                                Bioresorbable Neurostimulator: Boon to the Medical Industry
+                            </h3>
+                            <small>Sang-Woo Kim</small>
+                        </li>
+                    </ul>
+                </li>
+                <li class="related">
+                    <h2>Related Sites</h2>
+                    <ul>
+                        <li>HIT University Industry-University Cooperation</li>
+                        <li>HIT University Technology Holding Company</li>
+                        <li>HIT University Center for Research Facilities</li>
+                        <li>HRI</li>
+                        <li>Intellectual Property Management System</li>
+                        <li>Elsevier SciVal</li>
+                    </ul>
+                </li>
+            </ul>
+        </section>
+    </div>
+</div>
+<footer>
+    <ul>
+        <li><a href="#">Recruit</a></li>
+        <li>|</li>
+        <li>
+            <a href="#"><b>Privacy Policy</b></a>
+        </li>
+        <li>|</li>
+        <li><a href="#"></a>Cookie Policy</li>
+        <li>|</li>
+        <li><a href="#">Site Map</a></li>
+    </ul>
+    <div class="footer-address">
+        <p>
+            HIT University 50 HIT-ro Seodaemun-gu, Seoul, 03722, Republic of Korea
+            <br />
+            <br />
+            COPYRIGHT© 2015 HIT UNIV. ALL RIGHTS RESERVED.
+        </p>
+        <button>Related Links +</button>
+    </div>
+</footer>
+</body>
+<script>
+    // 메뉴 항목 클릭 시 서브 메뉴 토글
+    document.querySelectorAll(".menu-title").forEach(function (menuTitle) {
+        menuTitle.addEventListener("click", function (e) {
+            const menuItem = e.target.closest(".menu-item"); // 클릭된 메뉴 항목
+
+            // 다른 메뉴들이 열려 있으면 닫기
+            document.querySelectorAll(".menu-item").forEach(function (item) {
+                if (item !== menuItem) {
+                    item.classList.remove("active");
+                }
+            });
+
+            // 현재 메뉴 항목을 활성화/비활성화
+            menuItem.classList.toggle("active");
+        });
+    });
+
+    // 페이지 로딩 시 첫 번째 메뉴 항목 활성화
+    window.addEventListener("DOMContentLoaded", function () {
+        const firstMenuItem = document.querySelector(
+            ".container-side-menu .menu-item"
+        );
+        if (firstMenuItem) {
+            firstMenuItem.classList.add("active");
+        }
+    });
+</script>
+</html>
