@@ -1,0 +1,94 @@
+.filter-search-bar {
+    display: flex;
+    justify-content: space-between;
+    height: 38px;
+    margin-bottom: 24px;
+}
+.filter-search-bar li select {
+    height: 36px;
+}
+.filter-search-bar li:nth-of-type(2) {
+    display: flex;
+}
+.filter-search-bar li select:nth-of-type(1) {
+    width: 164px;
+}
+.filter-search-bar li select:nth-of-type(2) {
+    width: 90px;
+}
+.filter-search-bar li input {
+    width: 195px;
+    height: 36px;
+}
+.filter-search-bar li button {
+    width: 35px;
+    height: 35px;
+}
+.filter-search-bar li button img {
+    width: 35px;
+    height: 35px;
+    background-size: cover;
+}
+.notice-list {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+.notice-list > li {
+    height: 142px;
+    padding: 1%;
+    width: 80%;
+}
+.notice-content {
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid #888;
+}
+.notice-content li {
+    display: flex;
+}
+.notice-content li:nth-of-type(1) {
+    font-size: 24px;
+    margin-bottom: 24px;
+}
+.notice-content li:nth-of-type(1) button {
+    width: 15%;
+    background-color: #999999;
+    color: white;
+    font-size: 18px;
+    border: none;
+    margin-left: 10px;
+}
+.notice-content li:nth-of-type(2) {
+    margin-bottom: 30px;
+}
+.notice-content > li:nth-of-type(2) p {
+    color: #737373;
+    font-size: 18px;
+}
+.notice-content > li:nth-of-type(2) span {
+    color: #737373;
+    margin: 0 3%;
+}
+.pagination {
+    display: flex;
+    width: 200px;
+    margin: 0 auto;
+}
+.pagination img {
+    width: 28px;
+    height: 28px;
+}
+.pagination button {
+    width: 28px;
+    height: 28px;
+    background: none;
+    border: none;
+}
+.pagination li {
+    margin: 0 10px;
+    font-size: 18px;
+}
+.pagination button {
+    padding-left: 2px;
+}

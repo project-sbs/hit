@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/reset.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/m-common.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/aboutAdministrative.css}" />
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville&display=swap" rel="stylesheet"/>
+    <title>AboutHit</title>
+</head>
+<body>
+<header>
+    <nav class="gnb-wrap">
+        <h1 class="logo-wrap"><img src="/image/HitLogo.png" alt="" /></h1>
+        <ul>
+            <li><a th:href="@{/about/hit}">About Hit</a></li>
+            <li><a th:href="@{/research/overview}">Research</a></li>
+            <li><a th:href="@{/apply}">Admissions</a></li>
+            <li><a th:href="@{/about/department}">Campus Life</a></li>
+        </ul>
+    </nav>
+</header>
+<div class="container">
+    <ul class="container-side-menu">
+        <li class="menu-item">
+            <a th:href="@{/about/hit}" class="menu-title">Admissions</a>
+            <ul class="submenu">
+                <li><a th:href="@{/about/hit}">How to Apply</a></li>
+                <li><a th:href="@{/study}">Study in Korea at Hit</a></li>
+            </ul>
+        </li>
+        <li class="menu-item">
+            <a th:href="@{/about/department}" class="menu-title">Campus Life</a>
+            <ul class="submenu">
+                <li><a th:href="@{/about/department}">Admission Departments</a></li>
+                <li><a th:href="@{/about/notice}">Notice</a></li>
+            </ul>
+        </li>
+        <li class="menu-item">
+            <a th:href="@{/research/overview}" class="menu-title">Research</a>
+            <ul class="submenu">
+                <li><a th:href="@{/research/overview}">Research Overview</a></li>
+                <li><a th:href="@{/research/archive}">Research Archive</a></li>
+            </ul>
+        </li>
+        <li class="menu-item">
+            <a th:href="@{/about/hit}" class="menu-title">About Hit</a>
+            <ul class="submenu">
+                <li><a th:href="@{/about/hit}">About President</a></li>
+                <li><a th:href="@{/about/us}">About Us</a></li>
+            </ul>
+        </li>
+    </ul>
+    <div class="section-wrap">
+        <section class="administrative-departments">
+            <h2>Administrative departments</h2>
+            <ul class="content-list">
+                <li class="content-wrap">
+                    <div>
+                        <h3><a href="">Office of the President</a></h3>
+                        <h4>
+                            <img src="/image/location.png" alt="" />Underwood Hall 203
+                        </h4>
+                        <h4><img src="/image/call.png" alt="" />(+82) 2-2123-2006</h4>
+                        <ul>
+                            <li>
+                                Supporting the President, Provost,
+                                administrative-departmentssenior Vice President for
+                                Administration and Development
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="content-wrap">
+                    <div>
+                        <h3>
+                            <a href="">Head of Ethical Management</a>
+                        </h3>
+                        <h4>
+                            <img src="/image/location.png" alt="" />Appenzeller Hall 210
+                        </h4>
+                        <h4><img src="/image/call.png" alt="" />(+82) 2-2123-2110</h4>
+                        <ul>
+                            <li>Educational regulation education and counseling</li>
+                            <li>
+                                Checks and evaluates compliance with ethical regulations
+                            </li>
+                            <li>Receives and processes reports of ethical abuse</li>
+                            <li>
+                                Investigates, supervises and manages ethical fairness in
+                                university duties
+                            </li>
+                            <li>Manages Ethical Management Committee</li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="content-wrap">
+                    <div>
+                        <h3><a href="">Institue for global</a></h3>
+                        <h4>
+                            <img src="/image/location.png" alt="" />Stimson Hall 102
+                        </h4>
+                        <h4><img src="/image/call.png" alt="" />(+82) 2-2123-6701</h4>
+                        <ul>
+                            <li>
+                                Providing Community
+                                <ul>
+                                    <li>Social innovation Competency Course(SIC)</li>
+                                </ul>
+                            </li>
+                            <li>
+                                Support for student-led social Innovation projects
+                                <ul>
+                                    <li>Workstation(6 divisions)</li>
+                                    <li>Yonsei Social Innovation Certificate</li>
+                                </ul>
+                            </li>
+                            <li>
+                                Support for learning opportunities and infrastructure linked
+                                to the public sector
+                                <ul>
+                                    <li>Social Innovation Externship</li>
+                                    <li>Social Participation Programs</li>
+                                    <li>Community-Based Mentoring Programs</li>
+                                    <li>
+                                        Cooperation Programs & Projects with External Agencies
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="content-wrap">
+                    <div>
+                        <h3><a href="">Institue for Higher Education</a></h3>
+                        <h4>
+                            <img src="/image/location.png" alt="" />Appenzeller Hall 301
+                        </h4>
+                        <h4><img src="/image/call.png" alt="" />(+82) 2-2123-4423</h4>
+                        <ul>
+                            <li>
+                                Organizing the Global Engagement & Empowerment Forum(GEEF)
+                            </li>
+                            <li>
+                                Enhancing engagement for SDGs (Curricular/Extracurricular
+                                programs & Research)
+                            </li>
+                            <li>International Cooperation for SDGs</li>
+                        </ul>
+                        <p>*SDGs: Sustainable Development Goals</p>
+                    </div>
+                </li>
+            </ul>
+        </section>
+    </div>
+</div>
+<footer>
+    <ul>
+        <li><a href="#">Recruit</a></li>
+        <li>|</li>
+        <li>
+            <a href="#"><b>Privacy Policy</b></a>
+        </li>
+        <li>|</li>
+        <li><a href="#"></a>Cookie Policy</li>
+        <li>|</li>
+        <li><a href="#">Site Map</a></li>
+    </ul>
+    <div class="footer-address">
+        <p>
+            HIT University 50 HIT-ro Seodaemun-gu, Seoul, 03722, Republic of Korea
+            <br />
+            <br />
+            COPYRIGHT© 2015 HIT UNIV. ALL RIGHTS RESERVED.
+        </p>
+        <button>Related Links +</button>
+    </div>
+</footer>
+</body>
+<script>
+    // 메뉴 항목 클릭 시 서브 메뉴 토글
+    document.querySelectorAll(".menu-title").forEach(function (menuTitle) {
+        menuTitle.addEventListener("click", function (e) {
+            const menuItem = e.target.closest(".menu-item"); // 클릭된 메뉴 항목
+
+            // 다른 메뉴들이 열려 있으면 닫기
+            document.querySelectorAll(".menu-item").forEach(function (item) {
+                if (item !== menuItem) {
+                    item.classList.remove("active");
+                }
+            });
+
+            // 현재 메뉴 항목을 활성화/비활성화
+            menuItem.classList.toggle("active");
+        });
+    });
+
+    // 페이지 로딩 시 첫 번째 메뉴 항목 활성화
+    window.addEventListener("DOMContentLoaded", function () {
+        const firstMenuItem = document.querySelector(
+            ".container-side-menu .menu-item"
+        );
+        if (firstMenuItem) {
+            firstMenuItem.classList.add("active");
+        }
+    });
+</script>
+</html>

@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" type="text/css" th:href="@{/css/reset.css}" />
+  <link rel="stylesheet" type="text/css" th:href="@{/css/m-common.css}" />
+  <link rel="stylesheet" type="text/css" th:href="@{/css/about-hit.css}" />
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville&display=swap" rel="stylesheet"/>
+  <title>AboutHit</title>
+</head>
+<body>
+<header>
+  <nav class="gnb-wrap">
+    <h1 class="logo-wrap"><img src="/image/HitLogo.png" alt="" /></h1>
+    <ul>
+      <li><a th:href="@{/about/hit}">About Hit</a></li>
+      <li><a th:href="@{/research/overview}">Research</a></li>
+      <li><a th:href="@{/apply}">Admissions</a></li>
+      <li><a th:href="@{/about/department}">Campus Life</a></li>
+    </ul>
+  </nav>
+</header>
+<div class="container">
+  <ul class="container-side-menu">
+    <li class="menu-item">
+      <a th:href="@{/about/hit}" class="menu-title">Admissions</a>
+      <ul class="submenu">
+        <li><a th:href="@{/about/hit}">How to Apply</a></li>
+        <li><a th:href="@{/study}">Study in Korea at Hit</a></li>
+      </ul>
+    </li>
+    <li class="menu-item">
+      <a th:href="@{/about/department}" class="menu-title">Campus Life</a>
+      <ul class="submenu">
+        <li><a th:href="@{/about/department}">Admission Departments</a></li>
+        <li><a th:href="@{/about/notice}">Notice</a></li>
+      </ul>
+    </li>
+    <li class="menu-item">
+      <a th:href="@{/research/overview}" class="menu-title">Research</a>
+      <ul class="submenu">
+        <li><a th:href="@{/research/overview}">Research Overview</a></li>
+        <li><a th:href="@{/research/archive}">Research Archive</a></li>
+      </ul>
+    </li>
+    <li class="menu-item">
+      <a th:href="@{/about/hit}" class="menu-title">About Hit</a>
+      <ul class="submenu">
+        <li><a th:href="@{/about/hit}">About President</a></li>
+        <li><a th:href="@{/about/us}">About Us</a></li>
+      </ul>
+    </li>
+  </ul>
+  <div class="section-wrap">
+    <section class="profile-intro">
+      <h2>Welcoming Remarks/Profile</h2>
+      <div class="about-profile-photo-quotos">
+        <div class="about-profile-photo-wrap">
+          <img src="/image/professor.jpg" alt="" />
+        </div>
+        <div class="profile-intro-txt-wrap">
+          <p>
+            Empowering
+            <br />
+            HIT
+          </p>
+        </div>
+      </div>
+    </section>
+    <section class="introduce-president">
+      <p>
+        Greetings!
+        <br />
+        <br />
+        HIT University has always followed the righteous path through the
+        twists and turns of Korea’s modern history. As a distinguished
+        global academic institution, HIT has made significant contributions
+        to society and humanity. Inheriting this prestigious tradition, we
+        aim to advance into a new era of HIT, thereby opening the gateway to
+        the future with what makes us uniquely HIT.
+        <br />
+        <br />
+        In the age of “Big Blur," we are experiencing the collapse of
+        boundaries between academia and industry. We are confronted with the
+        dual challenges of digital transformation and energy transition on
+        the fiercely competitive battlefield of innovation. Words like
+        creativity, consilience, and convergence have long since become
+        keywords in our society. Innovation is the only way to stay relevant
+        in this rapidly changing international environment.
+        <br />
+        <br />
+        HIT's enduring mission for 139 years has been to nurture talents who
+        drive innovation and change. We will continue to build on this
+        foundation, to cultivate individuals who proactively tackle the
+        problems of global society while pursuing the values of coexistence.
+        We will strengthen programs that foster creative future talent, such
+        as the “Student-Designed Semester,” enabling students to freely
+        explore academia, to grow as independent agents of the future
+        society.
+      </p>
+      <p>
+        HIT’s key asset is the optimal campus in which we can navigate
+        diverse academic disciplines. We aim to bring together HIT’s
+        academic capabilities to address: the meaning and quality of a
+        healthy life in an aging society; redefine human dignity and ethics
+        in the era of artificial intelligence; implement ecological
+        practices to confront climate crises; and consolidate efforts to
+        solve international conflicts and societal challenges. This
+        interdisciplinary research initiative is rooted in a humanistic
+        understanding of humanity and nature embedded in HIT spirit. With a
+        focus on future sustainability, including artificial intelligence,
+        biotechnology, and renewable energy, HIT will seek to elevate our
+        global research competitiveness.
+        <br />
+        <br />
+        The new HIT era will be realized through "Empowering HIT," founded
+        on the principles of "governance centered on respect and
+        communication." Enhancing the pride of the HIT community through the
+        autonomous and responsible operation of each unit is the first step
+        towards being HIT. Ensuring a happy campus, where all HITans can
+        pursue studies, research, and personal growth to their hearts’
+        content, will indeed be the shortcut for HIT to leap forward into a
+        future beyond boundaries. Please join us on this journey.
+        <br />
+        <br />
+        Thank you.
+        <br />
+        <br />
+        <br />
+        20th President of HIT University
+        <br />OOH-SUNG GIL
+      </p>
+    </section>
+    <section class="about-biography">
+      <h2>Biography</h2>
+      <div class="biography-img-wrap">
+        <img src="image/img_greeting-banner.jpg" alt="" />
+        <div class="biography-img-wrap-innertxt">
+          <p>20th President of HIT University</p>
+          <p>OOH-SUNG GIL</p>
+        </div>
+      </div>
+      <div class="txt-wrap">
+        <h3>Education</h3>
+        <p>
+          <span>1981.03 - 1987.02</span> M.D. HIT University College of
+          Medicine
+        </p>
+        <p>
+          <span>1995.09 - 1997.08</span> M.S. HIT University College of
+          Medicine
+        </p>
+        <p>
+          <span>1998.03 - 2003.02</span> Ph.D.(Anatomy), Korea University
+        </p>
+      </div>
+      <div class="txt-wrap">
+        <h3>Academic Appointment</h3>
+        <p><span>2024.02 - Present</span> 20th President, HIT University</p>
+        <p>
+          <span>1999.03 - Present</span> Professor, Department of Surgery,
+          HIT University College of Medicine
+        </p>
+        <p>
+          <span>2008.09 - 2010.08</span> Vice Dean, HIT University College
+          of Medicine Seoul
+        </p>
+        <p>
+          <span>2017.03 - 2018.07</span> Chief, Department of Surgery, HIT
+          University College of Medicine
+        </p>
+        <p>
+          <span>2018.08 - 2020.07</span> General Director, Gangnam Severance
+          Hospital
+        </p>
+        <p>
+          <span>2020.08 - 2024.02</span> President & CEO, HIT University
+          Health System
+        </p>
+      </div>
+      <div class="txt-wrap">
+        <h3>Professional Appointment</h3>
+        <p>
+          <span>2017.04 - 2019.03</span> Chairman, Korean Association of
+          Hepato-Biliary-Pancreatic Surgery 2018.11 - 2020.11
+        </p>
+        <p>
+          <span>2018.11 - 2020.11</span> Chairman, Korean Surgical Society
+        </p>
+        <p>
+          <span>2018.04 - 2021.01</span> Vice President, Korean Academy of
+          Medical Sciences
+        </p>
+        <p>
+          <span>2020.01 - 2021.03</span> President, Council for Graduate
+          Medical Training, Korean Ministry of Health
+        </p>
+        <p>
+          <span>2020.07 - 2022.06</span> Board Member, Korean Cancer
+          Association
+        </p>
+        <p>
+          <span>2022.11 - 2023.11</span> President, Korean Surgical Society
+        </p>
+        <p>
+          <span>2022.05 - 2024.05</span> President, Korean Hospital
+          Association
+        </p>
+      </div>
+    </section>
+  </div>
+</div>
+<footer>
+  <ul>
+    <li><a href="#">Recruit</a></li>
+    <li>|</li>
+    <li>
+      <a href="#"><b>Privacy Policy</b></a>
+    </li>
+    <li>|</li>
+    <li><a href="#"></a>Cookie Policy</li>
+    <li>|</li>
+    <li><a href="#">Site Map</a></li>
+  </ul>
+  <div class="footer-address">
+    <p>
+      HIT University 50 HIT-ro Seodaemun-gu, Seoul, 03722, Republic of Korea
+      <br />
+      <br />
+      COPYRIGHT© 2015 HIT UNIV. ALL RIGHTS RESERVED.
+    </p>
+    <button>Related Links +</button>
+  </div>
+</footer>
+</body>
+<script>
+  // 메뉴 항목 클릭 시 서브 메뉴 토글
+  document.querySelectorAll(".menu-title").forEach(function (menuTitle) {
+    menuTitle.addEventListener("click", function (e) {
+      const menuItem = e.target.closest(".menu-item"); // 클릭된 메뉴 항목
+
+      // 다른 메뉴들이 열려 있으면 닫기
+      document.querySelectorAll(".menu-item").forEach(function (item) {
+        if (item !== menuItem) {
+          item.classList.remove("active");
+        }
+      });
+
+      // 현재 메뉴 항목을 활성화/비활성화
+      menuItem.classList.toggle("active");
+    });
+  });
+
+  // 페이지 로딩 시 첫 번째 메뉴 항목 활성화
+  window.addEventListener("DOMContentLoaded", function () {
+    const firstMenuItem = document.querySelector(
+            ".container-side-menu .menu-item"
+    );
+    if (firstMenuItem) {
+      firstMenuItem.classList.add("active");
+    }
+  });
+</script>
+</html>

@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/reset.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/m-common.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/research-archive.css}" />
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville&display=swap" rel="stylesheet"/>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <title>AboutHit</title>
+</head>
+<body>
+<header>
+    <nav class="gnb-wrap">
+        <h1 class="logo-wrap"><img src="/image/HitLogo.png" alt="" /></h1>
+        <ul>
+            <li><a th:href="@{/about/hit}">About Hit</a></li>
+            <li><a th:href="@{/research/overview}">Research</a></li>
+            <li><a th:href="@{/apply}">Admissions</a></li>
+            <li><a th:href="@{/about/department}">Campus Life</a></li>
+        </ul>
+    </nav>
+</header>
+<div class="container">
+    <ul class="container-side-menu">
+        <li class="menu-item">
+            <a th:href="@{/about/hit}" class="menu-title">Admissions</a>
+            <ul class="submenu">
+                <li><a th:href="@{/about/hit}">How to Apply</a></li>
+                <li><a th:href="@{/study}">Study in Korea at Hit</a></li>
+            </ul>
+        </li>
+        <li class="menu-item">
+            <a th:href="@{/about/department}" class="menu-title">Campus Life</a>
+            <ul class="submenu">
+                <li><a th:href="@{/about/department}">Admission Departments</a></li>
+                <li><a th:href="@{/about/notice}">Notice</a></li>
+            </ul>
+        </li>
+        <li class="menu-item">
+            <a th:href="@{/research/overview}" class="menu-title">Research</a>
+            <ul class="submenu">
+                <li><a th:href="@{/research/overview}">Research Overview</a></li>
+                <li><a th:href="@{/research/archive}">Research Archive</a></li>
+            </ul>
+        </li>
+        <li class="menu-item">
+            <a th:href="@{/about/hit}" class="menu-title">About Hit</a>
+            <ul class="submenu">
+                <li><a th:href="@{/about/hit}">About President</a></li>
+                <li><a th:href="@{/about/us}">About Us</a></li>
+            </ul>
+        </li>
+    </ul>
+    <div class="section-wrap">
+        <section class="">
+            <h2>Research Archive</h2>
+            <ul class="search-place">
+                <select name="" id="">
+                    <option value="">Title</option>
+                    <option value="">Content</option>
+                    <option value="">Name</option>
+                </select>
+                <input type="text" placeholder="Search word..." />
+                <button class="submit-button" type="submit">
+                    <img src="/image/search-icon.png" alt="" />
+                </button>
+                <button class="reset-button" type="reset">
+                    <img src="/image/reset-icon.png" alt="" />
+                </button>
+            </ul>
+            <ul class="research-list">
+                <li class="">
+                    <div class="research-img-wrap">
+                        <a href="">
+                            <img src="/image/research1.png" alt="" />
+                        </a>
+                    </div>
+                    <p>
+                        Harnessing the Power of Magnetism to Control Animal Behavior
+                    </p>
+                    <span> Minsuk Lee, Jae-Hyun Kim</span>
+                    <small>Advanced Science Institute</small>
+                </li>
+                <li>
+                    <div class="research-img-wrap">
+                        <a href="">
+                            <img src="/image/research2.png" alt="" />
+                        </a>
+                    </div>
+                    <p>Boosting the Flavor and Aroma of Cultured Meat</p>
+                    <span>Jinkee Choi</span>
+                    <small>Chemical & Biomolecular Engineering</small>
+                </li>
+                <li>
+                    <div class="research-img-wrap">
+                        <a href="">
+                            <img src="/image/research3.png" alt="" />
+                        </a>
+                    </div>
+                    <p>
+                        Excellent Effects of Immediate Post-surgery Exercise for Breast
+                        Cancer
+                    </p>
+                    <span>Justin Y. Park</span>
+                    <small>Sport Industry Studies</small>
+                </li>
+                <li>
+                    <div class="research-img-wrap">
+                        <a href="">
+                            <img src="/image/research4.png" alt="" />
+                        </a>
+                    </div>
+                    <p>
+                        Precision Cancer Immunotherapy Target for HPV-positive
+                        Oropharyngeal Cancer Discovered
+                    </p>
+                    <span>Insuk Jeon</span>
+                    <small>Biotechnology</small>
+                </li>
+                <li>
+                    <div class="research-img-wrap">
+                        <a href="">
+                            <img src="/image/research5.png" alt="" />
+                        </a>
+                    </div>
+                    <p>Innovative PreD Chip for Drug Testing developed</p>
+                    <span>Jungmok Yeon</span>
+                    <small>Electrical & Electronic Engineering</small>
+                </li>
+                <li>
+                    <div class="research-img-wrap">
+                        <a href="">
+                            <img src="/image/research6.png" alt="" />
+                        </a>
+                    </div>
+                    <p>
+                        A Technology for Ultra-High Efficiency Energy Conversion
+                        Material Obtained by Bending
+                    </p>
+                    <span>Yong Soo Lee</span>
+                    <small>Materials Science & Engineering</small>
+                </li>
+                <li>
+                    <div class="research-img-wrap">
+                        <a href="">
+                            <img src="/image/research7.png" alt="" />
+                        </a>
+                    </div>
+                    <p>
+                        Principle of Tumor Progression Induced by Adipocytes in Obesity
+                        Identified
+                    </p>
+                    <span>Han-Woong Park</span>
+                    <small>Biochemistry</small>
+                </li>
+                <li>
+                    <div class="research-img-wrap">
+                        <a href="">
+                            <img src="/image/research8.png" alt="" />
+                        </a>
+                    </div>
+                    <p>An AI Technology for Brain Stimulation Therapy Developed</p>
+                    <span>Kyungho Lee</span>
+                    <small>Mathematics and Computing</small>
+                </li>
+                <li>
+                    <div class="research-img-wrap">
+                        <a href="">
+                            <img src="/image/research9.png" alt="" />
+                        </a>
+                    </div>
+                    <p>A Next-generation Cancer Immunotherapy Platform Developed</p>
+                    <span>Sang-Jun Kim & Jinkee Lee</span>
+                    <small>Biochemistry & Chemical</small>
+                </li>
+                <li>
+                    <div class="research-img-wrap">
+                        <a href="">
+                            <img src="/image/research10.png" alt="" />
+                        </a>
+                    </div>
+                    <p>
+                        The World's First Fully Biodegradable Multifunctional Neural
+                        Implant System Developed
+                    </p>
+                    <span>Ki Jun Hong</span>
+                    <small>Electrical & Electronic Engineering</small>
+                </li>
+                <li>
+                    <div class="research-img-wrap">
+                        <a href="">
+                            <img src="/image/research11.png" alt="" />
+                        </a>
+                    </div>
+                    <p>New Brain-Computer Interface Technology Developed</p>
+                    <span>Jinwoo Lee & Jang-Ung Kim</span>
+                    <small>Advanced Science Institute</small>
+                </li>
+                <li>
+                    <div class="research-img-wrap">
+                        <a href="">
+                            <img src="/image/research12.png" alt="" />
+                        </a>
+                    </div>
+                    <p>
+                        A Fluorescent Probe for the Early Diagnosis of Alzheimer’s
+                        Disease Developed
+                    </p>
+                    <span>YoungSoo Hong</span>
+                    <small>Pharmacy</small>
+                </li>
+            </ul>
+            <ul class="pagination">
+                <li><a href="">1</a></li>
+                <li><a href="">2</a></li>
+                <li><a href="">3</a></li>
+                <li><a href="">4</a></li>
+                <li><a href="">5</a></li>
+            </ul>
+        </section>
+    </div>
+</div>
+<footer>
+    <ul>
+        <li><a href="#">Recruit</a></li>
+        <li>|</li>
+        <li>
+            <a href="#"><b>Privacy Policy</b></a>
+        </li>
+        <li>|</li>
+        <li><a href="#"></a>Cookie Policy</li>
+        <li>|</li>
+        <li><a href="#">Site Map</a></li>
+    </ul>
+    <div class="footer-address">
+        <p>
+            HIT University 50 HIT-ro Seodaemun-gu, Seoul, 03722, Republic of Korea
+            <br />
+            <br />
+            COPYRIGHT© 2015 HIT UNIV. ALL RIGHTS RESERVED.
+        </p>
+        <button>Related Links +</button>
+    </div>
+</footer>
+</body>
+<script>
+    // 메뉴 항목 클릭 시 서브 메뉴 토글
+    document.querySelectorAll(".menu-title").forEach(function (menuTitle) {
+        menuTitle.addEventListener("click", function (e) {
+            const menuItem = e.target.closest(".menu-item"); // 클릭된 메뉴 항목
+
+            // 다른 메뉴들이 열려 있으면 닫기
+            document.querySelectorAll(".menu-item").forEach(function (item) {
+                if (item !== menuItem) {
+                    item.classList.remove("active");
+                }
+            });
+
+            // 현재 메뉴 항목을 활성화/비활성화
+            menuItem.classList.toggle("active");
+        });
+    });
+
+    // 페이지 로딩 시 첫 번째 메뉴 항목 활성화
+    window.addEventListener("DOMContentLoaded", function () {
+        const firstMenuItem = document.querySelector(
+            ".container-side-menu .menu-item"
+        );
+        if (firstMenuItem) {
+            firstMenuItem.classList.add("active");
+        }
+    });
+</script>
+</html>

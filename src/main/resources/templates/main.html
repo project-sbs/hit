@@ -18,11 +18,10 @@
                 <img src="/image/HitLogo.png" alt="HIT대학교 로고" />
             </div>
             <ul>
-                <li>About HIT</li>
-                <li>Research</li>
-                <li>Admissions</li>
-                <li>Academics</li>
-                <li>Campus Life</li>
+                <li><a th:href="@{/about/hit}">About Hit</a></li>
+                <li><a th:href="@{/research/overview}">Research</a></li>
+                <li><a th:href="@{/apply}">Admissions</a></li>
+                <li><a th:href="@{/about/department}">Campus Life</a></li>
                 <li sec:authorize="hasRole('관리자')"><a th:href="@{/a/home}">Portal</a></li>
                 <li sec:authorize="hasRole('학생')"><a th:href="@{/s/home}">Portal</a></li>
                 <li sec:authorize="hasRole('교수')"><a th:href="@{/p/home}">Portal</a></li>
