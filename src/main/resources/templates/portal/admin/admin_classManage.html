@@ -6,14 +6,18 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/reset.css}" />
     <link rel="stylesheet" type="text/css" th:href="@{/css/commonElement.css}" />
     <link rel="stylesheet" type="text/css" th:href="@{/css/admin/adminClassManage.css}" />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet"/>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <title>Portal</title>
 </head>
 <body>
 <header class="portal-head">
-    <div>
-        <h1><img src="/image/home/HitLogo.png" alt="" /></h1>
-    </div>
+    <header class="portal-head">
+        <div>
+            <h1><img src="/image/home/HitLogo2.png" alt="" /></h1>
+            <button class="logout-wrap" onclick="location.href='/logout'"><span class="logout-text">Logout</span><img src="/image/home/handgesture.png" alt="" class="logout-img"></button>
+        </div>
+    </header>
 </header>
 <section class="portal-main">
     <nav class="portal-nav">
@@ -85,7 +89,7 @@
                        th:data-sugang-size="${#lists.size(subject.getSugangList())}"
                        class="delete btn btn-sm btn-outline-danger"
                        sec:authorize="hasRole('ROLE_관리자')"
-                        th:text="삭제"></a>
+                       th:text="삭제"></a>
                 </td>
             </tr>
             </tbody>
@@ -95,14 +99,14 @@
             <!-- 이전 버튼 -->
             <a class="prev_btn" href="javascript:void(0)" th:data-page="${subjectPage1.number - 1}"
                th:if="${subjectPage1.number != 0 && !subjectPage1.isEmpty()}">
-                <span>이전</span>
+                <span><img src="/image/home/arrowBack.png"></span>
             </a>
             <a class="page_link" href="javascript:void(0)" th:if="${!subjectPage1.isEmpty()}"
                th:classappend="${page == subjectPage1.number} ? 'on' : ''"
                th:data-page="${page}" th:each="page : ${#numbers.sequence(0, subjectPage1.totalPages - 1)}"
                th:text="${page + 1}"></a>
             <a class="next_btn" href="javascript:void(0)" th:data-page="${subjectPage1.number + 1}"
-               th:if="${subjectPage1.hasNext() && !subjectPage1.isEmpty()}"><span>다음</span></a>
+               th:if="${subjectPage1.hasNext() && !subjectPage1.isEmpty()}"><span><img src="/image/home/arrowForward.png"></span></a>
         </div>
 
         <form id="major-actionForm" method="get" th:action="@{/a/class}">
@@ -152,14 +156,14 @@
         <div class="general-pagination">
             <a class="prev_btn" href="javascript:void(0)" th:data-page="${subjectPage2.number - 1}"
                th:if="${subjectPage2.number != 0 && !subjectPage2.isEmpty()}">
-                <span>이전</span>
+                <span><img src="/image/home/arrowBack.png"></span>
             </a>
             <a class="page_link" href="javascript:void(0)" th:if="${!subjectPage2.isEmpty()}"
                th:classappend="${page == subjectPage2.number} ? 'on' : ''"
                th:data-page="${generalPage}" th:each="page : ${#numbers.sequence(0, subjectPage2.totalPages - 1)}"
                th:text="${page + 1}"></a>
             <a class="next_btn" href="javascript:void(0)" th:data-page="${subjectPage2.number + 1}"
-               th:if="${subjectPage2.hasNext() && !subjectPage2.isEmpty()}"><span>다음</span></a>
+               th:if="${subjectPage2.hasNext() && !subjectPage2.isEmpty()}"><span><img src="/image/home/arrowForward.png"></a>
         </div>
 
         <form id="general-actionForm" method="get" th:action="@{/a/class}">
@@ -307,6 +311,7 @@
         const selectedDepartment = departmentSelect.selectedOptions[0].text;
 
         const majorTableRows = majorTable.querySelectorAll("tbody tr");
+
 
         // 전공 구분 선택 시
         if (selectedMajorType === "전공") {

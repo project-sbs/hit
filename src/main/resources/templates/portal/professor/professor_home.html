@@ -6,6 +6,7 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/reset.css}" />
     <link rel="stylesheet" type="text/css" th:href="@{/css/commonElement.css}" />
     <link rel="stylesheet" type="text/css" th:href="@{/css/professor/professorHome.css}" />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet"/>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <title>Portal</title>
 </head>
@@ -104,8 +105,8 @@
             </form>
         </div>
 
-        <div class="portal-admin-student-check">
-            <h1>교수 수업 정보</h1>
+        <div class="portal-professor-class">
+            <h2>교수 수업 정보</h2>
 
             <!-- 교수 정보 표시 -->
             <h3>교수명: <span th:text="${professor.name}"></span></h3>
@@ -158,16 +159,13 @@
                 </li>
             </ul>
         </div>
-        <div class="portal-admin-paycheck">
+        <div class="portal-professor-lunch">
             <div>
-                <h1>오늘의 점심 메뉴</h1>
+               <h3>오늘의 점심 매뉴</h3>
                 <ul>
                     <li th:each="menu : ${lunchMenu}" th:text="${menu}"></li>
                 </ul>
             </div>
-
-            <canvas id="tuitionChart"></canvas>
-            <canvas id="paymentStatusChart"></canvas>
         </div>
     </div>
     <!-----------------------------------portal home finish---------------------------------------------------------------->

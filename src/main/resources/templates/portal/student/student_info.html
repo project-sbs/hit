@@ -182,16 +182,15 @@
                             <p id="current-address" th:text="${student.getAddress()}">현재 주소</p>
                         </li>
                         <li><h3>주소 변경란</h3></li>
-
                         <form th:action="@{/s/modify/address}" method="POST">
-                            <li>
+                            <li id="search-address">
                                 <input type="text" id="zip-code" name="zipCode" placeholder="우편번호" readonly />
                                 <input type="text" id="address-1" name="address" placeholder="도로명" readonly />
                                 <input type="text" id="new-address" name="newAddress" placeholder="상세정보 입력하기" />
                                 <button type="button" id="postcode-btn" onclick="execDaumPostcode()">우편번호찾기</button>
                             </li>
                             <li>
-                                <button type="submit" id="modify-address-btn">주소 변경하기</button>
+                                <button type="submit" id="modify-address-btn">등록</button>
                             </li>
                         </form>
                     </ul>

@@ -6,6 +6,7 @@
   <link rel="stylesheet" th:href="@{/css/reset.css}" type="text/css" />
   <link rel="stylesheet" type="text/css" th:href="@{/css/commonElement.css}" />
   <link rel="stylesheet" type="text/css" th:href="@{/css/admin/adminPersonManage.css}" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet"/>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <title>Portal</title>
 </head>
@@ -64,7 +65,7 @@
             <option value="학번">학번</option>
             <option value="사번">사번</option>
           </select>
-          <input type="text" name="keyword" th:value="${keyword}"/>
+          <input type="text" name="keyword" th:value="${keyword}" id="search-keyword"/>
           <input type="hidden" id="search-major" name="major" th:value="${major}">
           <button type="submit">검색</button>
         </form>
@@ -130,18 +131,18 @@
     </table>
     <!-- 학생 페이징 시작 -->
     <div class="st-pagination">
-      <a class="prev_btn" href="javascript:void(0)" th:data-page="${studentPaging.number - 1}" th:if="${studentPaging.number != 0 && !studentPaging.isEmpty()}"><span>이전</span></a>
+      <a class="prev_btn" href="javascript:void(0)" th:data-page="${studentPaging.number - 1}" th:if="${studentPaging.number != 0 && !studentPaging.isEmpty()}"><span><img src="/image/home/arrowBack.png"></span></a>
       <a class="page_link"
          href="javascript:void(0)" th:if="${!studentPaging.isEmpty()}" th:classappend="${page == studentPaging.number} ? 'on'" th:data-page="${page}" th:each="page: ${#numbers.sequence(stu_startBlock - 1, stu_endBlock - 1)}" th:text="${page+1}"></a>
-      <a class="next_btn" href="javascript:void(0)" th:data-page="${studentPaging.number + 1}" th:if="${studentPaging.hasNext() && !studentPaging.isEmpty()}"><span>다음</span></a>
+      <a class="next_btn" href="javascript:void(0)" th:data-page="${studentPaging.number + 1}" th:if="${studentPaging.hasNext() && !studentPaging.isEmpty()}"><span><img src="/image/home/arrowForward.png"></span></a>
     </div>
     <!-- 학생 페이징 끝 -->
     <!-- 교수 페이징 시작 -->
     <div class="pr-pagination" th:if="${!professorPaging.isEmpty()}">
-      <a class="prev_btn" href="javascript:void(0)" th:data-page="${professorPaging.number - 1}" th:if="${professorPaging.number != 0}"><span>이전</span></a>
+      <a class="prev_btn" href="javascript:void(0)" th:data-page="${professorPaging.number - 1}" th:if="${professorPaging.number != 0}"><span><img src="/image/home/arrowBack.png"></span></a>
       <a class="page_link"
          href="javascript:void(0)" th:classappend="${page == professorPaging.number} ? 'on'" th:data-page="${page}" th:each="page: ${#numbers.sequence(pro_startBlock - 1, pro_endBlock - 1)}" th:text="${page+1}"></a>
-      <a class="next_btn" href="javascript:void(0)" th:data-page="${professorPaging.number + 1}" th:if="${professorPaging.hasNext()}"><span>다음</span></a>
+      <a class="next_btn" href="javascript:void(0)" th:data-page="${professorPaging.number + 1}" th:if="${professorPaging.hasNext()}"><span><img src="/image/home/arrowForward.png"></span></a>
     </div>
     <!-- 교수 페이징 끝 -->
     <form id="actionForm" method="get" th:action="@{/a/person}">
