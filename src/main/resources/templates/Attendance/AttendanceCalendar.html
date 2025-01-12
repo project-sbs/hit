@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" type="text/css" th:href="@{/css/reset.css}" />
     <meta name="user-role" content="${userRole}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/commonElement.css}" />
     <link rel="stylesheet" href="/css/Attendance/AttendanceCalendar.css">
     <script src="/js/AttendanceCalendar.js" defer></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -15,24 +16,24 @@
 </head>
 <body>
 <header class="portal-head">
-    <div class="portal-logo-name">
-        <img src="" alt="" />
-        <h1>포털시스템</h1>
-    </div>
-    <div class="user-alarm">
-        <div class="user-photo"></div>
-        <p class="portal-user-name">길오성님</p>
+    <div>
+        <h1><img src="/image/home/HitLogo2.png" alt="" /></h1>
+        <button class="logout-wrap" onclick="location.href='/logout'"><span class="logout-text">Logout</span><img src="/image/home/handgesture.png" alt="" class="logout-img"></button>
     </div>
 </header>
 <section class="portal-main">
     <nav class="portal-nav">
         <ul>
-            <li class="portal-home-button" onclick="location.href='/p/home'"><img src="" alt="" />홈</li>
-            <li class="portal-profinfo-button" onclick="location.href='/p/info'"><img src="" alt="" />교수정보관리</li>
-            <li class="portal-attendance-button" onclick="location.href='/Attendance/AttendanceCalendar'"><img src="" alt="" />출석부</li>
-            <li class="portal-scoring-button" onclick="location.href='/p/score'">과목채점<img src="" alt="" /></li>
-            <li class="portal-report-check-button" onclick="location.href='/p/report'">과제확인<img src="" alt="" /></li>
+            <li class="portal-home-button" onclick="location.href='/p/home'"><div><img src="/image/home/homeicon.png" alt="" /></div>홈</li>
+            <li class="portal-profinfo-button" onclick="location.href='/p/info'"><div><img src="/image/home/userIcon.png" alt="" /></div>교수정보</li>
+            <li class="portal-attendance-button" onclick="location.href='/Attendance/AttendanceCalendar'"><div><img src="/image/home/Attendance.png" alt="" /></div>출석부</li>
+            <li class="portal-scoring-button" onclick="location.href='/p/score'"><div><img src="/image/home/importIcon.png" alt=""></div>과목채점</li>
+            <li class="portal-report-check-button" onclick="location.href='/p/report'"><div><img src="/image/home/importIcon.png" alt=""></div>과제확인</li>
         </ul>
+        <footer>
+            <p>© 2024 HITuniv. All rights reserved.</p>
+            <p>모든 저작권 권리는 HIT대학교에 있습니다.</p>
+        </footer>
     </nav>
     <div class="portal-home portal-main-frame">
         <div class="portal-user-login-etc">
@@ -51,7 +52,6 @@
                 <div class="week">금</div>
                 <div class="week">토</div>
                 <!-- 날짜를 추가할 컨테이너 추가 -->
-
             </div>
             <div class="calendar_days"></div>
 

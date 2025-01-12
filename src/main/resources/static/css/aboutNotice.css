@@ -58,6 +58,7 @@
     font-size: 18px;
     border: none;
     margin-left: 10px;
+    height: 36px;
 }
 .notice-content li:nth-of-type(2) {
     margin-bottom: 30px;
@@ -74,6 +75,7 @@
     display: flex;
     width: 200px;
     margin: 0 auto;
+    margin-top: 100px;
 }
 .pagination img {
     width: 28px;

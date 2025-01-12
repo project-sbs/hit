@@ -14,19 +14,20 @@
 .portal-score-check-student-info ul {
     width: 100%;
     display: flex;
-    border: 1px solid;
+ border: 1px solid #d1d9e6;
 }
 .portal-score-check-student-info ul li {
     width: 16.6%;
     display: flex;
 }
+
 .portal-score-check-student-info ul li:not(:last-child) {
-    border-right: 1px solid;
+    border-right: 1px solid #d1d9e6;
 }
 .portal-score-check-student-info ul li p:nth-of-type(1) {
     width: 80px;
     text-align: center;
-    border-right: 1px solid;
+    border-right: 1px solid #d1d9e6;
 }
 .portal-score-check-student-info ul li p:nth-of-type(2) {
     margin-left: 10px;
@@ -43,7 +44,7 @@
 .portal-score-total-year-count p:nth-of-type(1) {
     margin-left: 10px;
     width: 40px;
-    border: 1px solid black;
+    border: 1px solid #d1d9e6;
     text-align: center;
     color: red;
 }
@@ -99,7 +100,7 @@ td {
 .portal-score-each-year-count {
     width: 20%;
     display: flex;
-    margin: 100px 0px 10px 180px;
+    margin: 50px 0px 10px 180px;
     line-height: 26px;
 }
 .portal-score-each-year-count h3 {
@@ -108,7 +109,7 @@ td {
 .portal-score-each-year-count p {
     margin-left: 20px;
     width: 40px;
-    border: 1px solid black;
+    border: 1px solid #d1d9e6;
     text-align: center;
     color: red;
 }
@@ -126,4 +127,7 @@ td {
   height: 40px;
   background-color: #3f94f5;
   color: white;
+}
+.portal-score-each-year table tbody tr{
+height:40px;
 }

@@ -28,6 +28,22 @@
 }
 .portal-person-managing-frame ul li select {
     text-align: center;
+    height:30px;
+}
+#search-field{
+width:80px;
+height:30px;
+}
+#search-keyword{
+height:30px;
+}
+.portal-person-managing-frame ul li button{
+width:40px;
+height:30px;
+}
+
+#department-filter,#person-type-filter{
+width:120px;
 }
 table {
   width: 90%;
@@ -189,17 +205,27 @@ td {
 /* 페이징 처리 */
 .st-pagination,
 .pr-pagination {
-    width: 13%;
-    margin: 0 auto;
-    margin-top:50px;
+width: 13%;
+margin: 0 auto;
+margin-top:40px;
+font-size: 20px;
 }
 .st-pagination a,
 .pr-pagination a {
-    border: 1px solid;
-    color: black;
+    color: #4d4d4d;
+     margin: 0 5px;
 }
 .st-pagination a.on,
 .pr-pagination a.on {
-    background-color: black;
-    color: #fff;
+    color: black;
+}
+.st-pagination span, .pr-pagination span{
+width:20px;
+height:20px;
+}
+.st-pagination span img, .pr-pagination span img{
+padding-top:5px;
+width:20px;
+height:20px;
+background-size:cover;
 }

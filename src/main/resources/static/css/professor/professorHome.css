@@ -13,7 +13,7 @@
 .portal-user-login-etc {
     width: 380px;
     height: 350px;
-    border: 1px solid black;
+    border: 1px solid #d1d9e6;
 }
 .portal-user-login-etc > div {
   text-align: center;
@@ -78,6 +78,7 @@
   li:nth-of-type(3)
   button:nth-of-type(1) {
   background: skyblue;
+  color:white;
   border: none;
 }
 .portal-user-login-etc
@@ -153,29 +154,25 @@
 
 
 /*수업목록 css*/
-.portal-admin-student-check {
+.portal-professor-class {
     width: 600px;
     height: 350px;
-    border: 1px solid black;
+     border: 1px solid #d1d9e6;
     overflow: auto; /* 스크롤 추가 */
     padding: 10px; /* 내부 여백 추가 */
     box-sizing: border-box; /* 패딩 포함 크기 계산 */
 }
 
-.portal-admin-student-check h1 {
-    font-size: 24px;
-    font-weight: bold;
-    color: #333;
-    margin-bottom: 20px;
-}
-
-.portal-admin-student-check h3 {
+.portal-professor-class h3 {
     font-size: 18px;
     color: #555;
     margin-bottom: 15px;
+    width:559px;
+    margin 0 auto;
+    padding-left:30px;
 }
 
-.portal-admin-student-check ul {
+.portal-professor-class ul {
     list-style-type: none;
     padding: 0;
     margin: 0;
@@ -185,7 +182,7 @@
     justify-content: flex-start; /* 좌측 정렬 */
 }
 
-.portal-admin-student-check li {
+.portal-professor-class li {
     background-color: #fff;
     border: 1px solid #ddd;
     border-radius: 5px;
@@ -196,7 +193,7 @@
     box-sizing: border-box; /* 패딩 포함 크기 계산 */
 }
 
-.portal-admin-student-check li strong {
+.portal-professor-class li strong {
     font-weight: bold;
     font-size: 16px;
     color: #222;
@@ -211,9 +208,9 @@
 .portal-college-news {
     width: 820px;
     height: 400px;
-    border: 1px solid black;
+     border: 1px solid #d1d9e6;
     margin-right: 60px;
-    margin-bottom: 80px;
+    margin-bottom: 120px;
 }
 .portal-college-news-controller {
     display: flex;
@@ -238,16 +235,16 @@
     height: 45px;
 }
 .portal-college-news-controller li:nth-of-type(2) {
-    border-left: 1px solid;
-    border-right: 1px solid;
+  border-left: 1px solid #d1d9e6;
+  border-right: 1px solid #d1d9e6;
 }
 .portal-college-news-controller li:nth-of-type(4) {
-    border-left: 1px solid;
-    border-right: 1px solid;
+    border-left: 1px solid #d1d9e6;
+    border-right: 1px solid #d1d9e6;
 }
 .portal-college-news-frame {
     width: 100%;
-    border-top: 1px solid;
+    border-top: 1px solid #d1d9e6;;
     padding: 3%;
 }
 .portal-college-news-frame li {
@@ -265,21 +262,23 @@
     display: none;
 }
 /*portal-college-news끝*/
-.portal-admin-paycheck {
+.portal-professor-lunch {
     width: 600px;
     height: 400px;
-    border: 1px solid;
-    padding-top: 40px;
+    border: 1px solid #d1d9e6;
 }
 
-.portal-admin-paycheck h1 {
-    font-size: 20px;
+.portal-professor-lunch h3 {
+    height:60px;
+    line-height:60px;
+    font-size: 24px;
     font-weight: bold;
-    margin-bottom: 20px;
     text-align: center;
+    color:white;
+    background: #0057b7;
 }
 
-.portal-admin-paycheck li {
+.portal-professor-lunch li {
     grid-template-columns: repeat(2, 1fr); /* 2열 구조 */
     gap: 10px; /* 항목 간격 추가 */
     background-color: #fff;
@@ -293,7 +292,7 @@
     transition: transform 0.2s, box-shadow 0.2s;
 }
 
-.portal-admin-paycheck li {
+.portal-professor-lunch li {
     background-color: #fff;
     border: 1px solid #ddd;
     border-radius: 5px;
@@ -304,7 +303,7 @@
     text-align: center; /* 텍스트 가운데 정렬 */
 }
 
-.portal-admin-paycheck li:hover {
+.portal-professor-lunch li:hover {
     transform: scale(1.05); /* 살짝 확대 효과 */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 호버 시 강조 */
 }

@@ -197,30 +197,32 @@
   width: 80%;
   padding-left: 10px;
 }
-.address-frame ul > li:nth-of-type(4) {
+.address-frame ul  #search-address {
   width: 80%;
   margin: 0 auto;
 }
-.address-frame ul > li:nth-of-type(4) input {
+.address-frame ul  #search-address input {
   width: 25%;
   height: 30px;
   padding: 10px;
 }
-.address-frame ul > li:nth-of-type(4) input:last-of-type {
+.address-frame ul  #search-address input:last-of-type {
   width: 39%;
 }
-.address-frame ul > li:nth-of-type(4) button {
+.address-frame ul  #search-address button {
   background-color: orange;
   border: none;
   color: white;
   font-weight: bold;
   height: 30px;
+  width:100px;
+  text-align:center;
 }
-.address-frame ul > li:last-of-type {
+.address-frame ul > form li:last-of-type {
   margin-left: 1120px;
   margin-top: 50px;
 }
-.address-frame ul > li:last-of-type button {
+.address-frame ul > form li:last-of-type button {
   width: 120px;
   height: 40px;
   background: orange;

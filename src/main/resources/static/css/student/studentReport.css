@@ -8,7 +8,7 @@
     margin-bottom: 5px;
 }
 .portal-student-report-wrap {
-    width: 70%;
+    width: 50%;
     margin: 0 auto;
 }
 .portal-student-report-wrap form {
@@ -17,6 +17,7 @@
 }
 .portal-student-report-wrap form input:nth-of-type(1) {
     height: 30px;
+    padding-left:2%;
 }
 .portal-student-report-wrap form input:nth-of-type(2) {
     border-right: 1px solid;
@@ -24,4 +25,17 @@
 }
 .portal-student-report-wrap form input:nth-of-type(3) {
     width: 100px;
+}
+#subjectSelect{
+height:30px;
+text-align:center;
+}
+#report-submit-btn{
+ background: orange;
+    border: none;
+    color: white;
+    height:30px;
+    line-height:30px;
+    font-size: 16px;
+    font-weight: bold;
 }
