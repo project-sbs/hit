@@ -1,380 +1,1460 @@
-body {
-  width: 100%;
-  font-family: "Roboto", sans-serif;
-}
-header {
-  width: 100%;
+@media screen and (min-width: 1200px) {
+  body {
+    width: 100%;
+    font-family: "Crimson Text", serif;
+    overflow-x: hidden;
+  }
+  header {
+    width: 100%;
+  }
+  button {
+    cursor: pointer;
+  }
+  img {
+    background-size: cover;
+  }
+  .main-middle img:not(.hit-photo img) {
+    transition: all 0.3s ease; /* 부드러운 전환 효과 */
+  }
+
+  .main-middle img:not(.hit-photo img, a img, button img):hover {
+    transform: translateY(-10px); /* 이미지가 살짝 위로 올라감 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6); /* 그림자 효과 */
+  }
+  .nav-opener {
+    display: none;
+  }
+  .responsible-nav {
+    display: none;
+  }
+  .main-top {
+    position: relative;
+  }
+  .hit-nav {
+    padding: 1.5%;
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    z-index: 1;
+    color: white;
+    width: 100%;
+  }
+  .hit-nav ul {
+    position: relative;
+    display: flex;
+  }
+  .hit-nav ul li {
+    margin: 0px 10px;
+    font-size: 24px;
+  }
+  .hit-nav ul li:hover {
+    color: yellow;
+  }
+  .logo-wrap {
+    width: 160px;
+    height: 64px;
+  }
+  .logo-wrap > img {
+    width: 160px;
+    height: 64px;
+    background-size: cover;
+  }
+  .visual-wrap {
+    position: relative;
+    width: 100%;
+  }
+  .main-top-motto {
+    position: relative;
+    width: 100%;
+    height: 953px;
+  }
+  /*메인페이지 상단 사진관련*/
+  .main-top-photo {
+    width: 100%;
+    height: 953px;
+  }
+  .main-top-photo li {
+    position: absolute;
+    width: 100%;
+    height: 953px;
+    top: -20px;
+    display: none; /* 초기에는 모두 숨김 */
+  }
+  .main-top-photo1 {
+    background: url(../image/college.jpg) no-repeat center top/cover;
+  }
+  .main-top-photo2 {
+    background: url(../image/library.jpg) no-repeat center top/cover;
+  }
+  .main-top-photo3 {
+    background: url(../image/auditorium.jpg) no-repeat center top/cover;
+  }
+  .main-top-photo4 {
+    background: url(../image/people.jpg) no-repeat center top/cover;
+  }
+  .main-top-motto-button {
+    color: white;
+    text-align: center;
+    margin: 0 auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(
+      -50%,
+      -50%
+    ); /* 자식 요소의 크기를 기준으로 중앙 정렬 */
+  }
+  .main-top-motto-button button {
+    color: white;
+    background: none;
+    border: 1px solid white;
+    width: 134px;
+    height: 53px;
+    margin-top: 50px;
+    font-size: 24px;
+  }
+  .main-top-motto-button button:hover {
+    font-size: 30px;
+    border: 3px solid white;
+    transition: 200ms;
+  }
+  .main-top-motto-button b {
+    font-size: 50px;
+  }
+  .main-top-motto-button p {
+    margin-bottom: 30px;
+    font-size: 22px;
+    font-weight: 600;
+  }
+  .main-top-motto > button {
+    position: absolute;
+    bottom: 40px;
+    width: 400px;
+    font-size: 24px;
+    left: 39.45%;
+    background: none;
+    color: white;
+    border: none;
+  }
+  .main-middle {
+    width: 70%;
+    margin: 0 auto;
+    margin-top: 70px;
+  }
+  /*HIT NEWS 관련*/
+  .hit-news {
+    width: 100%;
+  }
+  .hit-news h2 {
+    margin-bottom: 48px;
+    font-size: 32px;
+  }
+  .hit-news ul {
+    width: 100%;
+    height: 527px;
+    display: flex;
+  }
+  .hit-news li {
+    width: 401px;
+  }
+  .hit-news li div {
+    width: 100%;
+    height: 268px;
+  }
+  .hit-news-img-wrap {
+    width: 401px;
+    height: 268px;
+  }
+  .hit-news-img-wrap > img {
+    width: 401px;
+    height: 268px;
+  }
+  .hit-news > ul > li:nth-of-type(2) {
+    margin: 0px 64px;
+  }
+  .hit-news li .hit-news-info {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  .hit-news li ul li:nth-of-type(1) {
+    font-size: 26px;
+    margin: 5px 0;
+    font-family: "Crimson Text", serif;
+    font-weight: 500;
+    color: #4b5762;
+  }
+  .hit-news li ul li:nth-of-type(2) {
+    margin-bottom: 3px;
+    font-family: "Assistant", serif;
+    font-size: 19px;
+    color: #333333;
+  }
+  .hit-news li ul li:nth-of-type(3) {
+    font-size: 18px;
+  }
+  .hit-news-info a {
+    margin-top: 20px;
+    font-size: 20px;
+    font-weight: inherit;
+    display: flex;
+  }
+  .hit-news-info a img {
+    width: 20px;
+    height: 20px;
+    margin-top: 5px;
+  }
+  .hit-research {
+    margin-top: 100px;
+  }
+  .hit-research-top {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 48px;
+  }
+  .hit-research-top h2 {
+    margin-bottom: 20px;
+    font-size: 32px;
+  }
+  .hit-research-top button {
+    width: 35px;
+    height: 35px;
+    background: none;
+    border: none;
+  }
+  .hit-research-top button img {
+    width: 35px;
+    height: 35px;
+    background-size: cover;
+  }
+  .hit-research-bottom {
+    display: flex;
+    height: 500px;
+  }
+  .hit-research-write {
+    width: 50%;
+    font-size: 16px;
+    font-weight: lighter;
+    margin-right: 204px;
+    padding-right: 50px;
+  }
+  .hit-research-write p:nth-of-type(1) {
+    font-size: 24px;
+    font-family: "Assistant", serif;
+  }
+  .hit-research-write p:nth-of-type(2) {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 18px;
+  }
+  .hit-research-write a {
+    font-size: 20px;
+    display: flex;
+  }
+  .hit-research-write a img {
+    width: 20px;
+    height: 20px;
+    margin-top: 5px;
+  }
+  .hit-research-img-wrap {
+    width: 571px;
+    height: 462px;
+  }
+  .hit-research-img-wrap > img {
+    width: 571px;
+    height: 462px;
+  }
+  .study-in-hit {
+    margin-top: 200px;
+  }
+  .study-in-hit-top {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 96px;
+    margin-bottom: 48px;
+  }
+  .study-in-hit-top h2 {
+    margin-bottom: 20px;
+    font-size: 32px;
+  }
+  .study-in-hit-top button {
+    width: 24px;
+    height: 24px;
+    text-align: center;
+    font-size: 24px;
+    background: none;
+    border: none;
+  }
+  .study-in-hit-top button img {
+    width: 35px;
+    height: 35px;
+  }
+  .study-in-hit-bottom {
+    width: 100%;
+    height: 746px;
+    display: flex;
+  }
+  .study-in-hit-img-wrap {
+    width: 600px;
+    height: 746px;
+    margin-right: 100px;
+  }
+  .study-in-hit-img-wrap > img {
+    width: 600px;
+    height: 746px;
+  }
+  .study-in-hit-txt-wrap {
+    width: 632px;
+  }
+  .study-in-hit-txt-wrap > p:nth-of-type(1) {
+    margin-top: 209px;
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  .study-in-hit-txt-wrap > p:nth-of-type(2) {
+    margin-bottom: 20px;
+    font-size: 18px;
+  }
+  .study-in-hit-student-info {
+    margin-bottom: 50px;
+    font-size: 18px;
+  }
+  .study-in-hit-student-info li {
+    display: flex;
+  }
+  .study-in-hit-student-info li b {
+    font-style: italic;
+    margin-right: 10px;
+  }
+  .study-in-hit-txt-wrap a b {
+    font-size: 19px;
+    font-weight: lighter;
+  }
+
+  .hit-photo {
+    margin-top: 120px;
+    width: 100%;
+    height: 1116px;
+  }
+
+  .hit-photo h2 {
+    margin-bottom: 48px;
+    font-size: 32px;
+  }
+  .hit-photo-wrap {
+    margin: 0 auto;
+    width: 1332px;
+    height: 750px;
+  }
+  .hit-photo-wrap > img {
+    width: 1332px;
+    height: 750px;
+  }
+  .hit-controller-photo {
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-between;
+    height: 183px;
+  }
+  .hit-controller-photo li {
+    width: 15%;
+    height: 183px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    font-size: 18px;
+  }
+  .hit-controller-photo-wrap {
+    width: 100%;
+    height: 140px;
+  }
+  .hit-controller-photo-wrap > img {
+    width: 100%;
+    height: 140px;
+    opacity: 0.6; /* 기본적으로 약간 투명하게 설정 */
+    transition: opacity 0.3s ease; /* 투명도 변화에 부드러운 전환 효과 */
+  }
+  .hit-controller-photo li:nth-of-type(1) > img {
+    opacity: 1;
+  }
+  .hit-controller-photo-wrap > img.active {
+    opacity: 1; /* 클릭한 사진은 원래대로 돌아옴 */
+  }
+  footer {
+    width: 100%;
+    height: 213px;
+    background: #001e40;
+    color: white;
+    padding-top: 33px;
+  }
+  .footer-nav {
+    width: 70%;
+    margin: 0 auto;
+    display: flex;
+  }
+  .footer-nav li {
+    margin-right: 25px;
+    font-size: 18px;
+  }
+  .footer-loc-link {
+    width: 70%;
+    margin: 0 auto;
+    margin-top: 36px;
+    display: flex;
+    justify-content: space-between;
+  }
+  .footer-loc-link a {
+    border: 1px solid white;
+    width: 162px;
+    height: 45px;
+    text-align: center;
+    line-height: 45px;
+  }
+  footer > p {
+    width: 70%;
+    margin: 0 auto;
+  }
+  .scroll-to-top-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    display: none; /* 기본적으로 숨김 */
+    transition: opacity 0.3s ease;
+  }
+
+  .scroll-to-top-btn:hover {
+    background-color: #0056b3;
+  }
+  .hidden-links {
+    display: none;
+    position: absolute;
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    padding: 10px;
+  }
+
+  .link-button {
+    display: block;
+    margin: 5px 0;
+    text-decoration: none;
+    color: #333;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+
+  .link-button:hover {
+    color: #007bff; /* 커서 올렸을 때 색상 변경 */
+  }
 }
 
-img {
-  background-size: cover;
-}
-.main-middle img:not(.hit-photo img) {
-  transition: all 0.3s ease; /* 부드러운 전환 효과 */
-}
+@media screen and (min-width: 491px) and (max-width: 1199px) {
+  body {
+    width: 100%;
+    font-family: "Crimson Text", serif;
+    overflow-x: hidden;
+  }
+  header {
+    width: 100%;
+  }
+  button {
+    cursor: pointer;
+  }
+  img {
+    background-size: cover;
+  }
+  .main-middle img:not(.hit-photo img) {
+    transition: all 0.3s ease; /* 부드러운 전환 효과 */
+  }
 
-.main-middle img:not(.hit-photo img):hover {
-  transform: translateY(-10px); /* 이미지가 살짝 위로 올라감 */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6); /* 그림자 효과 */
-}
-.hit-nav {
-  padding: 1.5%;
-  display: flex;
-  justify-content: space-between;
-  position: absolute;
-  z-index: 1;
-  color: white;
-}
-.hit-nav ul {
-  left: 1200px;
-  position: relative;
-  display: flex;
-}
-.hit-nav ul li {
-  margin: 0px 10px;
-}
-.logo-wrap {
-  width: 160px;
-  height: 64px;
-}
-.logo-wrap > img {
-  width: 160px;
-  height: 64px;
-  background-size: cover;
-}
-/*메인페이지 상단 사진관련*/
-.main-top-photo {
-  width: 100%;
-  height: 953px;
-  position: relative;
-}
-.main-top-photo li {
-  position: absolute;
-  width: 100%;
-  height: 953px;
-  top: -20px;
-  display: none; /* 초기에는 모두 숨김 */
-}
-.main-top-photo1 {
-  background: url(../image/college.jpg) no-repeat center top/cover;
-}
-.main-top-photo2 {
-  background: url(../image/library.jpg) no-repeat center top/cover;
-}
-.main-top-photo3 {
-  background: url(../image/auditorium.jpg) no-repeat center top/cover;
-}
-.main-top-photo4 {
-  background: url(../image/people.jpg) no-repeat center top/cover;
-}
-.main-top-motto-button {
-  position: absolute;
-  color: white;
-  bottom: 460px;
-  left: 44.25%;
-  text-align: center;
-  margin: 0 auto;
-}
-.main-top-motto-button button {
-  color: white;
-  background: none;
-  border: 1px solid white;
-  width: 134px;
-  height: 53px;
-  margin-top: 50px;
-}
-.main-top-motto-button b {
-  font-size: 40px;
-}
-.main-top-motto-button p {
-  margin-bottom: 20px;
-}
-.main-top-motto > button {
-  position: absolute;
-  bottom: 40px;
-  width: 400px;
-  font-size: 20px;
-  left: 39.45%;
-  background: none;
-  color: white;
-  border: none;
-}
-.main-middle {
-  width: 70%;
-  margin: 0 auto;
-  margin-top: 70px;
-}
-/*HIT NEWS 관련*/
-.hit-news {
-  width: 100%;
-}
-.hit-news h2 {
-  margin-bottom: 48px;
-  font-size: 32px;
-}
-.hit-news ul {
-  width: 100%;
-  height: 527px;
-  display: flex;
-}
-.hit-news li {
-  width: 401px;
-}
-.hit-news li div {
-  width: 100%;
-  height: 268px;
-}
-.hit-news-img-wrap {
-  width: 401px;
-  height: 268px;
-}
-.hit-news-img-wrap > img {
-  width: 401px;
-  height: 268px;
-}
-.hit-news > ul > li:nth-of-type(2) {
-  margin: 0px 64px;
-}
-.hit-news li .hit-news-info {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-}
-.hit-news li ul li:nth-of-type(1) {
-  font-size: 18px;
-  margin: 5px 0;
-}
-.hit-news li ul li:nth-of-type(2) {
-  margin-bottom: 3px;
-}
-.hit-news-info a {
-  margin-top: 5px;
-  font-size: 20px;
-  font-weight: inherit;
-}
-.hit-research {
-  margin-top: 10px;
-}
-.hit-research-top {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 48px;
-}
-.hit-research-top h2 {
-  margin-bottom: 20px;
-  font-size: 32px;
-}
-.hit-research-top button {
-  width: 24px;
-  height: 24px;
-  text-align: center;
-  font-size: 24px;
-  background: none;
-  border: none;
-}
-.hit-research-bottom {
-  display: flex;
-  height: 500px;
-}
-.hit-research-write {
-  width: 50%;
-  font-size: 16px;
-  font-weight: lighter;
-  margin-right: 204px;
-  padding-right: 50px;
-}
-.hit-research-write p:nth-of-type(2) {
-  margin-top: 20px;
-  margin-bottom: 20px;
-}
-.hit-research-write a {
-  font-size: 20px;
-}
-.hit-research-img-wrap {
-  width: 571px;
-  height: 462px;
-}
-.hit-research-img-wrap > img {
-  width: 571px;
-  height: 462px;
-}
-.study-in-hit-top {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 96px;
-  margin-bottom: 48px;
-}
-.study-in-hit-top h2 {
-  margin-bottom: 20px;
-  font-size: 32px;
-}
-.study-in-hit-top button {
-  width: 24px;
-  height: 24px;
-  text-align: center;
-  font-size: 24px;
-  background: none;
-  border: none;
-}
-.study-in-hit-bottom {
-  width: 100%;
-  height: 746px;
-  display: flex;
-}
-.study-in-hit-img-wrap {
-  width: 600px;
-  height: 746px;
-  margin-right: 100px;
-}
-.study-in-hit-img-wrap > img {
-  width: 600px;
-  height: 746px;
-}
-.study-in-hit-txt-wrap {
-  width: 632px;
-}
-.study-in-hit-txt-wrap > p:nth-of-type(1) {
-  margin-top: 209px;
-  font-size: 22px;
-  margin-bottom: 20px;
-}
-.study-in-hit-txt-wrap > p:nth-of-type(2) {
-  margin-bottom: 20px;
-}
-.study-in-hit-student-info {
-  margin-bottom: 50px;
-}
-.study-in-hit-student-info li {
-  display: flex;
-}
-.study-in-hit-student-info li b {
-  font-style: italic;
-  margin-right: 10px;
-}
-.study-in-hit-txt-wrap a b {
-  font-size: 19px;
-  font-weight: lighter;
-}
+  .main-middle img:not(.hit-photo img, a img, button img):hover {
+    transform: translateY(-10px); /* 이미지가 살짝 위로 올라감 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6); /* 그림자 효과 */
+  }
+  .main-top {
+    position: relative;
+  }
+  .hit-nav {
+    padding: 1.5%;
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    z-index: 1;
+    color: white;
+    width: 100%;
+  }
+  .nav-opener {
+    width: 50px;
+    height: 50px;
+    background: none;
+    border: none;
+  }
+  .responsible-nav {
+    position: absolute;
+    z-index: 99;
+    right: -100%;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    text-align: center;
+    top: 0;
+    display: block;
+    transition: right 0.3s ease; /* 오른쪽으로 이동하는 애니메이션 */
+  }
+  .responsible-nav.active {
+    right: 0;
+  }
+  .responsible-nav button {
+    position: absolute;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background: none;
+    cursor: pointer;
+    width: 60px;
+    height: 60px;
+    top: -2%;
+    right: 2%;
+  }
+  .responsible-nav button > img {
+    width: 60px;
+    height: 60px;
+    transform: rotate(45deg);
+    transform-origin: center;
+  }
+  .responsible-nav img {
+    margin-top: 120px;
+    margin-bottom: 50px;
+  }
+  .responsible-nav li {
+    font-size: 30px;
+    margin: 20px;
+  }
+  .nav-opener img {
+    width: 60px;
+    height: 60px;
+  }
+  .hit-nav ul {
+    display: none;
+  }
+  .hit-nav ul li {
+    margin: 0px 10px;
+    font-size: 24px;
+  }
+  .hit-nav ul li:hover {
+    color: yellow;
+  }
+  .logo-wrap {
+    width: 160px;
+    height: 64px;
+  }
+  .logo-wrap > img {
+    width: 160px;
+    height: 64px;
+    background-size: cover;
+  }
+  /*메인페이지 상단 사진관련*/
+  .main-top-photo {
+    width: 100%;
+    height: 600px;
+    position: relative;
+  }
+  .main-top-photo li {
+    position: absolute;
+    width: 100%;
+    height: 600px;
+    top: -20px;
+    display: none; /* 초기에는 모두 숨김 */
+  }
+  .main-top-photo1 {
+    background: url(../image/college.jpg) no-repeat center top/cover;
+  }
+  .main-top-photo2 {
+    background: url(../image/library.jpg) no-repeat center top/cover;
+  }
+  .main-top-photo3 {
+    background: url(../image/auditorium.jpg) no-repeat center top/cover;
+  }
+  .main-top-photo4 {
+    background: url(../image/people.jpg) no-repeat center top/cover;
+  }
+  .visual-wrap {
+    width: 100%;
+    position: relative;
+  }
+  .main-top-motto-button {
+    position: absolute;
+    color: white;
+    top: 50%;
+    left: 50%;
+    transform: translate(
+      -50%,
+      -50%
+    ); /* 자식 요소의 크기를 기준으로 중앙 정렬 */
+    text-align: center;
+    margin: 0 auto;
+  }
+  .main-top-motto-button button {
+    color: white;
+    background: none;
+    border: 1px solid white;
+    width: 134px;
+    height: 53px;
+    margin-top: 50px;
+    font-size: 24px;
+  }
+  .main-top-motto-button button:hover {
+    font-size: 30px;
+    border: 3px solid white;
+    transition: 200ms;
+  }
+  .main-top-motto-button b {
+    font-size: 50px;
+  }
+  .main-top-motto-button p {
+    margin-bottom: 30px;
+    font-size: 22px;
+    font-weight: 600;
+  }
+  .main-top-motto > button {
+    position: absolute;
+    bottom: 40px;
+    width: 400px;
+    font-size: 24px;
+    left: 32%;
+    background: none;
+    color: white;
+    border: none;
+  }
+  .main-middle {
+    width: 80%;
+    margin: 0 auto;
+    margin-top: 70px;
+  }
+  /*HIT NEWS 관련*/
+  .hit-news {
+    width: 100%;
+  }
+  .hit-news h2 {
+    width: 80%;
+    margin: 0 auto;
+    margin-bottom: 48px;
+    font-size: 32px;
+  }
+  .hit-news > ul {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  .hit-news > ul > li {
+    width: 80%;
+    margin: 0 auto;
+  }
+  .hit-news-img-wrap {
+    width: 100%;
+    height: 320px;
+  }
+  .hit-news-img-wrap > img {
+    width: 100%;
+    height: 320px;
+  }
+  .hit-news > ul > li:nth-of-type(2) {
+    margin-top: 80px;
+    margin-bottom: 80px;
+  }
+  .hit-news li .hit-news-info {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  .hit-news li ul li:nth-of-type(1) {
+    font-size: 26px;
+    margin: 5px 0;
+    font-family: "Crimson Text", serif;
+    font-weight: 500;
+    color: #4b5762;
+  }
+  .hit-news li ul li:nth-of-type(2) {
+    margin-bottom: 3px;
+    font-family: "Assistant", serif;
+    font-size: 19px;
+    color: #333333;
+  }
+  .hit-news li ul li:nth-of-type(3) {
+    font-size: 18px;
+  }
+  .hit-news-info a {
+    margin-top: 20px;
+    font-size: 20px;
+    font-weight: inherit;
+    display: flex;
+  }
+  .hit-news-info a img {
+    width: 20px;
+    height: 20px;
+    margin-top: 5px;
+  }
+  .hit-research {
+    margin-top: 50px;
+  }
+  .hit-research-top {
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    margin: 0 auto;
+  }
+  .hit-research-top h2 {
+    margin-bottom: 40px;
+    font-size: 32px;
+  }
+  .hit-research-top button {
+    width: 35px;
+    height: 35px;
+    background: none;
+    border: none;
+  }
+  .hit-research-top button img {
+    width: 35px;
+    height: 35px;
+    background-size: cover;
+  }
+  .hit-research-bottom {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+  .hit-research-write {
+    width: 80%;
+    font-size: 16px;
+    font-weight: lighter;
+    margin: 0 auto;
+  }
+  .hit-research-write p:nth-of-type(1) {
+    font-size: 24px;
+    font-family: "Assistant", serif;
+    margin-bottom: 20px;
+  }
+  .hit-research-write p:nth-of-type(2) {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 18px;
+  }
+  .hit-research-write a {
+    font-size: 20px;
+    display: flex;
+  }
+  .hit-research-write a img {
+    width: 20px;
+    height: 20px;
+    margin-top: 5px;
+  }
+  .hit-research-img-wrap {
+    width: 80%;
+    height: 350px;
+    margin: 0 auto;
+    margin-bottom: 50px;
+  }
+  .hit-research-img-wrap > img {
+    width: 100%;
+    height: 350px;
+  }
+  .study-in-hit {
+    margin-top: 50px;
+  }
+  .study-in-hit-top {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto;
+    width: 80%;
+  }
+  .study-in-hit-top h2 {
+    margin-bottom: 40px;
+    font-size: 32px;
+  }
+  .study-in-hit-top button {
+    width: 24px;
+    height: 24px;
+    text-align: center;
+    font-size: 24px;
+    background: none;
+    border: none;
+  }
+  .study-in-hit-top button img {
+    width: 35px;
+    height: 35px;
+  }
+  .study-in-hit-bottom {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  .study-in-hit-img-wrap {
+    width: 80%;
+    height: 746px;
+    margin: 0 auto;
+  }
+  .study-in-hit-img-wrap > img {
+    width: 100%;
+    height: 746px;
+  }
+  .study-in-hit-txt-wrap {
+    width: 80%;
+    margin: 0 auto;
+  }
+  .study-in-hit-txt-wrap > p:nth-of-type(1) {
+    margin-top: 50px;
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  .study-in-hit-txt-wrap > p:nth-of-type(2) {
+    margin-bottom: 20px;
+    font-size: 18px;
+  }
+  .study-in-hit-student-info {
+    margin-bottom: 50px;
+    font-size: 18px;
+  }
+  .study-in-hit-student-info li {
+    display: flex;
+  }
+  .study-in-hit-student-info li b {
+    font-style: italic;
+    margin-right: 10px;
+  }
+  .study-in-hit-txt-wrap a b {
+    font-size: 19px;
+    font-weight: lighter;
+  }
 
-.hit-photo {
-  margin-top: 120px;
-  width: 100%;
-  height: 1116px;
-}
+  .hit-photo {
+    width: 80%;
+    margin: 0 auto;
+    margin-top: 50px;
+  }
 
-.hit-photo h2 {
-  margin-bottom: 48px;
-  font-size: 32px;
-}
-.hit-photo-wrap {
-  margin: 0 auto;
-  width: 1332px;
-  height: 750px;
-}
-.hit-photo-wrap > img {
-  width: 1332px;
-  height: 750px;
-}
-.hit-controller-photo {
-  margin-top: 30px;
-  display: flex;
-  justify-content: space-between;
-  height: 183px;
-}
-.hit-controller-photo li {
-  width: 15%;
-  height: 183px;
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-  font-style: italic;
-}
-.hit-controller-photo-wrap {
-  width: 100%;
-  height: 140px;
-}
-.hit-controller-photo-wrap > img {
-  width: 100%;
-  height: 140px;
-  opacity: 0.6; /* 기본적으로 약간 투명하게 설정 */
-  transition: opacity 0.3s ease; /* 투명도 변화에 부드러운 전환 효과 */
-}
-.hit-controller-photo li:nth-of-type(1) > img {
-  opacity: 1;
-}
-.hit-controller-photo-wrap > img.active {
-  opacity: 1; /* 클릭한 사진은 원래대로 돌아옴 */
-}
-footer {
-  width: 100%;
-  height: 213px;
-  background: #001e40;
-  color: white;
-  padding-top: 33px;
-}
-.footer-nav {
-  width: 70%;
-  margin: 0 auto;
-  display: flex;
-}
-.footer-nav li {
-  margin-right: 25px;
-  font-size: 18px;
-}
-.footer-loc-link {
-  width: 70%;
-  margin: 0 auto;
-  margin-top: 36px;
-  display: flex;
-  justify-content: space-between;
-}
-.footer-loc-link a {
-  border: 1px solid white;
-  width: 162px;
-  height: 45px;
-  text-align: center;
-  line-height: 45px;
-}
-footer > p {
-  width: 70%;
-  margin: 0 auto;
-}
-.scroll-to-top-btn {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  font-size: 16px;
-  cursor: pointer;
-  border-radius: 5px;
-  display: none; /* 기본적으로 숨김 */
-  transition: opacity 0.3s ease;
-}
+  .hit-photo h2 {
+    margin-bottom: 40px;
+    font-size: 32px;
+  }
+  .hit-photo-wrap {
+    margin: 0 auto;
+    width: 100%;
+    height: 350px;
+  }
+  .hit-photo-wrap > img {
+    width: 100%;
+    height: 350px;
+  }
+  .hit-controller-photo {
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-between;
+    height: 183px;
+  }
+  .hit-controller-photo li {
+    width: 15%;
+    height: 60px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    font-size: 14px;
+  }
+  .hit-controller-photo-wrap {
+    width: 100%;
+    height: 60px;
+  }
+  .hit-controller-photo-wrap > img {
+    width: 100%;
+    height: 60px;
+    opacity: 0.6; /* 기본적으로 약간 투명하게 설정 */
+    transition: opacity 0.3s ease; /* 투명도 변화에 부드러운 전환 효과 */
+  }
+  .hit-controller-photo li:nth-of-type(1) > img {
+    opacity: 1;
+  }
+  .hit-controller-photo-wrap > img.active {
+    opacity: 1; /* 클릭한 사진은 원래대로 돌아옴 */
+  }
+  footer {
+    width: 100%;
+    height: 213px;
+    background: #001e40;
+    color: white;
+    padding-top: 33px;
+  }
+  .footer-nav {
+    width: 70%;
+    margin: 0 auto;
+    display: flex;
+  }
+  .footer-nav li {
+    margin-right: 25px;
+    font-size: 18px;
+  }
+  .footer-loc-link {
+    width: 70%;
+    margin: 0 auto;
+    margin-top: 36px;
+    display: flex;
+    justify-content: space-between;
+  }
+  .footer-loc-link a {
+    border: 1px solid white;
+    width: 162px;
+    height: 45px;
+    text-align: center;
+    line-height: 45px;
+  }
+  footer > p {
+    width: 70%;
+    margin: 0 auto;
+  }
+  .scroll-to-top-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    display: none; /* 기본적으로 숨김 */
+    transition: opacity 0.3s ease;
+  }
 
-.scroll-to-top-btn:hover {
-  background-color: #0056b3;
-}
-.hidden-links {
-  display: none;
-  position: absolute;
-  background: #f9f9f9;
-  border: 1px solid #ddd;
-  padding: 10px;
-}
+  .scroll-to-top-btn:hover {
+    background-color: #0056b3;
+  }
+  .hidden-links {
+    display: none;
+    position: absolute;
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    padding: 10px;
+  }
 
-.link-button {
-  display: block;
-  margin: 5px 0;
-  text-decoration: none;
-  color: #333;
-  background: none;
-  border: none;
-  cursor: pointer;
-}
+  .link-button {
+    display: block;
+    margin: 5px 0;
+    text-decoration: none;
+    color: #333;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
 
-.link-button:hover {
-  color: #007bff; /* 커서 올렸을 때 색상 변경 */
+  .link-button:hover {
+    color: #007bff; /* 커서 올렸을 때 색상 변경 */
+  }
+}
+@media screen and (max-width: 490px) {
+  body {
+    width: 100%;
+    font-family: "Crimson Text", serif;
+    overflow-x: hidden;
+  }
+  header {
+    width: 100%;
+  }
+  button {
+    cursor: pointer;
+  }
+  img {
+    background-size: cover;
+  }
+  .main-middle img:not(.hit-photo img) {
+    transition: all 0.3s ease; /* 부드러운 전환 효과 */
+  }
+
+  .main-middle img:not(.hit-photo img, a img, button img):hover {
+    transform: translateY(-10px); /* 이미지가 살짝 위로 올라감 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6); /* 그림자 효과 */
+  }
+  .main-top {
+    position: relative;
+  }
+  .hit-nav {
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    z-index: 1;
+    color: white;
+    width: 100%;
+  }
+  .nav-opener {
+    width: 40px;
+    height: 40px;
+    background: none;
+    border: none;
+  }
+  .nav-opener img {
+    width: 40px;
+    height: 40px;
+  }
+  .responsible-nav {
+    position: absolute;
+    z-index: 99;
+    right: -100%;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    text-align: center;
+    top: 0;
+    display: block;
+    transition: right 0.3s ease; /* 오른쪽으로 이동하는 애니메이션 */
+  }
+  .responsible-nav.active {
+    right: 0;
+  }
+  .responsible-nav button {
+    position: absolute;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background: none;
+    cursor: pointer;
+    width: 60px;
+    height: 60px;
+    top: -2%;
+    right: 2%;
+  }
+  .responsible-nav button > img {
+    width: 60px;
+    height: 60px;
+    transform: rotate(45deg);
+    transform-origin: center;
+  }
+  .responsible-nav img {
+    margin-top: 120px;
+    margin-bottom: 50px;
+  }
+  .responsible-nav li {
+    font-size: 30px;
+    margin: 20px;
+  }
+
+  .hit-nav ul {
+    display: none;
+  }
+  .hit-nav ul li {
+    margin: 0px 10px;
+    font-size: 24px;
+  }
+  .hit-nav ul li:hover {
+    color: yellow;
+  }
+  .logo-wrap {
+    width: 100px;
+    height: 44px;
+  }
+  .logo-wrap > img {
+    width: 100px;
+    height: 44px;
+    background-size: cover;
+  }
+  /*메인페이지 상단 사진관련*/
+  .main-top-photo {
+    width: 100%;
+    height: 400px;
+    position: relative;
+  }
+  .main-top-photo li {
+    position: absolute;
+    width: 100%;
+    height: 400px;
+    top: -20px;
+    display: none; /* 초기에는 모두 숨김 */
+  }
+  .main-top-photo1 {
+    background: url(../image/college.jpg) no-repeat center top/cover;
+  }
+  .main-top-photo2 {
+    background: url(../image/library.jpg) no-repeat center top/cover;
+  }
+  .main-top-photo3 {
+    background: url(../image/auditorium.jpg) no-repeat center top/cover;
+  }
+  .main-top-photo4 {
+    background: url(../image/people.jpg) no-repeat center top/cover;
+  }
+  .visual-wrap {
+    width: 100%;
+    position: relative;
+  }
+  .main-top-motto-button {
+    position: absolute;
+    color: white;
+    top: 50%;
+    left: 50%;
+    transform: translate(
+      -50%,
+      -50%
+    ); /* 자식 요소의 크기를 기준으로 중앙 정렬 */
+    text-align: center;
+    margin: 0 auto;
+  }
+  .main-top-motto-button button {
+    color: white;
+    background: none;
+    border: 1px solid white;
+    width: 60px;
+    height: 40px;
+    font-size: 18px;
+  }
+  .main-top-motto-button button:hover {
+    font-size: 30px;
+    border: 3px solid white;
+    transition: 200ms;
+  }
+  .main-top-motto-button b {
+    font-size: 30px;
+  }
+  .main-top-motto-button p {
+    margin-bottom: 30px;
+    font-size: 22px;
+    font-weight: 600;
+  }
+  .main-top-motto > button {
+    position: absolute;
+    bottom: 40px;
+    margin: 0 auto;
+    left: 35%;
+    font-size: 20px;
+    background: none;
+    color: white;
+    border: none;
+  }
+  .main-middle {
+    width: 80%;
+    margin: 0 auto;
+    margin-top: 70px;
+  }
+  /*HIT NEWS 관련*/
+  .hit-news {
+    width: 100%;
+  }
+  .hit-news h2 {
+    width: 80%;
+    margin: 0 auto;
+    margin-bottom: 48px;
+    font-size: 32px;
+  }
+  .hit-news > ul {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  .hit-news > ul > li {
+    width: 80%;
+    margin: 0 auto;
+  }
+  .hit-news-img-wrap {
+    width: 100%;
+    height: 180px;
+  }
+  .hit-news-img-wrap > img {
+    width: 100%;
+    height: 180px;
+  }
+  .hit-news > ul > li:nth-of-type(2) {
+    margin-top: 80px;
+    margin-bottom: 80px;
+  }
+  .hit-news li .hit-news-info {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  .hit-news li ul li:nth-of-type(1) {
+    font-size: 26px;
+    margin: 5px 0;
+    font-family: "Crimson Text", serif;
+    font-weight: 500;
+    color: #4b5762;
+  }
+  .hit-news li ul li:nth-of-type(2) {
+    margin-bottom: 3px;
+    font-family: "Assistant", serif;
+    font-size: 19px;
+    color: #333333;
+  }
+  .hit-news li ul li:nth-of-type(3) {
+    font-size: 18px;
+  }
+  .hit-news-info a {
+    margin-top: 20px;
+    font-size: 20px;
+    font-weight: inherit;
+    display: flex;
+  }
+  .hit-news-info a img {
+    width: 20px;
+    height: 20px;
+    margin-top: 5px;
+  }
+  .hit-research {
+    margin-top: 50px;
+  }
+  .hit-research-top {
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    margin: 0 auto;
+  }
+  .hit-research-top h2 {
+    margin-bottom: 40px;
+    font-size: 32px;
+  }
+  .hit-research-top button {
+    width: 35px;
+    height: 35px;
+    background: none;
+    border: none;
+  }
+  .hit-research-top button img {
+    width: 35px;
+    height: 35px;
+    background-size: cover;
+  }
+  .hit-research-bottom {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+  .hit-research-write {
+    width: 80%;
+    font-size: 16px;
+    font-weight: lighter;
+    margin: 0 auto;
+  }
+  .hit-research-write p:nth-of-type(1) {
+    font-size: 24px;
+    font-family: "Assistant", serif;
+    margin-bottom: 20px;
+  }
+  .hit-research-write p:nth-of-type(2) {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 18px;
+  }
+  .hit-research-write a {
+    font-size: 20px;
+    display: flex;
+  }
+  .hit-research-write a img {
+    width: 20px;
+    height: 20px;
+    margin-top: 5px;
+  }
+  .hit-research-img-wrap {
+    width: 80%;
+    height: 200px;
+    margin: 0 auto;
+    margin-bottom: 50px;
+  }
+  .hit-research-img-wrap > img {
+    width: 100%;
+    height: 200px;
+  }
+  .study-in-hit {
+    margin-top: 50px;
+  }
+  .study-in-hit-top {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto;
+    width: 80%;
+  }
+  .study-in-hit-top h2 {
+    margin-bottom: 40px;
+    font-size: 32px;
+  }
+  .study-in-hit-top button {
+    width: 24px;
+    height: 24px;
+    text-align: center;
+    font-size: 24px;
+    background: none;
+    border: none;
+  }
+  .study-in-hit-top button img {
+    width: 35px;
+    height: 35px;
+  }
+  .study-in-hit-bottom {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  .study-in-hit-img-wrap {
+    width: 80%;
+    height: 450px;
+    margin: 0 auto;
+  }
+  .study-in-hit-img-wrap > img {
+    width: 100%;
+    height: 450px;
+  }
+  .study-in-hit-txt-wrap {
+    width: 80%;
+    margin: 0 auto;
+  }
+  .study-in-hit-txt-wrap > p:nth-of-type(1) {
+    margin-top: 50px;
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  .study-in-hit-txt-wrap > p:nth-of-type(2) {
+    margin-bottom: 20px;
+    font-size: 18px;
+  }
+  .study-in-hit-student-info {
+    margin-bottom: 50px;
+    font-size: 18px;
+  }
+  .study-in-hit-student-info li {
+    display: flex;
+  }
+  .study-in-hit-student-info li b {
+    font-style: italic;
+    margin-right: 10px;
+  }
+  .study-in-hit-txt-wrap a b {
+    font-size: 19px;
+    font-weight: lighter;
+  }
+
+  .hit-photo {
+    width: 80%;
+    margin: 0 auto;
+    margin-top: 50px;
+    display: none;
+  }
+
+  .hit-photo h2 {
+    margin-bottom: 40px;
+    font-size: 32px;
+  }
+  .hit-photo-wrap {
+    margin: 0 auto;
+    width: 100%;
+    height: 350px;
+  }
+  .hit-photo-wrap > img {
+    width: 100%;
+    height: 350px;
+  }
+  .hit-controller-photo {
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-between;
+    height: 183px;
+  }
+  .hit-controller-photo li {
+    width: 15%;
+    height: 60px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    font-size: 14px;
+  }
+  .hit-controller-photo-wrap {
+    width: 100%;
+    height: 60px;
+  }
+  .hit-controller-photo-wrap > img {
+    width: 100%;
+    height: 60px;
+    opacity: 0.6; /* 기본적으로 약간 투명하게 설정 */
+    transition: opacity 0.3s ease; /* 투명도 변화에 부드러운 전환 효과 */
+  }
+  .hit-controller-photo li:nth-of-type(1) > img {
+    opacity: 1;
+  }
+  .hit-controller-photo-wrap > img.active {
+    opacity: 1; /* 클릭한 사진은 원래대로 돌아옴 */
+  }
+  footer {
+    width: 100%;
+    height: 213px;
+    background: #001e40;
+    color: white;
+    padding-top: 33px;
+  }
+  .footer-nav {
+    width: 70%;
+    margin: 0 auto;
+    display: flex;
+  }
+  .footer-nav li {
+    margin-right: 25px;
+    font-size: 18px;
+  }
+  .footer-loc-link {
+    width: 70%;
+    margin: 0 auto;
+    margin-top: 36px;
+    display: flex;
+    justify-content: space-between;
+  }
+  .footer-loc-link a {
+    border: 1px solid white;
+    width: 162px;
+    height: 45px;
+    text-align: center;
+    line-height: 45px;
+  }
+  footer > p {
+    width: 70%;
+    margin: 0 auto;
+  }
+  .scroll-to-top-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    display: none; /* 기본적으로 숨김 */
+    transition: opacity 0.3s ease;
+  }
+
+  .scroll-to-top-btn:hover {
+    background-color: #0056b3;
+  }
+  .hidden-links {
+    display: none;
+    position: absolute;
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    padding: 10px;
+  }
+
+  .link-button {
+    display: block;
+    margin: 5px 0;
+    text-decoration: none;
+    color: #333;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+
+  .link-button:hover {
+    color: #007bff; /* 커서 올렸을 때 색상 변경 */
+  }
 }
