@@ -86,7 +86,6 @@ public class AdminController {
         List<Board> jobpostings = this.boardService.getTop6Boards("hire");
         List<Board> contents = this.boardService.getTop6Boards("con");
         List<Board> schedulers = this.boardService.getSchedulersByPage(page, size);
-//        List<Board> schedulersa = this.boardService.getTop3Schedulers("scheduler");
 
         model.addAttribute("currentDate", currentDate);
         model.addAttribute("notices", notices);
@@ -105,45 +104,48 @@ public class AdminController {
     public String classManage(SubjectInsertForm subjectInsertForm, Principal principal, Model model,
                               @RequestParam(value = "majorPage", defaultValue = "0") int majorPage,
                               @RequestParam(value = "generalPage", defaultValue = "0") int generalPage,
-                              @RequestParam(value = "major", defaultValue = "-1") int major_id,
-                              @RequestParam(value = "class", defaultValue = "학생") String classType) {
+                              @RequestParam(value = "major", defaultValue = "전체") String major,
+                              @RequestParam(value = "department", defaultValue = "0") int department) {
 
         Admin admin = this.adminService.getAdmin(principal.getName());
         List<Major> majorList = this.majorService.getAllMajors();
         List<Professor> professorList = this.professorService.getAllProfessors();
-        Page<Subject> subjectPage1 = this.subjectService.getSubjectList("전공", majorPage, major_id);
-        Page<Subject> subjectPage2 = this.subjectService.getSubjectList("교양", generalPage, major_id);
+        if(major.equals("전체")) {
+            Page<Subject> subjectPage1 = this.subjectService.getSubjectList("전공", majorPage);
+            Page<Subject> subjectPage2 = this.subjectService.getSubjectList("교양", generalPage);
 
-        int sub_totalPage = subjectPage1.getTotalPages();
-        int sub2_totalPage = subjectPage2.getTotalPages();
-        int block = 5;
-        int sub_currentPage = subjectPage1.getNumber() + 1;
-        int sub2_currentPage = subjectPage2.getNumber() + 1;
+            int[] majorBlock = getPageBlock(subjectPage1);
+            int[] generalBlock = getPageBlock(subjectPage2);
 
-        int sub_startBlock = (((sub_currentPage - 1) / block) * block) + 1;
-        int sub_endBlock  = sub_startBlock + block - 1;
-        if (sub_endBlock > sub_totalPage) {
-            sub_endBlock = sub_totalPage;
+            model.addAttribute("sub_startBlock", majorBlock[0]);
+            model.addAttribute("sub2_sub_startBlock", generalBlock[0]);
+            model.addAttribute("sub_endBlock", majorBlock[1]);
+            model.addAttribute("sub2_endBlock", generalBlock[1]);
+            model.addAttribute("subjectPage1", subjectPage1);
+            model.addAttribute("subjectPage2", subjectPage2);
+        } else if (major.equals("전공")) {
+            Page<Subject> subjectPage1 = this.subjectService.getSubjectList("전공", majorPage, department);
+            int[] majorBlock = getPageBlock(subjectPage1);
+
+            model.addAttribute("sub_startBlock", majorBlock[0]);
+            model.addAttribute("sub2_sub_startBlock", majorBlock[1]);
+            model.addAttribute("subjectPage1", subjectPage1);
+        } else {
+            Page<Subject> subjectPage2 = this.subjectService.getSubjectList("교양", generalPage, department);
+            int[] generalBlock = getPageBlock(subjectPage2);
+
+            model.addAttribute("sub_startBlock", generalBlock[0]);
+            model.addAttribute("sub2_sub_startBlock", generalBlock[1]);
+            model.addAttribute("subjectPage2", subjectPage2);
         }
 
-        int sub2_startBlock = (((sub2_currentPage - 1) / block) * block) + 1;
-        int sub2_endBlock = sub2_startBlock + block - 1;
-        if (sub2_endBlock > sub2_totalPage) {
-            sub2_endBlock = sub2_totalPage;
-        }
-
-        model.addAttribute("sub_startBlock", sub_startBlock);
-        model.addAttribute("sub2_sub_startBlock", sub2_startBlock);
-        model.addAttribute("sub_totalPage", sub_totalPage);
-        model.addAttribute("sub2_totalPage", sub2_totalPage);
-        model.addAttribute("sub_endBlock", sub_endBlock);
-        model.addAttribute("sub2_endBlock", sub2_endBlock);
-        model.addAttribute("class", classType);
         model.addAttribute("professorList", professorList);
         model.addAttribute("majorList", majorList);
-        model.addAttribute("subjectPage1", subjectPage1);
-        model.addAttribute("subjectPage2", subjectPage2);
         model.addAttribute("admin", admin);
+        model.addAttribute("major", major);
+        model.addAttribute("department", department);
+        model.addAttribute("majorPage", majorPage);
+        model.addAttribute("generalPage", generalPage);
 
         return "portal/admin/admin_classManage";
     }
@@ -168,22 +170,14 @@ public class AdminController {
         Page<Professor> professorPaging = this.professorService.getProfessors(field, keyword, page, major_id);
         Admin admin = this.adminService.getAdmin(principal.getName());
 
-        int stu_totalPage = studentPaging.getTotalPages();
-        int pro_totalPage = professorPaging.getTotalPages();
-        int block = 5;
-        int stu_currentPage = studentPaging.getNumber() + 1;
-        int pro_currentPage = professorPaging.getNumber() + 1;
+        int[] stu_block = getPageBlock(studentPaging);
+        int[] prof_block = getPageBlock(professorPaging);
 
-        int stu_startBlock = (((stu_currentPage - 1) / block) * block) + 1;
-        int stu_endBlock = stu_startBlock + block - 1;
-        if (stu_endBlock > stu_totalPage) {
-            stu_endBlock = stu_totalPage;
-        }
-        int pro_startBlock = (((pro_currentPage - 1) / block) * block) + 1;
-        int pro_endBlock = pro_startBlock + block - 1;
-        if (pro_endBlock > pro_totalPage) {
-            pro_endBlock = pro_totalPage;
-        }
+        int stu_startBlock = stu_block[0];
+        int stu_endBlock = stu_block[1];
+
+        int pro_startBlock = prof_block[0];
+        int pro_endBlock = prof_block[1];
 
         model.addAttribute("stu_startBlock", stu_startBlock);
         model.addAttribute("stu_endBlock", stu_endBlock);
@@ -225,7 +219,6 @@ public class AdminController {
     @PostMapping("/insert/board")
     public String insertBoard(@RequestParam("type") String type, @RequestParam("title") String title,
                               @RequestParam("content") String content, @RequestParam("date") String date) {
-
         Board board = new Board();
         board.setContent(content);
         board.setReg_date(LocalDateTime.now());
@@ -480,6 +473,20 @@ public class AdminController {
             }
         }
         return pathDir;
+    }
+
+    private int[] getPageBlock(Page<?> pageList) {
+        int totalPages = pageList.getTotalPages();
+        int block = 5;
+        int currentPage = pageList.getNumber() + 1;
+
+        int startBlock = (((currentPage - 1) / block) * block) + 1;
+        int endBlock = startBlock + block - 1;
+
+        if (endBlock > totalPages) {
+            endBlock = totalPages;
+        }
+        return new int[] { startBlock, endBlock };
     }
 
 }

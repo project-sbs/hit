@@ -44,20 +44,24 @@
         <button class="btn-add-course">수강과목기입</button>
         <ul>
             <li>
-                <select name="" class="major-type-select">
-                    <option value="">=== 전공구분 ===</option>
-                    <option value="">전공</option>
-                    <option value="">교양</option>
+                <select class="major-type-select">
+                    <option value="전체" th:selected="${major == '전체'}">전체</option>
+                    <option value="전공" th:selected="${major == '전공'}">전공</option>
+                    <option value="교양" th:selected="${major == '교양'}">교양</option>
                 </select>
-            </li>
+            </li> &nbsp;
             <li>
-                <select name="" class="department-select">
-                    <option disabled>=== 학과 ===</option>
-                    <option th:each="major, loop : ${majorList}" th:text="${major.getName()}"></option>
+                <select class="department-select" disabled>
+                    <option value="0">※ 학과 선택</option>
+                    <option th:each="major, loop : ${majorList}" th:selected="${major.getId() == department}" th:value="${major.getId()}"  th:text="${major.getName()}"></option>
                 </select>
             </li>
         </ul>
-        <table class="major-class-table">
+        <form id="filterForm" th:action="@{/a/class}" method="get">
+            <input type="hidden" id="major" name="major" th:value="${major}">
+            <input type="hidden" id="department_num" name="department" th:value="${department}">
+        </form>
+        <table class="major-class-table" th:if="${major == '전체' || major == '전공'}">
             <thead>
             <tr>
                 <th>No.</th>
@@ -73,7 +77,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="subject : ${subjectPage1.content}">
+            <tr th:each="subject, loop : ${subjectPage1}">
                 <td th:text="${subject.getNo()}"></td>
                 <td th:text="${subject.getName()}" th:attr="title=${subject.getName()}"></td>
                 <td th:text="${subject.getMajor().getName()}"></td>
@@ -92,31 +96,33 @@
                        th:text="삭제"></a>
                 </td>
             </tr>
+            <tr th:if="${subjectPage1.isEmpty()}">
+                <td colspan="10">과목이 비었습니다.</td>
+            </tr>
             </tbody>
         </table>
 
-        <div class="major-pagination">
+        <div class="major-pagination" th:if="${major == '전체' || major == '전공'}">
             <!-- 이전 버튼 -->
-            <a class="prev_btn" href="javascript:void(0)" th:data-page="${subjectPage1.number - 1}"
-               th:if="${subjectPage1.number != 0 && !subjectPage1.isEmpty()}">
-                <span><img src="/image/home/arrowBack.png"></span>
+            <a class="prev_btn" href="javascript:void(0)" th:data-major="${subjectPage1.number - 1}" th:if="${subjectPage1.number != 0}">
+                <span><img src="/image/home/arrowBack.png" alt=""></span>
             </a>
             <a class="page_link" href="javascript:void(0)" th:if="${!subjectPage1.isEmpty()}"
-               th:classappend="${page == subjectPage1.number} ? 'on' : ''"
-               th:data-page="${page}" th:each="page : ${#numbers.sequence(0, subjectPage1.totalPages - 1)}"
-               th:text="${page + 1}"></a>
-            <a class="next_btn" href="javascript:void(0)" th:data-page="${subjectPage1.number + 1}"
-               th:if="${subjectPage1.hasNext() && !subjectPage1.isEmpty()}"><span><img src="/image/home/arrowForward.png"></span></a>
+               th:classappend="${majorPage == subjectPage1.number} ? 'on' : ''"
+               th:data-major="${majorPage}" th:each="majorPage : ${#numbers.sequence(0, subjectPage1.totalPages - 1)}"
+               th:text="${majorPage + 1}"></a>
+            <a class="next_btn" href="javascript:void(0)" th:data-major="${subjectPage1.number + 1}"
+               th:if="${subjectPage1.hasNext()}"><span><img src="/image/home/arrowForward.png" alt=""></span></a>
+            <form id="major-actionForm" method="get" th:action="@{/a/class}">
+                <input type="hidden" class="major-page" name="majorPage" th:value="${majorPage}">
+                <input type="hidden" class="general-page" name="generalPage" th:value="${generalPage}">
+                <input type="hidden" id="major-major" name="major" th:value="${major}">
+                <input type="hidden" id="major-class" name="department" th:value="${department}">
+            </form>
         </div>
 
-        <form id="major-actionForm" method="get" th:action="@{/a/class}">
-            <input type="hidden" id="major-page" name="majorPage" th:value="${subjectPage1.number}">
-            <input type="hidden" id="major-major" name="major" th:value="${major}">
-            <input type="hidden" id="major-class" name="class" th:value="${class}">
-        </form>
-
         <!-- 교양 클래스 테이블 -->
-        <table class="liberal-class-table">
+        <table class="liberal-class-table" th:if="${major == '전체' || major == '교양'}">
             <thead>
             <tr>
                 <th>No.</th>
@@ -132,7 +138,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="subject : ${subjectPage2.content}">
+            <tr th:each="subject, loop : ${subjectPage2}">
                 <td th:text="${subject.getNo()}"></td>
                 <td th:text="${subject.name}"></td>
                 <td>교양</td>
@@ -151,26 +157,30 @@
                        th:text="삭제"></a>
                 </td>
             </tr>
+            <tr th:if="${subjectPage2.isEmpty()}">
+                <td colspan="10">과목이 비었습니다.</td>
+            </tr>
             </tbody>
         </table>
-        <div class="general-pagination">
-            <a class="prev_btn" href="javascript:void(0)" th:data-page="${subjectPage2.number - 1}"
-               th:if="${subjectPage2.number != 0 && !subjectPage2.isEmpty()}">
-                <span><img src="/image/home/arrowBack.png"></span>
+        <div class="general-pagination" th:if="${major == '전체' || major == '교양'}">
+            <a class="prev_btn" href="javascript:void(0)" th:data-general="${subjectPage2.number - 1}" th:if="${subjectPage2.number != 0}">
+                <span><img src="/image/home/arrowBack.png" alt=""></span>
             </a>
-            <a class="page_link" href="javascript:void(0)" th:if="${!subjectPage2.isEmpty()}"
-               th:classappend="${page == subjectPage2.number} ? 'on' : ''"
-               th:data-page="${generalPage}" th:each="page : ${#numbers.sequence(0, subjectPage2.totalPages - 1)}"
-               th:text="${page + 1}"></a>
-            <a class="next_btn" href="javascript:void(0)" th:data-page="${subjectPage2.number + 1}"
-               th:if="${subjectPage2.hasNext() && !subjectPage2.isEmpty()}"><span><img src="/image/home/arrowForward.png"></a>
-        </div>
+            <a class="page_link" href="javascript:void(0)" th:classappend="${generalPage == subjectPage2.number} ? 'on' : ''"
+               th:data-general="${generalPage}" th:each="generalPage : ${#numbers.sequence(0, subjectPage2.totalPages - 1)}"
+               th:text="${generalPage + 1}"></a>
+            <a class="next_btn" href="javascript:void(0)" th:data-general="${subjectPage2.number + 1}"
+               th:if="${subjectPage2.hasNext()}">
+                <span><img src="/image/home/arrowForward.png" alt=""></span>
+            </a>
 
-        <form id="general-actionForm" method="get" th:action="@{/a/class}">
-            <input type="hidden" id="general-page" name="generalPage" th:value="${subjectPage2.number}">
-            <input type="hidden" id="general-major" name="major" th:value="${major}">
-            <input type="hidden" id="general-class" name="class" th:value="${class}">
-        </form>
+            <form id="general-actionForm" method="get" th:action="@{/a/class}">
+                <input type="hidden" class="major-page" name="majorPage" th:value="${majorPage}">
+                <input type="hidden" class="general-page" name="generalPage" th:value="${generalPage}">
+                <input type="hidden" id="general-major" name="major" th:value="${major}">
+                <input type="hidden" id="general-class" name="department" th:value="${department}">
+            </form>
+        </div>
     </div>
 
     <!-- 수강 과목 기입 모달 창 -->
@@ -180,7 +190,7 @@
             <h2 class="modal-title">수강 과목 기입</h2>
 
             <!-- 타임리프 폼 시작 -->
-            <form id="course-form" class="course-form" get="post" th:action="@{/a/insert/subject}" th:object="${subjectInsertForm}">
+            <form id="course-form" class="course-form" method="get" th:action="@{/a/insert/subject}" th:object="${subjectInsertForm}">
 
                 <!-- 년도 -->
                 <label for="course-year" class="label-course-year">년도:</label>
@@ -208,8 +218,8 @@
                 <!-- 학과 -->
                 <label for="department" class="label-department">학과:</label>
                 <select id="department" class="select-department" th:field="*{major}">
-                    <option value="" selected>=== 학과 ===</option>
-                    <option th:each="major : ${majorList}"
+                    <option value="0" selected>=== 학과 ===</option>
+                    <option th:each="major, loop : ${majorList}"
                             th:value="${major.id}"
                             th:text="${major.name.substring(0, major.name.length() - 1)}"></option>
                 </select>
@@ -223,8 +233,8 @@
                 <!-- 교수명 -->
                 <label for="professor" class="label-professor">교수명:</label>
                 <select id="professor" class="select-professor" th:field="*{professorNo}">
-                    <option value="" selected>=== 교수 선택 ===</option>
-                    <option th:each="professor : ${professorList}"
+                    <option value="0" selected>=== 교수 선택 ===</option>
+                    <option th:each="professor, loop : ${professorList}"
                             th:value="${professor.no}"
                             th:text="${professor.name +' [' + professor.getId() +']'}"></option>
                 </select>
@@ -233,7 +243,7 @@
                 <!-- 시간 -->
                 <div class="time-wrap">
                     <p>시작 시간:</p>
-                    <select th:field="*{startTime}" required>
+                    <select id="startTime" th:field="*{startTime}" required>
                         <option value="09:00">09:00</option>
                         <option value="10:00">10:00</option>
                         <option value="11:00">11:00</option>
@@ -245,7 +255,7 @@
                         <option value="17:00">17:00</option>
                     </select>
                     <p>종료 시간:</p>
-                    <select th:field="*{endTime}" required>
+                    <select id="endTime" th:field="*{endTime}" required>
                         <option value="10:00">10:00</option>
                         <option value="11:00">11:00</option>
                         <option value="12:00">12:00</option>
@@ -281,24 +291,15 @@
     </div>
 </section>
 <script>
-    window.onload = function () {
-        // 페이지 로드 후 기본 상태로 필터링
-        document.querySelector(".department-select").style.display = "none"; // 기본적으로 학과는 숨기기
-    };
-
     // 전공 구분 선택 시 필터링 처리
-    document
-        .querySelector(".major-type-select")
-        .addEventListener("change", function () {
+    document.querySelector(".major-type-select").addEventListener("change", function () {
             filterData();
         });
 
     // 학과 선택 시 필터링 처리
-    document
-        .querySelector(".department-select")
-        .addEventListener("change", function () {
+    /*document.querySelector(".department-select").addEventListener("change", function () {
             filterData();
-        });
+        });*/
 
     function filterData() {
         const majorTypeSelect = document.querySelector(".major-type-select");
@@ -312,17 +313,16 @@
 
         const majorTableRows = majorTable.querySelectorAll("tbody tr");
 
-
         // 전공 구분 선택 시
         if (selectedMajorType === "전공") {
-            majorTable.style.display = "table"; // 전공 테이블 보이기
-            liberalTable.style.display = "none"; // 교양 테이블 숨기기
+            /*majorTable.style.display = "table"; // 전공 테이블 보이기
+            liberalTable.style.display = "none"; // 교양 테이블 숨기기*/
             departmentSelect.style.display = "inline-block"; // 학과 선택 보이기
         }
         // 교양 구분 선택 시
         else if (selectedMajorType === "교양") {
-            majorTable.style.display = "none"; // 전공 테이블 숨기기
-            liberalTable.style.display = "table"; // 교양 테이블 보이기
+            /*majorTable.style.display = "none"; // 전공 테이블 숨기기
+            liberalTable.style.display = "table"; // 교양 테이블 보이기*/
             departmentSelect.style.display = "none"; // 학과 선택 숨기기
         }
         // 전공 구분 선택하지 않았을 때
@@ -332,7 +332,7 @@
             departmentSelect.style.display = "none"; // 학과 선택 숨기기
         }
 
-        // 학과 선택 필터링
+        /*// 학과 선택 필터링
         if (selectedDepartment === "=== 학과 ===") {
             // 학과가 선택되지 않으면 모든 과목을 표시
             majorTableRows.forEach(function (row) {
@@ -357,7 +357,7 @@
             majorTableRows.forEach(function (row) {
                 row.style.display = ""; // 모든 전공 과목 보이기
             });
-        }
+        }*/
     }
 
     // 모달창 관련 스크립트
@@ -404,6 +404,33 @@
     });
 
     $(document).ready(function () {
+        if($("#major").val() === "전공") {
+            $(".department-select").prop("disabled", false);
+        } else {
+            $(".department-select").prop("disabled", true);
+        }
+
+        // 전공 / 교양 리스트 필터링
+        $(".major-type-select").on('change', function (){
+            $("#major").val($(this).val());
+            if ($(this).val() === "전공") {
+                $(".department-select").prop("disabled", false);
+            } else {
+                $("#department_num").val("0");
+                $("#filterForm").submit();
+            }
+        });
+
+        // 전공 리스트 필터링
+        $(".department-select").on('change', function (){
+            if ($(this).val() === "0") {
+                alert("전공을 선택하세요.");
+            } else {
+                $("#department_num").val($(this).val());
+                $("#filterForm").submit();
+            }
+        })
+
         $("#department").on('change', function () {
             const departmentId = $(this).val();
 
@@ -444,6 +471,85 @@
                 $("#department").prop('selectedIndex', 0).trigger('change').focus();
             }
         })
+
+        $('#course-form').submit(function (e) {
+            e.preventDefault();
+
+            const year = $('#course-year').val();
+            const semester = $('#course-semester').val();
+            const majorType = $('#major-type').val();
+            const department = $('#department').val();
+            const courseName = $('#course-name').val();
+            const professor = $('#professor').val();
+            const startTime = $("#startTime").val();
+            const endTime = $("#endTime").val();
+            const day = $('#day').val();
+            const maxPersonnel = $('#max-personnel').val();
+            const credits = $('#score').val();
+
+            // 요일 정규식: '월', '화', '수', '목', '금' 조합, 쉼표 및 공백 허용
+            const dayPattern = /^([월화수목금])(, ?([월화수목금]))*$/;
+
+            if (!year) {
+                alert('년도는 필수 입력 항목입니다.');
+                return;
+            }
+            const yearRegex = /^\d{4}$/;
+            if (!yearRegex.test(year)) {
+                alert('유효한 4자리 년도를 입력해주세요.');
+                return;
+            }
+            const currentYear = new Date().getFullYear(); // 현재 연도 가져오기
+            const minYear = currentYear - 1; // 유효한 최소 년도
+            if (year < minYear || year > currentYear) {
+                alert(`유효한 년도는 ${minYear}년에서 ${currentYear}년 사이입니다.`);
+                return;
+            }
+            if (!semester) {
+                alert('학기를 선택해주세요.');
+                return;
+            }
+            if (!majorType) {
+                alert('전공/교양을 선택해주세요.');
+                return;
+            }
+            if (department === "0" && majorType === "전공") {
+                alert('학과를 선택해주세요.');
+                return;
+            }
+            if (!courseName.trim()) {
+                alert('과목명을 입력해주세요.');
+                return;
+            }
+            if (professor === "0" || !professor) {
+                alert('교수명을 선택해주세요.');
+                return;
+            }
+            if (!day.trim() || !dayPattern.test(day)) {
+                alert("정확한 요일을 입력하세요.");
+                return;
+            }
+            if (!maxPersonnel || maxPersonnel <= 0) {
+                alert('최대 수강 인원을 1명 이상으로 설정해주세요.');
+                return;
+            }
+            if (!credits || credits < 1 || credits > 3) {
+                alert('수강 학점은 1에서 3 사이로 설정해주세요.');
+                return;
+            }
+            const parseTime = (time) => {
+                const [h, m] = time.split(':').map(Number);
+                return h * 60 + m;
+            }
+            const start = parseTime(startTime);
+            const end = parseTime(endTime);
+            if (start >= end) {
+                alert('시작 시간은 종료 시간보다 이전이어야 합니다.');
+                return;
+            }
+
+            this.submit();
+        });
     })
 
     function updateProfessorSelect(professorList) {

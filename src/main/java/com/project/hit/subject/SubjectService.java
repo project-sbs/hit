@@ -72,11 +72,23 @@ public class SubjectService {
         return this.subjectRepository.findAll(pageable);
     }
 
+    public Page<Subject> getSubjectList(String type, int page) {
+        List<Sort.Order> sorts = new ArrayList<>();
+        sorts.add(Sort.Order.desc("no"));
+        Pageable pageable = PageRequest.of(page, 5, Sort.by(sorts));
+        return subjectRepository.findSubjectByTypeContaining(type, pageable);
+    }
+
     public Page<Subject> getSubjectList(String type, int page, int major_id) {
         List<Sort.Order> sorts = new ArrayList<>();
         sorts.add(Sort.Order.desc("no"));
         Pageable pageable = PageRequest.of(page, 10, Sort.by(sorts));
-        return subjectRepository.findSubjectByTypeContaining(type, pageable);
+        if (type.equals("전공")) {
+            Major major = this.majorRepository.findById(major_id).orElseThrow(() -> new DataNotFoundException("Not found major for id : " + major_id));
+            return this.subjectRepository.findSubjectByMajor(major, pageable);
+        } else {
+            return subjectRepository.findSubjectByTypeContaining(type, pageable);
+        }
     }
 
     @Transactional

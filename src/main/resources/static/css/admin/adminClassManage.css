@@ -25,6 +25,7 @@
 .portal-class-managing-frame li select {
     text-align: center;
     height:30px;
+    width: 110px;
 }
 .portal-class-managing-frame table {
     width: 90%;
