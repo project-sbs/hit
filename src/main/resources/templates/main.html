@@ -2,11 +2,22 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+            name="viewport"
+            content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"
+    />
     <link rel="stylesheet" type="text/css" th:href="@{/css/reset.css}" />
     <link rel="stylesheet" type="text/css" th:href="@{/css/mainpage.css}" />
     <link
             href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+            rel="stylesheet"
+    />
+    <link
+            href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap"
+            rel="stylesheet"
+    />
+    <link
+            href="https://fonts.googleapis.com/css2?family=Assistant:wght@200..800&family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap"
             rel="stylesheet"
     />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -31,23 +42,40 @@
                 <li sec:authorize="hasRole('교수')"><a th:href="@{/p/home}">Portal</a></li>
                 <li sec:authorize="isAnonymous()"><a th:href="@{/login}">Portal</a></li>
             </ul>
-        </div>
-        <div class="main-top-motto">
-            <ul class="main-top-photo">
-                <li class="main-top-photo1"></li>
-                <li class="main-top-photo2"></li>
-                <li class="main-top-photo3"></li>
-                <li class="main-top-photo4"></li>
-            </ul>
-            <div class="main-top-motto-button">
-                <b>HIT</b>
-                <p>THE HONOR MAKE YOU FREE</p>
-                <button>APPLY</button>
-            </div>
-            <button class="open-hidden-link">HIT News & More</button>
+            <button class="nav-opener">
+                <img src="/image/menu-icon.png" alt="" />
+            </button>
         </div>
     </nav>
+    <nav class="responsible-nav">
+        <button class="responsible-nav-close">
+            <img src="/image/home/add.png" alt="" />
+        </button>
+        <ul>
+            <li><img src="/image/HitLogo.png" alt="" /></li>
+            <li><a href="/AboutHit.html">About HIT</a></li>
+            <li>Research</li>
+            <li>Admissions</li>
+            <li>Campus Life</li>
+            <li><a href="Login.html">Portal</a></li>
+        </ul>
+    </nav>
 </header>
+<div class="visual-wrap">
+    <div class="main-top-motto">
+        <ul class="main-top-photo">
+            <li class="main-top-photo1"></li>
+            <li class="main-top-photo2"></li>
+            <li class="main-top-photo3"></li>
+            <li class="main-top-photo4"></li>
+        </ul>
+    </div>
+    <div class="main-top-motto-button">
+        <b>HIT</b>
+        <p>THE HONOR MAKE YOU FREE</p>
+        <button>APPLY</button>
+    </div>
+</div>
 <!-- Top 버튼 -->
 <button id="scrollToTopBtn" class="scroll-to-top-btn">Top</button>
 <div class="main-middle">
@@ -67,7 +95,10 @@
                             artificial intelligence named HOHO.
                         </p>
                     </li>
-                    <a href="#">READ MORE >></a>
+                    <a href="#">READ MORE<img
+                            src="/image/home/arrowForward.png"
+                            alt="arrow forward"
+                    /></a>
                 </ul>
             </li>
             <li>
@@ -83,7 +114,10 @@
                             'Java'
                         </p>
                     </li>
-                    <a href="#">READ MORE >></a>
+                    <a href="#">READ MORE <img
+                            src="/image/home/arrowForward.png"
+                            alt="arrow forward"
+                    /></a>
                 </ul>
             </li>
             <li>
@@ -99,7 +133,10 @@
                             Earnest Request
                         </p>
                     </li>
-                    <a href="#">READ MORE >></a>
+                    <a href="#">READ MORE <img
+                            src="/image/home/arrowForward.png"
+                            alt="arrow forward"
+                    /></a>
                 </ul>
             </li>
         </ul>
@@ -107,7 +144,9 @@
     <section class="hit-research">
         <div class="hit-research-top">
             <h2>RESEARCH ARCHIVE</h2>
-            <button>+</button>
+            <button>
+                <img src="/image/home/add.png" alt="plus icon" />
+            </button>
         </div>
         <div class="hit-research-bottom">
             <div class="hit-research-write">
@@ -135,7 +174,10 @@
                     impact of this new AI on everyday life. Stay tuned for more
                     updates on this exciting development!
                 </p>
-                <a href="#">READ MORE >></a>
+                <a href="#">READ MORE  <img
+                        src="/image/home/arrowForward.png"
+                        alt="arrow forward"
+                /></a>
             </div>
             <div class="hit-research-img-wrap">
                 <img src="/image/server.jpg" alt="computer server machines" />
@@ -145,7 +187,9 @@
     <section class="study-in-hit">
         <div class="study-in-hit-top">
             <h2>STUDY IN KOREA AT HIT</h2>
-            <button>+</button>
+            <button>
+                <img src="/image/home/add.png" alt="plus icon" />
+            </button>
         </div>
         <div class="study-in-hit-bottom">
             <div class="study-in-hit-img-wrap">
@@ -195,7 +239,6 @@
                         <p>Life Science and Biotechnology (LSBT)</p>
                     </li>
                 </ul>
-                <a href="#"><b>READ MORE >></b></a>
             </div>
         </div>
     </section>
@@ -269,4 +312,33 @@
     <p>© 2024 HIT UNIV. ALL RIGHTS RESERVED</p>
 </footer>
 </body>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const opener = document.querySelector(".nav-opener");
+      const width = window.innerWidth;
+      const normalNav = document.querySelector(".hit-nav > ul > li");
+      const responsibleNav = document.querySelector(".responsible-nav");
+      const body = document.querySelector("body");
+      const responsibleClose = document.querySelector(".responsible-nav-close");
+
+      function changeMini() {
+        if (width <= 1199) {
+          opener.style.display = "block";
+          normalNav.style.display = "none";
+        } else {
+          opener.style.display = "none";
+        }
+        window.addEventListener("resize", changeMini);
+      }
+      opener.addEventListener("click", () => {
+        // 메뉴 활성화 클래스 토글
+        responsibleNav.classList.toggle("active");
+        body.style.overflow = "hidden";
+      });
+      responsibleClose.addEventListener("click", () => {
+        responsibleNav.classList.remove("active");
+        body.style.overflow = "scroll";
+      });
+    });
+</script>
 </html>
