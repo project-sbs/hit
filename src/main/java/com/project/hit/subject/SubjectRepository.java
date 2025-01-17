@@ -32,6 +32,8 @@ public interface SubjectRepository extends JpaRepository<Subject, Integer> {
     // 타입 별 과목 페이징
     Page<Subject> findSubjectByTypeContaining(String type, Pageable pageable);
 
+    Page<Subject> findSubjectByMajor(Major major, Pageable pageable);
+
     @Query("select distinct s from Subject s where s.professor = :professor and s.year = :year and s.semester = :semester order by s.no desc")
     List<Subject> findSubjectByProfessor(Professor professor, String year, String semester);
 
