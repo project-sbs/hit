@@ -1,67 +1,75 @@
-header {
+@media screen and (min-width: 1200px) {
+  header {
     width: 100%;
     height: 90px;
     padding: 15px 0;
-   box-shadow: 0 0 10px 0 #555555;
     margin-bottom: 30px;
-}
-body {
+    box-shadow: 0 0 10px 0 #555555;
+  }
+  body {
     width: 100%;
     font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
-}
-img {
+  }
+  img {
     background-size: cover;
-}
-
-.gnb-wrap {
+  }
+  h1 {
+    cursor: pointer;
+  }
+  .gnb-wrap {
     width: 60%;
     display: flex;
     margin: 0 auto;
-}
-
-.gnb-wrap ul {
+  }
+  .gnb-wrap ul {
     display: flex;
     font-size: 23px;
-}
-.gnb-wrap ul li {
+  }
+  .gnb-wrap ul li {
     width: 130px;
     height: 60px;
     line-height: 60px;
     text-align: center;
     margin: 0 15px;
-}
-.gnb-wrap ul li:hover {
-  color: #1e90ff;
-}
-.logo-wrap {
+  }
+  .gnb-wrap ul li:hover {
+    color: #1e90ff;
+  }
+  .logo-wrap {
     width: 150px;
     height: 460x;
     margin-right: 139px;
-}
-.logo-wrap img {
+  }
+  .logo-wrap img {
     width: 150px;
     height: 60px;
-}
-.container {
+  }
+  .nav-opener {
+    display: none;
+  }
+  .responsible-nav {
+    display: none;
+  }
+  .container {
     width: 60%;
     margin: 0 auto;
     display: flex;
-}
-/* 사이드 메뉴 스타일 */
-.container-side-menu {
+  }
+  /* 사이드 메뉴 스타일 */
+  .container-side-menu {
     list-style-type: none;
     padding: 0;
     margin-right: 20px;
-}
+  }
 
-.container-side-menu .menu-item {
+  .container-side-menu .menu-item {
     width: 171px; /* 고정된 너비 */
     height: 63px; /* 기본 높이 */
     transition: height 0.3s ease, margin-bottom 0.3s ease; /* 높이와 margin-bottom 애니메이션 */
     display: block;
-}
+  }
 
-.container-side-menu .menu-title {
+  .container-side-menu .menu-title {
     display: block;
     padding: 10px;
     background-color: white;
@@ -73,107 +81,639 @@ img {
     height: 100%; /* 메뉴 항목의 전체 높이를 사용 */
     line-height: 43px; /* 텍스트가 중앙에 오도록 설정 */
     transition: background-color 0.3s;
-}
+  }
 
-.container-side-menu .menu-title:hover {
+  .container-side-menu .menu-title:hover {
     background-color: #e0e0e0;
-}
+  }
 
-/* 서브 메뉴 스타일 */
-.container-side-menu .submenu {
+  /* 서브 메뉴 스타일 */
+  .container-side-menu .submenu {
     margin-top: 10px;
     list-style-type: none;
     padding-left: 20px;
     display: none; /* 기본적으로 서브 메뉴 숨기기 */
-}
+  }
 
-.container-side-menu .submenu li {
+  .container-side-menu .submenu li {
     margin-bottom: 5px;
-}
+  }
 
-.container-side-menu .submenu li a {
+  .container-side-menu .submenu li a {
     text-decoration: none;
     color: #333;
     font-size: 16px;
-}
+  }
 
-.container-side-menu .submenu li a:hover {
+  .container-side-menu .submenu li a:hover {
     text-decoration: underline;
-}
+  }
 
-/* 클릭 시 활성화된 메뉴의 크기 변경 */
-.container-side-menu .active {
+  /* 클릭 시 활성화된 메뉴의 크기 변경 */
+  .container-side-menu .active {
     height: 84px; /* 클릭된 메뉴의 높이를 늘림 */
     margin-bottom: 100px; /* 메뉴 항목 간격을 늘려서 다른 메뉴들이 밀리도록 설정 */
-}
+  }
 
-.container-side-menu .active > .menu-title {
+  .container-side-menu .active > .menu-title {
     background-color: #1e90ff;
     color: white;
     font-size: 20px;
     line-height: 63px; /* 텍스트가 높이에 맞게 중앙에 오도록 조정 */
-}
+  }
 
-/* 서브 메뉴가 보일 때 */
-.container-side-menu .active .submenu {
+  /* 서브 메뉴가 보일 때 */
+  .container-side-menu .active .submenu {
     display: block;
-}
+  }
 
-.section-wrap {
+  .section-wrap {
     width: 100%;
     padding: 1%;
     padding-top: 50px;
     margin-left: 40px;
-}
-section {
+  }
+  section {
     margin-bottom: 40px;
-}
-h2 {
+  }
+  h2 {
     font-size: 35px;
     margin-bottom: 44px;
     font-weight: lighter;
-}
-section > p {
+  }
+  section > p {
     color: #333;
     font-size: 19px;
     margin-bottom: 50px;
-}
+  }
 
-footer {
+  footer {
     width: 100%;
     height: 220px;
     display: flex;
     flex-direction: column;
     color: white;
     background: #4d4d4d;
-}
-footer > ul {
+  }
+  footer > ul {
     display: flex;
     margin-top: 25px;
     margin-left: 336px;
-}
-footer > ul li {
+  }
+  footer > ul li {
     height: 25px;
     font-size: 19px;
     color: #999999;
-}
-footer > ul li:nth-child(odd) {
+  }
+  footer > ul li:nth-child(odd) {
     width: 150px;
     text-align: center;
-}
-.footer-address {
+  }
+  .footer-address {
     display: flex;
     margin-top: 29px;
     margin-left: 382px;
     width: 60%;
     justify-content: space-between;
     color: #999999;
-}
-.footer-address > button {
+  }
+  .footer-address > button {
     background: none;
     color: #999999;
     border: 1px solid #999999;
     width: 140px;
     height: 40px;
     font-size: 19px;
+  }
+}
+@media screen and (min-width: 491px) and (max-width: 1199px) {
+  header {
+    width: 100%;
+    height: 90px;
+    padding: 15px 0;
+    margin-bottom: 30px;
+    box-shadow: 0 0 10px 0 #555555;
+  }
+  body {
+    width: 100%;
+    font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+    overflow-x: hidden;
+  }
+  img {
+    background-size: cover;
+  }
+  h1 {
+    cursor: pointer;
+  }
+  .gnb-wrap {
+    width: 100%;
+    display: flex;
+    margin: 0 auto;
+  }
+  .gnb-wrap > ul {
+    display: flex;
+    font-size: 23px;
+    display: none;
+  }
+  .gnb-wrap > ul li {
+    width: 130px;
+    height: 60px;
+    line-height: 60px;
+    text-align: center;
+    margin: 0 15px;
+  }
+  .gnb-wrap > ul li:hover {
+    color: #1e90ff;
+  }
+  .logo-wrap {
+    width: 150px;
+    height: 60px;
+    margin: 0 auto;
+  }
+  .logo-wrap img {
+    width: 150px;
+    height: 60px;
+  }
+  .nav-opener {
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    right: 10px;
+    top: 20px;
+    background: none;
+    border: none;
+  }
+  .nav-opener img {
+    width: 100%;
+  }
+  .responsible-nav {
+    position: absolute;
+    z-index: 99;
+    right: -100%;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    text-align: center;
+    top: 0;
+    display: block;
+    transition: right 0.3s ease; /* 오른쪽으로 이동하는 애니메이션 */
+  }
+  .responsible-nav a{
+        color:inherit;
+        }
+  .responsible-nav.active {
+    right: 0;
+  }
+  .responsible-nav button {
+    position: absolute;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background: none;
+    cursor: pointer;
+    width: 60px;
+    height: 60px;
+    top: -2%;
+    right: 2%;
+  }
+  .responsible-nav button > img {
+    width: 60px;
+    height: 60px;
+    transform: rotate(45deg);
+    transform-origin: center;
+  }
+  .responsible-nav img {
+    margin-top: 120px;
+    margin-bottom: 50px;
+  }
+  .responsible-nav > ul > li {
+    font-size: 30px;
+    margin: 20px;
+  }
+  .responsible-nav .active {
+  }
+  .rmenu-item.active .rmenu-title {
+    color: #007bff; /* 활성화된 상태의 텍스트 색상 */
+    font-weight: bold; /* 강조 효과 */
+  }
+  .responsible-nav .rSubMenu {
+    list-style-type: none;
+    display: none; /* 기본적으로 서브 메뉴 숨기기 */
+    width: 50%;
+    margin: 20px auto;
+    padding-bottom: 10px;
+  }
+  .responsible-nav .rSubMenu li {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin: 10px;
+    line-height: 1.2;
+    padding-bottom: 10px;
+  }
+  .rSubMenu a {
+    font-size: 24px;
+  }
+  .responsible-nav .active .rSubMenu {
+    display: block;
+  }
+
+  .container {
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+  }
+  /* 사이드 메뉴 스타일 */
+  .container-side-menu {
+    list-style-type: none;
+    padding: 0;
+    margin-right: 20px;
+    display: none;
+  }
+
+  .container-side-menu .menu-item {
+    width: 171px; /* 고정된 너비 */
+    height: 63px; /* 기본 높이 */
+    transition: height 0.3s ease, margin-bottom 0.3s ease; /* 높이와 margin-bottom 애니메이션 */
+    display: block;
+  }
+
+  .container-side-menu .menu-title {
+    display: block;
+    padding: 10px;
+    background-color: white;
+    border-bottom: 1px solid #888;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: bold;
+    height: 100%; /* 메뉴 항목의 전체 높이를 사용 */
+    line-height: 43px; /* 텍스트가 중앙에 오도록 설정 */
+    transition: background-color 0.3s;
+  }
+
+  .container-side-menu .menu-title:hover {
+    background-color: #e0e0e0;
+  }
+
+  /* 서브 메뉴 스타일 */
+  .container-side-menu .submenu {
+    margin-top: 10px;
+    list-style-type: none;
+    padding-left: 20px;
+    display: none; /* 기본적으로 서브 메뉴 숨기기 */
+  }
+
+  .container-side-menu .submenu li {
+    margin-bottom: 5px;
+  }
+
+  .container-side-menu .submenu li a {
+    text-decoration: none;
+    color: #333;
+    font-size: 16px;
+  }
+
+  .container-side-menu .submenu li a:hover {
+    text-decoration: underline;
+  }
+
+  /* 클릭 시 활성화된 메뉴의 크기 변경 */
+  .container-side-menu .active {
+    height: 84px; /* 클릭된 메뉴의 높이를 늘림 */
+    margin-bottom: 100px; /* 메뉴 항목 간격을 늘려서 다른 메뉴들이 밀리도록 설정 */
+  }
+
+  .container-side-menu .active > .menu-title {
+    background-color: #1e90ff;
+    color: white;
+    font-size: 20px;
+    line-height: 63px; /* 텍스트가 높이에 맞게 중앙에 오도록 조정 */
+  }
+
+  /* 서브 메뉴가 보일 때 */
+  .container-side-menu .active .submenu {
+    display: block;
+  }
+
+  .section-wrap {
+    width: 100%;
+    padding: 1%;
+    padding-top: 50px;
+  }
+  section {
+    margin-bottom: 40px;
+  }
+  h2 {
+    font-size: 30px;
+    margin-bottom: 44px;
+    font-weight: lighter;
+  }
+  section > p {
+    color: #333;
+    font-size: 19px;
+    margin-bottom: 50px;
+  }
+
+  footer {
+    width: 100%;
+    height: 220px;
+    display: flex;
+    flex-direction: column;
+    color: white;
+    background: #4d4d4d;
+  }
+  footer > ul {
+    display: flex;
+    margin-top: 25px;
+  }
+  footer > ul li {
+    height: 25px;
+    font-size: 19px;
+    color: #999999;
+  }
+  footer > ul li:nth-child(odd) {
+    width: 150px;
+    text-align: center;
+  }
+  .footer-address {
+    display: flex;
+    margin-top: 29px;
+    width: 100%;
+    justify-content: space-between;
+    color: #999999;
+  }
+  .footer-address > button {
+    background: none;
+    color: #999999;
+    border: 1px solid #999999;
+    width: 140px;
+    height: 40px;
+    font-size: 19px;
+  }
+}
+
+@media screen and (max-width: 490px) {
+  header {
+    width: 100%;
+    height: 90px;
+    padding: 15px 0;
+    margin-bottom: 30px;
+    box-shadow: 0 0 10px 0 #555555;
+  }
+  body {
+    width: 100%;
+    font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+    overflow-x: hidden;
+  }
+  img {
+    background-size: cover;
+  }
+  h1 {
+    cursor: pointer;
+  }
+  .gnb-wrap {
+    width: 100%;
+    display: flex;
+    margin: 0 auto;
+  }
+  .gnb-wrap > ul {
+    display: flex;
+    font-size: 23px;
+    display: none;
+  }
+  .gnb-wrap > ul li {
+    width: 130px;
+    height: 60px;
+    line-height: 60px;
+    text-align: center;
+    margin: 0 15px;
+  }
+  .gnb-wrap > ul li:hover {
+    color: #1e90ff;
+  }
+  .logo-wrap {
+    width: 150px;
+    height: 60px;
+    margin: 0 auto;
+  }
+  .logo-wrap img {
+    width: 150px;
+    height: 60px;
+  }
+  .nav-opener {
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    right: 10px;
+    top: 20px;
+    background: none;
+    border: none;
+  }
+  .nav-opener img {
+    width: 100%;
+  }
+  .responsible-nav {
+    position: absolute;
+    z-index: 99;
+    right: -100%;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    text-align: center;
+    top: 0;
+    display: block;
+    transition: right 0.3s ease; /* 오른쪽으로 이동하는 애니메이션 */
+  }
+  .responsible-nav a{
+        color:inherit;
+        }
+  .responsible-nav.active {
+    right: 0;
+  }
+  .responsible-nav button {
+    position: absolute;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background: none;
+    cursor: pointer;
+    width: 60px;
+    height: 60px;
+    top: -2%;
+    right: 2%;
+  }
+  .responsible-nav button > img {
+    width: 60px;
+    height: 60px;
+    transform: rotate(45deg);
+    transform-origin: center;
+  }
+  .responsible-nav img {
+    margin-top: 120px;
+    margin-bottom: 50px;
+  }
+  .responsible-nav > ul > li {
+    font-size: 30px;
+    margin: 20px;
+  }
+  .responsible-nav .active {
+  }
+  .rmenu-item.active .rmenu-title {
+    color: #007bff; /* 활성화된 상태의 텍스트 색상 */
+    font-weight: bold; /* 강조 효과 */
+  }
+  .responsible-nav .rSubMenu {
+    list-style-type: none;
+    display: none; /* 기본적으로 서브 메뉴 숨기기 */
+    width: 50%;
+    margin: 20px auto;
+    padding-bottom: 10px;
+  }
+  .responsible-nav .rSubMenu li {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin: 10px;
+    line-height: 1.2;
+    padding-bottom: 10px;
+  }
+  .rSubMenu a {
+    font-size: 24px;
+  }
+  .responsible-nav .active .rSubMenu {
+    display: block;
+  }
+
+  .container {
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+  }
+  /* 사이드 메뉴 스타일 */
+  .container-side-menu {
+    list-style-type: none;
+    padding: 0;
+    margin-right: 20px;
+    display: none;
+  }
+
+  .container-side-menu .menu-item {
+    width: 171px; /* 고정된 너비 */
+    height: 63px; /* 기본 높이 */
+    transition: height 0.3s ease, margin-bottom 0.3s ease; /* 높이와 margin-bottom 애니메이션 */
+    display: block;
+  }
+
+  .container-side-menu .menu-title {
+    display: block;
+    padding: 10px;
+    background-color: white;
+    border-bottom: 1px solid #888;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: bold;
+    height: 100%; /* 메뉴 항목의 전체 높이를 사용 */
+    line-height: 43px; /* 텍스트가 중앙에 오도록 설정 */
+    transition: background-color 0.3s;
+  }
+
+  .container-side-menu .menu-title:hover {
+    background-color: #e0e0e0;
+  }
+
+  /* 서브 메뉴 스타일 */
+  .container-side-menu .submenu {
+    margin-top: 10px;
+    list-style-type: none;
+    padding-left: 20px;
+    display: none; /* 기본적으로 서브 메뉴 숨기기 */
+  }
+
+  .container-side-menu .submenu li {
+    margin-bottom: 5px;
+  }
+
+  .container-side-menu .submenu li a {
+    text-decoration: none;
+    color: #333;
+    font-size: 16px;
+  }
+
+  .container-side-menu .submenu li a:hover {
+    text-decoration: underline;
+  }
+
+  /* 클릭 시 활성화된 메뉴의 크기 변경 */
+  .container-side-menu .active {
+    height: 84px; /* 클릭된 메뉴의 높이를 늘림 */
+    margin-bottom: 100px; /* 메뉴 항목 간격을 늘려서 다른 메뉴들이 밀리도록 설정 */
+  }
+
+  .container-side-menu .active > .menu-title {
+    background-color: #1e90ff;
+    color: white;
+    font-size: 20px;
+    line-height: 63px; /* 텍스트가 높이에 맞게 중앙에 오도록 조정 */
+  }
+
+  /* 서브 메뉴가 보일 때 */
+  .container-side-menu .active .submenu {
+    display: block;
+  }
+
+  .section-wrap {
+    width: 100%;
+    padding: 1%;
+    padding-top: 50px;
+  }
+  section {
+    margin-bottom: 40px;
+  }
+  h2 {
+    font-size: 30px;
+    margin-bottom: 44px;
+    font-weight: lighter;
+  }
+  section > p {
+    color: #333;
+    font-size: 19px;
+    margin-bottom: 50px;
+  }
+
+  footer {
+    width: 100%;
+    height: 220px;
+    display: flex;
+    flex-direction: column;
+    color: white;
+    background: #4d4d4d;
+  }
+  footer > ul {
+    display: flex;
+    margin-top: 25px;
+  }
+  footer > ul li {
+    height: 25px;
+    font-size: 19px;
+    color: #999999;
+  }
+  footer > ul li:nth-child(odd) {
+    width: 150px;
+    text-align: center;
+  }
+  .footer-address {
+    display: flex;
+    margin-top: 29px;
+    width: 100%;
+    justify-content: space-between;
+    color: #999999;
+  }
+  .footer-address > button {
+    background: none;
+    color: #999999;
+    border: 1px solid #999999;
+    width: 140px;
+    height: 40px;
+    font-size: 19px;
+  }
 }
