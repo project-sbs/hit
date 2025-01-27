@@ -1,28 +1,92 @@
-.content-list {
+@media screen and (min-width: 1200px) {
+  .content-list {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
     row-gap: 100px;
-}
-.content-wrap {
+  }
+  .content-wrap {
     width: 45%;
-    height: 800px;
     background: #e5f4ff;
     padding: 1%;
-}
-.content-wrap h3 {
+  }
+  .content-wrap h3 {
     width: 80%;
     margin: 0 auto;
     font-size: 25px;
     font-weight: lighter;
     margin-top: 30px;
     margin-bottom: 20px;
-}
-.content-wrap h3 img {
+  }
+  .content-wrap h3 img {
     width: 27px;
     height: 27px;
+  }
+  .content-wrap h4 {
+    width: 80%;
+    font-size: 20px;
+    font-weight: lighter;
+    margin: 0 auto;
+    display: flex;
+    line-height: 35px;
+  }
+  .content-wrap h4 img {
+    width: 20px;
+    height: 20px;
+    margin-top: 10px;
+    margin-right: 20px;
+  }
+  .content-wrap div > h4:last-of-type {
+    margin-bottom: 20px;
+  }
+  .content-wrap div > ul {
+    width: 70%;
+    margin: 0 auto;
+    font-size: 18px;
+    color: #4d4d4d;
+  }
+  .content-wrap div > ul > li {
+    list-style: decimal;
+    margin-bottom: 15px;
+  }
+  .content-wrap div > ul > li > ul > li {
+    list-style: circle;
+    width: 90%;
+    margin: 0 auto;
+    margin-bottom: 10px;
+  }
+  .content-wrap div > ul > li > ul > li:first-of-type {
+    margin-top: 20px;
+  }
+  .content-wrap p {
+    width: 80%;
+    margin: 0 auto;
+  }
 }
-.content-wrap h4 {
+@media screen and (min-width: 491px) and (max-width: 1199px) {
+  .content-list {
+    display: flex;
+    flex-direction: column;
+  }
+  .content-wrap {
+    width: 100%;
+    background: #e5f4ff;
+    padding: 1%;
+    margin-bottom: 50px;
+  }
+  .content-wrap h3 {
+    width: 80%;
+    margin: 0 auto;
+    font-size: 25px;
+    font-weight: lighter;
+    margin-top: 30px;
+    margin-bottom: 20px;
+  }
+  .content-wrap h3 img {
+    width: 27px;
+    height: 27px;
+  }
+  .content-wrap h4 {
     width: 80%;
     font-size: 20px;
     font-weight: lighter;
@@ -30,36 +94,103 @@
     height: 35px;
     display: flex;
     line-height: 35px;
-}
-.content-wrap h4 img {
+  }
+  .content-wrap h4 img {
     width: 20px;
     height: 20px;
     margin-top: 10px;
     margin-right: 20px;
-}
-.content-wrap div > h4:last-of-type {
+  }
+  .content-wrap div > h4:last-of-type {
     margin-bottom: 20px;
-}
-.content-wrap div > ul {
+  }
+  .content-wrap div > ul {
     width: 70%;
     margin: 0 auto;
     font-size: 18px;
     color: #4d4d4d;
-}
-.content-wrap div > ul > li {
+  }
+  .content-wrap div > ul > li {
     list-style: decimal;
     margin-bottom: 15px;
-}
-.content-wrap div > ul > li > ul > li {
+  }
+  .content-wrap div > ul > li > ul > li {
     list-style: circle;
     width: 90%;
     margin: 0 auto;
     margin-bottom: 10px;
-}
-.content-wrap div > ul > li > ul > li:first-of-type {
+  }
+  .content-wrap div > ul > li > ul > li:first-of-type {
     margin-top: 20px;
-}
-.content-wrap p {
+  }
+  .content-wrap p {
     width: 80%;
     margin: 0 auto;
+  }
+}
+
+@media screen and (max-width: 491px) {
+  .content-list {
+    display: flex;
+    flex-direction: column;
+  }
+  .content-wrap {
+    width: 100%;
+    background: #e5f4ff;
+    padding: 1%;
+    margin-bottom: 50px;
+  }
+  .content-wrap h3 {
+    width: 80%;
+    margin: 0 auto;
+    font-size: 25px;
+    font-weight: lighter;
+    margin-top: 30px;
+    margin-bottom: 20px;
+  }
+  .content-wrap h3 img {
+    width: 27px;
+    height: 27px;
+  }
+  .content-wrap h4 {
+    width: 90%;
+    font-size: 20px;
+    font-weight: lighter;
+    margin: 0 auto;
+    height: 35px;
+    display: flex;
+    line-height: 35px;
+  }
+  .content-wrap h4 img {
+    width: 20px;
+    height: 20px;
+    margin-top: 10px;
+    margin-right: 20px;
+  }
+  .content-wrap div > h4:last-of-type {
+    margin-bottom: 20px;
+  }
+  .content-wrap div > ul {
+    width: 70%;
+    margin: 0 auto;
+    font-size: 18px;
+    color: #4d4d4d;
+  }
+  .content-wrap div > ul > li {
+    list-style: decimal;
+    margin-bottom: 15px;
+  }
+  .content-wrap div > ul > li > ul > li {
+    list-style: circle;
+    width: 90%;
+    margin: 0 auto;
+    margin-bottom: 10px;
+  }
+  .content-wrap div > ul > li > ul > li:first-of-type {
+    margin-top: 20px;
+  }
+  .content-wrap p {
+    width: 80%;
+    margin: 0 auto;
+  }
 }

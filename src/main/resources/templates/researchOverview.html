@@ -7,6 +7,7 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/m-common.css}" />
     <link rel="stylesheet" type="text/css" th:href="@{/css/research-overview.css}" />
     <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville&display=swap" rel="stylesheet"/>
+    <script th:src="@{/js/mcommon.js}"></script>
     <title>AboutHit</title>
 </head>
 <body>
@@ -18,6 +19,51 @@
             <li><a th:href="@{/research/overview}">Research</a></li>
             <li><a th:href="@{/apply}">Admissions</a></li>
             <li><a th:href="@{/about/department}">Campus Life</a></li>
+        </ul>
+    </nav>
+    <button class="nav-opener">
+        <img src="/image/menu-icon2.png" alt="" />
+    </button>
+    <nav class="responsible-nav">
+        <button class="responsible-nav-close">
+            <img src="/image/add.png" alt="" />
+        </button>
+        <ul>
+            <li><img src="/image/HitLogo.png" alt="" /></li>
+            <li class="rmenu-item">
+                <a href="#" class="rmenu-title">Research</a>
+                <ul class="rSubMenu">
+                    <li><a th:href="@{/research/overview}">Research Overview</a></li>
+                    <li><a th:href="@{/research/archive}">Research Archive</a></li>
+                </ul>
+            </li>
+            <li class="rmenu-item">
+                <a href="#" class="rmenu-title">About HIT</a>
+                <ul class="rSubMenu">
+                    <li><a th:href="@{/about/hit}">About President</a></li>
+                    <li><a th:href="@{/about/us}">About Us</a></li>
+                </ul>
+            </li>
+            <li class="rmenu-item">
+                <a href="#" class="rmenu-title">Admissions</a>
+                <ul class="rSubMenu">
+                    <li><a th:href="@{/apply}">How to Apply</a></li>
+                    <li><a th:href="@{/study}">Study in Korea at Hit</a></li>
+                </ul>
+            </li>
+            <li class="rmenu-item">
+                <a href="#" class="rmenu-title">Campus Life</a>
+                <ul class="rSubMenu">
+                    <li>
+                        <a th:href="@{/about/department}">Admission Departments</a>
+                    </li>
+                    <li><a th:href="@{/about/notice}">Notice</a></li>
+                </ul>
+            </li>
+            <li sec:authorize="hasRole('관리자')"><a th:href="@{/a/home}">Portal</a></li>
+            <li sec:authorize="hasRole('학생')"><a th:href="@{/s/home}">Portal</a></li>
+            <li sec:authorize="hasRole('교수')"><a th:href="@{/p/home}">Portal</a></li>
+            <li sec:authorize="isAnonymous()"><a th:href="@{/login}">Portal</a></li>
         </ul>
     </nav>
 </header>
